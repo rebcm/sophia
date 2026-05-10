@@ -170,7 +170,7 @@ sophia/
 └── vite.config.ts
 ```
 
-## Documentação — 26 documentos em quatro blocos
+## Documentação — 36 documentos em cinco blocos
 
 **Comece em [docs/00-LEIA-PRIMEIRO.md](docs/00-LEIA-PRIMEIRO.md).**
 
@@ -206,6 +206,18 @@ sophia/
 - [Customização e Permadeath](docs/05c-customizacao-e-permadeath.md) — homem/mulher, vida única
 - [Direção Artística](docs/06-direcao-artistica.md)
 - [Roadmap](docs/07-roadmap.md)
+
+### Bloco V — Profundidade, Drama e Aplicações
+- [Mistérios, Enigmas e Profecias](docs/08-misterios-enigmas-profecias.md) — a Pergunta Original, 13 Câmaras Secretas, 7 Profecias
+- [Vida Cotidiana e Práticas](docs/09-vida-cotidiana-praticas.md) — 12 práticas diárias
+- [Rituais, Meditações e Sonhos Lúcidos](docs/10-rituais-meditacoes-sonhos.md) — 12 meditações + 9 rituais + 108 mantras
+- [**Vínculos, Romance e Linhagem**](docs/11-vinculos-romance-linhagem.md) — Par Sizígico, 7 Lendários que te amaram, 9 Tragédias de Amor
+- [Fauna, Flora e Elementos Cósmicos](docs/12-fauna-flora-elementos.md) — 12 animais sagrados, clima dramático
+- [**Drama, Suspense e Tensão Narrativa**](docs/13-drama-suspense-tensao-narrativa.md) — 7 técnicas-mestre, 12 cliffhangers, 9 eventos off-screen
+- [Símbolos, Geometria Sagrada e Numerologia](docs/14-simbolos-geometria-numerologia.md)
+- [Tempo Cósmico e Arquitetura Sagrada](docs/15-tempo-arquitetura-sagrada.md)
+- [Pedagogia, Comunidade e Localização](docs/16-pedagogia-comunidade-localizacao.md)
+- [Glossário e Léxico Completo](docs/17-glossario-lexico-completo.md)
 
 ## Os dez pilares de design
 

@@ -24,7 +24,7 @@ revela no fim como **amor e compaixão infinitos**.
 
 ## Como ler estes documentos
 
-A bíblia agora tem **26 documentos**, em quatro blocos:
+A bíblia agora tem **36 documentos**, em cinco blocos:
 
 ### Bloco I · Fundação (cosmologia e religiões)
 
@@ -71,9 +71,25 @@ A bíblia agora tem **26 documentos**, em quatro blocos:
 | [06](06-direcao-artistica.md)  | **Direção Artística** — paleta, tipografia, som, referências | Arte, áudio, UI |
 | [07](07-roadmap.md)  | **Roadmap** — fases, MVP, marcos, dependências | Produção |
 
+### Bloco V · Profundidade, Drama e Aplicações (08–17)
+
+| # | Documento | Para quem |
+|---|-----------|-----------|
+| [08](08-misterios-enigmas-profecias.md) | **Mistérios, Enigmas e Profecias** — a Pergunta Original, Nomes Verdadeiros, 13 Câmaras Secretas, 7 Profecias, 12 Códigos Ocultos | Roteiro, design profundo |
+| [09](09-vida-cotidiana-praticas.md) | **Vida Cotidiana e Práticas** — 12 práticas (pesca de memórias, pintura, música, jardinagem, culinária, construção, caminhada, banho, conversa, observação de estrelas, animais, silêncio) | Game design, level design |
+| [10](10-rituais-meditacoes-sonhos.md) | **Rituais, Meditações e Sonhos Lúcidos** — 12 meditações de tradições reais, sonhos lúcidos, diário de sonhos, 9 rituais cerimoniais, 108 mantras | Roteiro, áudio, design |
+| [11](11-vinculos-romance-linhagem.md) | **Vínculos, Romance e Linhagem** — Par Sizígico, 7 Lendários que te amaram, filhos como almas, famílias-de-alma, 9 Tragédias de Amor | **Roteiro emocional central** |
+| [12](12-fauna-flora-elementos.md) | **Fauna, Flora e Elementos Cósmicos** — 12 animais sagrados, almas-animais, 9 árvores sagradas, 9 fenômenos climáticos dramáticos, 12 constelações | Arte, level design, drama |
+| [13](13-drama-suspense-tensao-narrativa.md) | **Drama, Suspense e Tensão Narrativa** — 7 técnicas-mestre, 12 cliffhangers, 9 eventos off-screen, 6 decisões cinco-segundos | **Direção narrativa central** |
+| [14](14-simbolos-geometria-numerologia.md) | **Símbolos, Geometria Sagrada e Numerologia** — 13 símbolos-mestre, 7 formas fundamentais, mandala cósmica, numerologia, 12 alfabetos | Arte, UI, código visual |
+| [15](15-tempo-arquitetura-sagrada.md) | **Tempo Cósmico e Arquitetura Sagrada** — 5 tempos, calendário, eclipses, construção de santuários, ciclo cósmico maior | Game design, level design |
+| [16](16-pedagogia-comunidade-localizacao.md) | **Pedagogia, Comunidade e Localização** — aplicações educacionais, terapêuticas, modding, tradução poética | Produção, comunidade |
+| [17](17-glossario-lexico-completo.md) | **Glossário e Léxico Completo** — dicionário alfabético | Consulta universal |
+
 > **Ordem de leitura recomendada:** 01 → 01b → 02 → 02b → 02c → 02d
 > → 02e → 03 → 03b → 03c → 03d → 03e → 03f → 04 → 04b → 04c → 04d
-> → 04e → 04f → 04g → 05 → 05b → 05c → 06 → 07.
+> → 04e → 04f → 04g → 05 → 05b → 05c → 06 → 07 → 08 → 09 → 10 → 11
+> → 12 → 13 → 14 → 15 → 16 → 17.
 
 > **Para entender rapidamente** o coração do jogo, leia em ordem
 > mínima: **00 (este) → 04f (Grande Revelação) → 03e (6 Anjos
