@@ -1,0 +1,32 @@
+# Bun configuration for Sophia
+#
+# Run with `bun install`, `bun run dev`, `bun run build`.
+# Vite is the dev server / bundler; Bun is the runtime + package manager.
+# Use `--bun` flag in scripts (configured in package.json) to actually run
+# Vite under Bun's runtime instead of Node.
+
+[install]
+# Use exact versions for reproducible builds (no ^ or ~ prefixes during install)
+exact = false
+
+# Cache packages globally so multiple projects share installs
+globalDir = "~/.bun/install/global"
+globalBinDir = "~/.bun/bin"
+
+# Install peer dependencies automatically
+peer = true
+
+[install.cache]
+# Where Bun stores tarballs
+dir = "~/.bun/install/cache"
+
+[run]
+# Quieter output by default — set BUN_RUNNER_VERBOSE=1 to override
+silent = false
+
+# Pass --bun flag through to npm scripts so they run under Bun
+bun = true
+
+[test]
+# Bun has a built-in test runner; reserve for future test work
+preload = []

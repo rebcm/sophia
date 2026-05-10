@@ -1,0 +1,32 @@
+{
+  "name": "sophia",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Sophia — uma jornada web3D pelo despertar gnóstico. Inspirada nos textos de Nag Hammadi e moldada para famílias curiosas.",
+  "scripts": {
+    "dev": "bun --bun vite",
+    "dev:node": "vite",
+    "build": "tsc -b && bun --bun vite build",
+    "build:node": "tsc -b && vite build",
+    "preview": "bun --bun vite preview --host",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.114.3",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/postprocessing": "^2.16.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.169.0",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.169.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "typescript": "~5.6.3",
+    "vite": "^5.4.10"
+  }
+}
