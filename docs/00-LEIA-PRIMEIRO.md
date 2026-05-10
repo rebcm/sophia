@@ -92,7 +92,7 @@ seção 2):
 
 ## Como ler estes documentos
 
-A bíblia agora tem **36 documentos**, em cinco blocos:
+A bíblia agora tem **39 documentos**, em cinco blocos (+3 documentos-mestre da última fase: 18, 19, 20):
 
 ### Bloco I · Fundação (cosmologia e religiões)
 
@@ -154,6 +154,8 @@ A bíblia agora tem **36 documentos**, em cinco blocos:
 | [16](16-pedagogia-comunidade-localizacao.md) | **Pedagogia, Comunidade e Localização** — aplicações educacionais, terapêuticas, modding, tradução poética | Produção, comunidade |
 | [17](17-glossario-lexico-completo.md) | **Glossário e Léxico Completo** — dicionário alfabético | Consulta universal |
 | [18](18-cinematicas-revelacao-progressiva.md) | **CINEMÁTICAS, REVELAÇÃO PROGRESSIVA E CENTELHA CRESCENTE** — 18 cinemáticas estilo Diablo + 18 grandes perguntas + centelha em 8 fases visuais + epílogos pós-créditos | **Espinha dramática central** |
+| [19](19-castas-celestiais-guerra-pela-consciencia.md) | **CASTAS CELESTIAIS E A VERDADEIRA GUERRA** — 9 ordens angelicais (Serafins, Querubins, Tronos, Dominações, Virtudes, Potestades, Principados, Arcanjos, Anjos) + 9 ordens sombrias espelhadas + guerra pela consciência humana + verdade escondida em filmes e séries + 12 limitações humanas vencidas | **Eixo cosmológico-dramático** |
+| [20](20-arquitetura-narrativa-master.md) | **ARQUITETURA NARRATIVA MASTER** — pipeline de produção em 6 fases, 3 atos macroscópicos, curva emocional de 45h, 12 tensões dramáticas, métricas de impacto, lançamento alinhado | **Master plan estúdio profissional** |
 
 > **Ordem de leitura recomendada:** 01 → 01b → 02 → 02b → 02c → 02d
 > → 02e → 03 → 03b → 03c → 03d → 03e → 03f → 04 → 04b → 04c → 04d

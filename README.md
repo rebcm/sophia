@@ -170,7 +170,7 @@ sophia/
 └── vite.config.ts
 ```
 
-## Documentação — 37 documentos em cinco blocos
+## Documentação — 39 documentos em cinco blocos
 
 **Comece em [docs/00-LEIA-PRIMEIRO.md](docs/00-LEIA-PRIMEIRO.md).**
 
@@ -219,6 +219,8 @@ sophia/
 - [Pedagogia, Comunidade e Localização](docs/16-pedagogia-comunidade-localizacao.md)
 - [Glossário e Léxico Completo](docs/17-glossario-lexico-completo.md)
 - [**CINEMÁTICAS, REVELAÇÃO PROGRESSIVA E CENTELHA CRESCENTE**](docs/18-cinematicas-revelacao-progressiva.md) — 18 cutscenes estilo Diablo + 18 grandes perguntas respondidas + centelha em 8 fases visuais + epílogos pós-créditos (**espinha dramática central**)
+- [**CASTAS CELESTIAIS E A VERDADEIRA GUERRA**](docs/19-castas-celestiais-guerra-pela-consciencia.md) — 9 ordens angelicais (Serafins → Anjos comuns) + 9 ordens sombrias espelhadas + verdade escondida em filmes/séries + 12 limitações humanas vencidas (**eixo cosmológico-dramático**)
+- [**ARQUITETURA NARRATIVA MASTER**](docs/20-arquitetura-narrativa-master.md) — pipeline de produção em 6 fases, 3 atos macroscópicos, curva emocional de 45h, 12 tensões dramáticas (**master plan estúdio profissional**)
 
 ## Os dez pilares de design
 
