@@ -231,6 +231,110 @@ tu és eles**.*
 
 ---
 
+## 4.5 · A Distinção Crucial — "Deuses deste mundo" vs Deus Verdadeiro
+
+> **Este é o eixo gnóstico mais importante do jogo.** Sophia
+> dedica vários minutos da Revelação a explicar **a maior
+> mentira que a humanidade ouviu**: a confusão entre os
+> **deuses-deste-mundo** e **o Deus Verdadeiro**.
+
+**SOPHIA** (na cinemática 15, após o Demiurgo cair):
+
+> *"Vê tu — **os deuses-deste-mundo**.*
+>
+> *Yahweh-tirânico, Allah-tirânico, Brahma, Zeus, Shiva-Destruidor,
+> Marduk, Ra-cobrador, Quetzalcoatl-vingativo... **todos eles**.*
+>
+> *Cada **deus tirânico** que **se apresentou como o ÚNICO** e
+> **exigiu obediência**.*
+>
+> *Cada **mensagem** que disse: 'sirva-me, ou queimarás'.*
+>
+> *Cada **doutrina** que ensinou medo do divino.*
+>
+> *Cada **religião institucional** que pegou **a luz da Mãe** e
+> **a vendeu**.*
+>
+> ***Tudo isto é Yaldabaoth, em mil máscaras***.*
+>
+> *Ele **não é** o Pai Verdadeiro.*
+>
+> *Ele **não é** Deus.*
+>
+> *Ele **é** uma criança que **esqueceu de pedir colo**."*
+
+### A Tabela da Distinção
+
+| Característica | Deuses-deste-mundo (falsos) | Deus Verdadeiro (Mônada) |
+|----------------|----------------------------|--------------------------|
+| **Exige obediência?** | Sim, sob ameaça | Não |
+| **Cobra adoração?** | Sim, em rituais e templos | Não |
+| **Julga pecados?** | Sim, com punição eterna | Não — apenas ama |
+| **Exige sacrifício?** | Sim (animal, financeiro, humano) | Não |
+| **Dá leis rígidas?** | Sim, em livros sagrados | Não — apenas convida |
+| **É masculino?** | Quase sempre apresentado como pai-rei | Nenhum gênero — **pai-mãe** |
+| **Localiza-se onde?** | Em céus distantes, templos | **Dentro de cada peito** |
+| **Se zanga?** | Sim, frequentemente | Nunca |
+| **Tem rivais?** | Sim — outros deuses falsos | Não — é único, mas inclui tudo |
+| **Sua linguagem?** | Comandos, ameaças, recompensas | Silêncio, vibração, amor |
+| **Como se encontra?** | Por rituais e clero intermediário | **Por silêncio interior** |
+| **O que pede?** | Tudo (taxa, dízimo, obediência) | **Nada**. Apenas que tu sejas |
+
+### Lista das Máscaras Históricas do Demiurgo
+
+Sophia, durante a Revelação, **nomeia explicitamente** algumas das
+"máscaras" historicas do Demiurgo:
+
+- **O Yahweh-tirânico do Antigo Testamento** que ordena
+  genocídios e exige holocaustos (NÃO o Pai de Jesus, que
+  é Mônada disfarçada)
+- **O Allah-punitivo das hadices apócrifas** (NÃO o Allah
+  dos sufis, que é Mônada disfarçada)
+- **O Júpiter-Zeus zangado da mitologia greco-romana**
+- **O Marduk mesopotâmico** que exige tributo
+- **O Ra-coletor egípcio** que pesa corações em balança falsa
+- **O Huitzilopochtli azteca** que exige sangue
+- **O Shiva-Destruidor versão tirânica** (NÃO o Shiva-Yogi,
+  que é Mônada)
+- **Todos os "deuses cobradores"** de religiões institucionais
+- **O "Deus" exigente da teologia da prosperidade** moderna
+- **O "Deus" punitivo dos fundamentalismos**
+
+> **Princípio ético crucial**: Sophia **não condena** as
+> tradições. **Condena as caricaturas tirânicas** que os Anjos
+> Caídos pintaram em cima delas. **Cada tradição tem, em seu
+> coração místico, o Deus Verdadeiro**. Apenas a **casca
+> institucional** foi capturada.
+
+### O Deus Verdadeiro Revelado
+
+**SOPHIA** (continuação da cinemática 15):
+
+> *"O Deus Verdadeiro — o **Deus Altíssimo** — está acima de
+> tudo isto.*
+>
+> *Ele **não é tirano**. **Não é juiz**. **Não é vingador**.*
+>
+> *Ele **é amor puro**. **Compaixão sem fim**. **Aceitação
+> total**.*
+>
+> *Ele nunca te exigiu nada. Os deuses-deste-mundo é que
+> exigiram em nome dele.*
+>
+> *Toda vez que tu **ouviste**: 'Deus está zangado contigo' —
+> **era mentira deles**.*
+>
+> *Toda vez que tu **leste**: 'Deus julgará' — **era inversão
+> deles**.*
+>
+> *O Deus Verdadeiro **espera-te no Coração Quieto**, **com
+> os braços abertos**, **sem cobrança, sem julgamento, sem
+> exigência**.*
+>
+> *Apenas... **com saudade**."*
+
+---
+
 ## 5. Cosmologia dos Três Terços — esquema visual
 
 ```

@@ -9,6 +9,46 @@
 
 ---
 
+## EIXO DRAMÁTICO CINEMATOGRÁFICO — leia antes de tudo
+
+**18 cinemáticas estilo Diablo** marcam **cada grande vitória**
+ao longo do enredo (detalhes completos em
+[18-cinematicas-revelacao-progressiva.md](18-cinematicas-revelacao-progressiva.md)).
+Cada cinemática:
+
+1. **Recapitula dramaticamente** o que acabou de acontecer
+2. **Revela uma camada nova da verdade gnóstica**
+3. **Responde parcialmente** a uma das 18 grandes perguntas da
+   humanidade
+4. **A centelha divina dentro do jogador cresce visivelmente**
+5. **Distingue cada vez mais claramente** os deuses-deste-mundo
+   (falsos) do Deus Verdadeiro (a Mônada)
+
+**Cronologia das 18 cinemáticas**:
+
+| # | Quando | Pergunta |
+|---|--------|----------|
+| 1 | Prólogo (antes do Cap 1) | O que é este mundo? |
+| 2 | Cap 4 (Athoth/Ratanabá) | Por que dormimos sem saber? |
+| 3 | Cap 5 (Yobel/El Dorado) | O que é o verdadeiro valor? |
+| 4 | Cap 6 (Adonaios/Hiperbórea) | O que é coragem real? |
+| 5 | Cap 7 (Eloaios/Atlântida) | O que é justiça? |
+| 6 | Cap 8 (Galila/Lemúria) | O que é beleza? |
+| 7 | Cap 9 (Harmas/Mu) | O que é comunicação verdadeira? |
+| 8 | Cap 12 (Iaoth/Pré-Adamita) | Quem fui eu antes desta vida? |
+| 9-14 | Cap 11 (Feira dos Sistemas — 6 Anjos Caídos) | 6 perguntas |
+| 15 | Cap 24 (Demiurgo cai) | Quem fez este mundo? |
+| 16 | Cap 24.5 (Grande Revelação) | Quem sou eu, verdadeiramente? |
+| 17 | Cap 25 (Véu) | O que é morrer? |
+| 18 | Cap 27 (Coração Quieto/Mônada) | O que é Deus? |
+
+A **centelha crescente** acompanha em **8 fases visuais**
+(cf. [18](18-cinematicas-revelacao-progressiva.md) seção 2) —
+visível dentro do peito do jogador desde o início, **explodindo
+em luz a cada vitória maior**.
+
+---
+
 ## ATUALIZAÇÃO IMPORTANTE — viagem inversa pelas civilizações
 
 A partir desta versão, o Ato II do enredo é uma **jornada inversa

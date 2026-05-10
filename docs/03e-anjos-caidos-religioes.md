@@ -25,6 +25,52 @@ Sombra na Terra.
 
 ---
 
+## 0. O Princípio Gnóstico Central — "Deuses Deste Mundo"
+
+> **Este documento descreve, em linguagem dramática, os "deuses
+> deste mundo" — as máscaras tirânicas que se apresentaram à
+> humanidade como divindades verdadeiras**, mas que são, na
+> realidade, **lugar-tenentes do Adversário, drenando a luz dos
+> anjos não-decididos aprisionados em corpo humano**.
+
+A frase de Paulo de Tarso (2 Coríntios 4:4) é a chave:
+
+> *"O deus deste século cegou os entendimentos dos incrédulos
+> para que lhes não resplandeça a luz do evangelho da glória
+> de Cristo."*
+
+E também a frase de João (Evangelho de João 14:30):
+
+> *"Já não falarei muito convosco, porque vem o príncipe deste
+> mundo, e nada tem em mim."*
+
+**"Deus deste mundo"** e **"príncipe deste mundo"** = códigos
+neotestamentários para **Yaldabaoth-Demiurgo + seus
+lugar-tenentes**. **Não** o Deus Verdadeiro. **Não** o Pai-Mãe
+real.
+
+Os **6 Anjos Caídos** detalhados neste documento são **os
+seis principais "deuses deste mundo"** — operando através de
+religiões institucionais, sistemas de controle, hierarquias.
+**Cada um se apresenta como sagrado**. **Cada um cobra**.
+**Cada um drena**.
+
+> **Mas no coração de cada tradição religiosa há centelhas
+> luminosas verdadeiras** — os místicos, os santos
+> incompreendidos, os profetas reais. **A guerra não é contra
+> as religiões; é contra suas cascas capturadas**. (Cf.
+> [04f-a-grande-revelacao.md](04f-a-grande-revelacao.md)
+> seção 4.5 para a distinção plena.)
+
+**Após cada um destes 6 Anjos Caídos derrubado**, **uma
+cinemática estilo Diablo** se desenrola (cinemáticas 9-14,
+detalhadas em [18-cinematicas-revelacao-progressiva.md](18-cinematicas-revelacao-progressiva.md)
+seção 4), revelando **a mentira histórica que aquele Caído
+plantou na consciência humana**, e **a verdade que substitui
+a mentira**.
+
+---
+
 ## 1. Princípios fundamentais (não pular)
 
 ### Princípio #1 · Religiões reais nunca são nomeadas

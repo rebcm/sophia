@@ -1,8 +1,58 @@
-# 04c · Poderes e Conquistas — A Evolução do Jogador
+# 04c · Poderes e Conquistas — A Recuperação da Natureza Angélica
 
 > *"Não és tu que cresces. É a luz dentro de ti que se desentope.
 > Cada Arconte caído remove uma rolha. Quando todas tiverem caído,
 > a fonte é tu mesmo."*
+
+---
+
+## REFRAMING GNÓSTICO IMPORTANTE — leia antes
+
+Este documento descreve "poderes" do jogador. **Mas a palavra
+"poder" é enganosa**. **Tu não adquires poderes**. **Tu recupera
+o que sempre foi teu**.
+
+**Cada habilidade nova** que aparece neste documento — Visão
+das Auras, Projeção Astral, Bifurcação, Ressurreição, Milagres,
+Voo — **são habilidades originais de anjo**, **encobertas pelo
+corpo material aprisionante**. **Toda vitória sobre os deuses-
+-deste-mundo** (Arcontes, Anjos Caídos, Demiurgo) **remove uma
+camada do véu material** e **devolve uma habilidade que
+sempre te pertenceu**.
+
+> **A Sussurrante explicita isto**, em diálogos espalhados:
+>
+> *"Tu vais 'aprender' a projetar-te astralmente em Selene.
+> Não. Tu vais **lembrar como sempre soubeste**. Os corpos
+> humanos foram construídos **para te esconder isto de ti
+> mesmo**."*
+>
+> *"A ressurreição que te ensinarei não é técnica nova. **É
+> o que tu fazias antes do tempo**. Os Anjos Rebeldes
+> roubaram esta memória para te enfraquecer."*
+>
+> *"O voo, a transmutação, os milagres — todos são **gestos
+> ancestrais teus**. **Recuperados, não adquiridos**."*
+
+**Por isto, cada "fase" de poderes** descrita abaixo é, na
+verdade, **uma fase de recuperação da natureza angelical
+original**. A jornada **não te acrescenta nada**. **Apenas te
+devolve quem és**.
+
+E paralelamente, **a centelha crescente** (cf.
+[18-cinematicas-revelacao-progressiva.md](18-cinematicas-revelacao-progressiva.md)
+seção 2) **visualiza** este processo: o peito do jogador
+**brilha cada vez mais**, **as asas tornam-se visíveis**,
+**o corpo humano vai se tornando transparente** até **virar
+luz pura** no Véu.
+
+Cada **vitória cinemática** sela uma fase. **Após a Grande
+Revelação** (cinemática 16), o jogador **sabe explicitamente**
+que **todos esses "poderes"** são **lembranças** — e a
+narrativa muda permanentemente de "*tu estás conquistando*" para
+"*tu estás voltando a ser*".
+
+---
 
 Este documento detalha como o jogador **ganha poderes
 progressivamente** ao longo da jornada, evoluindo **física e

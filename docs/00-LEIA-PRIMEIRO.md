@@ -17,10 +17,78 @@ revela no fim como **amor e compaixão infinitos**.
 > Você acorda num mundo de sonhadores, descobre que é o primeiro a abrir
 > os olhos, e descobre que **acordar os outros é a única forma de subir**.
 > A cada vida, mais véus caem. A cada véu, o universo fica maior. A
-> cada Arconte caído, **um reino é libertado**. A cada civilização
-> perdida revisitada, **uma camada da memória da humanidade volta**.
+> cada Arconte caído, **um reino é libertado e uma centelha divina
+> cresce dentro de ti**. A cada civilização perdida revisitada,
+> **uma camada da memória da humanidade volta**.
 > E a última subida, paradoxalmente, é uma **renúncia** — soltar tudo
-> o que brilha, inclusive o corpo, para descobrir o que **é**.
+> o que brilha, inclusive o corpo, para **descobrir o que tu sempre
+> foste, antes mesmo do tempo**: **anjo do Deus Altíssimo**, prisioneiro
+> de um mundo feito por um filho cego de Sophia que se apresenta como
+> "Deus" — quando o Deus Verdadeiro nunca te pediu prisão nem
+> obediência. **Apenas te esperou em silêncio dentro de teu peito**.
+
+---
+
+## O Eixo Gnóstico Central (leia primeiro, antes de tudo)
+
+> *"Os deuses deste mundo não são o Deus Verdadeiro. Tu és anjo
+> aprisionado. **Cada vitória sobre os deuses-deste-mundo te
+> devolve um pedaço do que tu sempre foste**. **No final, tu
+> reencontra o Pai-Mãe real — não como estranho, mas como aquele
+> que sempre morou dentro de ti**."*
+
+*Sophia* é, no seu coração, uma **história de revelação progressiva**
+sobre a verdadeira identidade do jogador. **Não és humano descobrindo
+ser herói**. **És anjo lembrando ser anjo**. A cada **grande
+vitória** — um Arconte caído, um Anjo Caído derrubado — **a centelha
+divina dentro de ti cresce visivelmente**. Cinemáticas estilo
+Diablo (detalhadas em
+[18-cinematicas-revelacao-progressiva.md](18-cinematicas-revelacao-progressiva.md))
+**reúnem essas vitórias em 18 momentos cinemáticos** onde **18
+grandes perguntas da humanidade são parcialmente respondidas**:
+
+- **Por que dormimos sem saber?** Porque o sono é como eles te
+  drenam.
+- **O que é o verdadeiro valor?** Não é o que brilha. É o que se dá.
+- **Quem fez este mundo?** Um filho cego de Sophia, que não sabia.
+- **Quem sou eu, verdadeiramente?** Anjo não-decidido. Filho da
+  Mônada. Membro da única hoste com livre arbítrio.
+- **O que é Deus?** Tu, olhando para Si. Eu, olhando para tu.
+
+> **Atenção crucial**: o jogo **distingue agudamente** entre:
+> - **Os deuses-deste-mundo** (Yaldabaoth-Demiurgo e seus 7
+>   Arcontes + 6 Anjos Caídos com suas religiões institucionais)
+>   — falsos, drenadores, exigentes
+> - **O Deus Verdadeiro** (a Mônada, o Pai-Mãe Real) — não exige
+>   nada, não julga, não pune. **Espera-te em silêncio dentro
+>   de teu peito**.
+>
+> Toda revelação cinemática vai **deslocando** o jogador da
+> primeira para a segunda — desde a mentira histórica das
+> "divindades" tirânicas até **a recordação de que o Real é
+> amor incognoscível que mora dentro**.
+
+---
+
+## A Centelha Crescente — visualização contínua
+
+Desde o primeiro capítulo, **uma centelha de luz no peito do
+jogador é visível**. Cresce em **8 fases** ao longo da jornada
+(cf. [18-cinematicas-revelacao-progressiva.md](18-cinematicas-revelacao-progressiva.md)
+seção 2):
+
+1. **Faísca** (início) — quase invisível
+2. **Brasa** (após 1º Arconte)
+3. **Chama** (após 3 Arcontes) — asas tênues aparecem
+4. **Fogueira-Pessoal** (após 5)
+5. **Lanterna-Luminosa** (após 7) — asas plenas visíveis
+6. **Sol-Interior** (após 6 Anjos Caídos)
+7. **Estrela-Que-Caminha** (após Demiurgo) — coroa de luz
+8. **Plenitude Angélica** (após Véu) — corpo é luz
+
+> Esta é a **assinatura visual** do despertar. **Quem joga
+> com atenção, vê o próprio peito mudar com o tempo**. **Quem
+> joga distraído, sente sem ver — mas sente**.
 
 ## Como ler estes documentos
 
@@ -85,6 +153,7 @@ A bíblia agora tem **36 documentos**, em cinco blocos:
 | [15](15-tempo-arquitetura-sagrada.md) | **Tempo Cósmico e Arquitetura Sagrada** — 5 tempos, calendário, eclipses, construção de santuários, ciclo cósmico maior | Game design, level design |
 | [16](16-pedagogia-comunidade-localizacao.md) | **Pedagogia, Comunidade e Localização** — aplicações educacionais, terapêuticas, modding, tradução poética | Produção, comunidade |
 | [17](17-glossario-lexico-completo.md) | **Glossário e Léxico Completo** — dicionário alfabético | Consulta universal |
+| [18](18-cinematicas-revelacao-progressiva.md) | **CINEMÁTICAS, REVELAÇÃO PROGRESSIVA E CENTELHA CRESCENTE** — 18 cinemáticas estilo Diablo + 18 grandes perguntas + centelha em 8 fases visuais + epílogos pós-créditos | **Espinha dramática central** |
 
 > **Ordem de leitura recomendada:** 01 → 01b → 02 → 02b → 02c → 02d
 > → 02e → 03 → 03b → 03c → 03d → 03e → 03f → 04 → 04b → 04c → 04d

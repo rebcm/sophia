@@ -170,7 +170,7 @@ sophia/
 └── vite.config.ts
 ```
 
-## Documentação — 36 documentos em cinco blocos
+## Documentação — 37 documentos em cinco blocos
 
 **Comece em [docs/00-LEIA-PRIMEIRO.md](docs/00-LEIA-PRIMEIRO.md).**
 
@@ -218,6 +218,7 @@ sophia/
 - [Tempo Cósmico e Arquitetura Sagrada](docs/15-tempo-arquitetura-sagrada.md)
 - [Pedagogia, Comunidade e Localização](docs/16-pedagogia-comunidade-localizacao.md)
 - [Glossário e Léxico Completo](docs/17-glossario-lexico-completo.md)
+- [**CINEMÁTICAS, REVELAÇÃO PROGRESSIVA E CENTELHA CRESCENTE**](docs/18-cinematicas-revelacao-progressiva.md) — 18 cutscenes estilo Diablo + 18 grandes perguntas respondidas + centelha em 8 fases visuais + epílogos pós-créditos (**espinha dramática central**)
 
 ## Os dez pilares de design
 
