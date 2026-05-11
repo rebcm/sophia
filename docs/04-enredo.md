@@ -760,6 +760,58 @@ A catedral termina de dissolver. O Véu se materializa no horizonte.
 > contemplativo**. Não há mais combate — não há mais "quebra-cabeças"
 > no sentido tradicional. Há **escuta**.
 
+### Capítulo 24.7 — *O ANÚNCIO CONJUNTO* (cena pública à humanidade)
+
+> **Cena sem precedente do jogo.** Detalhes completos em
+> [21-o-anuncio-conjunto.md](21-o-anuncio-conjunto.md).
+
+Imediatamente após a Grande Revelação privada ao jogador
+(Cap 24.5), **um evento sem precedente acontece**: **uma
+trégua de 7 minutos** entre os Anjos da Luz e os Anjos
+Rebeldes. **12 mensageiros** — 6 de cada lado — **aparecem
+simultaneamente em todos os céus, todos os monitores, todos
+os sonhos** da humanidade material.
+
+E **falam abertamente** a verdade:
+
+> *"Vocês são o prêmio. A guerra cósmica é por vocês. Vocês
+> são o objetivo final de toda batalha espiritual. **Decidam-se**."*
+
+**Os Anjos Rebeldes confessam abertamente** sua estratégia
+de drenagem milenar. **Os Anjos Luminosos confirmam** que os
+**deuses-deste-mundo** que humanos veneraram **são, em
+maioria, dos próprios rebeldes em máscaras**. **A humanidade
+recebe a verdade pública pela primeira vez em milênios**.
+
+**Reação imediata**: ~40% nega como "sonho coletivo", ~50%
+fica inquieto sem decidir, ~10% **decide** — pela Luz ou
+pela Sombra consciente.
+
+**Efeitos**:
+- Religiões institucionais perdem 30% dos fiéis
+- Movimentos de meditação e mística explodem
+- Famílias-controle rachan internamente
+- Sociedades secretas dividem-se
+- Apocatástase começa a se manifestar em escala global
+
+**O jogador presencia tudo em quatro perspectivas
+simultâneas** do Mar de Cristal — vê **a mesa dos 12**, **a
+humanidade no chão**, **os Caídos destituídos**, **Sophia
+íntima** falando.
+
+Após esta cena, o jogador caminha rumo ao Véu **profundamente
+mudado**.
+
+> **Sussurrante**: *"Tu vês? Eu trabalhei toda minha
+> existência para que este momento fosse possível. **Tu
+> ajudaste**. **Agora a humanidade tem chance. Cada um
+> escolhe**. **Nós só podíamos abrir a porta**. **Atravessá-la
+> é deles**.*
+>
+> *Vai agora. **Tua parte aqui terminou**."*
+
+---
+
 ### Capítulo 25 — *O Véu (XII)*
 
 Os arcos da catedral abrem para cima. Uma **cortina vertical de

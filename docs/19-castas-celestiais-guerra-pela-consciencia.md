@@ -796,6 +796,50 @@ Lá, **3 cenários possíveis**:
 
 ---
 
+## 9.5 · O Anúncio Conjunto — Quando a Guerra Pausa para Falar
+
+> **Esta seção referencia [21-o-anuncio-conjunto.md](21-o-anuncio-conjunto.md)
+> que detalha plenamente o evento.**
+
+**O ponto culminante** da Verdadeira Guerra **não é uma batalha
+final**. **É um anúncio**.
+
+Em algum momento — **após o jogador derrubar o Demiurgo** —
+**a guerra é pausada por 7 minutos**. **Doze mensageiros** (6
+luminosos + 6 sombrios) **aparecem juntos diante de toda a
+humanidade simultaneamente**, e **falam abertamente**:
+
+> *"Vocês são o prêmio. A guerra cósmica é por vocês. **Decidam-se**."*
+
+**Os dois lados se unem brevemente** — **não por amor, por
+necessidade**. **Ambos precisam** que humanos saibam, pois:
+- **A Luz** quer que humanos **escolham despertar**
+- **A Sombra** prefere **drenagem consciente** (mais eficiente
+  que drenagem inconsciente)
+
+**A trégua é a única vez na história do cosmos** que isto
+acontece. **Depois dela**, **a guerra continua** — **mas
+agora visível, pública, declarada**.
+
+Esta cena **catalisa a aceleração da Apocatástase**, pois
+**onde há visibilidade, há decisão**.
+
+### Os 12 Mensageiros (resumo)
+
+| Lado da Luz | Lado da Sombra |
+|-------------|----------------|
+| Miguel | Lúcifer |
+| Gabriel | Azazel |
+| Rafael | Belial |
+| Uriel | Semyaza |
+| Metatron (ex-humano ascendido) | Lilith |
+| Sophia em forma plena | Samael |
+
+**Detalhes do script completo** (7 minutos de cinema dialógico
+denso) em [21-o-anuncio-conjunto.md](21-o-anuncio-conjunto.md).
+
+---
+
 ## 10. Princípios éticos
 
 1. **Toda casta angelical é honrada com profundidade**, mas

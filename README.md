@@ -170,7 +170,7 @@ sophia/
 └── vite.config.ts
 ```
 
-## Documentação — 39 documentos em cinco blocos
+## Documentação — 40 documentos em cinco blocos
 
 **Comece em [docs/00-LEIA-PRIMEIRO.md](docs/00-LEIA-PRIMEIRO.md).**
 
@@ -221,6 +221,7 @@ sophia/
 - [**CINEMÁTICAS, REVELAÇÃO PROGRESSIVA E CENTELHA CRESCENTE**](docs/18-cinematicas-revelacao-progressiva.md) — 18 cutscenes estilo Diablo + 18 grandes perguntas respondidas + centelha em 8 fases visuais + epílogos pós-créditos (**espinha dramática central**)
 - [**CASTAS CELESTIAIS E A VERDADEIRA GUERRA**](docs/19-castas-celestiais-guerra-pela-consciencia.md) — 9 ordens angelicais (Serafins → Anjos comuns) + 9 ordens sombrias espelhadas + verdade escondida em filmes/séries + 12 limitações humanas vencidas (**eixo cosmológico-dramático**)
 - [**ARQUITETURA NARRATIVA MASTER**](docs/20-arquitetura-narrativa-master.md) — pipeline de produção em 6 fases, 3 atos macroscópicos, curva emocional de 45h, 12 tensões dramáticas (**master plan estúdio profissional**)
+- [**O ANÚNCIO CONJUNTO**](docs/21-o-anuncio-conjunto.md) — Cinemática 16.5: trégua cósmica de 7min onde anjos e demônios lado a lado revelam à humanidade que ela é o espólio. Script completo dos 12 mensageiros. (**Ponto fixo da história**)
 
 ## Os dez pilares de design
 

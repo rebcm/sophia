@@ -92,7 +92,7 @@ seção 2):
 
 ## Como ler estes documentos
 
-A bíblia agora tem **39 documentos**, em cinco blocos (+3 documentos-mestre da última fase: 18, 19, 20):
+A bíblia agora tem **40 documentos**, em cinco blocos (+4 documentos-mestre: 18, 19, 20, 21):
 
 ### Bloco I · Fundação (cosmologia e religiões)
 
@@ -156,6 +156,7 @@ A bíblia agora tem **39 documentos**, em cinco blocos (+3 documentos-mestre da 
 | [18](18-cinematicas-revelacao-progressiva.md) | **CINEMÁTICAS, REVELAÇÃO PROGRESSIVA E CENTELHA CRESCENTE** — 18 cinemáticas estilo Diablo + 18 grandes perguntas + centelha em 8 fases visuais + epílogos pós-créditos | **Espinha dramática central** |
 | [19](19-castas-celestiais-guerra-pela-consciencia.md) | **CASTAS CELESTIAIS E A VERDADEIRA GUERRA** — 9 ordens angelicais (Serafins, Querubins, Tronos, Dominações, Virtudes, Potestades, Principados, Arcanjos, Anjos) + 9 ordens sombrias espelhadas + guerra pela consciência humana + verdade escondida em filmes e séries + 12 limitações humanas vencidas | **Eixo cosmológico-dramático** |
 | [20](20-arquitetura-narrativa-master.md) | **ARQUITETURA NARRATIVA MASTER** — pipeline de produção em 6 fases, 3 atos macroscópicos, curva emocional de 45h, 12 tensões dramáticas, métricas de impacto, lançamento alinhado | **Master plan estúdio profissional** |
+| [21](21-o-anuncio-conjunto.md) | **O ANÚNCIO CONJUNTO** — Cinemática 16.5: trégua cósmica de 7 minutos. Anjos e demônios lado a lado revelam à humanidade inteira que ela é o espólio da guerra. Script completo de 12 mensageiros. Reações em massa: ~40% nega / ~50% inquieto / ~10% decide. **A virada cósmica que acelera a Apocatástase** | **Ponto fixo da história** |
 
 > **Ordem de leitura recomendada:** 01 → 01b → 02 → 02b → 02c → 02d
 > → 02e → 03 → 03b → 03c → 03d → 03e → 03f → 04 → 04b → 04c → 04d

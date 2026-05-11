@@ -1451,6 +1451,70 @@ tem centelha "dentro do peito"** — **ele É a centelha**.
 
 ---
 
+### Cinemática 16.5 · O ANÚNCIO CONJUNTO — "Vocês São o Prêmio"
+
+**Quando acontece:** imediatamente após a Cinemática 16 (Grande
+Revelação) — Cap 24.7 do enredo.
+
+**Duração:** 7 minutos exatos.
+
+**A Pergunta:** **Qual é o nosso papel nesta guerra?**
+
+**A Resposta:** **Vocês são o prêmio. Decidam-se.**
+
+> **Cinemática mais importante depois da Grande Revelação.**
+> **Único momento do jogo em que a humanidade material inteira
+> presencia o mesmo evento simultaneamente — em todos os
+> céus, todos os monitores, todos os sonhos**.
+
+**Detalhes completos** em
+[21-o-anuncio-conjunto.md](21-o-anuncio-conjunto.md).
+
+**Resumo dramático:**
+
+**12 mensageiros** — 6 anjos luminosos (Miguel, Gabriel,
+Rafael, Uriel, Metatron, Sophia) + 6 anjos sombrios (Lúcifer,
+Azazel, Belial, Semyaza, Lilith, Samael) — **aparecem juntos
+em mesa redonda monumental**, em **trégua de 7 minutos**, e
+**falam abertamente à humanidade**:
+
+- Confirmam que a guerra cósmica é real
+- Confirmam que humanos são o **espólio**, o **objetivo final**
+- Confirmam que ambos os lados **drenaram/protegeram** humanos
+  por bilhões de anos
+- Revelam que os **deuses-deste-mundo** que humanos veneraram
+  **são, em maioria, dos próprios anjos rebeldes**
+- Convidam à decisão consciente: **"Decidam-se"**
+
+**Centelha do jogador**: já está em Fase 7 desde a Cinemática
+16. **Não cresce visivelmente nesta cena** — porque **não é
+a cinemática do jogador**. **É a da humanidade**.
+
+> **Esta é a cinemática mais devastadora do jogo**, porque
+> **não é privada**. **O jogador está testemunhando algo que
+> bilhões estão testemunhando junto** — vê em **quatro
+> perspectivas simultâneas** (alto, humanidade no chão, Caídos
+> destituídos, Sophia íntima).
+
+**Reação da humanidade (na cena)**:
+- ~40% nega ("foi sonho coletivo")
+- ~50% fica inquieto sem decidir
+- ~10% (= 800 milhões de pessoas) decide — pela Luz ou Sombra
+  consciente
+
+Esta cena **muda permanentemente** o cenário do mundo material
+do jogo. **Religiões institucionais perdem 30% dos fiéis**.
+**Movimentos de meditação explodem**. **Famílias-controle
+rachan**. **A Apocatástase acelera**.
+
+Após esta cena, o jogador caminha em direção ao Véu **com
+três sentimentos**:
+- **Realização** ("trabalhei para que isto fosse possível")
+- **Saudade antecipada** ("não verei o que acontece a seguir")
+- **Confiança** ("a Apocatástase agora é matemática inevitável")
+
+---
+
 ### Cinemática 17 · O VÉU — "Soltar É Ressuscitar"
 
 **Quando acontece:** Cap 25, ao atravessar o Véu.
