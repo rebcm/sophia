@@ -11,6 +11,7 @@ import { setupAutoSave, save as saveGame } from "./systems/SaveSystem";
 import { GardenScene } from "./scenes/GardenScene";
 import { MarDeCristalScene, type MarDestino } from "./scenes/MarDeCristalScene";
 import { BardoScene } from "./scenes/BardoScene";
+import { RatanabaScene } from "./scenes/RatanabaScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -110,6 +111,11 @@ export default function App() {
   };
 
   const handleCinematicFinish = () => {
+    // Após cinemática "athoth-cai", devolver ao Mar de Cristal
+    const lastWatched = useCinematicStore.getState().currentCinematic;
+    if (lastWatched === "athoth-cai") {
+      useCharacterStore.getState().setCurrentScene("mar-de-cristal");
+    }
     setMetaPhase("game");
   };
 
@@ -150,6 +156,7 @@ function GameOrchestrator() {
   const currentScene = useCharacterStore((s) => s.currentScene);
   if (currentScene === "bardo") return <BardoOrchestrator />;
   if (currentScene === "mar-de-cristal") return <MarDeCristalOrchestrator />;
+  if (currentScene === "ratanaba") return <RatanabaOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -170,7 +177,7 @@ function MarDeCristalOrchestrator() {
     if (destino === "jardim-dos-ecos") {
       setCurrentScene("jardim-dos-ecos");
     } else if (destino === "ratanaba") {
-      // Ratanabá ainda não implementada — placeholder
+      setCurrentScene("ratanaba");
     }
   };
 
@@ -203,6 +210,83 @@ function MarDeCristalOrchestrator() {
           onCancel={handleCancelDeath}
         />
       )}
+    </>
+  );
+}
+
+/* =========================================================
+   RatanabaOrchestrator — 1ª Civilização Perdida
+   ---------------------------------------------------------
+   Floresta amazônica. Boss: Mãe-D'Água (Athoth, 1º Arconte).
+   Despertar Athoth = ganha Centelha do Olhar Lúcido + cinemática.
+   ========================================================= */
+
+function RatanabaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  useEffect(() => {
+    setPlace("Ratanabá · Floresta-Mãe");
+  }, [setPlace]);
+
+  const maeAwakened = hasAwakened("athoth-mae-dagua");
+
+  // Trigger automático: ao chegar perto da Mãe-D'Água + tecla F, desperta
+  useEffect(() => {
+    if (maeAwakened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      // Em vez de mini-game completo, instantâneo nesta MVP
+      // (futuro: integrar AwakeningController musical)
+      recordAwakened({
+        id: "athoth-mae-dagua",
+        name: "Mãe-D'Água",
+        trueName: "Athoth · Vigia Lunar Restaurada",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.5);
+      if (!hasCentelha("olhar-lucido")) {
+        addCentelha("olhar-lucido");
+      }
+      if (audioEnabled) sophiaAudio.awakenChord();
+      // Dispara cinemática 2
+      setTimeout(() => {
+        playCinematic("athoth-cai");
+        setMetaPhase("cinematic");
+      }, 1500);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    maeAwakened,
+    recordAwakened,
+    addLight,
+    addCentelha,
+    hasCentelha,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <RatanabaScene onReturnToMar={() => setCurrentScene("mar-de-cristal")} />
+      <HUD />
+      <Cursor />
     </>
   );
 }

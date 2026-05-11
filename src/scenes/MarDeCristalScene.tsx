@@ -12,6 +12,7 @@ import { Player } from "../world/Player";
 import { Whisperer } from "../world/Whisperer";
 import { Portal } from "../world/Portal";
 import { PedraDasVidas } from "../world/PedraDasVidas";
+import { useSoulStore } from "../state/soulStore";
 
 /* =========================================================
    MarDeCristalScene — Hub central entre dimensões
@@ -41,6 +42,9 @@ export function MarDeCristalScene({
 }: MarDeCristalSceneProps) {
   const playerRef = useRef<THREE.Group | null>(null);
   const [nearPortal, setNearPortal] = useState<MarDestino | null>(null);
+
+  // Ratanabá fica disponível após despertar o Velho do Jardim
+  const ratanabaEnabled = useSoulStore((s) => s.hasAwakened("velho-do-jardim"));
 
   // Tecla Espaço/Enter para entrar no portal próximo
   useKeyToEnter(nearPortal, onPortalEnter);
@@ -107,13 +111,13 @@ export function MarDeCristalScene({
       <Portal
         position={[-12, 0.4, -6]}
         label="Ratanabá"
-        subLabel="(em breve)"
+        subLabel={ratanabaEnabled ? "(a floresta espera)" : "(despertar primeiro)"}
         color="#87E1FF"
         playerRef={playerRef}
         onProximityChange={(near) =>
-          setNearPortal(near ? "ratanaba" : null)
+          setNearPortal(near && ratanabaEnabled ? "ratanaba" : null)
         }
-        enabled={false}
+        enabled={ratanabaEnabled}
       />
 
       {/* Pedra das Vidas — morte voluntária (acessível após primeira reencarnação desbloqueada via gameplay) */}

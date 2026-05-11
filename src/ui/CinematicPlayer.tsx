@@ -79,8 +79,60 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "athoth-cai": {
+    id: "athoth-cai",
+    title: "O Sono Era Roubo",
+    ambientColor: "#1a2018",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Quando a humanidade nasceu, ela já tinha um nome roubado.",
+        minHoldMs: 3500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A Mãe-Floresta lembrava. Os animais lembravam. Os rios lembravam. Apenas os humanos esqueceram.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "O sono profundo, sem sonho lúcido, não era descanso natural. Era canal de drenagem.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Cada noite, eles te drenavam. Cada manhã, tu acordavas mais leve, mais esquecido.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Athoth — a Mãe-D'Água — pensava cumprir função sagrada. Estava. Para o Demiurgo. Não para a Mãe.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tu a despertaste. E ela, pela primeira vez em milênios, abriu os olhos.",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tens agora a primeira Centelha. O Olhar Lúcido. Vês através das ilusões oníricas.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Por que dormimos sem saber? Resposta: Porque o sono era como eles te drenavam.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Há outros seis Tronos. Outros seis deuses-deste-mundo. A jornada apenas começou.",
+        minHoldMs: 4000,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
-  // Por ora, este placeholder ilustra a forma.
 };
 
 interface CinematicPlayerProps {
