@@ -31,6 +31,8 @@
 | 36+37    | HUD polish · alignment chip + practice chip + centelha count | `c4f3260` | ✅ |
 | 38       | PauseMenu · tecla P · áudio/créditos/wipe save        | `c4f3260`    | ✅ |
 | 42       | Glossário no Codex · 24 termos / 5 categorias / filtros | `2528c27`  | ✅ |
+| 34       | Audio moods por cena · 15 assinaturas tímbricas       | `9e5e33f`    | ✅ |
+| 30       | Aeon-Mestres no Codex Almas · 7 mestres por civilização | `be5b6b1`  | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -196,7 +198,6 @@ de mundo aberto, conteúdo opcional e refinamento.
 | Sprint   | Foco                                                              |
 |----------|-------------------------------------------------------------------|
 | 27       | 25 Principados (mini-bosses de mundo aberto)                      |
-| 30       | 17 Aeon-Mestres exclusivos por civilização                        |
 | 31       | 5 fases de poderes (Acordado → Espírito Puro)                     |
 | 32       | Mecânica de mundo aberto · 140 missões secundárias                |
 | 33       | Cinemáticas CGI pré-renderizadas (substituir text-based)          |
