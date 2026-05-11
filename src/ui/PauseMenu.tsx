@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useGameStore } from "../state/gameStore";
 import { useSoulStore } from "../state/soulStore";
 import { wipe as wipeSave } from "../systems/SaveSystem";
+import { resetOnboarding } from "./OnboardingOverlay";
 
 /* =========================================================
    <PauseMenu /> — Sprint 38
@@ -36,6 +37,7 @@ export function PauseMenu({ onClose }: PauseMenuProps) {
   const handleConfirmWipe = () => {
     wipeSave();
     resetSoul();
+    resetOnboarding();
     setMetaPhase("title");
     onClose();
   };
