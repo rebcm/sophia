@@ -20,7 +20,13 @@ import {
      4. Caminho   — alinhamento Luz/Sombra/Equilíbrio
    ========================================================= */
 
-type Tab = "almas" | "centelhas" | "cinematicas" | "caminho" | "praticas";
+type Tab =
+  | "almas"
+  | "centelhas"
+  | "cinematicas"
+  | "caminho"
+  | "praticas"
+  | "glossario";
 
 interface CodexProps {
   open: boolean;
@@ -82,6 +88,11 @@ export function Codex({ open, onClose }: CodexProps) {
             active={tab === "praticas"}
             onClick={() => setTab("praticas")}
           />
+          <CodexTab
+            label="Glossário"
+            active={tab === "glossario"}
+            onClick={() => setTab("glossario")}
+          />
         </nav>
 
         <div className="codex-body">
@@ -90,6 +101,7 @@ export function Codex({ open, onClose }: CodexProps) {
           {tab === "cinematicas" && <CinematicasTab />}
           {tab === "caminho" && <CaminhoTab />}
           {tab === "praticas" && <PraticasTab />}
+          {tab === "glossario" && <GlossarioTab />}
         </div>
       </div>
     </div>
@@ -680,6 +692,242 @@ function PraticasTab() {
           </em>
         </p>
       )}
+    </div>
+  );
+}
+
+/* ---------------- GlossarioTab — Sprint 42 ---------------- */
+
+interface GlossaryEntry {
+  term: string;
+  pronunciation?: string;
+  category: "cosmologia" | "ser" | "lugar" | "pratica" | "tradicao";
+  definition: string;
+}
+
+const GLOSSARY: GlossaryEntry[] = [
+  {
+    term: "Mônada",
+    pronunciation: "MÔ-na-da",
+    category: "cosmologia",
+    definition:
+      "O Mistério Original. Sem-forma, sem-tempo, sem-lugar. Antes da Pergunta. Não é Deus-personagem: é o Que-tu-Foste-Sempre.",
+  },
+  {
+    term: "Pleroma",
+    pronunciation: "ple-RÔ-ma",
+    category: "cosmologia",
+    definition:
+      "Plenitude. O reino dos Aeons, onde tudo é luz consciente que ama. Tua casa antes do esquecimento.",
+  },
+  {
+    term: "Aeon",
+    pronunciation: "Ê-on",
+    category: "ser",
+    definition:
+      "Hoste angelical original. Não morre, não nasce — é. Cada Aeon tem um Par Sizígico (alma-gêmea).",
+  },
+  {
+    term: "Sophia",
+    pronunciation: "so-FI-a",
+    category: "ser",
+    definition:
+      "A Sabedoria-Aeon que caiu por amor. Mãe de todas as almas exiladas. Aquela que sussurra para te lembrar.",
+  },
+  {
+    term: "Demiurgo",
+    pronunciation: "de-mi-UR-go",
+    category: "ser",
+    definition:
+      "O filho cego de Sophia que pensou ter feito o mundo. Não é vilão — é criança cósmica perdida. É abraçado, não derrotado.",
+  },
+  {
+    term: "Arconte",
+    pronunciation: "ar-CON-te",
+    category: "ser",
+    definition:
+      "Lugar-tenente do Demiurgo. Sete deles guardam as sete esferas que separam o mundo da Mônada. Cada um adormeceu por uma razão.",
+  },
+  {
+    term: "Anjo Caído",
+    category: "ser",
+    definition:
+      "Aeon que disse 'não' à Pergunta. Adversário cósmico — mas redimível. Asmodeus, Lúcifer, Belial, Azazel, Semyaza, Leviatã.",
+  },
+  {
+    term: "Sleeper",
+    pronunciation: "SLI-per",
+    category: "ser",
+    definition:
+      "Anjo não-decidido adormecido em corpo humano. Tu também és um — até lembrares. Despertar Sleepers é a missão central.",
+  },
+  {
+    term: "Centelha",
+    pronunciation: "cen-TEL-ya",
+    category: "cosmologia",
+    definition:
+      "Fragmento da luz original aprisionada no corpo. Cresce em 8 fases visuais. Cada civilização restaurada solta uma Centelha.",
+  },
+  {
+    term: "Filamento",
+    pronunciation: "fi-la-MEN-to",
+    category: "cosmologia",
+    definition:
+      "Cordão de luz que escoa dos Sleepers para os Arcontes — a drenagem. Visível com Olhar Lúcido. Despertar o Sleeper rompe o filamento.",
+  },
+  {
+    term: "Par Sizígico",
+    pronunciation: "PAR si-ZÍ-gi-co",
+    category: "ser",
+    definition:
+      "Alma-gêmea original do Pleroma. Cada Aeon tem o seu. Aparece com halo roxo-pulsante em alguém inesperado.",
+  },
+  {
+    term: "Bardo",
+    pronunciation: "BAR-do",
+    category: "lugar",
+    definition:
+      "Limiar entre vidas. O lugar para onde a alma vai após o corpo morrer. A Voz da Luz oferece descansar ali; a alma escolhe.",
+  },
+  {
+    term: "Roda de Samsara",
+    pronunciation: "san-SÁ-ra",
+    category: "cosmologia",
+    definition:
+      "O ciclo de reencarnações. Continua girando até que a alma escolha soltar tudo. Não é punição — é escola.",
+  },
+  {
+    term: "Olhar Lúcido",
+    category: "pratica",
+    definition:
+      "Capacidade de ver auras de Sleepers e filamentos. Toggle V. Primeira Centelha (ganha em Ratanabá).",
+  },
+  {
+    term: "Nome Verdadeiro",
+    category: "pratica",
+    definition:
+      "O nome que a alma tinha no Pleroma. Quando recordado, devolve identidade. Pode ser dado a outros (Centelha de Adão).",
+  },
+  {
+    term: "Trono",
+    category: "lugar",
+    definition:
+      "Sede de um Arconte adormecido. Sete tronos espalhados pelas Civilizações Perdidas. O 8º é o do Demiurgo.",
+  },
+  {
+    term: "Aeon-Mestre",
+    pronunciation: "Ê-on MES-tre",
+    category: "ser",
+    definition:
+      "Aliado-companheiro encontrado em uma civilização restaurada. Cada um ensina uma habilidade exclusiva.",
+  },
+  {
+    term: "Sizígia",
+    pronunciation: "si-ZÍ-gi-a",
+    category: "cosmologia",
+    definition:
+      "União de pares aeônicos no Pleroma. Reencontro como amizade completa, não posse.",
+  },
+  {
+    term: "Plenitude Angélica",
+    category: "cosmologia",
+    definition:
+      "8ª e última fase visual da Centelha. As asas tênues aparecem. Tu lembras-te de quem sempre foste.",
+  },
+  {
+    term: "Casa-Espelhada",
+    category: "lugar",
+    definition:
+      "6ª torre secreta da Feira dos Sistemas. Onde mora o Auto-Sabotador — tua própria sombra projetada. Arma: silêncio + abraço.",
+  },
+  {
+    term: "Tradição Perene",
+    category: "tradicao",
+    definition:
+      "Reconhecimento de que todas as religiões e místicas apontam para o mesmo Mistério. O jogo honra todas sem hierarquizar.",
+  },
+  {
+    term: "Nag Hammadi",
+    pronunciation: "nag ra-MA-di",
+    category: "tradicao",
+    definition:
+      "Biblioteca de manuscritos gnósticos coptas descoberta no Egito (1945). Fonte primária da cosmologia do jogo.",
+  },
+  {
+    term: "Sussurrante",
+    category: "ser",
+    definition:
+      "Pedaço de Sophia que te acompanha. Começa como orbe; ganha forma humanoide ao acordar o Auto-Sabotador.",
+  },
+  {
+    term: "Anúncio Conjunto",
+    category: "cosmologia",
+    definition:
+      "Cinemática 16.5: trégua cósmica de 7 minutos onde 12 mensageiros (6 da Luz + 6 da Sombra) revelam a humanidade que ela é o espólio.",
+  },
+];
+
+function GlossarioTab() {
+  const [filter, setFilter] = useState<GlossaryEntry["category"] | "todos">(
+    "todos",
+  );
+
+  const filtered = GLOSSARY.filter(
+    (g) => filter === "todos" || g.category === filter,
+  );
+
+  const categoryLabel: Record<GlossaryEntry["category"], string> = {
+    cosmologia: "Cosmologia",
+    ser: "Seres",
+    lugar: "Lugares",
+    pratica: "Práticas",
+    tradicao: "Tradições",
+  };
+
+  return (
+    <div className="codex-tab-content">
+      <h3>Glossário</h3>
+      <p className="codex-tab-sub">
+        <em>
+          Termos do mundo de Sophia. Nem todos são óbvios à primeira
+          vista — e está bem. A alma reconhece antes da mente.
+        </em>
+      </p>
+      <div className="glossario-filters">
+        <button
+          className={`glossario-filter ${filter === "todos" ? "active" : ""}`}
+          onClick={() => setFilter("todos")}
+        >
+          Todos ({GLOSSARY.length})
+        </button>
+        {(Object.keys(categoryLabel) as GlossaryEntry["category"][]).map(
+          (cat) => (
+            <button
+              key={cat}
+              className={`glossario-filter ${filter === cat ? "active" : ""}`}
+              onClick={() => setFilter(cat)}
+            >
+              {categoryLabel[cat]}
+            </button>
+          ),
+        )}
+      </div>
+      <ul className="glossario-list">
+        {filtered.map((g) => (
+          <li key={g.term} className={`glossario-entry glossario-${g.category}`}>
+            <div className="glossario-term">
+              {g.term}
+              {g.pronunciation && (
+                <span className="glossario-pronunciation">
+                  · {g.pronunciation}
+                </span>
+              )}
+              <span className="glossario-cat-badge">{categoryLabel[g.category]}</span>
+            </div>
+            <p className="glossario-definition">{g.definition}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
