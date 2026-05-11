@@ -40,6 +40,8 @@
 | 51       | Olhar Lúcido overlay · vinheta violeta + cantos        | `2939e13`    | ✅ |
 | 54       | Onboarding inicial · 7 teclas-chave 1x por jogador     | `2939e13`    | ✅ |
 | 32 lean  | QuestHint · sugestão diegética da Sussurrante por cena | `3fdc159`    | ✅ |
+| 27 lean  | Galeria dos Principados · 12 contempláveis (paralelo) | `155df2b`    | ✅ |
+| 36 lean  | Acessibilidade · 3 toggles (texto / movimento / contraste) | `155df2b` | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -204,7 +206,6 @@ de mundo aberto, conteúdo opcional e refinamento.
 
 | Sprint   | Foco                                                              |
 |----------|-------------------------------------------------------------------|
-| 27       | 25 Principados (mini-bosses de mundo aberto)                      |
 | 31       | 5 fases de poderes (Acordado → Espírito Puro)                     |
 | 32       | Mecânica de mundo aberto · 140 missões secundárias                |
 | 33       | Cinemáticas CGI pré-renderizadas (substituir text-based)          |

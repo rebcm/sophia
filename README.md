@@ -4,7 +4,7 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 42 sprints
+**Status:** **vertical slice end-to-end COMPLETO** — 44 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
@@ -103,12 +103,12 @@ todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
 de duração do loop narrativo: **~2-3 horas** se o jogador ler
 todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas (15)
+### Cenas implementadas (16)
 
 | Cena                       | Função                                       | Sprint |
 | -------------------------- | -------------------------------------------- | ------ |
 | **Jardim dos Ecos**        | Tutorial: despertar Velho + Adão             | 1, 5   |
-| **Mar de Cristal**         | Hub central com 14 portais multidimensionais | 2      |
+| **Mar de Cristal**         | Hub central com 15 portais multidimensionais | 2      |
 | **Bardo**                  | Liminar entre vidas (reencarnação)           | 3      |
 | **Ratanabá**               | 1ª Civilização — Athoth (Mãe-D'Água)         | 6,7,8  |
 | **Casa-Espelhada**         | 6ª Torre — Auto-Sabotador                    | 11     |
@@ -122,6 +122,7 @@ todas as cinemáticas e explorar cada cena.
 | **Tabernáculo dos Caídos** | 6 altares dos Anjos Caídos · cinemáticas 9-14 | 23   |
 | **Feira dos Sistemas**     | Cidade-arquetipo · 5 torres modernas         | 25     |
 | **Labirinto das Eras**     | 10 espelhos-memória · flashbacks de vidas    | 26     |
+| **Galeria dos Principados** | 12 leis contempláveis (silêncio + atenção)  | 27     |
 
 ### Sistemas funcionais
 
@@ -243,7 +244,8 @@ Após a Mônada, o jogador escolhe entre:
 | 50     | AmbientWhispers · 71 sussurros contemplativos por cena | `85ad1dd`    | ✅ |
 | 51+54  | Olhar Lúcido overlay + Onboarding inicial (7 teclas)  | `2939e13`    | ✅ |
 | 32 lean| QuestHint · sugestão diegética por cena               | `3fdc159`    | ✅ |
-| 27+    | Backlog — 25 Principados, mundo aberto / 140 missões, CGI, OST nativo, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
+| 27+36 lean | Galeria dos Principados (12) + Acessibilidade · paralelo agents | `155df2b` | ✅ |
+| —      | Backlog — mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
 
