@@ -15,6 +15,10 @@ import { RatanabaScene } from "./scenes/RatanabaScene";
 import { CasaEspelhadaScene } from "./scenes/CasaEspelhadaScene";
 import { ElDoradoScene } from "./scenes/ElDoradoScene";
 import { HiperboreaScene } from "./scenes/HiperboreaScene";
+import { AtlantidaScene } from "./scenes/AtlantidaScene";
+import { LemuriaScene } from "./scenes/LemuriaScene";
+import { MuScene } from "./scenes/MuScene";
+import { PreAdamitaScene } from "./scenes/PreAdamitaScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -124,7 +128,11 @@ export default function App() {
     if (
       lastWatched === "athoth-cai" ||
       lastWatched === "yobel-cai" ||
-      lastWatched === "adonaios-cai"
+      lastWatched === "adonaios-cai" ||
+      lastWatched === "eloaios-cai" ||
+      lastWatched === "galila-cai" ||
+      lastWatched === "harmas-cai" ||
+      lastWatched === "iaoth-cai"
     ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
@@ -172,6 +180,10 @@ function GameOrchestrator() {
   if (currentScene === "casa-espelhada") return <CasaEspelhadaOrchestrator />;
   if (currentScene === "el-dorado") return <ElDoradoOrchestrator />;
   if (currentScene === "hiperborea") return <HiperboreaOrchestrator />;
+  if (currentScene === "atlantida") return <AtlantidaOrchestrator />;
+  if (currentScene === "lemuria") return <LemuriaOrchestrator />;
+  if (currentScene === "mu") return <MuOrchestrator />;
+  if (currentScene === "pre-adamita") return <PreAdamitaOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -199,6 +211,14 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("el-dorado");
     } else if (destino === "hiperborea") {
       setCurrentScene("hiperborea");
+    } else if (destino === "atlantida") {
+      setCurrentScene("atlantida");
+    } else if (destino === "lemuria") {
+      setCurrentScene("lemuria");
+    } else if (destino === "mu") {
+      setCurrentScene("mu");
+    } else if (destino === "pre-adamita") {
+      setCurrentScene("pre-adamita");
     }
   };
 
@@ -827,6 +847,293 @@ function HiperboreaOrchestrator() {
     </>
   );
 }
+
+/* =========================================================
+   Atlântida / Lemúria / Mu / Pré-Adamita — Sprints 18-21
+   ---------------------------------------------------------
+   Padrão comum: cada cena tem um Arconte adormecido. F perto
+   abre escolha-chave. Resolução: addCentelha, addLight + 1.5,
+   recordAwakened, cinemática correspondente.
+   Após a cinemática, volta ao Mar de Cristal automaticamente.
+   ========================================================= */
+
+const ELOAIOS_CHOICE: KeyChoice = {
+  id: "eloaios-confronto",
+  context:
+    "Eloaios segura a Tábua da Lei. A ilha afunda mais a cada gota que cai dela. A Lei era para servir — virou prisão para todos, inclusive para ele.",
+  voices: {
+    angel:
+      "Lembra-lhe a primeira frase escrita na Tábua. Era amor — não condição.",
+    demon:
+      "Quebra a Tábua. Sem lei nenhuma, todos serão livres. Que afunde tudo.",
+    jinn: "Posso reescrever a Tábua a teu favor. Diz-me três leis que queres a tua medida.",
+    sophia: "Pergunta a ele a quem a lei jurou servir. Espera a resposta.",
+  },
+  options: [
+    {
+      label: "Tocar a Tábua e dizer-lhe: 'Lê com os olhos da criança que escreveu'",
+      alignment: "light",
+      immediateEffect: "A Tábua amolece. Vira água. Eloaios bebe. A ilha para de afundar.",
+      amount: 8,
+    },
+    {
+      label: "Quebrar a Tábua para libertar o povo",
+      alignment: "shadow",
+      immediateEffect: "Cristal estilhaça. Liberdade vem em ondas de pânico. Aprenderão a ter lei viva — depois.",
+      amount: 6,
+    },
+    {
+      label: "Sentar-se ao lado dele em silêncio até que ele leia a Tábua sozinho",
+      alignment: "balance",
+      immediateEffect: "Hora a hora, a Tábua suaviza. Ele lembra. A lei volta a ser água.",
+      amount: 7,
+    },
+  ],
+};
+
+const GALILA_CHOICE: KeyChoice = {
+  id: "galila-confronto",
+  context:
+    "Galila canta com voz que ofusca. Os Sleepers pares ao redor ouvem e se sentem pequenos. A beleza dela calcula admiração — esqueceu de ressoar.",
+  voices: {
+    angel: "Canta com ela uma nota só — não a tua melhor. Mostra-lhe que beleza é ressonância.",
+    demon: "Brilha mais do que ela. Mostra-lhe que perdeu o trono. Tu tens o que ela teme.",
+    jinn: "Posso fazer-te invisível para a inveja dela. Mas pagarás com a tua próxima beleza.",
+    sophia: "Pergunta-lhe quando foi a última vez que outro cantou e ela sentiu-se bela ouvindo.",
+  },
+  options: [
+    {
+      label: "Cantar com ela uma nota única — humilde, no mesmo tom",
+      alignment: "light",
+      immediateEffect: "Ela escuta. Pela primeira vez. O lótus floresce em respiração coletiva.",
+      amount: 8,
+    },
+    {
+      label: "Apagar a luz dela com a tua própria — mostrar quem brilha mais",
+      alignment: "shadow",
+      immediateEffect: "Ela cala. Acorda em vergonha — não em alegria. Mas acorda.",
+      amount: 6,
+    },
+    {
+      label: "Esperar em silêncio até que alguém cante perto dela",
+      alignment: "balance",
+      immediateEffect: "Um Sleeper canta. Galila escuta. Lembra. A beleza retorna por ressonância.",
+      amount: 7,
+    },
+  ],
+};
+
+const HARMAS_CHOICE: KeyChoice = {
+  id: "harmas-confronto",
+  context:
+    "Harmas é cristal fragmentado. Não fala — vibra. Os hieróglifos ao redor não traduzem entre si. Tu precisas dizer algo que vibre antes da língua.",
+  voices: {
+    angel: "Não fales. Apenas pensa-lhe o que queres dizer com toda a verdade.",
+    demon: "Toma um fragmento. Tu mereces uma palavra que ninguém mais entenda.",
+    jinn: "Posso te ensinar uma língua que dobra os outros. Caro, mas eficaz.",
+    sophia: "A palavra que vibra sem ser dita está dentro de ti — pergunta a ela.",
+  },
+  options: [
+    {
+      label: "Pensar uma frase verdadeira sem dizê-la — deixar a vibração tocá-lo",
+      alignment: "light",
+      immediateEffect: "Os hieróglifos giram. Reorganizam-se em estrelas. Harmas vê tu por dentro.",
+      amount: 8,
+    },
+    {
+      label: "Quebrar um fragmento e levar para te entender melhor",
+      alignment: "shadow",
+      immediateEffect: "A peça canta solitária na tua mão. Ela cala perto dos outros.",
+      amount: 6,
+    },
+    {
+      label: "Ficar parado, sem pensar nada — só ouvir o silêncio entre os hieróglifos",
+      alignment: "balance",
+      immediateEffect: "O tetraedro tece um anel novo. Tu já sabes a língua antes das línguas.",
+      amount: 7,
+    },
+  ],
+};
+
+const IAOTH_CHOICE: KeyChoice = {
+  id: "iaoth-confronto",
+  context:
+    "Iaoth é esfera negra com anel de Saturno. Sem face. Sem voz. Apenas presença antiga. Não há perguntas a fazer — só lembrança a aceitar ou recusar.",
+  voices: {
+    angel: "Aceita a memória. Doerá. Mas tu eras antes do tempo.",
+    demon: "Não olhes para dentro. Há coisas tuas que tu não queres lembrar.",
+    jinn: "Posso filtrar a memória — só o doce te chega. Por um preço.",
+    sophia: "Olha. Tudo. Não temas. Eu fico contigo.",
+  },
+  options: [
+    {
+      label: "Aceitar a memória inteira — doce, doloroso, brincalhão, perdido",
+      alignment: "light",
+      immediateEffect: "A esfera abre. Dentro: a tua estrela recém-nascida. Tu lembras quem foste.",
+      amount: 8,
+    },
+    {
+      label: "Recusar — algumas coisas é melhor esquecer",
+      alignment: "shadow",
+      immediateEffect: "A esfera mantém-se fechada. Iaoth desperta — mas tu carregas um véu novo.",
+      amount: 6,
+    },
+    {
+      label: "Pedir só o que ele te ofereça agora, sem exigir o resto",
+      alignment: "balance",
+      immediateEffect: "O anel de Saturno gira. Uma única lembrança vem — a primeira risada.",
+      amount: 7,
+    },
+  ],
+};
+
+function makeArconteOrchestrator(config: {
+  placeName: string;
+  awakenedId: string;
+  npcName: string;
+  trueName: string;
+  centelhaId: Parameters<ReturnType<typeof useSoulStore.getState>["addCentelha"]>[0];
+  cinematicId: Parameters<ReturnType<typeof useCinematicStore.getState>["playCinematic"]>[0];
+  choice: KeyChoice;
+  Scene: React.ComponentType<{
+    [k: string]: unknown;
+    onReturnToMar?: () => void;
+  }>;
+  awakenedPropName: string;
+}) {
+  return function ArconteOrchestrator() {
+    const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+    const setPlace = useGameStore((s) => s.setPlace);
+    const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+    const recordAwakened = useSoulStore((s) => s.recordAwakened);
+    const addLight = useSoulStore((s) => s.addLight);
+    const addCentelha = useSoulStore((s) => s.addCentelha);
+    const hasCentelha = useSoulStore((s) => s.hasCentelha);
+    const hasAwakened = useSoulStore((s) => s.hasAwakened);
+    const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+    const playCinematic = useCinematicStore((s) => s.playCinematic);
+    const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+    useEffect(() => {
+      setPlace(config.placeName);
+    }, [setPlace]);
+
+    const awakened = hasAwakened(config.awakenedId);
+    const [showChoice, setShowChoice] = useState(false);
+
+    useEffect(() => {
+      if (awakened || showChoice) return;
+      const onKey = (e: KeyboardEvent) => {
+        if (e.code !== "KeyF") return;
+        setShowChoice(true);
+      };
+      window.addEventListener("keydown", onKey);
+      return () => window.removeEventListener("keydown", onKey);
+    }, [awakened, showChoice]);
+
+    const handleChoiceResolved = (_opt: ChoiceOption) => {
+      setShowChoice(false);
+      recordAwakened({
+        id: config.awakenedId,
+        name: config.npcName,
+        trueName: config.trueName,
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.5);
+      if (!hasCentelha(config.centelhaId)) {
+        addCentelha(config.centelhaId);
+      }
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic(config.cinematicId);
+        setMetaPhase("cinematic");
+      }, 1500);
+    };
+
+    const sceneProps = {
+      [config.awakenedPropName]: awakened,
+      onReturnToMar: () => setCurrentScene("mar-de-cristal"),
+    };
+
+    return (
+      <>
+        <config.Scene {...sceneProps} />
+        <HUD />
+        <Cursor />
+        {showChoice && (
+          <VozesEscolha
+            choice={config.choice}
+            onResolved={handleChoiceResolved}
+          />
+        )}
+      </>
+    );
+  };
+}
+
+const AtlantidaOrchestrator = makeArconteOrchestrator({
+  placeName: "Atlântida · Cidade Concêntrica",
+  awakenedId: "eloaios-lei-cristalina",
+  npcName: "O Jurista de Cristal",
+  trueName: "Eloaios · Júpiter Restaurado",
+  centelhaId: "palavra-de-nomeacao",
+  cinematicId: "eloaios-cai",
+  choice: ELOAIOS_CHOICE,
+  Scene: AtlantidaScene as unknown as React.ComponentType<{
+    [k: string]: unknown;
+    onReturnToMar?: () => void;
+  }>,
+  awakenedPropName: "eloaiosAwakened",
+});
+
+const LemuriaOrchestrator = makeArconteOrchestrator({
+  placeName: "Lemúria · Continente do Canto",
+  awakenedId: "galila-beleza-viva",
+  npcName: "A Senhora do Lótus",
+  trueName: "Galila · Vênus Restaurada",
+  centelhaId: "toque-compassivo",
+  cinematicId: "galila-cai",
+  choice: GALILA_CHOICE,
+  Scene: LemuriaScene as unknown as React.ComponentType<{
+    [k: string]: unknown;
+    onReturnToMar?: () => void;
+  }>,
+  awakenedPropName: "galilaAwakened",
+});
+
+const MuOrchestrator = makeArconteOrchestrator({
+  placeName: "Mu · Plataformas Flutuantes",
+  awakenedId: "harmas-palavra-raiz",
+  npcName: "O Hieroglifo Vivo",
+  trueName: "Harmas · Mercúrio Restaurado",
+  centelhaId: "fala-raiz",
+  cinematicId: "harmas-cai",
+  choice: HARMAS_CHOICE,
+  Scene: MuScene as unknown as React.ComponentType<{
+    [k: string]: unknown;
+    onReturnToMar?: () => void;
+  }>,
+  awakenedPropName: "harmasAwakened",
+});
+
+const PreAdamitaOrchestrator = makeArconteOrchestrator({
+  placeName: "Pré-Adamita · Antes do Tempo",
+  awakenedId: "iaoth-memoria-pleroma",
+  npcName: "A Esfera Saturnal",
+  trueName: "Iaoth · Saturno Restaurado",
+  centelhaId: "memoria-do-pleroma",
+  cinematicId: "iaoth-cai",
+  choice: IAOTH_CHOICE,
+  Scene: PreAdamitaScene as unknown as React.ComponentType<{
+    [k: string]: unknown;
+    onReturnToMar?: () => void;
+  }>,
+  awakenedPropName: "iaothAwakened",
+});
 
 /* =========================================================
    JardimOrchestrator (anterior conteúdo do GameOrchestrator)

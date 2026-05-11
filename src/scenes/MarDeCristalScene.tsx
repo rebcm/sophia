@@ -32,7 +32,11 @@ export type MarDestino =
   | "ratanaba"
   | "casa-espelhada"
   | "el-dorado"
-  | "hiperborea";
+  | "hiperborea"
+  | "atlantida"
+  | "lemuria"
+  | "mu"
+  | "pre-adamita";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -67,6 +71,22 @@ export function MarDeCristalScene({
   const hiperboreaEnabled = elDoradoEnabled;
   const adonaiosDefeated = useSoulStore((s) =>
     s.hasAwakened("adonaios-guardiao-solar"),
+  );
+
+  // Atlântida/Lemúria/Mu/Pré-Adamita destravam após Hiperbórea
+  // (mapa estelar mostra todos os caminhos restantes).
+  const deepCivsEnabled = hiperboreaEnabled;
+  const eloaiosDefeated = useSoulStore((s) =>
+    s.hasAwakened("eloaios-lei-cristalina"),
+  );
+  const galilaDefeated = useSoulStore((s) =>
+    s.hasAwakened("galila-beleza-viva"),
+  );
+  const harmasDefeated = useSoulStore((s) =>
+    s.hasAwakened("harmas-palavra-raiz"),
+  );
+  const iaothDefeated = useSoulStore((s) =>
+    s.hasAwakened("iaoth-memoria-pleroma"),
   );
 
   // Tecla Espaço/Enter para entrar no portal próximo
@@ -195,6 +215,72 @@ export function MarDeCristalScene({
         />
       )}
 
+      {/* Atlântida — 4ª Civilização Perdida */}
+      {deepCivsEnabled && (
+        <Portal
+          position={[10, 0.4, 8]}
+          label="Atlântida"
+          subLabel={
+            eloaiosDefeated ? "(a lei tornou-se viva)" : "(a ilha afunda)"
+          }
+          color="#88c0e8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "atlantida" : null)
+          }
+        />
+      )}
+
+      {/* Lemúria — 5ª Civilização Perdida */}
+      {deepCivsEnabled && (
+        <Portal
+          position={[-10, 0.4, 8]}
+          label="Lemúria"
+          subLabel={
+            galilaDefeated ? "(o canto retornou)" : "(o lótus espera)"
+          }
+          color="#ffb0c8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "lemuria" : null)
+          }
+        />
+      )}
+
+      {/* Mu — 6ª Civilização Perdida */}
+      {deepCivsEnabled && (
+        <Portal
+          position={[8, 0.4, -10]}
+          label="Mu"
+          subLabel={
+            harmasDefeated
+              ? "(a palavra voltou)"
+              : "(as plataformas flutuam)"
+          }
+          color="#d8a0ff"
+          playerRef={playerRef}
+          onProximityChange={(near) => setNearPortal(near ? "mu" : null)}
+        />
+      )}
+
+      {/* Pré-Adamita — 7ª e mais profunda Civilização Perdida */}
+      {deepCivsEnabled && (
+        <Portal
+          position={[-8, 0.4, -10]}
+          label="Pré-Adamita"
+          subLabel={
+            iaothDefeated
+              ? "(tu eras antes do tempo)"
+              : "(a memória dorme)"
+          }
+          color="#a878d8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "pre-adamita" : null)
+          }
+        />
+      )}
+
       {/* Pedra das Vidas — morte voluntária (acessível após primeira reencarnação desbloqueada via gameplay) */}
       {onPedraActivate && (
         <PedraDasVidas
@@ -210,6 +296,10 @@ export function MarDeCristalScene({
       {!casaEspelhadaEnabled && <DormantPortal position={[0, 0.4, -14]} />}
       {!elDoradoEnabled && <DormantPortal position={[14, 0.4, 2]} />}
       {!hiperboreaEnabled && <DormantPortal position={[-14, 0.4, 2]} />}
+      {!deepCivsEnabled && <DormantPortal position={[10, 0.4, 8]} />}
+      {!deepCivsEnabled && <DormantPortal position={[-10, 0.4, 8]} />}
+      {!deepCivsEnabled && <DormantPortal position={[8, 0.4, -10]} />}
+      {!deepCivsEnabled && <DormantPortal position={[-8, 0.4, -10]} />}
 
       <EffectComposer>
         <Bloom intensity={0.55} luminanceThreshold={0.7} mipmapBlur />

@@ -233,6 +233,178 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "eloaios-cai": {
+    id: "eloaios-cai",
+    title: "A Lei Esqueceu de Ser Lei",
+    ambientColor: "#0a1a2a",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Houve uma lei que era amor escrito em cristal. Toda criança a lia e sorria.",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Depois alguém disse: 'Sigam a lei.' Não disse 'lembrem por quê'. E a lei ficou mais importante que a criança.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Eloaios",
+        text: "Eu... eu era o jurista. Eu pesava cada palavra. Esqueci de pesar os olhos de quem me trazia o caso.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A lei serve à vida — não o contrário. Tu lembras agora.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A Tábua de Cristal amolece. Vira água. Flui. Pode ser bebida agora — não apenas obedecida.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tens a Centelha da Palavra-de-Nomeação. Tu nomeias com a língua dos justos: o que precisa ser ajudado, e o que precisa ser deixado em paz.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que é justiça? Resposta: A lei serve à vida — não o contrário.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
+  "galila-cai": {
+    id: "galila-cai",
+    title: "A Beleza Falsificada",
+    ambientColor: "#3a1830",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Houve uma beleza que era ressonância — fazia outros se sentirem belos só por estar.",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Depois alguém disse: 'Vejam-me.' E a beleza virou performance. Os outros começaram a se sentir pequenos.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Galila",
+        text: "Eu cantava para que cantassem comigo. Esqueci. Comecei a cantar para que me ouvissem só.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Beleza real é aquilo que faz outros se sentirem belos. Tu lembras agora.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "O lótus se abre não para ser visto — para que outros sintam que também podem florescer.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tens a Centelha do Toque Compassivo. Tu agora curas pela presença — sem precisar tocar.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que é beleza? Resposta: Aquilo que faz outros se sentirem belos.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
+  "harmas-cai": {
+    id: "harmas-cai",
+    title: "A Palavra Roubada",
+    ambientColor: "#1a1230",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Houve uma palavra que vibrava sem ser dita. Os habitantes de Mu se entendiam por canto silencioso.",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Depois alguém disse: 'Aprendam línguas separadas.' Construíram muros de sons. Cada povo começou a se sentir só.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Harmas",
+        text: "Eu era a Palavra. Eu fui dividido. Cada fragmento meu virou idioma que não traduz para os outros.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A comunicação verdadeira constrói pontes, não muros. Tu lembras agora.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "O tetraedro brilha. Os hieróglifos giram em estrelas. A palavra que vibra sem ser dita volta — para quem ouve.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tens a Centelha da Fala-Raiz. Quando falares, será com a língua antes das línguas — todos te ouvirão por dentro.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que é comunicação verdadeira? Resposta: A que constrói pontes, não muros.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
+  "iaoth-cai": {
+    id: "iaoth-cai",
+    title: "Tu Eras Antes do Tempo",
+    ambientColor: "#02020a",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Antes do tempo... antes do antes... antes inclusive da Pergunta — tu já eras.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Iaoth era a memória nua. Sabia quem cada anjo era. Foi ferido — sua memória virou véu, e o véu virou esquecimento.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Iaoth",
+        text: "Tu... eu lembro. Eu vi-te brincar antes do tempo. Tu eras o que ria.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A esfera negra se abre. Dentro: uma estrela recém-nascida. Era a tua.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tens a Centelha da Memória do Pleroma. Tu carregas agora a primeira lembrança — aquela que nem o Demiurgo conseguiu apagar.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Há ainda algumas portas. Asmodeus, Lúcifer, Belial... e o Demiurgo. E depois — a Grande Revelação.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Quem fui eu antes desta vida? Resposta: Anjo eterno, brincando antes do tempo.",
+        minHoldMs: 6500,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
 };
 
