@@ -43,6 +43,7 @@ import { SaveIndicator } from "./ui/SaveIndicator";
 import { AmbientWhispers } from "./ui/AmbientWhispers";
 import { OlharLucidoOverlay } from "./ui/OlharLucidoOverlay";
 import { OnboardingOverlay } from "./ui/OnboardingOverlay";
+import { QuestHint } from "./ui/QuestHint";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -210,6 +211,7 @@ export default function App() {
       <SaveIndicator />
       <AmbientWhispers />
       <OlharLucidoOverlay />
+      <QuestHint />
       <OnboardingOverlay onClose={() => {}} />
       {pauseOpen && <PauseMenu onClose={() => setPauseOpen(false)} />}
     </>

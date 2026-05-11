@@ -3295,3 +3295,42 @@ canvas {
   transform: translateY(-1px);
   box-shadow: 0 4px 18px rgba(255, 212, 90, 0.3);
 }
+
+/* =========================================================
+   QuestHint (Sprint 32 lean)
+   ========================================================= */
+.quest-hint {
+  position: fixed;
+  top: 120px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: min(420px, 60vw);
+  padding: 8px 14px 8px 12px;
+  background: rgba(20, 14, 30, 0.75);
+  border: 1px solid rgba(255, 212, 90, 0.32);
+  border-left: 3px solid rgba(255, 212, 90, 0.75);
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--c-amber);
+  z-index: 35;
+  pointer-events: none;
+  backdrop-filter: blur(3px);
+  animation: questhint-in 0.7s ease-out;
+}
+@keyframes questhint-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.quest-hint-marker {
+  color: #ffd45a;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  text-shadow: 0 0 6px rgba(255, 212, 90, 0.4);
+}
+.quest-hint-text {
+  opacity: 0.92;
+}
