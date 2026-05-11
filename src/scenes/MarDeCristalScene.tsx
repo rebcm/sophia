@@ -27,7 +27,11 @@ import { useSoulStore } from "../state/soulStore";
    Sprints futuros adicionam os outros 7+ portais.
    ========================================================= */
 
-export type MarDestino = "jardim-dos-ecos" | "ratanaba" | "casa-espelhada";
+export type MarDestino =
+  | "jardim-dos-ecos"
+  | "ratanaba"
+  | "casa-espelhada"
+  | "el-dorado";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -51,6 +55,12 @@ export function MarDeCristalScene({
   );
   const autoSabotadorDefeated = useSoulStore((s) =>
     s.hasAwakened("auto-sabotador"),
+  );
+  // El Dorado fica disponível após despertar Athoth (Mãe-D'Água mostra
+  // o caminho na caverna de mapas estelares).
+  const elDoradoEnabled = casaEspelhadaEnabled;
+  const yobelDefeated = useSoulStore((s) =>
+    s.hasAwakened("yobel-inca-solitario"),
   );
 
   // Tecla Espaço/Enter para entrar no portal próximo
@@ -145,6 +155,22 @@ export function MarDeCristalScene({
         />
       )}
 
+      {/* El Dorado — 2ª Civilização Perdida */}
+      {elDoradoEnabled && (
+        <Portal
+          position={[14, 0.4, 2]}
+          label="El Dorado"
+          subLabel={
+            yobelDefeated ? "(o sol respira)" : "(o ouro espera ser luz)"
+          }
+          color="#ffd45a"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "el-dorado" : null)
+          }
+        />
+      )}
+
       {/* Pedra das Vidas — morte voluntária (acessível após primeira reencarnação desbloqueada via gameplay) */}
       {onPedraActivate && (
         <PedraDasVidas
@@ -158,7 +184,7 @@ export function MarDeCristalScene({
       <DormantPortal position={[10, 0.4, 8]} />
       <DormantPortal position={[-10, 0.4, 8]} />
       {!casaEspelhadaEnabled && <DormantPortal position={[0, 0.4, -14]} />}
-      <DormantPortal position={[14, 0.4, 2]} />
+      {!elDoradoEnabled && <DormantPortal position={[14, 0.4, 2]} />}
       <DormantPortal position={[-14, 0.4, 2]} />
 
       <EffectComposer>

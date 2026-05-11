@@ -132,6 +132,59 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "yobel-cai": {
+    id: "yobel-cai",
+    title: "O Ouro Era Sombra",
+    ambientColor: "#2a1c08",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Houve uma cidade onde o ouro era ofertado ao sol todas as manhãs. Era amor.",
+        minHoldMs: 3500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Depois alguém perguntou: 'E se ficássemos com um pouco?' E a resposta veio: 'Apenas um pouco.'",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Yobel — o Urso Coroado — esquecera o que coroa significava. Pensava que estava sendo adorado por ser brilhante.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Esquecera que o trono era para descansar nele cuidando do povo. Não para ser visto sobre ele.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Inca-Solitário",
+        text: "Eu... eu lembrei. Eu não era para ser adorado. Era para servir.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Inca-Solitário",
+        text: "Perdão. Perdão à minha gente. Perdão a... a ela.",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "O ouro que cobria o Inca começou a se desfazer — virou luz que escoou de volta para os Sleepers. Eles soltaram as barras. Olharam uns para os outros pela primeira vez.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tens agora a Centelha da Chama Interior. O fogo que não precisa de altar para queimar.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que é o verdadeiro valor? Resposta: Não é o que brilha. É o que se dá.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
 };
 

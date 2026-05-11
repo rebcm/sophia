@@ -51,8 +51,9 @@ export type Disposition =
 export type SceneId =
   | "jardim-dos-ecos"
   | "mar-de-cristal"
-  | "ratanaba" // placeholder até Sprint 6+
+  | "ratanaba" // 1ª Civilização Perdida (Sprint 6+)
   | "casa-espelhada" // Sprint 11 — Auto-Sabotador
+  | "el-dorado" // 2ª Civilização Perdida (Sprint 12+13)
   | "bardo";
 
 export interface BodyConfig {

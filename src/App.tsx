@@ -13,6 +13,7 @@ import { MarDeCristalScene, type MarDestino } from "./scenes/MarDeCristalScene";
 import { BardoScene } from "./scenes/BardoScene";
 import { RatanabaScene } from "./scenes/RatanabaScene";
 import { CasaEspelhadaScene } from "./scenes/CasaEspelhadaScene";
+import { ElDoradoScene } from "./scenes/ElDoradoScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -117,9 +118,9 @@ export default function App() {
   };
 
   const handleCinematicFinish = () => {
-    // Após cinemática "athoth-cai", devolver ao Mar de Cristal
+    // Cinemáticas pós-Arconte devolvem o jogador ao Mar de Cristal
     const lastWatched = useCinematicStore.getState().currentCinematic;
-    if (lastWatched === "athoth-cai") {
+    if (lastWatched === "athoth-cai" || lastWatched === "yobel-cai") {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
     setMetaPhase("game");
@@ -164,6 +165,7 @@ function GameOrchestrator() {
   if (currentScene === "mar-de-cristal") return <MarDeCristalOrchestrator />;
   if (currentScene === "ratanaba") return <RatanabaOrchestrator />;
   if (currentScene === "casa-espelhada") return <CasaEspelhadaOrchestrator />;
+  if (currentScene === "el-dorado") return <ElDoradoOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -187,6 +189,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("ratanaba");
     } else if (destino === "casa-espelhada") {
       setCurrentScene("casa-espelhada");
+    } else if (destino === "el-dorado") {
+      setCurrentScene("el-dorado");
     }
   };
 
@@ -580,6 +584,120 @@ function CasaEspelhadaOrchestrator() {
           gift="Centelha do Discernimento — vê através das próprias mentiras. A Sussurrante toma forma humanoide."
           onComplete={() => setShowReveal(false)}
         />
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   ElDoradoOrchestrator — Sprint 12+13
+   ---------------------------------------------------------
+   Ruínas de cidade dourada. Yobel adormecido no trono.
+   F perto dele abre escolha-chave (4 vozes / 3 opções).
+   Despertar Yobel = Centelha "chama-interior" + cinemática
+   "yobel-cai" + Yobel registrado como Lendário.
+   ========================================================= */
+
+const YOBEL_CHOICE: KeyChoice = {
+  id: "yobel-confronto",
+  context:
+    "Yobel está coberto de ouro pesado. Os Sleepers ao redor carregam barras invisíveis nos ombros. Algo precisa quebrar este sono.",
+  voices: {
+    angel:
+      "Não tomes o ouro. Tu não vieste por isso. Lembra-o de quem ele era antes da coroa.",
+    demon:
+      "Toma uma barra. Tu mereces. Quem se sacrificou foste tu — não eles.",
+    jinn: "Posso fazer o ouro virar luz num só piscar — em troca, prometes-me três coisas depois.",
+    sophia: "O brilho cega. O que se dá ilumina. Tu sabes a diferença.",
+  },
+  options: [
+    {
+      label: "Ajoelhar-se ao lado dos Sleepers e oferecer-lhes a luz da Centelha",
+      alignment: "light",
+      immediateEffect:
+        "Eles erguem a cabeça. Pela primeira vez em séculos, vêem-se uns aos outros.",
+      amount: 8,
+    },
+    {
+      label: "Confrontar Yobel: gritar-lhe o nome verdadeiro",
+      alignment: "shadow",
+      immediateEffect:
+        "Ele acorda em choque. A coroa cai — mas o canto demora a vir.",
+      amount: 6,
+    },
+    {
+      label: "Sentar-se em silêncio até que ele se lembre por si",
+      alignment: "balance",
+      immediateEffect:
+        "Hora a hora, o ouro escorre como água. Ele lembra. O sol respira.",
+      amount: 7,
+    },
+  ],
+};
+
+function ElDoradoOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  useEffect(() => {
+    setPlace("El Dorado · Ruínas de Ouro");
+  }, [setPlace]);
+
+  const yobelAwakened = hasAwakened("yobel-inca-solitario");
+  const [showChoice, setShowChoice] = useState(false);
+
+  useEffect(() => {
+    if (yobelAwakened || showChoice) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      setShowChoice(true);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [yobelAwakened, showChoice]);
+
+  const handleChoiceResolved = (_opt: ChoiceOption) => {
+    setShowChoice(false);
+    recordAwakened({
+      id: "yobel-inca-solitario",
+      name: "Inca-Solitário",
+      trueName: "Yobel · Urso Coroado Restaurado",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.5);
+    if (!hasCentelha("chama-interior")) {
+      addCentelha("chama-interior");
+    }
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => {
+      playCinematic("yobel-cai");
+      setMetaPhase("cinematic");
+    }, 1500);
+  };
+
+  return (
+    <>
+      <ElDoradoScene
+        yobelAwakened={yobelAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+      />
+      <HUD />
+      <Cursor />
+      {showChoice && (
+        <VozesEscolha choice={YOBEL_CHOICE} onResolved={handleChoiceResolved} />
       )}
     </>
   );
