@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useGameStore } from "../state/gameStore";
+import { useSoulStore } from "../state/soulStore";
 
 /* =========================================================
    Sleeper — Adormecido genérico
@@ -31,7 +31,7 @@ export function Sleeper({
   const haloRef = useRef<THREE.Mesh>(null);
   const lightRef = useRef<THREE.PointLight>(null);
 
-  const awakened = useGameStore((s) => s.awakened.has(id));
+  const awakened = useSoulStore((s) => s.hasAwakened(id));
 
   useFrame((state) => {
     if (!groupRef.current) return;

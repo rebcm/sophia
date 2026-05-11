@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { useGameStore } from "../state/gameStore";
+import { useSoulStore } from "../state/soulStore";
+import { Centelha } from "./Centelha";
 
 /* =========================================================
    Player — orbe-personagem do MVP
@@ -48,7 +50,7 @@ export function Player({
   const haloRef = useRef<THREE.Mesh>(null);
 
   const phase = useGameStore((s) => s.phase);
-  const light = useGameStore((s) => s.light);
+  const light = useSoulStore((s) => s.light);
 
   const camera = useThree((s) => s.camera);
   const gl = useThree((s) => s.gl);
@@ -237,6 +239,9 @@ export function Player({
         distance={8 + light * 2}
         decay={2}
       />
+
+      {/* Centelha no peito (8 fases conforme bíblia) */}
+      <Centelha localPosition={[0, 0.05, 0.36]} />
     </group>
   );
 }

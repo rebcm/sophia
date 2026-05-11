@@ -1,0 +1,135 @@
+import { create } from "zustand";
+
+/* =========================================================
+   characterStore — estado do CORPO atual
+   ---------------------------------------------------------
+   Zera a cada reencarnação (morte do corpo).
+   Persiste apenas durante a vida atual.
+
+   Ver docs/05c-customizacao-e-permadeath.md
+   ========================================================= */
+
+export type Sex = "homem" | "mulher" | "androgino";
+
+export type SkinTone =
+  | "muito-clara"
+  | "clara"
+  | "media-clara"
+  | "media"
+  | "media-escura"
+  | "escura"
+  | "muito-escura";
+
+export type HairColor =
+  | "castanho"
+  | "loiro"
+  | "preto"
+  | "ruivo"
+  | "cinza"
+  | "branco-luminoso"
+  | "sem-cabelo";
+
+export type BodyHeight = "baixo" | "medio" | "alto";
+export type BodyType = "esguio" | "medio" | "robusto";
+
+/** Origem mortal — vida humana antes do despertar. */
+export type MortalOrigin =
+  | "citadino-contemporaneo" // Era da Informação
+  | "aldeao-simples" // Reino-Refúgio
+  | "refugiado-de-guerra" // Reino-Conflito
+  | "eremita-viajante"
+  | "filho-de-familia-rica";
+
+/** Disposição inicial — tom emocional de chegada. */
+export type Disposition =
+  | "contemplativo"
+  | "curioso"
+  | "corajoso"
+  | "compassivo";
+
+export interface BodyConfig {
+  sex: Sex;
+  skinTone: SkinTone;
+  hairColor: HairColor;
+  height: BodyHeight;
+  bodyType: BodyType;
+}
+
+export interface CharacterState {
+  // Configuração diegética (resultado da customização inicial)
+  body: BodyConfig;
+  origin: MortalOrigin;
+  disposition: Disposition;
+
+  // Nome — começa como "Você"; evolui para Nome Verdadeiro
+  // gerado a partir das escolhas (ver docs/08).
+  displayName: string;
+  trueName: string | null;
+
+  // Localização atual no mundo
+  currentScene: string;
+
+  // Idade in-game (para futura mecânica de envelhecimento natural)
+  ageInGame: number;
+
+  // Actions
+  setBody: (config: Partial<BodyConfig>) => void;
+  setOrigin: (origin: MortalOrigin) => void;
+  setDisposition: (d: Disposition) => void;
+  setDisplayName: (name: string) => void;
+  revealTrueName: (name: string) => void;
+  setCurrentScene: (scene: string) => void;
+  ageOne: () => void;
+
+  // Reset (chamado pela mecânica de reencarnação)
+  resetBody: (newConfig: NewBodyConfig) => void;
+
+  // Hidratação
+  hydrate: (data: Partial<CharacterState>) => void;
+}
+
+export interface NewBodyConfig {
+  body: BodyConfig;
+  origin: MortalOrigin;
+  disposition: Disposition;
+}
+
+const DEFAULT_BODY: BodyConfig = {
+  sex: "androgino",
+  skinTone: "media",
+  hairColor: "castanho",
+  height: "medio",
+  bodyType: "medio",
+};
+
+export const useCharacterStore = create<CharacterState>((set) => ({
+  body: { ...DEFAULT_BODY },
+  origin: "citadino-contemporaneo",
+  disposition: "contemplativo",
+  displayName: "Você",
+  trueName: null,
+  currentScene: "jardim-dos-ecos",
+  ageInGame: 0,
+
+  setBody: (config) =>
+    set((s) => ({ body: { ...s.body, ...config } })),
+  setOrigin: (origin) => set({ origin }),
+  setDisposition: (d) => set({ disposition: d }),
+  setDisplayName: (name) => set({ displayName: name }),
+  revealTrueName: (name) => set({ trueName: name }),
+  setCurrentScene: (scene) => set({ currentScene: scene }),
+  ageOne: () => set((s) => ({ ageInGame: s.ageInGame + 1 })),
+
+  resetBody: (newConfig) =>
+    set({
+      body: { ...newConfig.body },
+      origin: newConfig.origin,
+      disposition: newConfig.disposition,
+      displayName: "Você",
+      trueName: null,
+      currentScene: "bardo",
+      ageInGame: 0,
+    }),
+
+  hydrate: (data) => set((s) => ({ ...s, ...data })),
+}));

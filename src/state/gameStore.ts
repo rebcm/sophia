@@ -1,21 +1,30 @@
 import { create } from "zustand";
 
 /* =========================================================
-   gameStore — estado global do jogo
+   gameStore — estado da SESSÃO atual
    ---------------------------------------------------------
-   Mantemos pequeno e narrativo. O resto vive no R3F.
+   Não persistente. Reinicia a cada sessão de jogo.
+   Para estado persistente, ver soulStore / characterStore.
    ========================================================= */
 
+/** Fase macro do jogo (qual tela está ativa). */
+export type MetaPhase =
+  | "title" // tela de abertura
+  | "character-creation" // customização inicial diegética
+  | "cinematic" // assistindo cinemática
+  | "game" // gameplay 3D ativo
+  | "menu"; // pause/codex/options
+
+/** Fase narrativa dentro do gameplay 3D (legado do MVP). */
 export type Phase =
-  | "intro" //  tela de abertura, esperando primeiro clique
+  | "intro" //  tela de abertura, esperando primeiro clique (legado)
   | "awaken" //  jogador caiu no Jardim, sem HUD ainda
   | "whisper-arrives" //  Sussurrante chega, primeiro diálogo
   | "explore" //  jogador explora, vê o Velho
   | "approach-elder" //  perto do Velho, prompt de despertar
   | "awakening" //  mini-game ativo
   | "elder-awake" //  pós-despertar, Velho fala
-  | "free-roam" //  fim do MVP — a Sussurrante incentiva a procurar mais
-  ;
+  | "free-roam"; //  fim do MVP — a Sussurrante incentiva a procurar mais
 
 export interface DialogLine {
   speaker: string;
@@ -25,17 +34,13 @@ export interface DialogLine {
 }
 
 interface GameState {
-  // Fase narrativa
+  // Meta-fase (tela ativa)
+  metaPhase: MetaPhase;
+  setMetaPhase: (m: MetaPhase) => void;
+
+  // Fase narrativa (dentro do gameplay)
   phase: Phase;
   setPhase: (p: Phase) => void;
-
-  // Luz interior — 0..7
-  light: number;
-  addLight: (amount: number) => void;
-
-  // Adormecidos despertados (ids)
-  awakened: Set<string>;
-  awaken: (id: string, name: string) => void;
 
   // Toast (notificação flutuante)
   toast: { title: string; name: string } | null;
@@ -48,6 +53,7 @@ interface GameState {
 
   // Sistema de lugar (debug/HUD)
   place: string;
+  setPlace: (p: string) => void;
 
   // Áudio
   audioEnabled: boolean;
@@ -55,24 +61,11 @@ interface GameState {
 }
 
 export const useGameStore = create<GameState>((set) => ({
+  metaPhase: "title",
+  setMetaPhase: (m) => set({ metaPhase: m }),
+
   phase: "intro",
   setPhase: (p) => set({ phase: p }),
-
-  light: 0.4,
-  addLight: (amount) =>
-    set((s) => ({ light: Math.min(7, s.light + amount) })),
-
-  awakened: new Set(),
-  awaken: (id, name) =>
-    set((s) => {
-      if (s.awakened.has(id)) return s;
-      const next = new Set(s.awakened);
-      next.add(id);
-      return {
-        awakened: next,
-        toast: { title: "Despertou", name },
-      };
-    }),
 
   toast: null,
   showToast: (title, name) => set({ toast: { title, name } }),
@@ -82,6 +75,7 @@ export const useGameStore = create<GameState>((set) => ({
   setDialog: (d) => set({ dialog: d }),
 
   place: "Jardim dos Ecos",
+  setPlace: (p) => set({ place: p }),
 
   audioEnabled: false,
   enableAudio: () => set({ audioEnabled: true }),

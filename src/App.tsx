@@ -2,14 +2,19 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 import { useGameStore } from "./state/gameStore";
+import { useSoulStore } from "./state/soulStore";
+import { useCinematicStore } from "./state/cinematicStore";
 import { sophiaAudio } from "./audio/SophiaAudio";
+import { setupAutoSave, save as saveGame } from "./systems/SaveSystem";
 
 import { GardenScene } from "./scenes/GardenScene";
-import { IntroOverlay } from "./ui/IntroOverlay";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
 import { Cursor } from "./ui/Cursor";
+import { TitleScreen, startFreshSession } from "./ui/TitleScreen";
+import { CharacterCreation } from "./ui/CharacterCreation";
+import { CinematicPlayer } from "./ui/CinematicPlayer";
 
 import {
   introDialog,
@@ -19,30 +24,113 @@ import {
 import { createAwakening } from "./systems/AwakeningController";
 
 /* =========================================================
-   App — orquestra: cena + UI + sequência narrativa do MVP
+   App — orquestra: tela → criação → cinemática → jogo
    ---------------------------------------------------------
-   Fluxo:
-     intro → awaken → whisper-arrives (introDialog)
-       → explore → approach-elder (approachElderDialog)
-       → awakening → elder-awake (elderAwakeDialog)
-       → free-roam
+   Meta-flow (gameStore.metaPhase):
+     "title" → "character-creation" → "cinematic" → "game"
+   Dentro de "game" (phase):
+     intro → awaken → whisper-arrives → ... → free-roam
    ========================================================= */
 
 const ELDER_POS = new THREE.Vector3(12, 0, -6);
 
 export default function App() {
+  // Meta-flow
+  const metaPhase = useGameStore((s) => s.metaPhase);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  // Cinematic
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const hasPrologoBeenWatched = useCinematicStore((s) =>
+    s.watched.prologo.watched,
+  );
+
+  // Setup auto-save uma única vez
+  useEffect(() => {
+    const cleanup = setupAutoSave();
+    return cleanup;
+  }, []);
+
+  // Salva ao fechar a janela
+  useEffect(() => {
+    const handler = () => saveGame();
+    window.addEventListener("beforeunload", handler);
+    return () => window.removeEventListener("beforeunload", handler);
+  }, []);
+
+  // -- Fluxos do meta-flow --
+
+  const handleNewGame = () => {
+    startFreshSession();
+    setMetaPhase("character-creation");
+  };
+
+  const handleContinue = () => {
+    // Save já carregado pelo TitleScreen
+    setMetaPhase("game");
+  };
+
+  const handleCharacterCreationDone = () => {
+    // Após customização, vai para a cinemática Prólogo (se não viu)
+    if (!hasPrologoBeenWatched) {
+      playCinematic("prologo");
+      setMetaPhase("cinematic");
+    } else {
+      setMetaPhase("game");
+    }
+  };
+
+  const handleCinematicFinish = () => {
+    setMetaPhase("game");
+  };
+
+  // Renderização do meta-flow
+  if (metaPhase === "title") {
+    return (
+      <TitleScreen
+        onNewGame={handleNewGame}
+        onContinue={handleContinue}
+      />
+    );
+  }
+
+  if (metaPhase === "character-creation") {
+    return <CharacterCreation onComplete={handleCharacterCreationDone} />;
+  }
+
+  if (metaPhase === "cinematic") {
+    return <CinematicPlayer onFinish={handleCinematicFinish} />;
+  }
+
+  // metaPhase === "game"
+  return <GameOrchestrator />;
+}
+
+/* =========================================================
+   GameOrchestrator — orquestrador do gameplay 3D
+   ---------------------------------------------------------
+   (Antes era o conteúdo direto de App.)
+   ========================================================= */
+
+function GameOrchestrator() {
   const phase = useGameStore((s) => s.phase);
   const setPhase = useGameStore((s) => s.setPhase);
   const setDialog = useGameStore((s) => s.setDialog);
-  const addLight = useGameStore((s) => s.addLight);
-  const awaken = useGameStore((s) => s.awaken);
   const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  // Soul: addLight + recordAwakened
+  const addLight = useSoulStore((s) => s.addLight);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
 
   // dialog index local para cada beat
   const [dialogIdx, setDialogIdx] = useState(0);
 
   /* ---- Awakening mini-game ---- */
-  const awakeningCtrl = useMemo(() => createAwakening({ required: 4, period: 1.5 }), []);
+  const awakeningCtrl = useMemo(
+    () => createAwakening({ required: 4, period: 1.5 }),
+    [],
+  );
   const [awakeningState, setAwakeningState] = useState({
     hits: 0,
     required: 4,
@@ -50,9 +138,14 @@ export default function App() {
   const awakeningRaf = useRef<number | null>(null);
   const elderName = "Velho do Jardim";
 
-  /* ---------------------------------------------------------
-     Sequência narrativa
-     --------------------------------------------------------- */
+  // Garante phase inicial correta ao entrar no gameplay
+  useEffect(() => {
+    if (phase === "intro") {
+      // Se já passamos pela cinemática, começamos diretamente em "awaken"
+      setPhase("awaken");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Após intro: pequena espera silenciosa, depois Sussurrante chega
   useEffect(() => {
@@ -75,7 +168,6 @@ export default function App() {
       setDialogIdx(next);
       if (audioEnabled) sophiaAudio.whisperBlip();
     } else {
-      // fim do diálogo de chegada — libera exploração
       setDialog(null);
       setDialogIdx(0);
       setPhase("explore");
@@ -90,7 +182,6 @@ export default function App() {
       setDialogIdx(next);
       if (audioEnabled) sophiaAudio.whisperBlip();
     } else {
-      // libera o despertar
       setDialog(null);
       setDialogIdx(0);
       setPhase("awakening");
@@ -131,7 +222,6 @@ export default function App() {
       const st = awakeningCtrl.update(now);
       setAwakeningState({ hits: st.hits, required: st.required });
       if (st.done) {
-        // sucesso!
         finishAwakening();
         return;
       }
@@ -141,12 +231,25 @@ export default function App() {
   };
 
   const finishAwakening = () => {
-    if (awakeningRaf.current !== null) cancelAnimationFrame(awakeningRaf.current);
+    if (awakeningRaf.current !== null)
+      cancelAnimationFrame(awakeningRaf.current);
     awakeningRaf.current = null;
-    awaken("velho-do-jardim", elderName);
+
+    // Registra na alma — Velho do Jardim acordado
+    recordAwakened({
+      id: "velho-do-jardim",
+      name: elderName,
+      trueName: "Aquele-que-procurou",
+      isLegendary: false,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
     addLight(0.8);
+
+    // Toast continua no gameStore (sessão)
+    useGameStore.getState().showToast("Despertou", elderName);
+
     if (audioEnabled) sophiaAudio.awakenChord();
-    // pequena pausa, depois diálogo do Velho
     setTimeout(() => {
       setPhase("elder-awake");
       setDialogIdx(0);
@@ -198,7 +301,8 @@ export default function App() {
   /* ---- Cleanup ---- */
   useEffect(() => {
     return () => {
-      if (awakeningRaf.current !== null) cancelAnimationFrame(awakeningRaf.current);
+      if (awakeningRaf.current !== null)
+        cancelAnimationFrame(awakeningRaf.current);
     };
   }, []);
 
@@ -211,7 +315,6 @@ export default function App() {
         hits={awakeningState.hits}
         required={awakeningState.required}
       />
-      <IntroOverlay />
       <Cursor />
     </>
   );
