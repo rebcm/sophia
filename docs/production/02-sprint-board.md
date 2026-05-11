@@ -4,7 +4,7 @@
 > Cada sprint termina com **build verde + push**.
 > Autoria integral: **Rebeca Alves Moreira**.
 
-## Status global · pós-Sprint 11
+## Status global · pós-Sprint 22 (vertical slice end-to-end COMPLETO)
 
 | Sprint   | Tema                                                  | Commit       | Status |
 | -------- | ----------------------------------------------------- | ------------ | ------ |
@@ -16,10 +16,16 @@
 | 6+7+8    | Ratanabá + Athoth + Cinemática 2                      | `2508da6`    | ✅ |
 | 9+10     | Sistema de Vozes (4 falantes) + Alinhamento ativo     | `290170c`    | ✅ |
 | 11       | Casa-Espelhada + Auto-Sabotador + Sussurrante humanoide | `c0d51ff`  | ✅ |
-| 12       | El Dorado básico (próximo)                            | –            | 🔜 |
-| 13       | Yobel (2º Arconte) cai + Cinemática 3                 | –            | 🔜 |
-| 14       | Sistema de Filamentos (visão de drenagem)             | –            | 🔜 |
-| 15       | Sleepers de Casta 6/7 + ritmos de despertar avançados | –            | 🔜 |
+| 12+13    | El Dorado + Yobel cai + Cinemática 3                  | `9328693`    | ✅ |
+| 14       | Sistema de Filamentos (visão de drenagem)             | `e5924a9`    | ✅ |
+| 17       | Hiperbórea + Adonaios cai + Cinemática 4              | `3751043`    | ✅ |
+| 18-21    | Atlântida + Lemúria + Mu + Pré-Adamita (4 últimas civ.) | `798300c` | ✅ |
+| 22       | **CLÍMAX** · Demiurgo + Grande Revelação + 6 Endings  | `3b51335`    | ✅ |
+
+**Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
+agora ir da TitleScreen ao confronto com a Mônada e escolher
+um dos 6 endings, atravessando todas as 7 Civilizações Perdidas
+e a Casa-Espelhada. **Loop narrativo completo.**
 
 Sprints já marcados como **✅** estão consolidados no `main`.
 
@@ -168,19 +174,28 @@ funcional.
 
 ---
 
-## Backlog de Sprints (visão atualizada 6 meses)
+## Backlog pós-vertical-slice
 
-| Sprint | Foco |
-|--------|------|
-| 12 | El Dorado básico (cena + Yobel adormecido) |
-| 13 | Yobel (2º Arconte) cai + Cinemática 3 ("Ouro Era Sombra") + Centelha da Fala-Raiz |
-| 14 | Sistema de Filamentos (visão de drenagem dos Sleepers) |
-| 15 | Sleepers Casta 6/7 + variações de mini-game de despertar |
-| 16 | Feira dos Sistemas (5 distritos) — cidade-arquetipo |
-| 17 | Hiperbórea (3ª Civilização) + Adonaios cai |
-| 18 | Sistema de Profissões / Caminhos (12 práticas diárias) |
-| 19 | Vínculos / Par Sizígico — primeiro encontro romântico |
-| 20 | Eloaios (4º Arconte) + Cinemática 5 + Labirinto das Eras (esqueleto) |
+O loop narrativo está completo. O backlog passa agora a expansão
+de mundo aberto, conteúdo opcional e refinamento.
+
+| Sprint   | Foco                                                              |
+|----------|-------------------------------------------------------------------|
+| 23       | 6 Anjos Caídos (Asmodeus, Lúcifer, Belial, Azazel, Semyaza, Leviatã) — Cinemáticas 9-14 |
+| 24       | Anúncio Conjunto (Cinemática 16.5) — trégua cósmica de 7min       |
+| 25       | Feira dos Sistemas (5 distritos arquetípicos)                     |
+| 26       | Labirinto das Eras (10 eras flashback)                            |
+| 27       | 25 Principados (mini-bosses de mundo aberto)                      |
+| 28       | Sistema de Profissões / 12 práticas diárias                       |
+| 29       | Vínculos / Par Sizígico — primeiro encontro romântico             |
+| 30       | 17 Aeon-Mestres exclusivos por civilização                        |
+| 31       | 5 fases de poderes (Acordado → Espírito Puro)                     |
+| 32       | Mecânica de mundo aberto · 140 missões secundárias                |
+| 33       | Cinemáticas CGI pré-renderizadas (substituir text-based)          |
+| 34       | Áudio com OST original (substituir sintetizador procedural)       |
+| 35       | Multiplayer assíncrono (Aeon-Mestres em jardins de outros)        |
+| 36       | Localização EN/ES/FR + acessibilidade completa                    |
+| 37       | Polimento, performance, lançamento beta                           |
 
 ---
 

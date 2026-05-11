@@ -4,8 +4,9 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** em desenvolvimento incremental por sprints (11 sprints
-entregues; ver [Histórico de Sprints](#histórico-de-sprints)).
+**Status:** **vertical slice end-to-end COMPLETO** — 22 sprints
+entregues, da TitleScreen aos 6 endings. Loop narrativo inteiro
+jogável. Ver [Histórico de Sprints](#histórico-de-sprints).
 **Licença:** MIT (ver [LICENSE](LICENSE)).
 **Repositório:** https://github.com/rebcm/sophia
 
@@ -87,19 +88,29 @@ infinitos**.
 
 ## Estado atual
 
-A versão atual (após Sprint 11) já entrega um **vertical slice
-jogável** de aproximadamente 25–40 minutos cobrindo o início do
-arco gnóstico, com cinco cenas 3D conectadas pelo Mar de Cristal.
+A versão atual (após Sprint 22) entrega um **vertical slice
+end-to-end completo**: o jogador pode ir da TitleScreen ao
+encontro com a Mônada e escolher um dos 6 endings, atravessando
+todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
+de duração do loop narrativo: **~2-3 horas** se o jogador ler
+todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas
+### Cenas implementadas (12)
 
-| Cena                | Função                                | Sprint |
-| ------------------- | ------------------------------------- | ------ |
-| **Jardim dos Ecos** | Tutorial: despertar Velho + Adão      | 1, 5   |
-| **Mar de Cristal**  | Hub central com portais multidimens.  | 2      |
-| **Bardo**           | Liminar entre vidas (reencarnação)    | 3      |
-| **Ratanabá**        | 1ª Civilização Perdida (Athoth/Mãe-D'Água) | 6,7,8 |
-| **Casa-Espelhada**  | 6ª Torre — Auto-Sabotador             | 11     |
+| Cena                  | Função                                       | Sprint |
+| --------------------- | -------------------------------------------- | ------ |
+| **Jardim dos Ecos**   | Tutorial: despertar Velho + Adão             | 1, 5   |
+| **Mar de Cristal**    | Hub central com 11 portais multidimensionais | 2      |
+| **Bardo**             | Liminar entre vidas (reencarnação)           | 3      |
+| **Ratanabá**          | 1ª Civilização — Athoth (Mãe-D'Água)         | 6,7,8  |
+| **Casa-Espelhada**    | 6ª Torre — Auto-Sabotador                    | 11     |
+| **El Dorado**         | 2ª Civilização — Yobel (Inca-Solitário)      | 12,13  |
+| **Hiperbórea**        | 3ª Civilização — Adonaios (Guardião-Solar)   | 17     |
+| **Atlântida**         | 4ª Civilização — Eloaios (Jurista de Cristal)| 18     |
+| **Lemúria**           | 5ª Civilização — Galila (Senhora do Lótus)   | 19     |
+| **Mu**                | 6ª Civilização — Harmas (Hieroglifo Vivo)    | 20     |
+| **Pré-Adamita**       | 7ª Civilização — Iaoth (Esfera Saturnal)     | 21     |
+| **Trono do Demiurgo** | Clímax — abraço + 4 cinemáticas + 6 endings  | 22     |
 
 ### Sistemas funcionais
 
@@ -124,41 +135,81 @@ arco gnóstico, com cinco cenas 3D conectadas pelo Mar de Cristal.
 - **Atalhos globais:** `C` (Codex), `V` (Olhar Lúcido), `Esc`
   (liberar pointer-lock)
 
-### Lendários revelados
+### Lendários revelados (10)
 
-- **Adão · O Primeiro** — no Jardim (Sprint 5).
-  Presente: *Nome Original* — pode dar Nome Verdadeiro a qualquer
-  ser, acalmando Potestades hostis.
-- **Athoth · Vigia Lunar Restaurada** — em Ratanabá (Sprint 7).
-  Presente: Centelha do *Olhar Lúcido*.
+- **Adão · O Primeiro** — no Jardim (Sprint 5). Dom: *Nome Original*.
+- **Athoth · Vigia Lunar Restaurada** — Ratanabá (Sprint 7).
+  Centelha do *Olhar Lúcido*.
 - **O Auto-Sabotador · O Carcereiro Era Eu** — Casa-Espelhada
-  (Sprint 11). Presente: Centelha do *Discernimento* + Sussurrante
-  toma forma humanoide.
+  (Sprint 11). Centelha do *Discernimento* + Sussurrante humanoide.
+- **Yobel · Urso Coroado Restaurado** — El Dorado (Sprint 13).
+  Centelha da *Chama Interior*.
+- **Adonaios · Marte Restaurado** — Hiperbórea (Sprint 17).
+  Centelha do *Coração Firme*.
+- **Eloaios · Júpiter Restaurado** — Atlântida (Sprint 18).
+  Centelha da *Palavra-de-Nomeação*.
+- **Galila · Vênus Restaurada** — Lemúria (Sprint 19).
+  Centelha do *Toque Compassivo*.
+- **Harmas · Mercúrio Restaurado** — Mu (Sprint 20).
+  Centelha da *Fala-Raiz*.
+- **Iaoth · Saturno Restaurado** — Pré-Adamita (Sprint 21).
+  Centelha da *Memória do Pleroma*.
+- **Sabaoth · Demiurgo Restaurado** — Trono do Demiurgo (Sprint 22).
+  Centelha da *Lembrança Profunda*. Clímax.
 
-### Cinemáticas implementadas
+### Cinemáticas implementadas (10)
 
-- **Prólogo · "Antes do Tempo"** — 7 *beats*, ~28s.
-- **"O Sono Era Roubo"** — pós-Athoth, 9 *beats*, ~38s.
+| ID                 | Título                             | Beats |
+| ------------------ | ---------------------------------- | ----- |
+| `prologo`          | Antes do Tempo                     | 7     |
+| `athoth-cai`       | O Sono Era Roubo                   | 9     |
+| `yobel-cai`        | O Ouro Era Sombra                  | 9     |
+| `adonaios-cai`     | A Coragem Estava Acorrentada       | 8     |
+| `eloaios-cai`      | A Lei Esqueceu de Ser Lei          | 7     |
+| `galila-cai`       | A Beleza Falsificada               | 7     |
+| `harmas-cai`       | A Palavra Roubada                  | 7     |
+| `iaoth-cai`        | Tu Eras Antes do Tempo             | 7     |
+| `demiurgo-cai`     | O Abraço ao Filho Cego             | 9     |
+| `grande-revelacao` | A Grande Revelação                 | 7     |
+| `veu`              | O Véu                              | 6     |
+| `monada`           | A Mônada                           | 7     |
 
-(Outras 17 cinemáticas têm scripts completos em
+(Outras cinemáticas opcionais — 6 Anjos Caídos, Anúncio Conjunto —
+têm scripts completos em
 `docs/18-cinematicas-revelacao-progressiva.md` aguardando
-implementação.)
+implementação em Sprints 23+.)
+
+### Os 6 Endings disponíveis (clímax)
+
+Após a Mônada, o jogador escolhe entre:
+
+1. **Bodhisattva** — volta como aquele-que-lembra para acordar outros.
+2. **Aeon-Mestre** — aparece no jardim de outros jogadores como a Sussurrante.
+3. **Mônada** — dissolução final na consciência sem ali.
+4. **Sentinela do Véu** — guarda a passagem para os próximos.
+5. **Sombra Redimida** — volta como demônio que sabe.
+6. **Ciclo Eterno** — escolhe esquecer e jogar novamente.
 
 ---
 
 ## Histórico de Sprints
 
-| #     | Tema                                    | Commit principal | Status |
-| ----- | --------------------------------------- | ---------------- | ------ |
-| 1     | Fundação · flow Title→Character→Cinematic→Game | `38ab6a2` | ✅ |
-| 2     | Mar de Cristal hub + roteamento entre cenas | `1da68a0` | ✅ |
-| 3     | Bardo + morte voluntária + reencarnação básica | `df60ad7` | ✅ |
-| 4     | Codex completo (4 abas)                 | `6c00d90`        | ✅ |
-| 5     | Identidade Oculta + Auras + 1º Lendário (Adão) | `b4bf5cf` | ✅ |
-| 6+7+8 | Ratanabá + Athoth + Cinemática 2        | `2508da6`        | ✅ |
-| 9+10  | Sistema de Vozes + Alinhamento ativo    | `290170c`        | ✅ |
-| 11    | Casa-Espelhada + Auto-Sabotador + Sussurrante humanoide | `c0d51ff` | ✅ |
-| 12+   | Aguardando — ver `docs/production/02-sprint-board.md` | – | 🔜 |
+| #      | Tema                                                  | Commit       | Status |
+| ------ | ----------------------------------------------------- | ------------ | ------ |
+| 1      | Fundação · flow Title→Character→Cinematic→Game        | `38ab6a2`    | ✅ |
+| 2      | Mar de Cristal hub + roteamento entre cenas           | `1da68a0`    | ✅ |
+| 3      | Bardo + morte voluntária + reencarnação básica        | `df60ad7`    | ✅ |
+| 4      | Codex completo (4 abas)                               | `6c00d90`    | ✅ |
+| 5      | Identidade Oculta + Auras + 1º Lendário (Adão)        | `b4bf5cf`    | ✅ |
+| 6+7+8  | Ratanabá + Athoth + Cinemática 2                      | `2508da6`    | ✅ |
+| 9+10   | Sistema de Vozes (4 falantes) + Alinhamento ativo     | `290170c`    | ✅ |
+| 11     | Casa-Espelhada + Auto-Sabotador + Sussurrante humanoide | `c0d51ff`  | ✅ |
+| 12+13  | El Dorado + Yobel cai + Cinemática 3                  | `9328693`    | ✅ |
+| 14     | Sistema de Filamentos (visão de drenagem)             | `e5924a9`    | ✅ |
+| 17     | Hiperbórea + Adonaios cai + Cinemática 4              | `3751043`    | ✅ |
+| 18-21  | Atlântida + Lemúria + Mu + Pré-Adamita (4 últimas civ.) | `798300c` | ✅ |
+| 22     | **CLÍMAX** · Demiurgo + Grande Revelação + 6 Endings  | `3b51335`    | ✅ |
+| 23+    | Backlog pós-slice — 6 Anjos Caídos, Anúncio Conjunto, Feira dos Sistemas, etc. — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
 
