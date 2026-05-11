@@ -2236,3 +2236,35 @@ canvas {
   opacity: 0.6;
   margin: 0;
 }
+
+/* =========================================================
+   Tabernáculo dos Caídos · hint flutuante
+   ========================================================= */
+.caidos-hint {
+  position: fixed;
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(540px, 88vw);
+  padding: 14px 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 8, 30, 0.85) 0%,
+    rgba(40, 16, 56, 0.72) 100%
+  );
+  border: 1px solid rgba(168, 60, 60, 0.45);
+  border-radius: 8px;
+  color: var(--c-amber);
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+}
+.caidos-hint p { margin: 0; font-size: 1.0rem; line-height: 1.5; }
+.caidos-hint strong { color: #ffd45a; }
+.caidos-hint-count {
+  margin-top: 6px !important;
+  font-size: 0.88rem;
+  opacity: 0.78;
+  font-style: italic;
+}

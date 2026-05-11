@@ -60,6 +60,7 @@ export type SceneId =
   | "mu" // 6ª Civilização Perdida (Sprint 20)
   | "pre-adamita" // 7ª Civilização Perdida (Sprint 21)
   | "trono-demiurgo" // Sprint 22 — clímax: Grande Revelação + 6 endings
+  | "tabernaculo-dos-caidos" // Sprint 23 — 6 Anjos Caídos opcionais
   | "bardo";
 
 export interface BodyConfig {

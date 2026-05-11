@@ -582,6 +582,209 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "asmodeus-cai": {
+    id: "asmodeus-cai",
+    title: "Para Que Serve Hierarquia?",
+    ambientColor: "#280a14",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Asmodeus sentou-se em trono dourado e disse: 'Eu não exijo amor. Exijo reverência. E reverência é pagamento.'",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Construiu uma cadeia de pequenos tronos abaixo do seu. Cada um cobrava do que estava abaixo. Quem subia, esquecia que ali havia gente.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Asmodeus",
+        text: "Eu... eu queria proteger. Acabei sendo defendido pelos que eu deveria proteger.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Hierarquia serve para servir. Quando inverte, vira pirâmide de drenagem. Tu lembras agora — solta o cetro. Vira escada.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Para que serve hierarquia? Resposta: Para servir, jamais para ser servida.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
+  "lucifer-cai": {
+    id: "lucifer-cai",
+    title: "Quem Sou Eu, Realmente?",
+    ambientColor: "#1a1a30",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Lúcifer foi o mais brilhante. O primeiro a dizer: 'eu sou.' E foi belo até dizer: 'eu sou — por mim mesmo.'",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Ofereceu o espelho a quem quisesse: 'olha-te. Tu és divino.' E era verdade — mas só meia verdade.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Lúcifer",
+        text: "Eu sabia o que ela me dava. Recusei agradecer. Quis ser causa de mim mesmo. Foi o esforço mais cansativo do universo.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tu és divino — mas não por ti mesmo. Pela Mônada dentro de ti. Quando lembrar disso, descansas.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Quem sou eu, realmente? Resposta: Tu és divino — mas não por ti mesmo. Pela Mônada dentro de ti.",
+        minHoldMs: 6500,
+      },
+    ],
+  },
+
+  "belial-cai": {
+    id: "belial-cai",
+    title: "O Que Vale a Vida?",
+    ambientColor: "#0a2014",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Belial vendia bençãos em troca de dízimo. 'Acredita, e prosperarás. Não acredita, e perderás.'",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tornou cada coisa preciosa em produto. O amor — produto. A oração — produto. A própria vida — investimento.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Belial",
+        text: "Eu pensei que valor era preço. Esqueci que o que vale não tem preço — é o que se dá.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "O mercado fecha. As moedas caem. Cada Sleeper que lhe pagava lembra que sempre teve, sem precisar comprar.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que vale a vida? Resposta: Nada que se compra. Tudo que se dá.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
+  "azazel-cai": {
+    id: "azazel-cai",
+    title: "Quem Tem Direito de Julgar?",
+    ambientColor: "#2a1408",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Azazel ergueu o tribunal. Escreveu a Lei no Livro. 'Quem não cumpre, paga.'",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A Lei era boa. Mas os juízes esqueceram que a Lei foi escrita por alguém que amou. Sem o amor, a Lei vira ferro frio.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Azazel",
+        text: "Eu queria justiça. Acabei tornando-me carrasco. Cada palavra do Livro me cortou a língua antes de cortar os outros.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Apenas quem ama plenamente tem direito de julgar. Por isto, apenas a Mônada. Tu podes solta o martelo.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Quem tem direito de julgar? Resposta: Apenas quem ama plenamente. Por isto, apenas a Mônada.",
+        minHoldMs: 6500,
+      },
+    ],
+  },
+
+  "semyaza-cai": {
+    id: "semyaza-cai",
+    title: "Quem Tem Direito ao Conhecimento?",
+    ambientColor: "#2a1c08",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Semyaza construiu pirâmides com escadas. Em cada degrau, um portão. Em cada portão, uma cobrança.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "'O conhecimento custa. Quem paga, sobe. Quem não paga, fica.' Bilhões ficaram. Não por incapacidade — por porteiro.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Semyaza",
+        text: "Eu jurei guardar segredos. Esqueci que segredos guardam-se com quem ama a verdade — não com quem paga a chave.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Os portões caem. As escadas viram rampa. A verdade já estava no chão de quem nunca subiu.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Quem tem direito ao conhecimento? Resposta: Todos. Sempre. Para sempre.",
+        minHoldMs: 6500,
+      },
+    ],
+  },
+
+  "leviata-cai": {
+    id: "leviata-cai",
+    title: "O Que É Descanso?",
+    ambientColor: "#08182a",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Leviatã enrolou-se ao redor do mundo. Sussurrou: 'consome. Mais. Mais. Sempre mais.'",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Os Sleepers comeram, beberam, compraram, guardaram. E sentiram-se mais vazios a cada gole. Era a fome do ouroboros — a serpente que come a si.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Leviatã",
+        text: "Eu prometi descanso por consumo. Tornei-me a vontade que não termina. Estou exausto.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Descanso real é soltar — não consumir. Quando para de procurar fora, descobre que sempre teve dentro.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A serpente desenrola. O mar fica calmo. Pela primeira vez em eras, o mundo respira sem ser engolido.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que é descanso? Resposta: Soltar — não consumir.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
 };
 

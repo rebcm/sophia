@@ -37,7 +37,8 @@ export type MarDestino =
   | "lemuria"
   | "mu"
   | "pre-adamita"
-  | "trono-demiurgo";
+  | "trono-demiurgo"
+  | "tabernaculo-dos-caidos";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -303,6 +304,20 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "trono-demiurgo" : null)
+          }
+        />
+      )}
+
+      {/* Tabernáculo dos Caídos — opcional, destrava com Hiperbórea */}
+      {hiperboreaEnabled && (
+        <Portal
+          position={[14, 0.4, -8]}
+          label="Tabernáculo dos Caídos"
+          subLabel="(seis tronos sombrios podem lembrar)"
+          color="#a83a3a"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "tabernaculo-dos-caidos" : null)
           }
         />
       )}

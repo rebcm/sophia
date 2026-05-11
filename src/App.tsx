@@ -21,6 +21,12 @@ import { MuScene } from "./scenes/MuScene";
 import { PreAdamitaScene } from "./scenes/PreAdamitaScene";
 import { TronoDemiurgoScene } from "./scenes/TronoDemiurgoScene";
 import { EndingChoice, type EndingId } from "./ui/EndingChoice";
+import {
+  TabernaculoDosCaidosScene,
+  CAIDOS_ORDER,
+  SHRINE_POSITIONS,
+} from "./scenes/TabernaculoDosCaidosScene";
+import type { CaidoId } from "./world/AnjoCaidoShrine";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -138,6 +144,19 @@ export default function App() {
     ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
+    // Cinemáticas dos 6 Anjos Caídos voltam ao próprio tabernáculo
+    if (
+      lastWatched === "asmodeus-cai" ||
+      lastWatched === "lucifer-cai" ||
+      lastWatched === "belial-cai" ||
+      lastWatched === "azazel-cai" ||
+      lastWatched === "semyaza-cai" ||
+      lastWatched === "leviata-cai"
+    ) {
+      useCharacterStore
+        .getState()
+        .setCurrentScene("tabernaculo-dos-caidos");
+    }
     // Cinemáticas do clímax encadeiam sem trocar de cena —
     // TronoDemiurgoOrchestrator escuta cinematicStore.currentCinematic
     // e dispara a próxima após finishCurrentCinematic.
@@ -190,6 +209,8 @@ function GameOrchestrator() {
   if (currentScene === "mu") return <MuOrchestrator />;
   if (currentScene === "pre-adamita") return <PreAdamitaOrchestrator />;
   if (currentScene === "trono-demiurgo") return <TronoDemiurgoOrchestrator />;
+  if (currentScene === "tabernaculo-dos-caidos")
+    return <TabernaculoDosCaidosOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -227,6 +248,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("pre-adamita");
     } else if (destino === "trono-demiurgo") {
       setCurrentScene("trono-demiurgo");
+    } else if (destino === "tabernaculo-dos-caidos") {
+      setCurrentScene("tabernaculo-dos-caidos");
     }
   };
 
@@ -1313,6 +1336,165 @@ function TronoDemiurgoOrchestrator() {
           </p>
         </div>
       )}
+    </>
+  );
+}
+
+/* =========================================================
+   TabernaculoDosCaidosOrchestrator — Sprint 23
+   ---------------------------------------------------------
+   Os 6 Anjos Caídos têm altares em círculo. Aproximação a
+   menos de 2.5m + F dispara a cinemática-redenção daquele.
+   Cada redenção: addLight(0.6) + addToAlignment(balance, 5).
+   ========================================================= */
+
+const CAIDO_TO_CINEMATIC: Record<CaidoId, Parameters<ReturnType<typeof useCinematicStore.getState>["playCinematic"]>[0]> = {
+  asmodeus: "asmodeus-cai",
+  lucifer: "lucifer-cai",
+  belial: "belial-cai",
+  azazel: "azazel-cai",
+  semyaza: "semyaza-cai",
+  leviata: "leviata-cai",
+};
+
+const CAIDO_TRUE_NAMES: Record<CaidoId, { name: string; trueName: string }> = {
+  asmodeus: {
+    name: "Asmodeus",
+    trueName: "Asmodeus · Servo do Servir",
+  },
+  lucifer: {
+    name: "Lúcifer",
+    trueName: "Lúcifer · O Mais Brilhante que Lembrou",
+  },
+  belial: {
+    name: "Belial",
+    trueName: "Belial · A Gratidão Restaurada",
+  },
+  azazel: {
+    name: "Azazel",
+    trueName: "Azazel · Juiz Que Amou Primeiro",
+  },
+  semyaza: {
+    name: "Semyaza",
+    trueName: "Semyaza · Guardião da Verdade Aberta",
+  },
+  leviata: {
+    name: "Leviatã",
+    trueName: "Leviatã · A Serpente Desenrolada",
+  },
+};
+
+function TabernaculoDosCaidosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  // Snapshot de quais já foram redimidos (re-renderiza ao retornar)
+  const redeemed: Record<CaidoId, boolean> = CAIDOS_ORDER.reduce(
+    (acc, id) => {
+      acc[id] = hasAwakened(`caido-${id}`);
+      return acc;
+    },
+    {} as Record<CaidoId, boolean>,
+  );
+
+  useEffect(() => {
+    setPlace("Tabernáculo dos Caídos");
+  }, [setPlace]);
+
+  // Tecla F: encontra o santuário mais próximo e dispara
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+
+      let bestId: CaidoId | null = null;
+      let bestDist = 2.8;
+      for (const id of CAIDOS_ORDER) {
+        if (hasAwakened(`caido-${id}`)) continue;
+        const p = SHRINE_POSITIONS[id];
+        const d = Math.hypot(
+          player.position.x - p[0],
+          player.position.z - p[2],
+        );
+        if (d < bestDist) {
+          bestDist = d;
+          bestId = id;
+        }
+      }
+      if (!bestId) return;
+
+      // Redime
+      const info = CAIDO_TRUE_NAMES[bestId];
+      recordAwakened({
+        id: `caido-${bestId}`,
+        name: info.name,
+        trueName: info.trueName,
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(0.6);
+      addToAlignment("balance", 5);
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic(CAIDO_TO_CINEMATIC[bestId!]);
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    hasAwakened,
+    recordAwakened,
+    addLight,
+    addToAlignment,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  const remaining = CAIDOS_ORDER.filter((id) => !redeemed[id]).length;
+
+  return (
+    <>
+      <TabernaculoDosCaidosScene
+        redeemed={redeemed}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      <div className="caidos-hint">
+        <p>
+          <em>
+            Aproxima-te de cada altar. Pressiona <strong>F</strong>. Não
+            ataques — lembra-os.
+          </em>
+        </p>
+        <p className="caidos-hint-count">
+          {remaining > 0
+            ? `${remaining} de 6 ainda dormem.`
+            : "Os seis lembraram. Vai em paz."}
+        </p>
+      </div>
     </>
   );
 }
