@@ -5,7 +5,7 @@ import { useGameStore } from "./state/gameStore";
 import { useSoulStore } from "./state/soulStore";
 import { useCharacterStore } from "./state/characterStore";
 import { useCinematicStore } from "./state/cinematicStore";
-import { sophiaAudio } from "./audio/SophiaAudio";
+import { sophiaAudio, moodForScene } from "./audio/SophiaAudio";
 import { setupAutoSave, save as saveGame } from "./systems/SaveSystem";
 
 import { GardenScene } from "./scenes/GardenScene";
@@ -216,6 +216,14 @@ export default function App() {
 
 function GameOrchestrator() {
   const currentScene = useCharacterStore((s) => s.currentScene);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  // Sprint 34 · Trocar mood do áudio ao mudar de cena
+  useEffect(() => {
+    if (!audioEnabled) return;
+    sophiaAudio.setMood(moodForScene(currentScene));
+  }, [currentScene, audioEnabled]);
+
   if (currentScene === "bardo") return <BardoOrchestrator />;
   if (currentScene === "mar-de-cristal") return <MarDeCristalOrchestrator />;
   if (currentScene === "ratanaba") return <RatanabaOrchestrator />;

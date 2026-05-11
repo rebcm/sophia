@@ -5,7 +5,26 @@
    Tudo Web Audio API: drones, sininhos, sussurros, chimes.
    ========================================================= */
 
-type Mood = "garden" | "approach" | "awakening" | "after";
+type Mood =
+  | "garden"
+  | "approach"
+  | "awakening"
+  | "after"
+  // Sprint 34 — moods por cena
+  | "mar-de-cristal"
+  | "ratanaba"
+  | "el-dorado"
+  | "hiperborea"
+  | "atlantida"
+  | "lemuria"
+  | "mu"
+  | "pre-adamita"
+  | "casa-espelhada"
+  | "tabernaculo"
+  | "feira"
+  | "labirinto"
+  | "trono"
+  | "bardo";
 
 class SophiaAudio {
   private ctx: AudioContext | null = null;
@@ -188,11 +207,34 @@ class SophiaAudio {
     if (this.mood === mood || !this.ctx) return;
     this.mood = mood;
     const ctx = this.ctx;
+    // Cada mood é uma assinatura tímbrica: pesos das 4 camadas
+    // de drone (fundamental, 5ª, oitava, harmônico colorido).
     const targetVols: Record<Mood, number[]> = {
+      // Originais (legado do Jardim)
       garden: [0.18, 0.12, 0.16, 0.08],
       approach: [0.16, 0.14, 0.18, 0.12],
       awakening: [0.1, 0.1, 0.14, 0.18],
       after: [0.14, 0.18, 0.18, 0.1],
+
+      // Hub — luminoso e equilibrado
+      "mar-de-cristal": [0.16, 0.16, 0.18, 0.12],
+
+      // 7 Civilizações Perdidas
+      ratanaba: [0.2, 0.1, 0.14, 0.14], // floresta — grave + sopro
+      "el-dorado": [0.12, 0.18, 0.22, 0.16], // dourado — brilhante
+      hiperborea: [0.1, 0.08, 0.16, 0.22], // cristal — agudo
+      atlantida: [0.14, 0.18, 0.16, 0.14], // estrutural — equilibrado
+      lemuria: [0.16, 0.2, 0.14, 0.12], // canto — caloroso
+      mu: [0.08, 0.12, 0.2, 0.22], // geometria — etéreo agudo
+      "pre-adamita": [0.22, 0.06, 0.1, 0.14], // vazio — grave puro
+
+      // Lugares simbólicos
+      "casa-espelhada": [0.14, 0.2, 0.1, 0.18], // sombra — denso
+      tabernaculo: [0.18, 0.18, 0.12, 0.12], // altares — solene
+      feira: [0.1, 0.14, 0.16, 0.18], // cidade — eletrônico
+      labirinto: [0.16, 0.16, 0.18, 0.14], // memória — flutuante
+      trono: [0.24, 0.2, 0.18, 0.12], // clímax — pesado
+      bardo: [0.18, 0.14, 0.18, 0.14], // limiar — neutro
     };
     const vols = targetVols[mood];
     this.droneNodes.forEach(({ gain }, i) => {
@@ -215,3 +257,44 @@ class SophiaAudio {
 }
 
 export const sophiaAudio = new SophiaAudio();
+
+export type AudioMood = Mood;
+
+/** Mapeia um SceneId do characterStore ao mood de áudio correspondente.
+ *  Cada orquestrador chama sophiaAudio.setMood(moodForScene(sceneId)). */
+export function moodForScene(scene: string): Mood {
+  switch (scene) {
+    case "jardim-dos-ecos":
+      return "garden";
+    case "mar-de-cristal":
+      return "mar-de-cristal";
+    case "ratanaba":
+      return "ratanaba";
+    case "el-dorado":
+      return "el-dorado";
+    case "hiperborea":
+      return "hiperborea";
+    case "atlantida":
+      return "atlantida";
+    case "lemuria":
+      return "lemuria";
+    case "mu":
+      return "mu";
+    case "pre-adamita":
+      return "pre-adamita";
+    case "casa-espelhada":
+      return "casa-espelhada";
+    case "tabernaculo-dos-caidos":
+      return "tabernaculo";
+    case "feira-dos-sistemas":
+      return "feira";
+    case "labirinto-das-eras":
+      return "labirinto";
+    case "trono-demiurgo":
+      return "trono";
+    case "bardo":
+      return "bardo";
+    default:
+      return "garden";
+  }
+}
