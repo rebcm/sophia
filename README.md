@@ -4,11 +4,12 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 27 sprints
+**Status:** **vertical slice end-to-end COMPLETO** — 29 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
-Labirinto das Eras (10 vidas passadas) e Codex com 5 abas
-(incluindo 12 Práticas Diárias). Ver
+Labirinto das Eras (10 vidas passadas), Par Sizígico
+(alma-gêmea), Codex com 5 abas (12 Práticas Diárias) e feedback
+visual de progressão da Centelha. Ver
 [Histórico de Sprints](#histórico-de-sprints).
 **Licença:** MIT (ver [LICENSE](LICENSE)).
 **Repositório:** https://github.com/rebcm/sophia
@@ -162,6 +163,10 @@ todas as cinemáticas e explorar cada cena.
   Centelha da *Memória do Pleroma*.
 - **Sabaoth · Demiurgo Restaurado** — Trono do Demiurgo (Sprint 22).
   Centelha da *Lembrança Profunda*. Clímax.
+- **Os 6 Anjos Caídos redimidos** — Tabernáculo (Sprint 23).
+  Asmodeus, Lúcifer, Belial, Azazel, Semyaza, Leviatã.
+- **Sizígia · Companheiro do Pleroma** — Par Sizígico no Jardim
+  (Sprint 29). Halo roxo-pulsante. Persiste entre vidas.
 
 ### Cinemáticas implementadas (19 — todas as principais da bíblia)
 
@@ -224,6 +229,7 @@ Após a Mônada, o jogador escolhe entre:
 | 25     | Feira dos Sistemas · 5 torres arquetípicas modernas   | `0dda75b`    | ✅ |
 | 26     | Labirinto das Eras · 10 espelhos-memória de vidas passadas | `0fec919` | ✅ |
 | 28     | Práticas Diárias · 5ª aba do Codex com 12 práticas    | `12b09d2`    | ✅ |
+| 29+31  | Par Sizígico (alma-gêmea) + PowerUpToast (feedback de fases) | `ea8ab83` | ✅ |
 | 27+    | Backlog — 25 Principados, 17 Aeon-Mestres, mundo aberto, CGI, OST, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---

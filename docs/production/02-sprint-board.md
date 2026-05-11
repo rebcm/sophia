@@ -26,6 +26,8 @@
 | 25       | Feira dos Sistemas · 5 torres arquetípicas modernas   | `0dda75b`    | ✅ |
 | 26       | Labirinto das Eras · 10 espelhos-memória de vidas passadas | `0fec919` | ✅ |
 | 28       | Práticas Diárias · 5ª aba do Codex com 12 práticas    | `12b09d2`    | ✅ |
+| 29       | Par Sizígico · alma-gêmea no Jardim (3+ Centelhas)    | `ea8ab83`    | ✅ |
+| 31       | PowerUpToast · feedback de fase da Centelha           | `ea8ab83`    | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -191,7 +193,6 @@ de mundo aberto, conteúdo opcional e refinamento.
 | Sprint   | Foco                                                              |
 |----------|-------------------------------------------------------------------|
 | 27       | 25 Principados (mini-bosses de mundo aberto)                      |
-| 29       | Vínculos / Par Sizígico — primeiro encontro romântico             |
 | 30       | 17 Aeon-Mestres exclusivos por civilização                        |
 | 31       | 5 fases de poderes (Acordado → Espírito Puro)                     |
 | 32       | Mecânica de mundo aberto · 140 missões secundárias                |
