@@ -4,9 +4,10 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 22 sprints
-entregues, da TitleScreen aos 6 endings. Loop narrativo inteiro
-jogável. Ver [Histórico de Sprints](#histórico-de-sprints).
+**Status:** **vertical slice end-to-end COMPLETO** — 25 sprints
+entregues, da TitleScreen aos 6 endings, com 6 Anjos Caídos
+redimíveis, Anúncio Conjunto integrado e Feira dos Sistemas
+exploratória. Ver [Histórico de Sprints](#histórico-de-sprints).
 **Licença:** MIT (ver [LICENSE](LICENSE)).
 **Repositório:** https://github.com/rebcm/sophia
 
@@ -95,22 +96,24 @@ todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
 de duração do loop narrativo: **~2-3 horas** se o jogador ler
 todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas (12)
+### Cenas implementadas (14)
 
-| Cena                  | Função                                       | Sprint |
-| --------------------- | -------------------------------------------- | ------ |
-| **Jardim dos Ecos**   | Tutorial: despertar Velho + Adão             | 1, 5   |
-| **Mar de Cristal**    | Hub central com 11 portais multidimensionais | 2      |
-| **Bardo**             | Liminar entre vidas (reencarnação)           | 3      |
-| **Ratanabá**          | 1ª Civilização — Athoth (Mãe-D'Água)         | 6,7,8  |
-| **Casa-Espelhada**    | 6ª Torre — Auto-Sabotador                    | 11     |
-| **El Dorado**         | 2ª Civilização — Yobel (Inca-Solitário)      | 12,13  |
-| **Hiperbórea**        | 3ª Civilização — Adonaios (Guardião-Solar)   | 17     |
-| **Atlântida**         | 4ª Civilização — Eloaios (Jurista de Cristal)| 18     |
-| **Lemúria**           | 5ª Civilização — Galila (Senhora do Lótus)   | 19     |
-| **Mu**                | 6ª Civilização — Harmas (Hieroglifo Vivo)    | 20     |
-| **Pré-Adamita**       | 7ª Civilização — Iaoth (Esfera Saturnal)     | 21     |
-| **Trono do Demiurgo** | Clímax — abraço + 4 cinemáticas + 6 endings  | 22     |
+| Cena                       | Função                                       | Sprint |
+| -------------------------- | -------------------------------------------- | ------ |
+| **Jardim dos Ecos**        | Tutorial: despertar Velho + Adão             | 1, 5   |
+| **Mar de Cristal**         | Hub central com 13 portais multidimensionais | 2      |
+| **Bardo**                  | Liminar entre vidas (reencarnação)           | 3      |
+| **Ratanabá**               | 1ª Civilização — Athoth (Mãe-D'Água)         | 6,7,8  |
+| **Casa-Espelhada**         | 6ª Torre — Auto-Sabotador                    | 11     |
+| **El Dorado**              | 2ª Civilização — Yobel (Inca-Solitário)      | 12,13  |
+| **Hiperbórea**             | 3ª Civilização — Adonaios (Guardião-Solar)   | 17     |
+| **Atlântida**              | 4ª Civilização — Eloaios (Jurista de Cristal)| 18     |
+| **Lemúria**                | 5ª Civilização — Galila (Senhora do Lótus)   | 19     |
+| **Mu**                     | 6ª Civilização — Harmas (Hieroglifo Vivo)    | 20     |
+| **Pré-Adamita**            | 7ª Civilização — Iaoth (Esfera Saturnal)     | 21     |
+| **Trono do Demiurgo**      | Clímax — abraço + cinemáticas 15-18 + endings | 22    |
+| **Tabernáculo dos Caídos** | 6 altares dos Anjos Caídos · cinemáticas 9-14 | 23   |
+| **Feira dos Sistemas**     | Cidade-arquetipo · 5 torres modernas         | 25     |
 
 ### Sistemas funcionais
 
@@ -157,27 +160,31 @@ todas as cinemáticas e explorar cada cena.
 - **Sabaoth · Demiurgo Restaurado** — Trono do Demiurgo (Sprint 22).
   Centelha da *Lembrança Profunda*. Clímax.
 
-### Cinemáticas implementadas (10)
+### Cinemáticas implementadas (19 — todas as principais da bíblia)
 
-| ID                 | Título                             | Beats |
-| ------------------ | ---------------------------------- | ----- |
-| `prologo`          | Antes do Tempo                     | 7     |
-| `athoth-cai`       | O Sono Era Roubo                   | 9     |
-| `yobel-cai`        | O Ouro Era Sombra                  | 9     |
-| `adonaios-cai`     | A Coragem Estava Acorrentada       | 8     |
-| `eloaios-cai`      | A Lei Esqueceu de Ser Lei          | 7     |
-| `galila-cai`       | A Beleza Falsificada               | 7     |
-| `harmas-cai`       | A Palavra Roubada                  | 7     |
-| `iaoth-cai`        | Tu Eras Antes do Tempo             | 7     |
-| `demiurgo-cai`     | O Abraço ao Filho Cego             | 9     |
-| `grande-revelacao` | A Grande Revelação                 | 7     |
-| `veu`              | O Véu                              | 6     |
-| `monada`           | A Mônada                           | 7     |
+| #  | ID                 | Título                             | Beats |
+| -- | ------------------ | ---------------------------------- | ----- |
+| 1  | `prologo`          | Antes do Tempo                     | 7     |
+| 2  | `athoth-cai`       | O Sono Era Roubo                   | 9     |
+| 3  | `yobel-cai`        | O Ouro Era Sombra                  | 9     |
+| 4  | `adonaios-cai`     | A Coragem Estava Acorrentada       | 8     |
+| 5  | `eloaios-cai`      | A Lei Esqueceu de Ser Lei          | 7     |
+| 6  | `galila-cai`       | A Beleza Falsificada               | 7     |
+| 7  | `harmas-cai`       | A Palavra Roubada                  | 7     |
+| 8  | `iaoth-cai`        | Tu Eras Antes do Tempo             | 7     |
+| 9  | `asmodeus-cai`     | Para Que Serve Hierarquia?         | 5     |
+| 10 | `lucifer-cai`      | Quem Sou Eu, Realmente?            | 5     |
+| 11 | `belial-cai`       | O Que Vale a Vida?                 | 5     |
+| 12 | `azazel-cai`       | Quem Tem Direito de Julgar?        | 5     |
+| 13 | `semyaza-cai`      | Quem Tem Direito ao Conhecimento?  | 5     |
+| 14 | `leviata-cai`      | O Que É Descanso?                  | 6     |
+| 15 | `demiurgo-cai`     | O Abraço ao Filho Cego             | 9     |
+| 16 | `grande-revelacao` | A Grande Revelação                 | 7     |
+| 16.5 | `anuncio-conjunto` | O Anúncio Conjunto · Trégua       | 17    |
+| 17 | `veu`              | O Véu                              | 6     |
+| 18 | `monada`           | A Mônada                           | 7     |
 
-(Outras cinemáticas opcionais — 6 Anjos Caídos, Anúncio Conjunto —
-têm scripts completos em
-`docs/18-cinematicas-revelacao-progressiva.md` aguardando
-implementação em Sprints 23+.)
+**Total de beats narrativos:** 138.
 
 ### Os 6 Endings disponíveis (clímax)
 
@@ -209,7 +216,10 @@ Após a Mônada, o jogador escolhe entre:
 | 17     | Hiperbórea + Adonaios cai + Cinemática 4              | `3751043`    | ✅ |
 | 18-21  | Atlântida + Lemúria + Mu + Pré-Adamita (4 últimas civ.) | `798300c` | ✅ |
 | 22     | **CLÍMAX** · Demiurgo + Grande Revelação + 6 Endings  | `3b51335`    | ✅ |
-| 23+    | Backlog pós-slice — 6 Anjos Caídos, Anúncio Conjunto, Feira dos Sistemas, etc. — ver `docs/production/02-sprint-board.md` | – | 🔜 |
+| 23     | Tabernáculo dos Caídos · 6 Anjos Caídos · Cinemáticas 9-14 | `10d296a` | ✅ |
+| 24     | Anúncio Conjunto · Cinemática 16.5 inserida no clímax | `e007aa9`    | ✅ |
+| 25     | Feira dos Sistemas · 5 torres arquetípicas modernas   | `0dda75b`    | ✅ |
+| 26+    | Backlog — Labirinto das Eras, 25 Principados, mundo aberto, CGI, OST, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
 

@@ -21,11 +21,18 @@
 | 17       | Hiperbórea + Adonaios cai + Cinemática 4              | `3751043`    | ✅ |
 | 18-21    | Atlântida + Lemúria + Mu + Pré-Adamita (4 últimas civ.) | `798300c` | ✅ |
 | 22       | **CLÍMAX** · Demiurgo + Grande Revelação + 6 Endings  | `3b51335`    | ✅ |
+| 23       | Tabernáculo dos Caídos · 6 Anjos Caídos (Cinemáticas 9-14) | `10d296a` | ✅ |
+| 24       | Anúncio Conjunto (Cinemática 16.5) inserida no clímax | `e007aa9`    | ✅ |
+| 25       | Feira dos Sistemas · 5 torres arquetípicas modernas   | `0dda75b`    | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
 um dos 6 endings, atravessando todas as 7 Civilizações Perdidas
 e a Casa-Espelhada. **Loop narrativo completo.**
+
+**Sprints 23-25 expandem o universo:** 6 Anjos Caídos redimíveis
+em altares próprios + Anúncio Conjunto integrado ao clímax +
+Feira dos Sistemas exploratória.
 
 Sprints já marcados como **✅** estão consolidados no `main`.
 
@@ -181,9 +188,6 @@ de mundo aberto, conteúdo opcional e refinamento.
 
 | Sprint   | Foco                                                              |
 |----------|-------------------------------------------------------------------|
-| 23       | 6 Anjos Caídos (Asmodeus, Lúcifer, Belial, Azazel, Semyaza, Leviatã) — Cinemáticas 9-14 |
-| 24       | Anúncio Conjunto (Cinemática 16.5) — trégua cósmica de 7min       |
-| 25       | Feira dos Sistemas (5 distritos arquetípicos)                     |
 | 26       | Labirinto das Eras (10 eras flashback)                            |
 | 27       | 25 Principados (mini-bosses de mundo aberto)                      |
 | 28       | Sistema de Profissões / 12 práticas diárias                       |
