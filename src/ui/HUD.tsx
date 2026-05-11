@@ -19,6 +19,7 @@ export function HUD() {
   const place = useGameStore((s) => s.place);
   const toast = useGameStore((s) => s.toast);
   const hideToast = useGameStore((s) => s.hideToast);
+  const toggleCodex = useGameStore((s) => s.toggleCodex);
 
   const light = useSoulStore((s) => s.light);
   const centelhasCount = useSoulStore((s) => s.centelhas.size);
@@ -60,6 +61,15 @@ export function HUD() {
       </div>
 
       {hint && <div className="hint">{hint}</div>}
+
+      <button
+        className="codex-trigger"
+        onClick={toggleCodex}
+        aria-label="Abrir Codex (C)"
+        title="Codex · C"
+      >
+        Codex <kbd>C</kbd>
+      </button>
 
       {toast && (
         <div className="awakened-toast" key={toast.name}>

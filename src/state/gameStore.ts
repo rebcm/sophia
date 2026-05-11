@@ -55,6 +55,11 @@ interface GameState {
   place: string;
   setPlace: (p: string) => void;
 
+  // Codex (sessão)
+  codexOpen: boolean;
+  setCodexOpen: (o: boolean) => void;
+  toggleCodex: () => void;
+
   // Áudio
   audioEnabled: boolean;
   enableAudio: () => void;
@@ -76,6 +81,10 @@ export const useGameStore = create<GameState>((set) => ({
 
   place: "Jardim dos Ecos",
   setPlace: (p) => set({ place: p }),
+
+  codexOpen: false,
+  setCodexOpen: (o) => set({ codexOpen: o }),
+  toggleCodex: () => set((s) => ({ codexOpen: !s.codexOpen })),
 
   audioEnabled: false,
   enableAudio: () => set({ audioEnabled: true }),

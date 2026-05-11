@@ -20,6 +20,7 @@ import { CharacterCreation } from "./ui/CharacterCreation";
 import { CinematicPlayer } from "./ui/CinematicPlayer";
 import { VozDaLuz } from "./ui/VozDaLuz";
 import { PedraConfirmation } from "./ui/PedraConfirmation";
+import { Codex } from "./ui/Codex";
 
 import {
   introDialog,
@@ -43,6 +44,9 @@ export default function App() {
   // Meta-flow
   const metaPhase = useGameStore((s) => s.metaPhase);
   const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const codexOpen = useGameStore((s) => s.codexOpen);
+  const setCodexOpen = useGameStore((s) => s.setCodexOpen);
+  const toggleCodex = useGameStore((s) => s.toggleCodex);
 
   // Cinematic
   const playCinematic = useCinematicStore((s) => s.playCinematic);
@@ -62,6 +66,25 @@ export default function App() {
     window.addEventListener("beforeunload", handler);
     return () => window.removeEventListener("beforeunload", handler);
   }, []);
+
+  // Atalho global: C abre/fecha Codex (apenas em metaPhase=game)
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.code !== "KeyC") return;
+      // Evita toggle quando jogador está digitando em algum input futuro
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
+      if (metaPhase === "game") {
+        toggleCodex();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [metaPhase, toggleCodex]);
 
   // -- Fluxos do meta-flow --
 
@@ -108,7 +131,12 @@ export default function App() {
   }
 
   // metaPhase === "game"
-  return <GameOrchestrator />;
+  return (
+    <>
+      <GameOrchestrator />
+      <Codex open={codexOpen} onClose={() => setCodexOpen(false)} />
+    </>
+  );
 }
 
 /* =========================================================
