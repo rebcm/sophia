@@ -47,6 +47,13 @@ export type Disposition =
   | "corajoso"
   | "compassivo";
 
+/** Cenas/dimensões disponíveis. */
+export type SceneId =
+  | "jardim-dos-ecos"
+  | "mar-de-cristal"
+  | "ratanaba" // placeholder até Sprint 6+
+  | "bardo";
+
 export interface BodyConfig {
   sex: Sex;
   skinTone: SkinTone;
@@ -67,7 +74,7 @@ export interface CharacterState {
   trueName: string | null;
 
   // Localização atual no mundo
-  currentScene: string;
+  currentScene: SceneId;
 
   // Idade in-game (para futura mecânica de envelhecimento natural)
   ageInGame: number;
@@ -78,7 +85,7 @@ export interface CharacterState {
   setDisposition: (d: Disposition) => void;
   setDisplayName: (name: string) => void;
   revealTrueName: (name: string) => void;
-  setCurrentScene: (scene: string) => void;
+  setCurrentScene: (scene: SceneId) => void;
   ageOne: () => void;
 
   // Reset (chamado pela mecânica de reencarnação)

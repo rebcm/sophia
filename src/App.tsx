@@ -3,11 +3,13 @@ import * as THREE from "three";
 
 import { useGameStore } from "./state/gameStore";
 import { useSoulStore } from "./state/soulStore";
+import { useCharacterStore } from "./state/characterStore";
 import { useCinematicStore } from "./state/cinematicStore";
 import { sophiaAudio } from "./audio/SophiaAudio";
 import { setupAutoSave, save as saveGame } from "./systems/SaveSystem";
 
 import { GardenScene } from "./scenes/GardenScene";
+import { MarDeCristalScene, type MarDestino } from "./scenes/MarDeCristalScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -109,14 +111,61 @@ export default function App() {
 /* =========================================================
    GameOrchestrator — orquestrador do gameplay 3D
    ---------------------------------------------------------
-   (Antes era o conteúdo direto de App.)
+   Roteia entre cenas baseado em characterStore.currentScene.
    ========================================================= */
 
 function GameOrchestrator() {
+  const currentScene = useCharacterStore((s) => s.currentScene);
+  if (currentScene === "mar-de-cristal") return <MarDeCristalOrchestrator />;
+  return <JardimOrchestrator />;
+}
+
+/* =========================================================
+   MarDeCristalOrchestrator
+   ========================================================= */
+
+function MarDeCristalOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+
+  useEffect(() => {
+    setPlace("Mar de Cristal");
+  }, [setPlace]);
+
+  const handlePortalEnter = (destino: MarDestino) => {
+    if (destino === "jardim-dos-ecos") {
+      setCurrentScene("jardim-dos-ecos");
+    } else if (destino === "ratanaba") {
+      // Ratanabá ainda não implementada — placeholder
+      // Por enquanto não faz nada (portal está enabled=false)
+    }
+  };
+
+  return (
+    <>
+      <MarDeCristalScene onPortalEnter={handlePortalEnter} />
+      <HUD />
+      <Cursor />
+    </>
+  );
+}
+
+/* =========================================================
+   JardimOrchestrator (anterior conteúdo do GameOrchestrator)
+   ========================================================= */
+
+function JardimOrchestrator() {
   const phase = useGameStore((s) => s.phase);
   const setPhase = useGameStore((s) => s.setPhase);
   const setDialog = useGameStore((s) => s.setDialog);
+  const setPlace = useGameStore((s) => s.setPlace);
   const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+
+  useEffect(() => {
+    setPlace("Jardim dos Ecos");
+  }, [setPlace]);
 
   // Soul: addLight + recordAwakened
   const addLight = useSoulStore((s) => s.addLight);
@@ -306,9 +355,16 @@ function GameOrchestrator() {
     };
   }, []);
 
+  const goToMar = () => setCurrentScene("mar-de-cristal");
+
   return (
     <>
-      <GardenScene elderPos={ELDER_POS} onApproachElder={handleApproach} />
+      <GardenScene
+        elderPos={ELDER_POS}
+        onApproachElder={handleApproach}
+        showExitPortal={phase === "free-roam"}
+        onExitToMar={goToMar}
+      />
       <HUD />
       <DialogBox onAdvance={handleAdvance} />
       <AwakeningRing

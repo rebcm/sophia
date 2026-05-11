@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import {
   EffectComposer,
@@ -17,6 +17,7 @@ import {
 import { Player } from "../world/Player";
 import { Whisperer } from "../world/Whisperer";
 import { Sleeper } from "../world/Sleeper";
+import { Portal } from "../world/Portal";
 
 /* =========================================================
    GardenScene — orquestra a cena 3D do Jardim dos Ecos
@@ -26,10 +27,32 @@ interface GardenSceneProps {
   /** Posição do Velho do Jardim (alvo do jogador). */
   elderPos: THREE.Vector3;
   onApproachElder?: (near: boolean) => void;
+  /** Mostra o Portal de Espelho (saída para Mar de Cristal). */
+  showExitPortal?: boolean;
+  /** Chamado quando o jogador entra no portal de saída. */
+  onExitToMar?: () => void;
 }
 
-export function GardenScene({ elderPos, onApproachElder }: GardenSceneProps) {
+export function GardenScene({
+  elderPos,
+  onApproachElder,
+  showExitPortal = false,
+  onExitToMar,
+}: GardenSceneProps) {
   const playerRef = useRef<THREE.Group | null>(null);
+  const [nearPortal, setNearPortal] = useState(false);
+
+  // Espaço/Enter/F para entrar no portal de saída quando perto
+  useEffect(() => {
+    if (!showExitPortal || !nearPortal) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.code === "Space" || e.code === "Enter" || e.code === "KeyF") {
+        onExitToMar?.();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [showExitPortal, nearPortal, onExitToMar]);
 
   return (
     <Canvas
@@ -91,6 +114,18 @@ export function GardenScene({ elderPos, onApproachElder }: GardenSceneProps) {
 
       {/* Sussurrante */}
       <Whisperer playerRef={playerRef} />
+
+      {/* Portal de Espelho — saída para Mar de Cristal (após despertar Velho) */}
+      {showExitPortal && (
+        <Portal
+          position={[-10, 0.4, -10]}
+          label="Portal de Espelho"
+          subLabel="Mar de Cristal · pressione Espaço"
+          color="#c5d7e0"
+          playerRef={playerRef}
+          onProximityChange={setNearPortal}
+        />
+      )}
 
       {/* Pós-processamento */}
       <EffectComposer>
