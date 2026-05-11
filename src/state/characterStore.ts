@@ -64,6 +64,8 @@ export type SceneId =
   | "feira-dos-sistemas" // Sprint 25 — 5 distritos modernos arquetípicos
   | "labirinto-das-eras" // Sprint 26 — 10 eras / flashbacks de vidas passadas
   | "galeria-dos-principados" // Sprint 27 — 12 Principados contempláveis
+  | "agartha" // Sprint 60 — cidade intra-terrena
+  | "sodoma" // Sprint 61 — cidade aguardando julgamento
   | "bardo";
 
 export interface BodyConfig {

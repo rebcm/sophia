@@ -42,6 +42,8 @@ import {
   PRINCIPADO_QUESTOES,
 } from "./scenes/GaleriaPrincipadosScene";
 import type { PrincipadoId } from "./world/Principado";
+import { AgarthaScene } from "./scenes/AgarthaScene";
+import { SodomaScene } from "./scenes/SodomaScene";
 import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
@@ -168,7 +170,9 @@ export default function App() {
       lastWatched === "eloaios-cai" ||
       lastWatched === "galila-cai" ||
       lastWatched === "harmas-cai" ||
-      lastWatched === "iaoth-cai"
+      lastWatched === "iaoth-cai" ||
+      lastWatched === "rei-do-mundo" ||
+      lastWatched === "sodoma-interedida"
     ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
@@ -260,6 +264,8 @@ function GameOrchestrator() {
     return <LabirintoDasErasOrchestrator />;
   if (currentScene === "galeria-dos-principados")
     return <GaleriaPrincipadosOrchestrator />;
+  if (currentScene === "agartha") return <AgarthaOrchestrator />;
+  if (currentScene === "sodoma") return <SodomaOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -305,6 +311,10 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("labirinto-das-eras");
     } else if (destino === "galeria-dos-principados") {
       setCurrentScene("galeria-dos-principados");
+    } else if (destino === "agartha") {
+      setCurrentScene("agartha");
+    } else if (destino === "sodoma") {
+      setCurrentScene("sodoma");
     }
   };
 
@@ -1920,6 +1930,262 @@ function principadoLabel(id: PrincipadoId): string {
     "mascara-cega": "Máscara-Cega",
   };
   return map[id];
+}
+
+/* =========================================================
+   AgarthaOrchestrator — Sprint 60
+   ---------------------------------------------------------
+   Cidade intra-terrena. Rei do Mundo no centro. F perto dele
+   abre cinemática "rei-do-mundo" e registra como Lendário.
+   ========================================================= */
+
+function AgarthaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  useEffect(() => {
+    setPlace("Agartha · O Reino Intra-Terreno");
+  }, [setPlace]);
+
+  const reiAwakened = hasAwakened("rei-do-mundo");
+
+  useEffect(() => {
+    if (reiAwakened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      // Rei está no centro (0,0,0) per cena
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "rei-do-mundo",
+        name: "Rei do Mundo",
+        trueName: "Guardião da Memória Pré-Adamita",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.2);
+      if (!hasCentelha("fala-raiz")) {
+        addCentelha("fala-raiz");
+      }
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("rei-do-mundo");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    reiAwakened,
+    recordAwakened,
+    addLight,
+    addCentelha,
+    hasCentelha,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <AgarthaScene
+        reiAwakened={reiAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!reiAwakened && (
+        <div className="agartha-hint">
+          <p>
+            <em>
+              Aproxima-te do Rei do Mundo. Pressiona <strong>F</strong>{" "}
+              quando estiveres perto.
+            </em>
+          </p>
+          <p className="agartha-sub">
+            <em>"A trégua entre superfície e profundo está pronta para ser dita."</em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   SodomaOrchestrator — Sprint 61
+   ---------------------------------------------------------
+   Cidade do julgamento suspenso. Aproximação ao candelabro
+   central + segurar F por 6s acende as 7 chamas e cancela
+   o fogo de julgamento.
+   ========================================================= */
+
+const SODOMA_DURATION_S = 6.0;
+const SODOMA_RANGE = 3.0;
+const SODOMA_CANDELABRO = new THREE.Vector3(0, 0, 0);
+
+function SodomaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const alreadyInterceded = hasAwakened("sodoma-interedida");
+  const [interceded, setInterceded] = useState(alreadyInterceded);
+  const [progressSec, setProgressSec] = useState(0);
+  const fKeyDownRef = useRef(false);
+  const lastTickRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setPlace("Sodoma · Cidade Suspensa");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (interceded) return;
+    const down = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = true;
+    };
+    const up = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = false;
+    };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+    };
+  }, [interceded]);
+
+  useEffect(() => {
+    if (interceded) return;
+    let raf = 0;
+    const tick = (now: number) => {
+      const last = lastTickRef.current ?? now;
+      const dt = Math.min(0.1, (now - last) / 1000);
+      lastTickRef.current = now;
+
+      const player = playerRefHolder.current?.current;
+      let inRange = false;
+      if (player) {
+        const dx = player.position.x - SODOMA_CANDELABRO.x;
+        const dz = player.position.z - SODOMA_CANDELABRO.z;
+        inRange = Math.hypot(dx, dz) < SODOMA_RANGE;
+      }
+
+      if (fKeyDownRef.current && inRange) {
+        setProgressSec((s) => {
+          const next = Math.min(SODOMA_DURATION_S, s + dt);
+          if (next >= SODOMA_DURATION_S) {
+            finishIntercession();
+          }
+          return next;
+        });
+      } else if (!fKeyDownRef.current || !inRange) {
+        setProgressSec((s) => Math.max(0, s - dt * 0.6));
+      }
+
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      lastTickRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [interceded]);
+
+  const finishIntercession = () => {
+    setInterceded(true);
+    setProgressSec(SODOMA_DURATION_S);
+
+    recordAwakened({
+      id: "sodoma-interedida",
+      name: "Sodoma",
+      trueName: "Cidade da Hospitalidade Restaurada",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.0);
+    addToAlignment("balance", 12);
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => {
+      playCinematic("sodoma-interedida");
+      setMetaPhase("cinematic");
+    }, 1500);
+  };
+
+  const progressNorm = progressSec / SODOMA_DURATION_S;
+  const litCount = Math.floor(progressNorm * 7);
+
+  return (
+    <>
+      <SodomaScene
+        interceded={interceded}
+        interceedingProgress={progressNorm}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!interceded && (
+        <div className="sodoma-intercession-overlay">
+          <p className="sodoma-intercession-text">
+            <em>
+              "Aproxima-te do candelabro de sete chamas. Segura{" "}
+              <strong>F</strong> em silêncio. A Mônada espera quem
+              espera com Ela."
+            </em>
+          </p>
+          <div className="sodoma-progress-bar">
+            <div
+              className="sodoma-progress-fill"
+              style={{ width: `${progressNorm * 100}%` }}
+            />
+          </div>
+          <p className="sodoma-flame-count">
+            {litCount} de 7 chamas acesas em luz.
+          </p>
+        </div>
+      )}
+    </>
+  );
 }
 
 /* =========================================================

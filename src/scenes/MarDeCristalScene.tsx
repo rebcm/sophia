@@ -41,7 +41,9 @@ export type MarDestino =
   | "tabernaculo-dos-caidos"
   | "feira-dos-sistemas"
   | "labirinto-das-eras"
-  | "galeria-dos-principados";
+  | "galeria-dos-principados"
+  | "agartha"
+  | "sodoma";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -363,6 +365,34 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "galeria-dos-principados" : null)
+          }
+        />
+      )}
+
+      {/* Agartha — cidade intra-terrena (destrava após Harmas/Mu) */}
+      {harmasDefeated && (
+        <Portal
+          position={[6, 0.4, 4.5]}
+          label="Agartha"
+          subLabel="(o reino que lembrou)"
+          color="#ffd890"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "agartha" : null)
+          }
+        />
+      )}
+
+      {/* Sodoma — cidade do julgamento (destrava após Demiurgo abraçado) */}
+      {tronoEnabled && (
+        <Portal
+          position={[-6, 0.4, 4.5]}
+          label="Sodoma"
+          subLabel="(uma cidade aguarda intercessão)"
+          color="#d87858"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "sodoma" : null)
           }
         />
       )}

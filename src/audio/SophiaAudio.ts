@@ -24,7 +24,10 @@ type Mood =
   | "feira"
   | "labirinto"
   | "trono"
-  | "bardo";
+  | "bardo"
+  // Sprint 60-61 · expansão
+  | "agartha"
+  | "sodoma";
 
 class SophiaAudio {
   private ctx: AudioContext | null = null;
@@ -235,6 +238,10 @@ class SophiaAudio {
       labirinto: [0.16, 0.16, 0.18, 0.14], // memória — flutuante
       trono: [0.24, 0.2, 0.18, 0.12], // clímax — pesado
       bardo: [0.18, 0.14, 0.18, 0.14], // limiar — neutro
+
+      // Expansão (Sprint 60-61)
+      agartha: [0.22, 0.12, 0.14, 0.12], // intra-terreno — grave + cavernoso
+      sodoma: [0.24, 0.18, 0.14, 0.1], // julgamento suspenso — pesado solene
     };
     const vols = targetVols[mood];
     this.droneNodes.forEach(({ gain }, i) => {
@@ -293,6 +300,10 @@ export function moodForScene(scene: string): Mood {
     case "galeria-dos-principados":
       // Compartilha o mood denso da Casa-Espelhada (Principados são leis sombrias)
       return "casa-espelhada";
+    case "agartha":
+      return "agartha";
+    case "sodoma":
+      return "sodoma";
     case "trono-demiurgo":
       return "trono";
     case "bardo":

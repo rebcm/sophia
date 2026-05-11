@@ -27,7 +27,10 @@ export type CinematicId =
   | "grande-revelacao" // 16
   | "anuncio-conjunto" // 16.5 — trégua cósmica
   | "veu" // 17
-  | "monada"; // 18
+  | "monada" // 18
+  // Sprint 60-61 · expansão (intra-terrenas + julgamento)
+  | "rei-do-mundo" // Agartha
+  | "sodoma-interedida"; // Sodoma
 
 interface CinematicEntry {
   id: CinematicId;

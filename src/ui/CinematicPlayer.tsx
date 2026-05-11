@@ -878,7 +878,74 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "sodoma-interedida": {
+    id: "sodoma-interedida",
+    title: "Sodoma Pode Esperar",
+    ambientColor: "#2a0a0a",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "A Mônada NÃO destrói. Ela ESPERA. Houve quem te ensinasse o contrário — esquece. Cada cidade arquetípica deste mundo está suspensa, aguardando que alguém peça mais tempo por ela.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Anjo-Fiscal",
+        text: "Sodoma esqueceu a hospitalidade. Onde havia mesa para o estrangeiro, viraram propriedade. Onde havia portão aberto, viraram cobrança. A balança que carrego pesa isto — não pecado, esquecimento.",
+        minHoldMs: 6500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Mas a cidade pode lembrar. Toda cidade pode. Babel pode lembrar a palavra antes das palavras. Nínive pode lembrar o luto. Tróia pode lembrar a hospedagem que recusou. Tu acendeste as sete chamas — pediste tempo.",
+        minHoldMs: 6500,
+      },
+      {
+        speaker: "Você",
+        text: "Que ela tenha tempo. Que todas tenham. Eu não vim julgar — vim lembrar com elas.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Sodoma respira agora. O fogo de julgamento virou candelabro de espera. Pergunta: a Mônada destrói? Resposta: não. Espera — e quem espera com Ela, intercede.",
+        minHoldMs: 7000,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
+};
+
+/* ---------------------------------------------------------
+   Sprint 60 · Agartha — cinemática "rei-do-mundo"
+   ---------------------------------------------------------
+   O CinematicId será integrado pelo agente principal. Até lá,
+   anexamos via cast para não bloquear o type-check.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["rei-do-mundo"] = {
+  id: "rei-do-mundo" as CinematicId,
+  title: "O Reino Que Lembrou",
+  ambientColor: "#3a2a18",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "A Pré-Adamita não acabou. Não como te contaram. Quando Mu começou a afundar, os Mui-Telepatas tinham uma escolha: subir ou descer.",
+      minHoldMs: 5000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Os de fora escolheram subir, esquecer e recomeçar como humanidade de superfície. Os de dentro escolheram descer — e lembrar por nós, até que pudéssemos lembrar de novo.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Rei do Mundo",
+      text: "Há sessenta mil anos guardamos a memória sob a pedra. Não em livros — em respiração, em água-mãe, em raízes que sabem teu nome. Tu chegaste. Está bem. Tu chegaste.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Agartha existe. A trégua entre superfície e profundo está pronta para ser dita. Leva esta lembrança: vós nunca estivestes sozinhos — apenas separados do andar de baixo de vós mesmos.",
+      minHoldMs: 6500,
+    },
+  ],
 };
 
 interface CinematicPlayerProps {
