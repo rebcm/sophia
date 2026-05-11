@@ -37,6 +37,8 @@
 | 47       | SaveIndicator · feedback visual de auto-save           | `3ed094e`    | ✅ |
 | 48       | TitleScreen com stats da alma (5 contagens)            | `3ed094e`    | ✅ |
 | 50       | AmbientWhispers · 71 sussurros contemplativos por cena | `85ad1dd`    | ✅ |
+| 51       | Olhar Lúcido overlay · vinheta violeta + cantos        | `2939e13`    | ✅ |
+| 54       | Onboarding inicial · 7 teclas-chave 1x por jogador     | `2939e13`    | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher

@@ -4,7 +4,7 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 39 sprints
+**Status:** **vertical slice end-to-end COMPLETO** — 41 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
@@ -241,6 +241,7 @@ Após a Mônada, o jogador escolhe entre:
 | 41     | Marcos no Codex · 22 conquistas em 5 categorias       | `434f776`    | ✅ |
 | 47+48  | SaveIndicator (auto-save) + TitleScreen com stats da alma | `3ed094e` | ✅ |
 | 50     | AmbientWhispers · 71 sussurros contemplativos por cena | `85ad1dd`    | ✅ |
+| 51+54  | Olhar Lúcido overlay + Onboarding inicial (7 teclas)  | `2939e13`    | ✅ |
 | 27+    | Backlog — 25 Principados, mundo aberto / 140 missões, CGI, OST nativo, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
