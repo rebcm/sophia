@@ -24,6 +24,8 @@
 | 23       | Tabernáculo dos Caídos · 6 Anjos Caídos (Cinemáticas 9-14) | `10d296a` | ✅ |
 | 24       | Anúncio Conjunto (Cinemática 16.5) inserida no clímax | `e007aa9`    | ✅ |
 | 25       | Feira dos Sistemas · 5 torres arquetípicas modernas   | `0dda75b`    | ✅ |
+| 26       | Labirinto das Eras · 10 espelhos-memória de vidas passadas | `0fec919` | ✅ |
+| 28       | Práticas Diárias · 5ª aba do Codex com 12 práticas    | `12b09d2`    | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -188,9 +190,7 @@ de mundo aberto, conteúdo opcional e refinamento.
 
 | Sprint   | Foco                                                              |
 |----------|-------------------------------------------------------------------|
-| 26       | Labirinto das Eras (10 eras flashback)                            |
 | 27       | 25 Principados (mini-bosses de mundo aberto)                      |
-| 28       | Sistema de Profissões / 12 práticas diárias                       |
 | 29       | Vínculos / Par Sizígico — primeiro encontro romântico             |
 | 30       | 17 Aeon-Mestres exclusivos por civilização                        |
 | 31       | 5 fases de poderes (Acordado → Espírito Puro)                     |

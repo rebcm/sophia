@@ -4,10 +4,12 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 25 sprints
-entregues, da TitleScreen aos 6 endings, com 6 Anjos Caídos
-redimíveis, Anúncio Conjunto integrado e Feira dos Sistemas
-exploratória. Ver [Histórico de Sprints](#histórico-de-sprints).
+**Status:** **vertical slice end-to-end COMPLETO** — 27 sprints
+entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
+redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
+Labirinto das Eras (10 vidas passadas) e Codex com 5 abas
+(incluindo 12 Práticas Diárias). Ver
+[Histórico de Sprints](#histórico-de-sprints).
 **Licença:** MIT (ver [LICENSE](LICENSE)).
 **Repositório:** https://github.com/rebcm/sophia
 
@@ -96,12 +98,12 @@ todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
 de duração do loop narrativo: **~2-3 horas** se o jogador ler
 todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas (14)
+### Cenas implementadas (15)
 
 | Cena                       | Função                                       | Sprint |
 | -------------------------- | -------------------------------------------- | ------ |
 | **Jardim dos Ecos**        | Tutorial: despertar Velho + Adão             | 1, 5   |
-| **Mar de Cristal**         | Hub central com 13 portais multidimensionais | 2      |
+| **Mar de Cristal**         | Hub central com 14 portais multidimensionais | 2      |
 | **Bardo**                  | Liminar entre vidas (reencarnação)           | 3      |
 | **Ratanabá**               | 1ª Civilização — Athoth (Mãe-D'Água)         | 6,7,8  |
 | **Casa-Espelhada**         | 6ª Torre — Auto-Sabotador                    | 11     |
@@ -114,6 +116,7 @@ todas as cinemáticas e explorar cada cena.
 | **Trono do Demiurgo**      | Clímax — abraço + cinemáticas 15-18 + endings | 22    |
 | **Tabernáculo dos Caídos** | 6 altares dos Anjos Caídos · cinemáticas 9-14 | 23   |
 | **Feira dos Sistemas**     | Cidade-arquetipo · 5 torres modernas         | 25     |
+| **Labirinto das Eras**     | 10 espelhos-memória · flashbacks de vidas    | 26     |
 
 ### Sistemas funcionais
 
@@ -219,7 +222,9 @@ Após a Mônada, o jogador escolhe entre:
 | 23     | Tabernáculo dos Caídos · 6 Anjos Caídos · Cinemáticas 9-14 | `10d296a` | ✅ |
 | 24     | Anúncio Conjunto · Cinemática 16.5 inserida no clímax | `e007aa9`    | ✅ |
 | 25     | Feira dos Sistemas · 5 torres arquetípicas modernas   | `0dda75b`    | ✅ |
-| 26+    | Backlog — Labirinto das Eras, 25 Principados, mundo aberto, CGI, OST, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
+| 26     | Labirinto das Eras · 10 espelhos-memória de vidas passadas | `0fec919` | ✅ |
+| 28     | Práticas Diárias · 5ª aba do Codex com 12 práticas    | `12b09d2`    | ✅ |
+| 27+    | Backlog — 25 Principados, 17 Aeon-Mestres, mundo aberto, CGI, OST, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
 
