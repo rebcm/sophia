@@ -61,6 +61,7 @@ export type SceneId =
   | "pre-adamita" // 7ª Civilização Perdida (Sprint 21)
   | "trono-demiurgo" // Sprint 22 — clímax: Grande Revelação + 6 endings
   | "tabernaculo-dos-caidos" // Sprint 23 — 6 Anjos Caídos opcionais
+  | "feira-dos-sistemas" // Sprint 25 — 5 distritos modernos arquetípicos
   | "bardo";
 
 export interface BodyConfig {

@@ -2268,3 +2268,32 @@ canvas {
   opacity: 0.78;
   font-style: italic;
 }
+
+/* =========================================================
+   Feira dos Sistemas · hint exploratório
+   ========================================================= */
+.feira-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 88vw);
+  padding: 14px 22px;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 28, 40, 0.85) 0%,
+    rgba(42, 46, 60, 0.7) 100%
+  );
+  border: 1px solid rgba(136, 192, 232, 0.4);
+  border-radius: 8px;
+  color: var(--c-amber);
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6);
+}
+.feira-hint p {
+  margin: 0;
+  font-size: 1.0rem;
+  line-height: 1.5;
+}

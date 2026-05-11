@@ -38,7 +38,8 @@ export type MarDestino =
   | "mu"
   | "pre-adamita"
   | "trono-demiurgo"
-  | "tabernaculo-dos-caidos";
+  | "tabernaculo-dos-caidos"
+  | "feira-dos-sistemas";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -318,6 +319,20 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "tabernaculo-dos-caidos" : null)
+          }
+        />
+      )}
+
+      {/* Feira dos Sistemas — disponível desde Casa-Espelhada */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[-14, 0.4, -8]}
+          label="Feira dos Sistemas"
+          subLabel="(cinco torres da Era da Informação)"
+          color="#88c0e8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "feira-dos-sistemas" : null)
           }
         />
       )}

@@ -27,6 +27,7 @@ import {
   SHRINE_POSITIONS,
 } from "./scenes/TabernaculoDosCaidosScene";
 import type { CaidoId } from "./world/AnjoCaidoShrine";
+import { FeiraDosSistemasScene } from "./scenes/FeiraDosSistemasScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -211,6 +212,8 @@ function GameOrchestrator() {
   if (currentScene === "trono-demiurgo") return <TronoDemiurgoOrchestrator />;
   if (currentScene === "tabernaculo-dos-caidos")
     return <TabernaculoDosCaidosOrchestrator />;
+  if (currentScene === "feira-dos-sistemas")
+    return <FeiraDosSistemasOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -250,6 +253,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("trono-demiurgo");
     } else if (destino === "tabernaculo-dos-caidos") {
       setCurrentScene("tabernaculo-dos-caidos");
+    } else if (destino === "feira-dos-sistemas") {
+      setCurrentScene("feira-dos-sistemas");
     }
   };
 
@@ -1498,6 +1503,42 @@ function TabernaculoDosCaidosOrchestrator() {
           {remaining > 0
             ? `${remaining} de 6 ainda dormem.`
             : "Os seis lembraram. Vai em paz."}
+        </p>
+      </div>
+    </>
+  );
+}
+
+/* =========================================================
+   FeiraDosSistemasOrchestrator — Sprint 25
+   ---------------------------------------------------------
+   Cidade-arquetipo da Era da Informação. Por enquanto: cena
+   explorável sem interação obrigatória (atmosfera + visão
+   simbólica dos sistemas de drenagem modernos). Mecânicas
+   futuras: confrontar "doppelgangers" dentro de cada edifício.
+   ========================================================= */
+
+function FeiraDosSistemasOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+
+  useEffect(() => {
+    setPlace("Feira dos Sistemas");
+  }, [setPlace]);
+
+  return (
+    <>
+      <FeiraDosSistemasScene
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+      />
+      <HUD />
+      <Cursor />
+      <div className="feira-hint">
+        <p>
+          <em>
+            Cinco torres em pentágono. Cada uma é uma forma de drenagem
+            sem máscara. A sexta — a Casa-Espelhada — tu já conheceste.
+          </em>
         </p>
       </div>
     </>
