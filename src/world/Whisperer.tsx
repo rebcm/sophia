@@ -2,6 +2,7 @@ import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useGameStore } from "../state/gameStore";
+import { useSoulStore } from "../state/soulStore";
 
 /* =========================================================
    Whisperer — A Sussurrante de Sophia
@@ -22,9 +23,13 @@ export function Whisperer({ playerRef }: WhispererProps) {
   const ring2 = useRef<THREE.Mesh>(null);
   const ring3 = useRef<THREE.Mesh>(null);
   const lightRef = useRef<THREE.PointLight>(null);
+  const torsoRef = useRef<THREE.Mesh>(null);
+  const headRef = useRef<THREE.Mesh>(null);
   const targetPos = useRef(new THREE.Vector3(0, 1.6, 4));
 
   const phase = useGameStore((s) => s.phase);
+  // Forma humanoide após derrotar o Auto-Sabotador
+  const humanoid = useSoulStore((s) => s.hasAwakened("auto-sabotador"));
 
   /* posição inicial fora do mundo */
   const startPos = useMemo(() => new THREE.Vector3(20, 8, -15), []);
@@ -83,6 +88,15 @@ export function Whisperer({ playerRef }: WhispererProps) {
 
     if (lightRef.current) {
       lightRef.current.intensity = 1.3 + Math.sin(t * 2.0) * 0.25;
+    }
+
+    // Quando humanoide, o torso pulsa suavemente
+    if (humanoid && torsoRef.current) {
+      const breath = 1 + Math.sin(t * 0.8) * 0.04;
+      torsoRef.current.scale.y = breath;
+    }
+    if (humanoid && headRef.current) {
+      headRef.current.position.y = 0.55 + Math.sin(t * 0.8) * 0.02;
     }
   });
 
@@ -144,6 +158,51 @@ export function Whisperer({ playerRef }: WhispererProps) {
         distance={6}
         decay={2}
       />
+
+      {/* Forma humanoide etérica — só após despertar o Auto-Sabotador */}
+      {humanoid && (
+        <group position={[0, -0.6, 0]}>
+          {/* Torso translúcido */}
+          <mesh ref={torsoRef} position={[0, 0, 0]}>
+            <cylinderGeometry args={[0.18, 0.24, 0.9, 12]} />
+            <meshBasicMaterial
+              color="#ffe9d0"
+              transparent
+              opacity={0.28}
+              depthWrite={false}
+            />
+          </mesh>
+          {/* Cabeça */}
+          <mesh ref={headRef} position={[0, 0.55, 0]}>
+            <sphereGeometry args={[0.18, 16, 12]} />
+            <meshBasicMaterial
+              color="#fff5d8"
+              transparent
+              opacity={0.4}
+              depthWrite={false}
+            />
+          </mesh>
+          {/* Braços — duas tiras finas */}
+          <mesh position={[0.28, 0.1, 0]} rotation={[0, 0, 0.4]}>
+            <cylinderGeometry args={[0.05, 0.06, 0.7, 8]} />
+            <meshBasicMaterial
+              color="#ffd4a8"
+              transparent
+              opacity={0.25}
+              depthWrite={false}
+            />
+          </mesh>
+          <mesh position={[-0.28, 0.1, 0]} rotation={[0, 0, -0.4]}>
+            <cylinderGeometry args={[0.05, 0.06, 0.7, 8]} />
+            <meshBasicMaterial
+              color="#ffd4a8"
+              transparent
+              opacity={0.25}
+              depthWrite={false}
+            />
+          </mesh>
+        </group>
+      )}
     </group>
   );
 }

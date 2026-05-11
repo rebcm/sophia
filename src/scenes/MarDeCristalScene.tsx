@@ -27,7 +27,7 @@ import { useSoulStore } from "../state/soulStore";
    Sprints futuros adicionam os outros 7+ portais.
    ========================================================= */
 
-export type MarDestino = "jardim-dos-ecos" | "ratanaba";
+export type MarDestino = "jardim-dos-ecos" | "ratanaba" | "casa-espelhada";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -45,6 +45,13 @@ export function MarDeCristalScene({
 
   // Ratanabá fica disponível após despertar o Velho do Jardim
   const ratanabaEnabled = useSoulStore((s) => s.hasAwakened("velho-do-jardim"));
+  // Casa-Espelhada fica disponível após despertar Athoth (Mãe-D'Água)
+  const casaEspelhadaEnabled = useSoulStore((s) =>
+    s.hasAwakened("athoth-mae-dagua"),
+  );
+  const autoSabotadorDefeated = useSoulStore((s) =>
+    s.hasAwakened("auto-sabotador"),
+  );
 
   // Tecla Espaço/Enter para entrar no portal próximo
   useKeyToEnter(nearPortal, onPortalEnter);
@@ -120,6 +127,24 @@ export function MarDeCristalScene({
         enabled={ratanabaEnabled}
       />
 
+      {/* Casa-Espelhada — torre secreta da Feira dos Sistemas */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[0, 0.4, -14]}
+          label="Casa-Espelhada"
+          subLabel={
+            autoSabotadorDefeated
+              ? "(o espelho está quebrado)"
+              : "(uma sombra te chama)"
+          }
+          color="#a878d8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "casa-espelhada" : null)
+          }
+        />
+      )}
+
       {/* Pedra das Vidas — morte voluntária (acessível após primeira reencarnação desbloqueada via gameplay) */}
       {onPedraActivate && (
         <PedraDasVidas
@@ -132,7 +157,7 @@ export function MarDeCristalScene({
       {/* Portais futuros (silhuetas distantes para sugerir o resto do hub) */}
       <DormantPortal position={[10, 0.4, 8]} />
       <DormantPortal position={[-10, 0.4, 8]} />
-      <DormantPortal position={[0, 0.4, -14]} />
+      {!casaEspelhadaEnabled && <DormantPortal position={[0, 0.4, -14]} />}
       <DormantPortal position={[14, 0.4, 2]} />
       <DormantPortal position={[-14, 0.4, 2]} />
 

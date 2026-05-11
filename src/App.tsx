@@ -12,6 +12,7 @@ import { GardenScene } from "./scenes/GardenScene";
 import { MarDeCristalScene, type MarDestino } from "./scenes/MarDeCristalScene";
 import { BardoScene } from "./scenes/BardoScene";
 import { RatanabaScene } from "./scenes/RatanabaScene";
+import { CasaEspelhadaScene } from "./scenes/CasaEspelhadaScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -162,6 +163,7 @@ function GameOrchestrator() {
   if (currentScene === "bardo") return <BardoOrchestrator />;
   if (currentScene === "mar-de-cristal") return <MarDeCristalOrchestrator />;
   if (currentScene === "ratanaba") return <RatanabaOrchestrator />;
+  if (currentScene === "casa-espelhada") return <CasaEspelhadaOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -183,6 +185,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("jardim-dos-ecos");
     } else if (destino === "ratanaba") {
       setCurrentScene("ratanaba");
+    } else if (destino === "casa-espelhada") {
+      setCurrentScene("casa-espelhada");
     }
   };
 
@@ -410,6 +414,172 @@ function BardoOrchestrator() {
       )}
       {reincarnating && (
         <CharacterCreation onComplete={handleNewBodyDone} />
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   CasaEspelhadaOrchestrator — Sprint 11
+   ---------------------------------------------------------
+   Câmara hexagonal. O Auto-Sabotador (sombra do jogador)
+   aguarda no centro. Mecânica: aproximar-se a < 1.6m e
+   segurar F por 5 segundos. Largar reseta o progresso.
+   Vitória: addCentelha "discernimento", recordAwakened
+   "auto-sabotador" (Legendary), Sussurrante humanoide.
+   ========================================================= */
+
+const HUG_DURATION_S = 5.0;
+const HUG_RANGE = 1.8;
+const SABOTADOR_WORLD = new THREE.Vector3(0, 0, 0);
+
+function CasaEspelhadaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const alreadyDefeated = hasAwakened("auto-sabotador");
+  const [defeated, setDefeated] = useState(alreadyDefeated);
+  const [hugSeconds, setHugSeconds] = useState(0);
+  const [showReveal, setShowReveal] = useState(false);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const fKeyDownRef = useRef(false);
+  const lastTickRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setPlace("Casa-Espelhada · Torre Secreta");
+  }, [setPlace]);
+
+  // Listener de F (down/up)
+  useEffect(() => {
+    if (defeated) return;
+    const down = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = true;
+    };
+    const up = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = false;
+    };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+    };
+  }, [defeated]);
+
+  // Loop de progresso do abraço — só acumula se F segurado E perto da sombra
+  useEffect(() => {
+    if (defeated) return;
+    let raf = 0;
+    const tick = (now: number) => {
+      const last = lastTickRef.current ?? now;
+      const dt = Math.min(0.1, (now - last) / 1000);
+      lastTickRef.current = now;
+
+      const player = playerRefHolder.current?.current;
+      let inRange = false;
+      if (player) {
+        const dx = player.position.x - SABOTADOR_WORLD.x;
+        const dz = player.position.z - SABOTADOR_WORLD.z;
+        inRange = Math.hypot(dx, dz) < HUG_RANGE;
+      }
+
+      if (fKeyDownRef.current && inRange) {
+        setHugSeconds((s) => {
+          const next = Math.min(HUG_DURATION_S, s + dt);
+          if (next >= HUG_DURATION_S) {
+            finishHug();
+          }
+          return next;
+        });
+      } else if (!fKeyDownRef.current || !inRange) {
+        // Esquecimento gradual quando solta ou se afasta
+        setHugSeconds((s) => Math.max(0, s - dt * 0.6));
+      }
+
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      lastTickRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defeated]);
+
+  const finishHug = () => {
+    setDefeated(true);
+    setHugSeconds(HUG_DURATION_S);
+
+    recordAwakened({
+      id: "auto-sabotador",
+      name: "O Auto-Sabotador",
+      trueName: "O Carcereiro Era Eu",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.0);
+    addToAlignment("balance", 10);
+    if (!hasCentelha("discernimento")) {
+      addCentelha("discernimento");
+    }
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => setShowReveal(true), 1500);
+  };
+
+  const hugProgress = hugSeconds / HUG_DURATION_S;
+
+  return (
+    <>
+      <CasaEspelhadaScene
+        defeated={defeated}
+        hugProgress={hugProgress}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!defeated && (
+        <div className="casa-espelhada-hint">
+          <p>
+            <em>
+              Aproxima-te. Segura <strong>F</strong> em silêncio. Por cinco
+              respirações.
+            </em>
+          </p>
+          <div className="hug-bar">
+            <div
+              className="hug-fill"
+              style={{ width: `${hugProgress * 100}%` }}
+            />
+          </div>
+          <p className="hug-time">
+            {hugSeconds.toFixed(1)}s / {HUG_DURATION_S.toFixed(0)}s
+          </p>
+        </div>
+      )}
+      {showReveal && (
+        <LegendaryReveal
+          legendaryName="O Auto-Sabotador"
+          epithet="O Carcereiro Era Eu"
+          firstWords="Eu era a voz que dizia 'não és'. Eu era a porta que se trancava de dentro. Tu me abraçaste — e eu pude finalmente descansar."
+          gift="Centelha do Discernimento — vê através das próprias mentiras. A Sussurrante toma forma humanoide."
+          onComplete={() => setShowReveal(false)}
+        />
       )}
     </>
   );

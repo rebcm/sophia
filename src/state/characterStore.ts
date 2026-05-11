@@ -52,6 +52,7 @@ export type SceneId =
   | "jardim-dos-ecos"
   | "mar-de-cristal"
   | "ratanaba" // placeholder até Sprint 6+
+  | "casa-espelhada" // Sprint 11 — Auto-Sabotador
   | "bardo";
 
 export interface BodyConfig {
