@@ -38,6 +38,7 @@ import { FlashbackOverlay } from "./ui/FlashbackOverlay";
 import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
+import { PauseMenu } from "./ui/PauseMenu";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -102,7 +103,9 @@ export default function App() {
 
   // Atalho global: C abre/fecha Codex (apenas em metaPhase=game)
   // Atalho global: V toggle Olhar Lúcido (apenas em metaPhase=game)
+  // Atalho global: P abre/fecha Pause Menu (apenas em metaPhase=game)
   const toggleOlharLucido = useGameStore((s) => s.toggleOlharLucido);
+  const [pauseOpen, setPauseOpen] = useState(false);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (
@@ -114,10 +117,12 @@ export default function App() {
       if (metaPhase !== "game") return;
       if (e.code === "KeyC") toggleCodex();
       if (e.code === "KeyV") toggleOlharLucido();
+      if (e.code === "KeyP") setPauseOpen((o) => !o);
+      if (e.code === "Escape" && pauseOpen) setPauseOpen(false);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [metaPhase, toggleCodex, toggleOlharLucido]);
+  }, [metaPhase, toggleCodex, toggleOlharLucido, pauseOpen]);
 
   // -- Fluxos do meta-flow --
 
@@ -198,6 +203,7 @@ export default function App() {
       <GameOrchestrator />
       <Codex open={codexOpen} onClose={() => setCodexOpen(false)} />
       <PowerUpToast />
+      {pauseOpen && <PauseMenu onClose={() => setPauseOpen(false)} />}
     </>
   );
 }

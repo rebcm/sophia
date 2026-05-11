@@ -22,15 +22,21 @@ export function HUD() {
   const toggleCodex = useGameStore((s) => s.toggleCodex);
   const olharLucidoActive = useGameStore((s) => s.olharLucidoActive);
   const toggleOlharLucido = useGameStore((s) => s.toggleOlharLucido);
+  const dailyPractice = useGameStore((s) => s.dailyPractice);
 
   const light = useSoulStore((s) => s.light);
   const centelhasCount = useSoulStore((s) => s.centelhas.size);
+  const alignment = useSoulStore((s) => s.alignment);
 
   // Light percent: 0..9 → 4..100
   const pct = Math.min(100, 4 + (light / 9) * 96);
 
   const centelhaPhase = computeCentelhaPhase({ light, centelhasCount });
   const centelhaLabel = phaseToHudLabel(centelhaPhase);
+
+  // Dominant alignment for HUD chip
+  const dominantAlignment = pickDominantAlignment(alignment);
+  const practiceLabel = dailyPracticeLabel(dailyPractice);
 
   // Auto-hide do toast
   useEffect(() => {
@@ -58,9 +64,30 @@ export function HUD() {
       >
         <div className="label">
           Luz Interior · {light.toFixed(1)} · {centelhaLabel}
+          {centelhasCount > 0 && (
+            <span className="centelha-count">
+              {" "}· {centelhasCount} centelha{centelhasCount === 1 ? "" : "s"}
+            </span>
+          )}
         </div>
         <div className="bar" />
       </div>
+
+      {dominantAlignment && (
+        <div className={`alignment-chip alignment-${dominantAlignment.key}`}>
+          <span className="alignment-label">{dominantAlignment.label}</span>
+          <span className="alignment-value">
+            {alignment[dominantAlignment.key]}
+          </span>
+        </div>
+      )}
+
+      {practiceLabel && (
+        <div className="practice-chip">
+          <span className="practice-marker">◇</span>
+          <span className="practice-name">{practiceLabel}</span>
+        </div>
+      )}
 
       {hint && <div className="hint">{hint}</div>}
 
@@ -92,6 +119,40 @@ export function HUD() {
       )}
     </div>
   );
+}
+
+type AlignmentKey = "light" | "shadow" | "balance";
+
+function pickDominantAlignment(a: {
+  light: number;
+  shadow: number;
+  balance: number;
+}): { key: AlignmentKey; label: string } | null {
+  const max = Math.max(a.light, a.shadow, a.balance);
+  if (max < 5) return null; // não exibe até alcançar algum peso
+  if (a.light === max) return { key: "light", label: "Luz" };
+  if (a.balance === max) return { key: "balance", label: "Equilíbrio" };
+  return { key: "shadow", label: "Sombra" };
+}
+
+const PRACTICE_LABELS: Record<string, string> = {
+  "silencio-matinal": "Silêncio Matinal",
+  "respiracao-quadrada": "Respiração Quadrada",
+  "leitura-sagrada": "Leitura Sagrada",
+  "caminhada-consciente": "Caminhada Consciente",
+  "gratidao-dos-tres": "Gratidão dos Três",
+  "contemplacao-do-corpo": "Contemplação do Corpo",
+  "mantra-pessoal": "Mantra Pessoal",
+  "diario-de-sombras": "Diário de Sombras",
+  "perdao-de-quatro-direcoes": "Perdão das Quatro Direções",
+  "oferta-aos-ancestrais": "Oferta aos Ancestrais",
+  "presenca-com-natureza": "Presença com a Natureza",
+  "saudacao-do-pleroma": "Saudação ao Pleroma",
+};
+
+function dailyPracticeLabel(id: string | null): string | null {
+  if (!id) return null;
+  return PRACTICE_LABELS[id] ?? null;
 }
 
 function useHint(phase: string) {

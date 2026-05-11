@@ -68,6 +68,8 @@ interface GameState {
   // Áudio
   audioEnabled: boolean;
   enableAudio: () => void;
+  disableAudio: () => void;
+  toggleAudio: () => void;
 
   // Prática diária (Sprint 28) — bônus simbólico da sessão
   dailyPractice: DailyPracticeId | null;
@@ -118,6 +120,8 @@ export const useGameStore = create<GameState>((set) => ({
 
   audioEnabled: false,
   enableAudio: () => set({ audioEnabled: true }),
+  disableAudio: () => set({ audioEnabled: false }),
+  toggleAudio: () => set((s) => ({ audioEnabled: !s.audioEnabled })),
 
   dailyPractice: null,
   setDailyPractice: (p) => set({ dailyPractice: p }),
