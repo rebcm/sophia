@@ -4,7 +4,7 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 44 sprints
+**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica iniciada** — 46 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
@@ -103,7 +103,7 @@ todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
 de duração do loop narrativo: **~2-3 horas** se o jogador ler
 todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas (16)
+### Cenas implementadas (18)
 
 | Cena                       | Função                                       | Sprint |
 | -------------------------- | -------------------------------------------- | ------ |
@@ -123,6 +123,8 @@ todas as cinemáticas e explorar cada cena.
 | **Feira dos Sistemas**     | Cidade-arquetipo · 5 torres modernas         | 25     |
 | **Labirinto das Eras**     | 10 espelhos-memória · flashbacks de vidas    | 26     |
 | **Galeria dos Principados** | 12 leis contempláveis (silêncio + atenção)  | 27     |
+| **Agartha**                | Cidade intra-terrena · Rei do Mundo          | 60     |
+| **Sodoma**                 | Cidade do julgamento suspenso · intercessão  | 61     |
 
 ### Sistemas funcionais
 
@@ -245,7 +247,8 @@ Após a Mônada, o jogador escolhe entre:
 | 51+54  | Olhar Lúcido overlay + Onboarding inicial (7 teclas)  | `2939e13`    | ✅ |
 | 32 lean| QuestHint · sugestão diegética por cena               | `3fdc159`    | ✅ |
 | 27+36 lean | Galeria dos Principados (12) + Acessibilidade · paralelo agents | `155df2b` | ✅ |
-| —      | Backlog — mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização — ver `docs/production/02-sprint-board.md` | – | 🔜 |
+| 60+61  | **Expansão cosmológica:** Agartha (intra-terrena) + Sodoma (julgamento) | `fe4acfe` | ✅ |
+| —      | Backlog — mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização + expansão (intra-terrenas restantes, cósmicas, 11 cidades do julgamento) — ver `docs/22` e `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
 
@@ -646,6 +649,7 @@ Sintetizador procedural com osciladores + filtros. APIs:
 - [**CASTAS CELESTIAIS E A VERDADEIRA GUERRA**](docs/19-castas-celestiais-guerra-pela-consciencia.md)
 - [**ARQUITETURA NARRATIVA MASTER**](docs/20-arquitetura-narrativa-master.md)
 - [**O ANÚNCIO CONJUNTO**](docs/21-o-anuncio-conjunto.md)
+- [**CIVILIZAÇÕES EXPANDIDAS**](docs/22-civilizacoes-expandidas.md) — cidades intra-terrenas, civilizações extra-terrenas cósmicas, 13 cidades aguardando julgamento
 
 ### Produção
 

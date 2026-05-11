@@ -42,6 +42,9 @@
 | 32 lean  | QuestHint · sugestão diegética da Sussurrante por cena | `3fdc159`    | ✅ |
 | 27 lean  | Galeria dos Principados · 12 contempláveis (paralelo) | `155df2b`    | ✅ |
 | 36 lean  | Acessibilidade · 3 toggles (texto / movimento / contraste) | `155df2b` | ✅ |
+| 60       | Agartha · cidade intra-terrena + Rei do Mundo (paralelo) | `fe4acfe` | ✅ |
+| 61       | Sodoma · cidade do julgamento + intercessão (paralelo) | `fe4acfe`  | ✅ |
+| 22-doc   | docs/22-civilizacoes-expandidas.md · master de expansão | `fe4acfe`  | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -206,13 +209,16 @@ de mundo aberto, conteúdo opcional e refinamento.
 
 | Sprint   | Foco                                                              |
 |----------|-------------------------------------------------------------------|
-| 31       | 5 fases de poderes (Acordado → Espírito Puro)                     |
+| 31       | 5 fases de poderes (Acordado → Espírito Puro) — só PowerUpToast feito |
 | 32       | Mecânica de mundo aberto · 140 missões secundárias                |
 | 33       | Cinemáticas CGI pré-renderizadas (substituir text-based)          |
 | 34       | Áudio com OST original (substituir sintetizador procedural)       |
 | 35       | Multiplayer assíncrono (Aeon-Mestres em jardins de outros)        |
-| 36       | Localização EN/ES/FR + acessibilidade completa                    |
+| 36       | Localização EN/ES/FR (acessibilidade básica já feita)             |
 | 37       | Polimento, performance, lançamento beta                           |
+| 62-64    | Restantes intra-terrenas (Shamballa, Telos, Erks) — ver docs/22   |
+| 65-70    | Civilizações cósmicas (Pleiadianos, Siríacos, Arcturianos, Andromedanos, Cinzas, Reptilianos) |
+| 71-82    | Restantes 11 cidades do julgamento (Gomorra → Catalhöyük)         |
 
 ---
 
