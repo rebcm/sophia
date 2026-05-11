@@ -2877,3 +2877,68 @@ canvas {
   line-height: 1.55;
   opacity: 0.92;
 }
+
+/* =========================================================
+   Codex · Aeon-Mestres (Sprint 30)
+   ========================================================= */
+.aeon-mestres-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 720px) {
+  .aeon-mestres-list { grid-template-columns: 1fr; }
+}
+.aeon-mestre {
+  padding: 14px 16px;
+  background: rgba(20, 16, 32, 0.5);
+  border: 1px solid rgba(255, 212, 90, 0.25);
+  border-left: 3px solid;
+  border-radius: 6px;
+}
+.aeon-mestre-unlocked { border-left-color: #ffd45a; }
+.aeon-mestre-locked {
+  border-left-color: rgba(255, 255, 255, 0.15);
+  opacity: 0.55;
+}
+.aeon-mestre-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.aeon-mestre-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: #fff5d8;
+  letter-spacing: 0.04em;
+}
+.aeon-mestre-civ {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+}
+.aeon-mestre-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 8px;
+  opacity: 0.88;
+}
+.aeon-mestre-teaching,
+.aeon-mestre-effect {
+  margin: 0 0 4px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.aeon-mestre-teaching strong,
+.aeon-mestre-effect strong {
+  color: #ffd45a;
+  font-weight: 500;
+  margin-right: 4px;
+}

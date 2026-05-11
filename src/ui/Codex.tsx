@@ -255,7 +255,154 @@ function AlmasTab() {
           </ul>
         )}
       </section>
+
+      <AeonMestresSection />
     </div>
+  );
+}
+
+/* ---------------- Aeon-Mestres (Sprint 30) ---------------- */
+
+interface AeonMestre {
+  id: string;
+  name: string;
+  civilization: string;
+  /** ID do Arconte cuja queda destrava este Aeon-Mestre. */
+  unlocksAfter: string;
+  description: string;
+  teaching: string;
+  effect: string;
+}
+
+const AEON_MESTRES: AeonMestre[] = [
+  {
+    id: "paje-do-cipo",
+    name: "Pajé-do-Cipó",
+    civilization: "Ratanabá",
+    unlocksAfter: "athoth-mae-dagua",
+    description:
+      "Anciã indígena com olhos verdes, de pé numa clareira de pequenas estrelas.",
+    teaching: "O canto da serpente cósmica.",
+    effect:
+      "Sleepers do mundo inteiro ficam levemente mais receptivos ao despertar.",
+  },
+  {
+    id: "acllla-cantora",
+    name: "Acllla-Cantora",
+    civilization: "El Dorado",
+    unlocksAfter: "yobel-inca-solitario",
+    description:
+      "Sacerdotisa do sol, jovem, vestes brancas com bordados dourados, olhos como gemas.",
+    teaching: "O gesto de doar sem perder.",
+    effect:
+      "Transfere Luz Interior a outros sem reduzir a tua própria.",
+  },
+  {
+    id: "bardo-apolineo",
+    name: "Bardo-Apolíneo",
+    civilization: "Hiperbórea",
+    unlocksAfter: "adonaios-guardiao-solar",
+    description:
+      "Figura andrógina de cabelos dourados longos, toca uma lira de sete cordas.",
+    teaching: "A harmonia das esferas (Pitágoras).",
+    effect:
+      "Sleepers próximos vibram em ressonância e ficam mais fáceis de despertar.",
+  },
+  {
+    id: "sacerdotisa-de-cristal",
+    name: "Sacerdotisa-de-Cristal",
+    civilization: "Atlântida",
+    unlocksAfter: "eloaios-lei-cristalina",
+    description:
+      "Veste-se de luz, com três cristais flutuantes ao redor da cabeça — passado, presente, futuro.",
+    teaching: "A leitura cristalina.",
+    effect:
+      "Lê intenções por trás das aparências em Sleepers e NPCs.",
+  },
+  {
+    id: "hula-sabia",
+    name: "Hula-Sábia",
+    civilization: "Lemúria",
+    unlocksAfter: "galila-beleza-viva",
+    description: "Anciã coberta de flores, dançando em loop suave.",
+    teaching: "A dança da abertura do peito.",
+    effect: "Derruba véus automaticamente em até 5m do jogador.",
+  },
+  {
+    id: "avo-da-linguagem",
+    name: "Avó-da-Linguagem",
+    civilization: "Mu",
+    unlocksAfter: "harmas-palavra-raiz",
+    description:
+      "Figura ancestral feminina, vestes longas de luz líquida, cabelos brancos como cosmos.",
+    teaching: "A linguagem original — a fala que precede todas as línguas.",
+    effect:
+      "Pode falar com qualquer ser vivo (animais, plantas, cristais, vento) por 60 segundos.",
+  },
+  {
+    id: "voce-antes-da-queda",
+    name: "Você-Antes-da-Queda",
+    civilization: "Pré-Adamita",
+    unlocksAfter: "iaoth-memoria-pleroma",
+    description:
+      "O Aeon-Criança com a tua face. Ele se aproxima, sorri, e toca o teu peito.",
+    teaching: "Memória do Pleroma — a sétima Centelha.",
+    effect:
+      "Tu lembras, verdadeiramente, quem eras antes do tempo.",
+  },
+];
+
+function AeonMestresSection() {
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const unlocked = AEON_MESTRES.filter((a) => hasAwakened(a.unlocksAfter));
+  const locked = AEON_MESTRES.filter((a) => !hasAwakened(a.unlocksAfter));
+
+  return (
+    <section className="codex-section">
+      <h3>
+        Aeon-Mestres
+        <span className="count">
+          ({unlocked.length} de {AEON_MESTRES.length})
+        </span>
+      </h3>
+      {unlocked.length === 0 && (
+        <p className="empty-state">
+          <em>
+            Nenhum Aeon-Mestre encontrado ainda. Eles aparecem após
+            cada Arconte ser despertado.
+          </em>
+        </p>
+      )}
+      <ul className="aeon-mestres-list">
+        {unlocked.map((a) => (
+          <li key={a.id} className="aeon-mestre aeon-mestre-unlocked">
+            <div className="aeon-mestre-head">
+              <div className="aeon-mestre-name">{a.name}</div>
+              <div className="aeon-mestre-civ">{a.civilization}</div>
+            </div>
+            <p className="aeon-mestre-desc">
+              <em>{a.description}</em>
+            </p>
+            <p className="aeon-mestre-teaching">
+              <strong>Ensina:</strong> {a.teaching}
+            </p>
+            <p className="aeon-mestre-effect">
+              <strong>Efeito:</strong> {a.effect}
+            </p>
+          </li>
+        ))}
+        {locked.map((a) => (
+          <li key={a.id} className="aeon-mestre aeon-mestre-locked">
+            <div className="aeon-mestre-head">
+              <div className="aeon-mestre-name">??? · {a.civilization}</div>
+            </div>
+            <p className="aeon-mestre-desc">
+              <em>Aguarda que aquele lugar lembre.</em>
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
