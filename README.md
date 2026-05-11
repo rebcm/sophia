@@ -4,15 +4,16 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 35 sprints
+**Status:** **vertical slice end-to-end COMPLETO** — 36 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
 (alma-gêmea), 7 Aeon-Mestres exclusivos por civilização, Codex
-com 6 abas (Almas, Centelhas, Cinemáticas, Caminho, Práticas,
-Glossário), HUD polido com alignment/practice chips, PauseMenu
-(P) com áudio/créditos/wipe, áudio procedural com 15 moods
-distintos por cena, e feedback visual de progressão da Centelha.
+com 7 abas (Almas, Centelhas, Cinemáticas, Caminho, Práticas,
+Glossário, Marcos), HUD polido com alignment/practice chips,
+PauseMenu (P) com áudio/créditos/wipe, áudio procedural com 15
+moods distintos por cena, feedback visual de progressão da
+Centelha, e 22 marcos de conquista rastreados automaticamente.
 Ver [Histórico de Sprints](#histórico-de-sprints).
 **Licença:** MIT (ver [LICENSE](LICENSE)).
 **Repositório:** https://github.com/rebcm/sophia
@@ -237,6 +238,7 @@ Após a Mônada, o jogador escolhe entre:
 | 42     | Glossário no Codex · 24 termos / 5 categorias         | `2528c27`    | ✅ |
 | 34     | Audio moods por cena · 15 assinaturas tímbricas       | `9e5e33f`    | ✅ |
 | 30     | Aeon-Mestres no Codex Almas · 7 mestres por civilização | `be5b6b1`  | ✅ |
+| 41     | Marcos no Codex · 22 conquistas em 5 categorias       | `434f776`    | ✅ |
 | 27+    | Backlog — 25 Principados, mundo aberto / 140 missões, CGI, OST nativo, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---

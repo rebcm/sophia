@@ -33,6 +33,7 @@
 | 42       | Glossário no Codex · 24 termos / 5 categorias / filtros | `2528c27`  | ✅ |
 | 34       | Audio moods por cena · 15 assinaturas tímbricas       | `9e5e33f`    | ✅ |
 | 30       | Aeon-Mestres no Codex Almas · 7 mestres por civilização | `be5b6b1`  | ✅ |
+| 41       | Marcos / Achievements · 7ª aba do Codex · 22 conquistas | `434f776`  | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
