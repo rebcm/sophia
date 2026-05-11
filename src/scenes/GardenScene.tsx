@@ -17,6 +17,8 @@ import {
 import { Player } from "../world/Player";
 import { Whisperer } from "../world/Whisperer";
 import { Sleeper } from "../world/Sleeper";
+import { Filament } from "../world/Filament";
+import { useSoulStore } from "../state/soulStore";
 import { Portal } from "../world/Portal";
 
 /* =========================================================
@@ -113,16 +115,29 @@ export function GardenScene({
         position={[elderPos.x, 0, elderPos.z]}
         auraColor="branco-tenue"
       />
+      <SleeperFilament
+        id="velho-do-jardim"
+        position={[elderPos.x, 1.6, elderPos.z]}
+        tint="dourado"
+      />
 
       {/* O Estranho — Lendário oculto, aparece após despertar Velho */}
       {showEstranho && estranhoPos && (
-        <Sleeper
-          id="adao-estranho"
-          name="O Estranho"
-          position={[estranhoPos.x, 0, estranhoPos.z]}
-          auraColor="dourado-forte"
-          isLegendary
-        />
+        <>
+          <Sleeper
+            id="adao-estranho"
+            name="O Estranho"
+            position={[estranhoPos.x, 0, estranhoPos.z]}
+            auraColor="dourado-forte"
+            isLegendary
+          />
+          <SleeperFilament
+            id="adao-estranho"
+            position={[estranhoPos.x, 1.6, estranhoPos.z]}
+            tint="dourado"
+            height={12}
+          />
+        </>
       )}
 
       {/* Player */}
@@ -159,6 +174,30 @@ export function GardenScene({
         <Vignette eskil={false} offset={0.3} darkness={0.85} />
       </EffectComposer>
     </Canvas>
+  );
+}
+
+/** Filamento de drenagem ligado a um Sleeper específico.
+ *  Rompe-se automaticamente quando ele é despertado. */
+function SleeperFilament({
+  id,
+  position,
+  tint = "dourado",
+  height = 8,
+}: {
+  id: string;
+  position: [number, number, number];
+  tint?: "dourado" | "azul-frio" | "vermelho-quente" | "violeta";
+  height?: number;
+}) {
+  const awakened = useSoulStore((s) => s.hasAwakened(id));
+  return (
+    <Filament
+      base={position}
+      tint={tint}
+      height={height}
+      ruptured={awakened}
+    />
   );
 }
 

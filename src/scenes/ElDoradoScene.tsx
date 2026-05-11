@@ -11,6 +11,7 @@ import { Player } from "../world/Player";
 import { Whisperer } from "../world/Whisperer";
 import { Yobel } from "../world/Yobel";
 import { Portal } from "../world/Portal";
+import { Filament } from "../world/Filament";
 
 /* =========================================================
    ElDoradoScene — 2ª Civilização Perdida
@@ -88,6 +89,15 @@ export function ElDoradoScene({
       <SleeperBearers awakened={yobelAwakened} />
 
       <Yobel position={YOBEL_POS} awakened={yobelAwakened} />
+
+      {/* Filamento principal do Yobel + filamentos dos 8 portadores */}
+      <Filament
+        base={[YOBEL_POS[0], 3.0, YOBEL_POS[2]]}
+        tint="dourado"
+        height={16}
+        ruptured={yobelAwakened}
+      />
+      <BearerFilaments awakened={yobelAwakened} />
 
       <Player
         externalRef={playerRef}
@@ -281,5 +291,31 @@ function SleeperBearers({ awakened }: { awakened: boolean }) {
         </group>
       ))}
     </group>
+  );
+}
+
+/** Filamentos finos saindo dos 8 Sleepers-portadores ao redor de Yobel.
+ *  Rompem-se juntos quando o Inca-Solitário se lembra. */
+function BearerFilaments({ awakened }: { awakened: boolean }) {
+  const positions: [number, number, number][] = Array.from(
+    { length: 8 },
+    (_, i) => {
+      const a = (i / 8) * Math.PI * 2;
+      const r = 5.5;
+      return [Math.cos(a) * r, 1.6, Math.sin(a) * r];
+    },
+  );
+  return (
+    <>
+      {positions.map((p, i) => (
+        <Filament
+          key={i}
+          base={p}
+          tint="dourado"
+          height={10}
+          ruptured={awakened}
+        />
+      ))}
+    </>
   );
 }

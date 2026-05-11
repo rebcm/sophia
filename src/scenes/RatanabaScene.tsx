@@ -12,6 +12,8 @@ import { Whisperer } from "../world/Whisperer";
 import { MaeDagua } from "../world/MaeDagua";
 import { Paje } from "../world/Paje";
 import { Portal } from "../world/Portal";
+import { Filament } from "../world/Filament";
+import { useSoulStore } from "../state/soulStore";
 
 /* =========================================================
    RatanabaScene — floresta amazônica luminosa
@@ -86,6 +88,9 @@ export function RatanabaScene({ onReturnToMar }: RatanabaSceneProps) {
 
       <MaeDagua position={MAE_POS} />
       <Paje position={PAJE_POS} />
+
+      {/* Filamento de drenagem da Mãe-D'Água — visível só com Olhar Lúcido */}
+      <MaeDaguaFilament position={MAE_POS} />
 
       {/* Player */}
       <Player
@@ -253,5 +258,18 @@ function CanopyFireflies() {
         </mesh>
       ))}
     </group>
+  );
+}
+
+/** Filamento da Mãe-D'Água — escoa para a "Lua" (Athoth no céu). */
+function MaeDaguaFilament({ position }: { position: [number, number, number] }) {
+  const awakened = useSoulStore((s) => s.hasAwakened("athoth-mae-dagua"));
+  return (
+    <Filament
+      base={[position[0], 1.2, position[2]]}
+      tint="azul-frio"
+      height={14}
+      ruptured={awakened}
+    />
   );
 }
