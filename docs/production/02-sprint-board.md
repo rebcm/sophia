@@ -36,6 +36,7 @@
 | 41       | Marcos / Achievements · 7ª aba do Codex · 22 conquistas | `434f776`  | ✅ |
 | 47       | SaveIndicator · feedback visual de auto-save           | `3ed094e`    | ✅ |
 | 48       | TitleScreen com stats da alma (5 contagens)            | `3ed094e`    | ✅ |
+| 50       | AmbientWhispers · 71 sussurros contemplativos por cena | `85ad1dd`    | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
