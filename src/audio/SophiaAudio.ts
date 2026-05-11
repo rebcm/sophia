@@ -290,6 +290,9 @@ export function moodForScene(scene: string): Mood {
       return "feira";
     case "labirinto-das-eras":
       return "labirinto";
+    case "galeria-dos-principados":
+      // Compartilha o mood denso da Casa-Espelhada (Principados são leis sombrias)
+      return "casa-espelhada";
     case "trono-demiurgo":
       return "trono";
     case "bardo":

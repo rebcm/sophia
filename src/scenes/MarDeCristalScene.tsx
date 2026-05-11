@@ -40,7 +40,8 @@ export type MarDestino =
   | "trono-demiurgo"
   | "tabernaculo-dos-caidos"
   | "feira-dos-sistemas"
-  | "labirinto-das-eras";
+  | "labirinto-das-eras"
+  | "galeria-dos-principados";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -348,6 +349,20 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "labirinto-das-eras" : null)
+          }
+        />
+      )}
+
+      {/* Galeria dos Principados — opcional, destrava após Casa-Espelhada */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[0, 0.4, -4.5]}
+          label="Galeria dos Principados"
+          subLabel="(doze leis aguardam contemplação)"
+          color="#a890d8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "galeria-dos-principados" : null)
           }
         />
       )}

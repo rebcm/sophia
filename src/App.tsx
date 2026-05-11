@@ -35,6 +35,13 @@ import {
   type EraDescriptor,
 } from "./scenes/LabirintoDasErasScene";
 import { FlashbackOverlay } from "./ui/FlashbackOverlay";
+import {
+  GaleriaPrincipadosScene,
+  PRINCIPADOS_ORDER,
+  PRINCIPADO_POSITIONS,
+  PRINCIPADO_QUESTOES,
+} from "./scenes/GaleriaPrincipadosScene";
+import type { PrincipadoId } from "./world/Principado";
 import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
@@ -251,6 +258,8 @@ function GameOrchestrator() {
     return <FeiraDosSistemasOrchestrator />;
   if (currentScene === "labirinto-das-eras")
     return <LabirintoDasErasOrchestrator />;
+  if (currentScene === "galeria-dos-principados")
+    return <GaleriaPrincipadosOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -294,6 +303,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("feira-dos-sistemas");
     } else if (destino === "labirinto-das-eras") {
       setCurrentScene("labirinto-das-eras");
+    } else if (destino === "galeria-dos-principados") {
+      setCurrentScene("galeria-dos-principados");
     }
   };
 
@@ -1700,6 +1711,215 @@ function LabirintoDasErasOrchestrator() {
       )}
     </>
   );
+}
+
+/* =========================================================
+   GaleriaPrincipadosOrchestrator — Sprint 27
+   ---------------------------------------------------------
+   Corredor com 12 Principados. Aproximar-se a < 2.6m + segurar
+   F por 4s contempla o Principado (silêncio + atenção). Soltar
+   F ou afastar-se decai o progresso.
+   Cada contemplação: +0.4 luz + +5 equilíbrio + registra Principado
+   como "contemplado" via awakenedSleepers (id "principado-X").
+   ========================================================= */
+
+const CONTEMPLATION_DURATION_S = 4.0;
+const CONTEMPLATION_RANGE = 2.6;
+
+function GaleriaPrincipadosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const contemplated: Record<PrincipadoId, boolean> = PRINCIPADOS_ORDER.reduce(
+    (acc, id) => {
+      acc[id] = hasAwakened(`principado-${id}`);
+      return acc;
+    },
+    {} as Record<PrincipadoId, boolean>,
+  );
+
+  const [activeTarget, setActiveTarget] = useState<PrincipadoId | null>(null);
+  const [progressSec, setProgressSec] = useState(0);
+  const fKeyDownRef = useRef(false);
+  const lastTickRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setPlace("Galeria dos Principados");
+  }, [setPlace]);
+
+  // F-key down/up
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = true;
+    };
+    const up = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = false;
+    };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+    };
+  }, []);
+
+  // Loop de contemplação
+  useEffect(() => {
+    let raf = 0;
+    const tick = (now: number) => {
+      const last = lastTickRef.current ?? now;
+      const dt = Math.min(0.1, (now - last) / 1000);
+      lastTickRef.current = now;
+
+      const player = playerRefHolder.current?.current;
+      if (!player) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
+
+      // Encontra Principado mais próximo (não contemplado ainda)
+      let nearestId: PrincipadoId | null = null;
+      let nearestDist = CONTEMPLATION_RANGE;
+      for (const id of PRINCIPADOS_ORDER) {
+        if (contemplated[id]) continue;
+        const p = PRINCIPADO_POSITIONS[id];
+        const d = Math.hypot(
+          player.position.x - p[0],
+          player.position.z - p[2],
+        );
+        if (d < nearestDist) {
+          nearestDist = d;
+          nearestId = id;
+        }
+      }
+
+      if (fKeyDownRef.current && nearestId) {
+        if (activeTarget !== nearestId) {
+          setActiveTarget(nearestId);
+          setProgressSec(0);
+        } else {
+          setProgressSec((s) => {
+            const next = Math.min(CONTEMPLATION_DURATION_S, s + dt);
+            if (next >= CONTEMPLATION_DURATION_S) {
+              finishContemplation(nearestId!);
+              return 0;
+            }
+            return next;
+          });
+        }
+      } else {
+        // Soltar F ou afastar → decay
+        if (progressSec > 0) {
+          setProgressSec((s) => Math.max(0, s - dt * 0.6));
+        }
+        if (!nearestId && activeTarget !== null) {
+          setActiveTarget(null);
+        }
+      }
+
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      lastTickRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTarget, contemplated]);
+
+  const finishContemplation = (id: PrincipadoId) => {
+    recordAwakened({
+      id: `principado-${id}`,
+      name: principadoLabel(id),
+      isLegendary: false,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(0.4);
+    addToAlignment("balance", 5);
+    if (audioEnabled) sophiaAudio.chime(70, 1.6, 0.18);
+    setActiveTarget(null);
+  };
+
+  const progressNorm = progressSec / CONTEMPLATION_DURATION_S;
+  const remaining = PRINCIPADOS_ORDER.filter(
+    (id) => !contemplated[id],
+  ).length;
+
+  return (
+    <>
+      <GaleriaPrincipadosScene
+        contemplated={contemplated}
+        contemplationTarget={activeTarget}
+        contemplationProgress={progressNorm}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {activeTarget && (
+        <div className="principado-questao-overlay">
+          <p className="principado-questao-text">
+            <em>{PRINCIPADO_QUESTOES[activeTarget]}</em>
+          </p>
+          <div className="principado-progress-bar">
+            <div
+              className="principado-progress-fill"
+              style={{ width: `${progressNorm * 100}%` }}
+            />
+          </div>
+          <p className="principado-progress-time">
+            {progressSec.toFixed(1)}s / {CONTEMPLATION_DURATION_S.toFixed(0)}s
+            de silêncio
+          </p>
+        </div>
+      )}
+      {!activeTarget && remaining > 0 && (
+        <div className="principado-hint">
+          <p>
+            <em>
+              Aproxima-te de um Principado. Segura <strong>F</strong>{" "}
+              em silêncio. A questão não pede resposta.
+            </em>
+          </p>
+          <p className="principado-progress-time">
+            {12 - remaining} de 12 contemplados.
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+function principadoLabel(id: PrincipadoId): string {
+  const map: Record<PrincipadoId, string> = {
+    "sentinela-espelho": "Sentinela-Espelho",
+    "capataz-cinto": "Capataz-Cinto",
+    "vigia-vela": "Vigia-Vela",
+    "censor-boca": "Censor-Boca",
+    "coletor-imposto": "Coletor-Imposto",
+    "porta-trancada": "Porta-Trancada",
+    "lei-viva": "Lei-Viva",
+    "estatua-vigia": "Estátua-Vigia",
+    "boca-grande": "Boca-Grande",
+    "boneca-corda": "Boneca-Corda",
+    "saco-vazio": "Saco-Vazio",
+    "mascara-cega": "Máscara-Cega",
+  };
+  return map[id];
 }
 
 /* =========================================================

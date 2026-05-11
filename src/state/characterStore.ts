@@ -63,6 +63,7 @@ export type SceneId =
   | "tabernaculo-dos-caidos" // Sprint 23 — 6 Anjos Caídos opcionais
   | "feira-dos-sistemas" // Sprint 25 — 5 distritos modernos arquetípicos
   | "labirinto-das-eras" // Sprint 26 — 10 eras / flashbacks de vidas passadas
+  | "galeria-dos-principados" // Sprint 27 — 12 Principados contempláveis
   | "bardo";
 
 export interface BodyConfig {

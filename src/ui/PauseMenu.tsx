@@ -3,6 +3,10 @@ import { useGameStore } from "../state/gameStore";
 import { useSoulStore } from "../state/soulStore";
 import { wipe as wipeSave } from "../systems/SaveSystem";
 import { resetOnboarding } from "./OnboardingOverlay";
+import {
+  AcessibilidadeOverlay,
+  resetAccessibility,
+} from "./AcessibilidadeOverlay";
 
 /* =========================================================
    <PauseMenu /> — Sprint 38
@@ -19,7 +23,7 @@ interface PauseMenuProps {
   onClose: () => void;
 }
 
-type View = "main" | "credits" | "wipe-confirm";
+type View = "main" | "credits" | "wipe-confirm" | "a11y";
 
 export function PauseMenu({ onClose }: PauseMenuProps) {
   const audioEnabled = useGameStore((s) => s.audioEnabled);
@@ -38,9 +42,14 @@ export function PauseMenu({ onClose }: PauseMenuProps) {
     wipeSave();
     resetSoul();
     resetOnboarding();
+    resetAccessibility();
     setMetaPhase("title");
     onClose();
   };
+
+  if (view === "a11y") {
+    return <AcessibilidadeOverlay onClose={() => setView("main")} />;
+  }
 
   if (view === "credits") {
     return (
@@ -131,6 +140,9 @@ export function PauseMenu({ onClose }: PauseMenuProps) {
           </button>
           <button className="pause-action" onClick={toggleAudio}>
             {audioEnabled ? "Silenciar áudio" : "Ativar áudio"}
+          </button>
+          <button className="pause-action" onClick={() => setView("a11y")}>
+            Acessibilidade
           </button>
           <button className="pause-action" onClick={() => setView("credits")}>
             Créditos
