@@ -11,6 +11,7 @@ import { Stars } from "../world/PleromaSky";
 import { Player } from "../world/Player";
 import { Whisperer } from "../world/Whisperer";
 import { Portal } from "../world/Portal";
+import { PedraDasVidas } from "../world/PedraDasVidas";
 
 /* =========================================================
    MarDeCristalScene — Hub central entre dimensões
@@ -30,9 +31,14 @@ export type MarDestino = "jardim-dos-ecos" | "ratanaba";
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
   onPortalEnter: (destino: MarDestino) => void;
+  /** Chamado quando o jogador ativa a Pedra das Vidas. */
+  onPedraActivate?: () => void;
 }
 
-export function MarDeCristalScene({ onPortalEnter }: MarDeCristalSceneProps) {
+export function MarDeCristalScene({
+  onPortalEnter,
+  onPedraActivate,
+}: MarDeCristalSceneProps) {
   const playerRef = useRef<THREE.Group | null>(null);
   const [nearPortal, setNearPortal] = useState<MarDestino | null>(null);
 
@@ -109,6 +115,15 @@ export function MarDeCristalScene({ onPortalEnter }: MarDeCristalSceneProps) {
         }
         enabled={false}
       />
+
+      {/* Pedra das Vidas — morte voluntária (acessível após primeira reencarnação desbloqueada via gameplay) */}
+      {onPedraActivate && (
+        <PedraDasVidas
+          position={[0, 0.35, 4]}
+          playerRef={playerRef}
+          onActivate={onPedraActivate}
+        />
+      )}
 
       {/* Portais futuros (silhuetas distantes para sugerir o resto do hub) */}
       <DormantPortal position={[10, 0.4, 8]} />

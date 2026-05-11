@@ -10,6 +10,7 @@ import { setupAutoSave, save as saveGame } from "./systems/SaveSystem";
 
 import { GardenScene } from "./scenes/GardenScene";
 import { MarDeCristalScene, type MarDestino } from "./scenes/MarDeCristalScene";
+import { BardoScene } from "./scenes/BardoScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -17,6 +18,8 @@ import { Cursor } from "./ui/Cursor";
 import { TitleScreen, startFreshSession } from "./ui/TitleScreen";
 import { CharacterCreation } from "./ui/CharacterCreation";
 import { CinematicPlayer } from "./ui/CinematicPlayer";
+import { VozDaLuz } from "./ui/VozDaLuz";
+import { PedraConfirmation } from "./ui/PedraConfirmation";
 
 import {
   introDialog,
@@ -116,6 +119,7 @@ export default function App() {
 
 function GameOrchestrator() {
   const currentScene = useCharacterStore((s) => s.currentScene);
+  if (currentScene === "bardo") return <BardoOrchestrator />;
   if (currentScene === "mar-de-cristal") return <MarDeCristalOrchestrator />;
   return <JardimOrchestrator />;
 }
@@ -127,6 +131,7 @@ function GameOrchestrator() {
 function MarDeCristalOrchestrator() {
   const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
   const setPlace = useGameStore((s) => s.setPlace);
+  const [showPedraConfirm, setShowPedraConfirm] = useState(false);
 
   useEffect(() => {
     setPlace("Mar de Cristal");
@@ -137,15 +142,119 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("jardim-dos-ecos");
     } else if (destino === "ratanaba") {
       // Ratanabá ainda não implementada — placeholder
-      // Por enquanto não faz nada (portal está enabled=false)
     }
+  };
+
+  const handlePedraActivate = () => {
+    setShowPedraConfirm(true);
+  };
+
+  const handleConfirmDeath = () => {
+    setShowPedraConfirm(false);
+    // Marca fim da vida atual e vai ao Bardo
+    useSoulStore.getState().endCurrentLife("morte voluntária na Pedra das Vidas");
+    setCurrentScene("bardo");
+  };
+
+  const handleCancelDeath = () => {
+    setShowPedraConfirm(false);
   };
 
   return (
     <>
-      <MarDeCristalScene onPortalEnter={handlePortalEnter} />
+      <MarDeCristalScene
+        onPortalEnter={handlePortalEnter}
+        onPedraActivate={handlePedraActivate}
+      />
       <HUD />
       <Cursor />
+      {showPedraConfirm && (
+        <PedraConfirmation
+          onConfirm={handleConfirmDeath}
+          onCancel={handleCancelDeath}
+        />
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   BardoOrchestrator — fluxo do Bardo
+   ---------------------------------------------------------
+   1. Cena aparece com luz central
+   2. Voz da Luz fala
+   3. Jogador escolhe: aceitar (ending placeholder) ou recusar
+   4. Se recusar: re-customização breve + nova vida no Mar
+   ========================================================= */
+
+function BardoOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const pastLives = useSoulStore((s) => s.pastLives);
+  const beginNewLife = useSoulStore((s) => s.beginNewLife);
+
+  const [acceptedLight, setAcceptedLight] = useState(false);
+  const [reincarnating, setReincarnating] = useState(false);
+
+  useEffect(() => {
+    setPlace("Bardo");
+  }, [setPlace]);
+
+  const handleAccept = () => {
+    setAcceptedLight(true);
+    // Placeholder ending E: voltar ao TitleScreen após 6s
+    setTimeout(() => {
+      setMetaPhase("title");
+    }, 6000);
+  };
+
+  const handleRefuse = () => {
+    setReincarnating(true);
+  };
+
+  const handleNewBodyDone = () => {
+    // Registra nova vida na alma
+    const body = useCharacterStore.getState().body;
+    const origin = useCharacterStore.getState().origin;
+    beginNewLife({
+      id: `life-${Date.now()}`,
+      era: "Era da Informação",
+      characterName: "Você",
+      story: `Renascido após ${pastLives.length} vida(s). Origem: ${origin}, ${body.sex}.`,
+      sleepersAwakened: 0,
+      startedAt: Date.now(),
+    });
+    // Volta para o Mar de Cristal com novo corpo
+    setCurrentScene("mar-de-cristal");
+  };
+
+  return (
+    <>
+      <BardoScene showMirrors={reincarnating} />
+      {!acceptedLight && !reincarnating && (
+        <VozDaLuz
+          pastLivesCount={pastLives.length}
+          onAccept={handleAccept}
+          onRefuse={handleRefuse}
+        />
+      )}
+      {acceptedLight && (
+        <div className="bardo-ending">
+          <p className="bardo-fala">
+            <em>
+              "Tu chegaste. Repousa. Tu sempre estiveste em casa."
+            </em>
+          </p>
+          <p className="bardo-ending-sub">
+            (Ending placeholder · Bardo Direto · retornando ao Título)
+          </p>
+        </div>
+      )}
+      {reincarnating && (
+        <CharacterCreation onComplete={handleNewBodyDone} />
+      )}
     </>
   );
 }

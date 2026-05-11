@@ -884,3 +884,208 @@ canvas {
 .cinematic-skip-yes {
   border-color: rgba(220, 80, 80, 0.5) !important;
 }
+
+/* =========================================================
+   Bardo overlays (VozDaLuz, PedraConfirmation)
+   ========================================================= */
+.bardo-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  pointer-events: none;
+}
+.bardo-frame {
+  background: rgba(6, 5, 10, 0.65);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(200, 162, 74, 0.25);
+  border-radius: 4px;
+  padding: 2.5rem 3rem;
+  max-width: 640px;
+  text-align: center;
+  color: var(--c-pearl);
+  pointer-events: auto;
+  animation: bardoFrameIn 1.5s ease-out;
+}
+@keyframes bardoFrameIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.bardo-intro {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: rgba(232, 216, 176, 0.75);
+  font-style: italic;
+}
+.bardo-speaker {
+  font-family: var(--font-body);
+  color: #c8a24a;
+  font-style: italic;
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.04rem;
+}
+.bardo-fala {
+  font-family: var(--font-body);
+  font-size: 1.45rem;
+  line-height: 1.5;
+  color: var(--c-pearl);
+  letter-spacing: 0.02rem;
+  margin-bottom: 1.5rem;
+  animation: bardoTextIn 1.2s ease-out;
+}
+@keyframes bardoTextIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.bardo-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+  align-items: stretch;
+}
+.bardo-choice {
+  padding: 1rem 1.4rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(200, 162, 74, 0.3);
+  color: var(--c-pearl);
+  font-family: var(--font-ui);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-align: center;
+}
+.bardo-choice:hover {
+  background: rgba(200, 162, 74, 0.1);
+  border-color: rgba(200, 162, 74, 0.7);
+}
+.bardo-choice.accept {
+  border-color: rgba(200, 162, 74, 0.5);
+}
+.bardo-choice.accept:hover {
+  background: rgba(200, 162, 74, 0.15);
+}
+.bardo-choice.refuse {
+  border-color: rgba(255, 233, 208, 0.3);
+}
+.bardo-choice.refuse:hover {
+  background: rgba(255, 233, 208, 0.08);
+}
+.bardo-choice .choice-label {
+  font-size: 1.05rem;
+  letter-spacing: 0.04rem;
+}
+.bardo-choice .choice-hint {
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-style: italic;
+  opacity: 0.6;
+}
+.bardo-hint {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-style: italic;
+  color: rgba(232, 216, 176, 0.5);
+  font-size: 0.95rem;
+  z-index: 40;
+}
+.bardo-ending {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.55);
+  animation: bardoEndingIn 2s ease-out;
+}
+@keyframes bardoEndingIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.bardo-ending-sub {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  color: rgba(245, 242, 235, 0.4);
+  margin-top: 1.5rem;
+  letter-spacing: 0.04rem;
+}
+
+/* =========================================================
+   PedraConfirmation (overlay sobre Mar de Cristal)
+   ========================================================= */
+.pedra-confirm {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 45;
+  background: rgba(6, 5, 10, 0.7);
+  backdrop-filter: blur(3px);
+  animation: bardoFrameIn 0.6s ease-out;
+}
+.pedra-confirm-frame {
+  background: rgba(20, 14, 32, 0.92);
+  border: 1px solid rgba(200, 154, 255, 0.3);
+  padding: 2rem 2.5rem;
+  max-width: 520px;
+  text-align: center;
+  color: var(--c-pearl);
+}
+.pedra-speaker {
+  font-family: var(--font-body);
+  color: var(--c-amber);
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 0.6rem;
+}
+.pedra-text {
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+.pedra-sub {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(245, 242, 235, 0.6);
+  margin-bottom: 1.8rem;
+  font-style: italic;
+}
+.pedra-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.pedra-btn {
+  padding: 0.7rem 1.6rem;
+  background: transparent;
+  border: 1px solid rgba(255, 233, 208, 0.4);
+  color: var(--c-pearl);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.pedra-btn.cancel:hover {
+  background: rgba(255, 233, 208, 0.08);
+}
+.pedra-btn.confirm {
+  border-color: rgba(200, 154, 255, 0.6);
+  color: #c89aff;
+}
+.pedra-btn.confirm:hover {
+  background: rgba(200, 154, 255, 0.1);
+}
