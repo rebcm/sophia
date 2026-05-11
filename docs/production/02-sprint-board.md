@@ -28,6 +28,9 @@
 | 28       | Práticas Diárias · 5ª aba do Codex com 12 práticas    | `12b09d2`    | ✅ |
 | 29       | Par Sizígico · alma-gêmea no Jardim (3+ Centelhas)    | `ea8ab83`    | ✅ |
 | 31       | PowerUpToast · feedback de fase da Centelha           | `ea8ab83`    | ✅ |
+| 36+37    | HUD polish · alignment chip + practice chip + centelha count | `c4f3260` | ✅ |
+| 38       | PauseMenu · tecla P · áudio/créditos/wipe save        | `c4f3260`    | ✅ |
+| 42       | Glossário no Codex · 24 termos / 5 categorias / filtros | `2528c27`  | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher

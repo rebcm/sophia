@@ -4,12 +4,14 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** — 29 sprints
+**Status:** **vertical slice end-to-end COMPLETO** — 33 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
-(alma-gêmea), Codex com 5 abas (12 Práticas Diárias) e feedback
-visual de progressão da Centelha. Ver
+(alma-gêmea), Codex com 6 abas (Almas, Centelhas, Cinemáticas,
+Caminho, Práticas, Glossário), HUD polido com alignment/practice
+chips, PauseMenu (P) com áudio/créditos/wipe, e feedback visual
+de progressão da Centelha. Ver
 [Histórico de Sprints](#histórico-de-sprints).
 **Licença:** MIT (ver [LICENSE](LICENSE)).
 **Repositório:** https://github.com/rebcm/sophia
@@ -230,6 +232,8 @@ Após a Mônada, o jogador escolhe entre:
 | 26     | Labirinto das Eras · 10 espelhos-memória de vidas passadas | `0fec919` | ✅ |
 | 28     | Práticas Diárias · 5ª aba do Codex com 12 práticas    | `12b09d2`    | ✅ |
 | 29+31  | Par Sizígico (alma-gêmea) + PowerUpToast (feedback de fases) | `ea8ab83` | ✅ |
+| 36-38  | HUD polish + PauseMenu / Settings · áudio/créditos/wipe | `c4f3260` | ✅ |
+| 42     | Glossário no Codex · 24 termos / 5 categorias         | `2528c27`    | ✅ |
 | 27+    | Backlog — 25 Principados, 17 Aeon-Mestres, mundo aberto, CGI, OST, multiplayer — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
@@ -525,6 +529,7 @@ Transições entre cenas chamam
 | Abraçar Auto-Sabotador        | `F` (segurar por 5s)                 |
 | Abrir/fechar Codex            | `C`                                  |
 | Toggle Olhar Lúcido (auras)   | `V`                                  |
+| Pausar / abrir menu           | `P`                                  |
 | Ativar Pedra das Vidas        | `F` em proximidade                   |
 
 Controles **completos do jogo final** (com poderes, alinhamentos,
