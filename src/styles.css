@@ -3102,3 +3102,30 @@ canvas {
   opacity: 0.65;
   margin-top: 2px;
 }
+
+/* =========================================================
+   AmbientWhispers (Sprint 50)
+   ========================================================= */
+.ambient-whisper {
+  position: fixed;
+  bottom: 6vh;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: min(640px, 86vw);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  color: rgba(255, 245, 216, 0.7);
+  text-shadow: 0 0 18px rgba(255, 212, 90, 0.25);
+  z-index: 40;
+  pointer-events: none;
+  animation: whisper-cycle 8s ease-out;
+  line-height: 1.55;
+}
+@keyframes whisper-cycle {
+  0%   { opacity: 0; transform: translate(-50%, 10px); }
+  18%  { opacity: 1; transform: translate(-50%, 0); }
+  72%  { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -6px); }
+}

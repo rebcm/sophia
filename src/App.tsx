@@ -40,6 +40,7 @@ import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
 import { PauseMenu } from "./ui/PauseMenu";
 import { SaveIndicator } from "./ui/SaveIndicator";
+import { AmbientWhispers } from "./ui/AmbientWhispers";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -205,6 +206,7 @@ export default function App() {
       <Codex open={codexOpen} onClose={() => setCodexOpen(false)} />
       <PowerUpToast />
       <SaveIndicator />
+      <AmbientWhispers />
       {pauseOpen && <PauseMenu onClose={() => setPauseOpen(false)} />}
     </>
   );
