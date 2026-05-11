@@ -26,7 +26,8 @@ type Tab =
   | "cinematicas"
   | "caminho"
   | "praticas"
-  | "glossario";
+  | "glossario"
+  | "marcos";
 
 interface CodexProps {
   open: boolean;
@@ -93,6 +94,11 @@ export function Codex({ open, onClose }: CodexProps) {
             active={tab === "glossario"}
             onClick={() => setTab("glossario")}
           />
+          <CodexTab
+            label="Marcos"
+            active={tab === "marcos"}
+            onClick={() => setTab("marcos")}
+          />
         </nav>
 
         <div className="codex-body">
@@ -102,6 +108,7 @@ export function Codex({ open, onClose }: CodexProps) {
           {tab === "caminho" && <CaminhoTab />}
           {tab === "praticas" && <PraticasTab />}
           {tab === "glossario" && <GlossarioTab />}
+          {tab === "marcos" && <MarcosTab />}
         </div>
       </div>
     </div>
@@ -1072,6 +1079,363 @@ function GlossarioTab() {
               <span className="glossario-cat-badge">{categoryLabel[g.category]}</span>
             </div>
             <p className="glossario-definition">{g.definition}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ---------------- MarcosTab (Sprint 41) ---------------- */
+
+interface Marco {
+  id: string;
+  title: string;
+  description: string;
+  /** Função que retorna true se o marco está completo. */
+  isComplete: (state: {
+    sleepers: { id: string; isLegendary: boolean }[];
+    centelhas: Set<CentelhaId>;
+    cinematicas: Record<string, boolean>;
+    light: number;
+    pastLives: number;
+    alignment: { light: number; shadow: number; balance: number };
+  }) => boolean;
+  category: "despertar" | "centelha" | "narrativa" | "alma" | "caminho";
+}
+
+const MARCOS: Marco[] = [
+  // Despertar
+  {
+    id: "primeiro-despertar",
+    title: "O Primeiro Despertar",
+    description: "Acorde o Velho do Jardim.",
+    category: "despertar",
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "velho-do-jardim"),
+  },
+  {
+    id: "primeiro-lendario",
+    title: "Reconhecimento Lendário",
+    description: "Acorde teu primeiro Lendário (Adão, o Estranho).",
+    category: "despertar",
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "adao-estranho"),
+  },
+  {
+    id: "sete-arcontes",
+    title: "Os Sete Arcontes Restaurados",
+    description: "Acorde todos os 7 Arcontes (Athoth → Iaoth).",
+    category: "despertar",
+    isComplete: ({ sleepers }) => {
+      const ids = [
+        "athoth-mae-dagua",
+        "yobel-inca-solitario",
+        "adonaios-guardiao-solar",
+        "eloaios-lei-cristalina",
+        "galila-beleza-viva",
+        "harmas-palavra-raiz",
+        "iaoth-memoria-pleroma",
+      ];
+      return ids.every((id) => sleepers.some((s) => s.id === id));
+    },
+  },
+  {
+    id: "seis-caidos",
+    title: "Os Seis Caídos Lembraram",
+    description: "Redima os 6 Anjos Caídos no Tabernáculo.",
+    category: "despertar",
+    isComplete: ({ sleepers }) => {
+      const ids = [
+        "caido-asmodeus",
+        "caido-lucifer",
+        "caido-belial",
+        "caido-azazel",
+        "caido-semyaza",
+        "caido-leviata",
+      ];
+      return ids.every((id) => sleepers.some((s) => s.id === id));
+    },
+  },
+  {
+    id: "demiurgo-abracado",
+    title: "O Filho Cego Abraçado",
+    description: "Abrace o Demiurgo no Trono.",
+    category: "despertar",
+    isComplete: ({ sleepers }) => sleepers.some((s) => s.id === "demiurgo"),
+  },
+
+  // Centelhas
+  {
+    id: "primeira-centelha",
+    title: "A Primeira Centelha",
+    description: "Conquiste tua primeira Centelha (Olhar Lúcido).",
+    category: "centelha",
+    isComplete: ({ centelhas }) => centelhas.size >= 1,
+  },
+  {
+    id: "tres-centelhas",
+    title: "Três Centelhas",
+    description: "Acumule 3 Centelhas. O Par Sizígico aparecerá.",
+    category: "centelha",
+    isComplete: ({ centelhas }) => centelhas.size >= 3,
+  },
+  {
+    id: "todas-centelhas",
+    title: "As 9 Centelhas",
+    description: "Conquiste todas as 9 Centelhas dos planos sagrados.",
+    category: "centelha",
+    isComplete: ({ centelhas }) => centelhas.size >= 9,
+  },
+  {
+    id: "plenitude",
+    title: "Plenitude Angélica",
+    description: "Alcance a 8ª fase visual da Centelha.",
+    category: "centelha",
+    isComplete: ({ light, centelhas }) =>
+      light >= 8 || centelhas.size >= 7,
+  },
+
+  // Narrativa (cinemáticas)
+  {
+    id: "prologo-visto",
+    title: "Antes do Tempo",
+    description: "Assista ao Prólogo.",
+    category: "narrativa",
+    isComplete: ({ cinematicas }) => cinematicas["prologo"] === true,
+  },
+  {
+    id: "todas-civilizacoes",
+    title: "As 7 Lições Aprendidas",
+    description: "Assista às cinemáticas de queda de todos os Arcontes.",
+    category: "narrativa",
+    isComplete: ({ cinematicas }) => {
+      const ids = [
+        "athoth-cai",
+        "yobel-cai",
+        "adonaios-cai",
+        "eloaios-cai",
+        "galila-cai",
+        "harmas-cai",
+        "iaoth-cai",
+      ];
+      return ids.every((id) => cinematicas[id] === true);
+    },
+  },
+  {
+    id: "anuncio-visto",
+    title: "A Trégua Cósmica",
+    description: "Assista ao Anúncio Conjunto (Cinemática 16.5).",
+    category: "narrativa",
+    isComplete: ({ cinematicas }) =>
+      cinematicas["anuncio-conjunto"] === true,
+  },
+  {
+    id: "monada-vista",
+    title: "Encontrei a Mônada",
+    description: "Chegue à última cinemática (A Mônada).",
+    category: "narrativa",
+    isComplete: ({ cinematicas }) => cinematicas["monada"] === true,
+  },
+  {
+    id: "todas-cinematicas",
+    title: "Todas as 18 Cinemáticas",
+    description: "Assista às 18 cinemáticas principais da bíblia.",
+    category: "narrativa",
+    isComplete: ({ cinematicas }) => {
+      const principais = [
+        "prologo",
+        "athoth-cai",
+        "yobel-cai",
+        "adonaios-cai",
+        "eloaios-cai",
+        "galila-cai",
+        "harmas-cai",
+        "iaoth-cai",
+        "asmodeus-cai",
+        "lucifer-cai",
+        "belial-cai",
+        "azazel-cai",
+        "semyaza-cai",
+        "leviata-cai",
+        "demiurgo-cai",
+        "grande-revelacao",
+        "veu",
+        "monada",
+      ];
+      return principais.every((id) => cinematicas[id] === true);
+    },
+  },
+
+  // Alma (vidas + Par)
+  {
+    id: "par-encontrado",
+    title: "O Par Sizígico",
+    description: "Encontre tua alma-gêmea original do Pleroma.",
+    category: "alma",
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "par-sizigico"),
+  },
+  {
+    id: "duas-vidas",
+    title: "Roda em Movimento",
+    description: "Reencarne pela primeira vez (use a Pedra das Vidas).",
+    category: "alma",
+    isComplete: ({ pastLives }) => pastLives >= 2,
+  },
+  {
+    id: "cinco-vidas",
+    title: "Veterano de Samsara",
+    description: "Atinja 5 vidas vividas.",
+    category: "alma",
+    isComplete: ({ pastLives }) => pastLives >= 5,
+  },
+  {
+    id: "labirinto-completo",
+    title: "Todas as Eras Lembradas",
+    description: "Lembre todas as 10 vidas no Labirinto das Eras.",
+    category: "alma",
+    isComplete: ({ sleepers }) => {
+      const eras = [
+        "era-mito",
+        "era-atlantida",
+        "era-mesopotamia",
+        "era-egito",
+        "era-grecia",
+        "era-roma",
+        "era-idade-media",
+        "era-renascimento",
+        "era-vapor-aco",
+        "era-informacao",
+      ];
+      return eras.every((id) => sleepers.some((s) => s.id === id));
+    },
+  },
+
+  // Caminho (alinhamentos)
+  {
+    id: "caminho-luz",
+    title: "Caminho da Luz",
+    description: "Alcance 80+ de alinhamento Luz.",
+    category: "caminho",
+    isComplete: ({ alignment }) => alignment.light >= 80,
+  },
+  {
+    id: "caminho-equilibrio",
+    title: "Caminho do Equilíbrio",
+    description: "Alcance 50+ de alinhamento Equilíbrio.",
+    category: "caminho",
+    isComplete: ({ alignment }) => alignment.balance >= 50,
+  },
+  {
+    id: "caminho-sombra",
+    title: "A Sombra Que Sabe",
+    description:
+      "Alcance 50+ de alinhamento Sombra (caminho mais longo).",
+    category: "caminho",
+    isComplete: ({ alignment }) => alignment.shadow >= 50,
+  },
+];
+
+function MarcosTab() {
+  const awakenedSleepers = useSoulStore((s) => s.awakenedSleepers);
+  const centelhas = useSoulStore((s) => s.centelhas);
+  const watchedRecord = useCinematicStore((s) => s.watched);
+  const light = useSoulStore((s) => s.light);
+  const pastLives = useSoulStore((s) => s.pastLives);
+  const alignment = useSoulStore((s) => s.alignment);
+
+  // Converte cinemáticas watched para map id→boolean
+  const cinematicasMap: Record<string, boolean> = {};
+  for (const id in watchedRecord) {
+    cinematicasMap[id] = watchedRecord[id as CinematicId].watched;
+  }
+
+  const state = {
+    sleepers: awakenedSleepers.map((s) => ({
+      id: s.id,
+      isLegendary: s.isLegendary,
+    })),
+    centelhas,
+    cinematicas: cinematicasMap,
+    light,
+    pastLives: pastLives.length,
+    alignment,
+  };
+
+  const completed = MARCOS.filter((m) => m.isComplete(state));
+  const pending = MARCOS.filter((m) => !m.isComplete(state));
+
+  const categoryLabel: Record<Marco["category"], string> = {
+    despertar: "Despertar",
+    centelha: "Centelhas",
+    narrativa: "Narrativa",
+    alma: "Alma",
+    caminho: "Caminho",
+  };
+
+  const pct = Math.round((completed.length / MARCOS.length) * 100);
+
+  return (
+    <div className="codex-tab-content">
+      <h3>
+        Marcos da Jornada
+        <span className="count">
+          ({completed.length}/{MARCOS.length} · {pct}%)
+        </span>
+      </h3>
+      <p className="codex-tab-sub">
+        <em>
+          Não há prêmios — apenas o reflexo do que tua alma já viveu
+          nesta playthrough. Cada marco que ainda dorme é uma porta.
+        </em>
+      </p>
+      <div className="marcos-progress">
+        <div
+          className="marcos-progress-bar"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+
+      <h4 className="marcos-section-title">Conquistados</h4>
+      {completed.length === 0 && (
+        <p className="empty-state">
+          <em>Ainda nenhum. A primeira respiração já está em curso.</em>
+        </p>
+      )}
+      <ul className="marcos-list">
+        {completed.map((m) => (
+          <li
+            key={m.id}
+            className={`marco marco-done marco-${m.category}`}
+          >
+            <div className="marco-icon">◆</div>
+            <div className="marco-body">
+              <div className="marco-title">
+                {m.title}
+                <span className="marco-cat">{categoryLabel[m.category]}</span>
+              </div>
+              <p className="marco-desc">{m.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <h4 className="marcos-section-title">Por descobrir</h4>
+      <ul className="marcos-list">
+        {pending.map((m) => (
+          <li
+            key={m.id}
+            className={`marco marco-pending marco-${m.category}`}
+          >
+            <div className="marco-icon">◇</div>
+            <div className="marco-body">
+              <div className="marco-title">
+                {m.title}
+                <span className="marco-cat">{categoryLabel[m.category]}</span>
+              </div>
+              <p className="marco-desc">{m.description}</p>
+            </div>
           </li>
         ))}
       </ul>

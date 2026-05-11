@@ -2942,3 +2942,91 @@ canvas {
   font-weight: 500;
   margin-right: 4px;
 }
+
+/* =========================================================
+   Codex · Tab Marcos (Sprint 41)
+   ========================================================= */
+.marcos-progress {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 10px 0 22px;
+}
+.marcos-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #a878d8 0%, #ffd45a 100%);
+  box-shadow: 0 0 14px rgba(255, 212, 90, 0.4);
+  transition: width 0.5s ease;
+}
+.marcos-section-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  color: #fff5d8;
+  margin: 24px 0 10px;
+  border-bottom: 1px solid rgba(168, 120, 216, 0.25);
+  padding-bottom: 6px;
+}
+.marcos-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.marco {
+  display: flex;
+  gap: 14px;
+  padding: 12px 14px;
+  background: rgba(20, 16, 32, 0.5);
+  border: 1px solid rgba(168, 120, 216, 0.2);
+  border-radius: 6px;
+}
+.marco-done {
+  background: rgba(50, 36, 18, 0.55);
+  border-color: rgba(255, 212, 90, 0.5);
+}
+.marco-pending { opacity: 0.7; }
+.marco-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #ffd45a;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.marco-pending .marco-icon {
+  color: rgba(255, 255, 255, 0.35);
+}
+.marco-body { flex: 1; }
+.marco-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: #fff5d8;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.marco-cat {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+}
+.marco-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  opacity: 0.88;
+}
+.marco-despertar { border-left: 3px solid #ffd45a; }
+.marco-centelha { border-left: 3px solid #ffe0a0; }
+.marco-narrativa { border-left: 3px solid #c89aff; }
+.marco-alma { border-left: 3px solid #88c0e8; }
+.marco-caminho { border-left: 3px solid #a8d870; }
