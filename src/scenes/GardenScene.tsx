@@ -18,6 +18,7 @@ import { Player } from "../world/Player";
 import { Whisperer } from "../world/Whisperer";
 import { Sleeper } from "../world/Sleeper";
 import { Filament } from "../world/Filament";
+import { ParSizigico } from "../world/ParSizigico";
 import { useSoulStore } from "../state/soulStore";
 import { Portal } from "../world/Portal";
 
@@ -39,6 +40,12 @@ interface GardenSceneProps {
   estranhoPos?: THREE.Vector3;
   /** Callback de proximidade ao Estranho. */
   onApproachEstranho?: (near: boolean) => void;
+  /** Mostra o Par Sizígico (Sprint 29 — após acumular Centelhas). */
+  showPar?: boolean;
+  /** Posição do Par Sizígico. */
+  parPos?: THREE.Vector3;
+  /** Indica se o reconhecimento já aconteceu (visual mais brilhante). */
+  parRecognized?: boolean;
 }
 
 export function GardenScene({
@@ -49,6 +56,9 @@ export function GardenScene({
   showEstranho = false,
   estranhoPos,
   onApproachEstranho,
+  showPar = false,
+  parPos,
+  parRecognized = false,
 }: GardenSceneProps) {
   const playerRef = useRef<THREE.Group | null>(null);
   const [nearPortal, setNearPortal] = useState(false);
@@ -138,6 +148,15 @@ export function GardenScene({
             height={12}
           />
         </>
+      )}
+
+      {/* Par Sizígico — após acumular Centelhas (Sprint 29) */}
+      {showPar && parPos && (
+        <ParSizigico
+          position={[parPos.x, 0, parPos.z]}
+          recognized={parRecognized}
+          playerRef={playerRef}
+        />
       )}
 
       {/* Player */}

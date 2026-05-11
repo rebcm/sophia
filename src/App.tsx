@@ -35,6 +35,9 @@ import {
   type EraDescriptor,
 } from "./scenes/LabirintoDasErasScene";
 import { FlashbackOverlay } from "./ui/FlashbackOverlay";
+import { ParSizigico } from "./world/ParSizigico";
+import { SizigiaRecognition } from "./ui/SizigiaRecognition";
+import { PowerUpToast } from "./ui/PowerUpToast";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -194,6 +197,7 @@ export default function App() {
     <>
       <GameOrchestrator />
       <Codex open={codexOpen} onClose={() => setCodexOpen(false)} />
+      <PowerUpToast />
     </>
   );
 }
@@ -1701,6 +1705,13 @@ function JardimOrchestrator() {
   const elderAwakened = hasAwakened("velho-do-jardim");
   const adamAwakened = hasAwakened("adao-estranho");
   const showEstranho = elderAwakened; // aparece após despertar Velho
+
+  // Par Sizígico (Sprint 29): aparece com 3+ Centelhas
+  const centelhasCount = useSoulStore((s) => s.centelhas.size);
+  const parRecognized = hasAwakened("par-sizigico");
+  const showPar = centelhasCount >= 3;
+  const [showSizigia, setShowSizigia] = useState(false);
+  const PAR_POS = useMemo(() => new THREE.Vector3(0, 0, -8), []);
   const [nearEstranho, setNearEstranho] = useState(false);
   const [estranhoAwakenLoop, setEstranhoAwakenLoop] = useState(false);
   const [estranhoAwakenState, setEstranhoAwakenState] = useState({
@@ -1955,6 +1966,42 @@ function JardimOrchestrator() {
     };
   }, []);
 
+  /* ---- Par Sizígico: F-key abre o reconhecimento ---- */
+  useEffect(() => {
+    if (!showPar || parRecognized || showSizigia) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      // Para evitar conflito com outros F-listeners da cena,
+      // só responde se nenhum mini-game/diálogo estiver ativo
+      if (
+        phase === "awakening" ||
+        estranhoAwakenLoop ||
+        phase === "approach-elder" ||
+        phase === "whisper-arrives" ||
+        phase === "elder-awake"
+      ) {
+        return;
+      }
+      setShowSizigia(true);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showPar, parRecognized, showSizigia, phase, estranhoAwakenLoop]);
+
+  const handleSizigiaRecognized = () => {
+    setShowSizigia(false);
+    recordAwakened({
+      id: "par-sizigico",
+      name: "Par Sizígico",
+      trueName: "Sizígia · Companheiro do Pleroma",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.0);
+    if (audioEnabled) sophiaAudio.awakenChord();
+  };
+
   const goToMar = () => setCurrentScene("mar-de-cristal");
 
   // Posição do Estranho (oposta ao Velho — pelo outro lado do Jardim)
@@ -1979,6 +2026,9 @@ function JardimOrchestrator() {
         showEstranho={showEstranho && !adamAwakened}
         estranhoPos={ESTRANHO_POS}
         onApproachEstranho={handleApproachEstranho}
+        showPar={showPar}
+        parPos={PAR_POS}
+        parRecognized={parRecognized}
       />
       <HUD />
       <DialogBox onAdvance={handleAdvance} />
@@ -1992,6 +2042,9 @@ function JardimOrchestrator() {
           gift="Nome Original — pode dar o Nome Verdadeiro a qualquer ser, acalmando Potestades hostis."
           onComplete={() => setShowAdamReveal(false)}
         />
+      )}
+      {showSizigia && (
+        <SizigiaRecognition onComplete={handleSizigiaRecognized} />
       )}
     </>
   );
