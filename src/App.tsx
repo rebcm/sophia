@@ -39,6 +39,7 @@ import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
 import { PauseMenu } from "./ui/PauseMenu";
+import { SaveIndicator } from "./ui/SaveIndicator";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -203,6 +204,7 @@ export default function App() {
       <GameOrchestrator />
       <Codex open={codexOpen} onClose={() => setCodexOpen(false)} />
       <PowerUpToast />
+      <SaveIndicator />
       {pauseOpen && <PauseMenu onClose={() => setPauseOpen(false)} />}
     </>
   );

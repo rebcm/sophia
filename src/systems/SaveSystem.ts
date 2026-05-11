@@ -54,6 +54,9 @@ function serializeCinematic() {
 }
 
 /** Salva tudo no localStorage. */
+/** Custom event emitido a cada save bem-sucedido (Sprint 47). */
+export const SAVE_EVENT = "sophia:save-success";
+
 export function save(): boolean {
   try {
     const data: SaveFile = {
@@ -64,6 +67,10 @@ export function save(): boolean {
       cinematic: serializeCinematic(),
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    // Sprint 47: notifica UI via CustomEvent global
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent(SAVE_EVENT));
+    }
     return true;
   } catch (e) {
     console.error("[SaveSystem] save failed", e);

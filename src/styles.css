@@ -3030,3 +3030,75 @@ canvas {
 .marco-narrativa { border-left: 3px solid #c89aff; }
 .marco-alma { border-left: 3px solid #88c0e8; }
 .marco-caminho { border-left: 3px solid #a8d870; }
+
+/* =========================================================
+   SaveIndicator (Sprint 47)
+   ========================================================= */
+.save-indicator {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(20, 14, 30, 0.75);
+  border: 1px solid rgba(168, 232, 168, 0.45);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: #c8e8c8;
+  z-index: 60;
+  pointer-events: none;
+  backdrop-filter: blur(3px);
+  animation: save-pulse 1.4s ease-out;
+}
+@keyframes save-pulse {
+  0%   { opacity: 0; transform: translateY(8px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+.save-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #88e8a0;
+  box-shadow: 0 0 8px rgba(136, 232, 160, 0.7);
+}
+.save-label { opacity: 0.85; }
+
+/* =========================================================
+   TitleScreen · stats da alma (Sprint 48)
+   ========================================================= */
+.title-stats {
+  display: flex;
+  gap: 22px;
+  margin: 8px 0 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  background: rgba(20, 14, 30, 0.45);
+  border: 1px solid rgba(255, 212, 90, 0.18);
+  border-radius: 8px;
+}
+.title-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+}
+.title-stat-value {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  color: #fff5d8;
+  letter-spacing: 0.04em;
+}
+.title-stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.65;
+  margin-top: 2px;
+}
