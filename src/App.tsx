@@ -28,6 +28,13 @@ import {
 } from "./scenes/TabernaculoDosCaidosScene";
 import type { CaidoId } from "./world/AnjoCaidoShrine";
 import { FeiraDosSistemasScene } from "./scenes/FeiraDosSistemasScene";
+import {
+  LabirintoDasErasScene,
+  ERAS,
+  type EraId,
+  type EraDescriptor,
+} from "./scenes/LabirintoDasErasScene";
+import { FlashbackOverlay } from "./ui/FlashbackOverlay";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -214,6 +221,8 @@ function GameOrchestrator() {
     return <TabernaculoDosCaidosOrchestrator />;
   if (currentScene === "feira-dos-sistemas")
     return <FeiraDosSistemasOrchestrator />;
+  if (currentScene === "labirinto-das-eras")
+    return <LabirintoDasErasOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -255,6 +264,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("tabernaculo-dos-caidos");
     } else if (destino === "feira-dos-sistemas") {
       setCurrentScene("feira-dos-sistemas");
+    } else if (destino === "labirinto-das-eras") {
+      setCurrentScene("labirinto-das-eras");
     }
   };
 
@@ -1541,6 +1552,124 @@ function FeiraDosSistemasOrchestrator() {
           </em>
         </p>
       </div>
+    </>
+  );
+}
+
+/* =========================================================
+   LabirintoDasErasOrchestrator — Sprint 26
+   ---------------------------------------------------------
+   10 espelhos-memória em corredor. Aproximação (< 2.5m) + F
+   abre flashback overlay com a vinheta daquela era.
+   Lembrar: +0.3 luz + addCentelha("lembranca-profunda") (1x).
+   ========================================================= */
+
+function LabirintoDasErasOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const [activeFlashback, setActiveFlashback] = useState<EraDescriptor | null>(
+    null,
+  );
+
+  useEffect(() => {
+    setPlace("Labirinto das Eras");
+  }, [setPlace]);
+
+  const remembered: Record<EraId, boolean> = ERAS.reduce(
+    (acc, e) => {
+      acc[e.id] = hasAwakened(`era-${e.id}`);
+      return acc;
+    },
+    {} as Record<EraId, boolean>,
+  );
+
+  // Tecla F: encontra espelho mais próximo dentro do raio
+  useEffect(() => {
+    if (activeFlashback) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+
+      let best: EraDescriptor | null = null;
+      let bestDist = 3.2;
+      ERAS.forEach((era, i) => {
+        const side = i % 2 === 0 ? -1 : 1;
+        const z = -16 + i * 4;
+        const x = side * 5.5;
+        const d = Math.hypot(player.position.x - x, player.position.z - z);
+        if (d < bestDist) {
+          bestDist = d;
+          best = era;
+        }
+      });
+      if (best) setActiveFlashback(best);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeFlashback]);
+
+  const handleClose = () => {
+    if (!activeFlashback) return;
+    const era = activeFlashback;
+    if (!hasAwakened(`era-${era.id}`)) {
+      recordAwakened({
+        id: `era-${era.id}`,
+        name: era.title,
+        trueName: undefined,
+        isLegendary: false,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(0.3);
+      if (!hasCentelha("lembranca-profunda")) {
+        addCentelha("lembranca-profunda");
+      }
+      if (audioEnabled) sophiaAudio.chime(72, 1.4, 0.18);
+    }
+    setActiveFlashback(null);
+  };
+
+  const rememberedCount = Object.values(remembered).filter(Boolean).length;
+
+  return (
+    <>
+      <LabirintoDasErasScene
+        remembered={remembered}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      <div className="labirinto-hint">
+        <p>
+          <em>
+            Aproxima-te de cada espelho. Pressiona <strong>F</strong>.
+            Tua alma lembrará de uma das tuas vidas.
+          </em>
+        </p>
+        <p className="labirinto-hint-count">
+          {rememberedCount} de 10 lembradas.
+        </p>
+      </div>
+      {activeFlashback && (
+        <FlashbackOverlay era={activeFlashback} onClose={handleClose} />
+      )}
     </>
   );
 }

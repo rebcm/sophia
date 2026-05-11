@@ -62,6 +62,7 @@ export type SceneId =
   | "trono-demiurgo" // Sprint 22 — clímax: Grande Revelação + 6 endings
   | "tabernaculo-dos-caidos" // Sprint 23 — 6 Anjos Caídos opcionais
   | "feira-dos-sistemas" // Sprint 25 — 5 distritos modernos arquetípicos
+  | "labirinto-das-eras" // Sprint 26 — 10 eras / flashbacks de vidas passadas
   | "bardo";
 
 export interface BodyConfig {

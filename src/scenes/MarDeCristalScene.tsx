@@ -39,7 +39,8 @@ export type MarDestino =
   | "pre-adamita"
   | "trono-demiurgo"
   | "tabernaculo-dos-caidos"
-  | "feira-dos-sistemas";
+  | "feira-dos-sistemas"
+  | "labirinto-das-eras";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -333,6 +334,20 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "feira-dos-sistemas" : null)
+          }
+        />
+      )}
+
+      {/* Labirinto das Eras — opcional, disponível desde Ratanabá */}
+      {ratanabaEnabled && (
+        <Portal
+          position={[0, 0.4, 4.5]}
+          label="Labirinto das Eras"
+          subLabel="(dez espelhos lembram tuas vidas)"
+          color="#a878d8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "labirinto-das-eras" : null)
           }
         />
       )}
