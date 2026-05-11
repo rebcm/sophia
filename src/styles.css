@@ -2026,3 +2026,213 @@ canvas {
   margin: 0;
   letter-spacing: 0.05em;
 }
+
+/* =========================================================
+   EndingChoice — clímax dos 6 finais
+   ========================================================= */
+.ending-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(10, 4, 28, 0.92) 0%,
+    rgba(2, 2, 10, 0.98) 70%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+  overflow-y: auto;
+}
+.ending-frame {
+  max-width: 880px;
+  width: 100%;
+  color: var(--c-amber);
+  text-align: center;
+  font-family: var(--font-body);
+}
+.ending-title {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 400;
+  margin: 0 0 12px;
+  letter-spacing: 0.08em;
+  color: #fff5d8;
+}
+.ending-prompt {
+  margin: 0 0 32px;
+  font-size: 1.15rem;
+  opacity: 0.8;
+}
+.ending-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+@media (max-width: 720px) {
+  .ending-grid { grid-template-columns: 1fr; }
+}
+.ending-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 18px 20px;
+  background: linear-gradient(
+    160deg,
+    rgba(40, 16, 70, 0.55) 0%,
+    rgba(20, 8, 40, 0.7) 100%
+  );
+  border: 1px solid rgba(168, 120, 216, 0.35);
+  border-radius: 8px;
+  color: var(--c-amber);
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+.ending-option:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 212, 90, 0.55);
+  box-shadow: 0 6px 22px rgba(255, 212, 90, 0.15);
+}
+.ending-option--bodhisattva { border-color: rgba(255, 212, 90, 0.5); }
+.ending-option--aeon-mestre { border-color: rgba(168, 232, 232, 0.5); }
+.ending-option--monada-dissolucao { border-color: rgba(255, 245, 216, 0.5); }
+.ending-option--sentinela-do-veu { border-color: rgba(192, 168, 224, 0.5); }
+.ending-option--sombra-redimida { border-color: rgba(216, 120, 168, 0.5); }
+.ending-option--ciclo-eterno { border-color: rgba(216, 184, 120, 0.5); }
+.ending-option-title {
+  font-size: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  color: #fff5d8;
+}
+.ending-option-sub {
+  font-size: 0.95rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+.ending-revealed {
+  max-width: 720px;
+  text-align: center;
+  color: var(--c-amber);
+  font-family: var(--font-body);
+}
+.ending-revealed h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  margin: 0 0 8px;
+  color: #fff5d8;
+  letter-spacing: 0.08em;
+}
+.ending-revealed .ending-subtitle {
+  margin: 0 0 28px;
+  font-size: 1.2rem;
+  opacity: 0.85;
+}
+.ending-revealed .ending-body {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin: 0 0 24px;
+}
+.ending-revealed .ending-closing {
+  font-size: 1.05rem;
+  opacity: 0.8;
+  margin: 0 0 36px;
+}
+.ending-confirm {
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.1em;
+  background: linear-gradient(180deg, #2a1838 0%, #3a1f50 100%);
+  border: 1px solid rgba(255, 212, 90, 0.6);
+  border-radius: 6px;
+  color: #fff5d8;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.ending-confirm:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 18px rgba(255, 212, 90, 0.3);
+}
+
+/* =========================================================
+   Trono do Demiurgo · hints climáticos
+   ========================================================= */
+.trono-hint {
+  position: fixed;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 90vw);
+  padding: 20px 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 4, 28, 0.85) 0%,
+    rgba(20, 8, 40, 0.7) 100%
+  );
+  border: 1px solid rgba(168, 120, 216, 0.5);
+  border-radius: 8px;
+  color: var(--c-amber);
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  backdrop-filter: blur(2px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.65);
+}
+.trono-hint p { margin: 0 0 8px; font-size: 1.05rem; line-height: 1.55; }
+.trono-hint-keys { opacity: 0.85; font-size: 0.95rem; }
+.trono-hint strong { color: #ffd45a; }
+.trono-embrace-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 245, 216, 0.05) 0%,
+    rgba(10, 4, 24, 0.7) 70%
+  );
+  z-index: 100;
+  pointer-events: none;
+}
+.trono-embrace-overlay p {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: #fff5d8;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 24px rgba(255, 212, 90, 0.45);
+}
+.ending-played-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  z-index: 250;
+  color: #fff5d8;
+  font-family: var(--font-body);
+  padding: 32px;
+  text-align: center;
+}
+.ending-played-text {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.06em;
+  margin: 0 0 36px;
+  max-width: 720px;
+  line-height: 1.6;
+}
+.ending-played-credit {
+  font-size: 0.95rem;
+  opacity: 0.6;
+  margin: 0;
+}

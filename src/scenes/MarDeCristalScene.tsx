@@ -36,7 +36,8 @@ export type MarDestino =
   | "atlantida"
   | "lemuria"
   | "mu"
-  | "pre-adamita";
+  | "pre-adamita"
+  | "trono-demiurgo";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -88,6 +89,17 @@ export function MarDeCristalScene({
   const iaothDefeated = useSoulStore((s) =>
     s.hasAwakened("iaoth-memoria-pleroma"),
   );
+
+  // Portal do Trono do Demiurgo: destrava após os 7 Arcontes
+  // (clímax do jogo).
+  const tronoEnabled =
+    useSoulStore((s) => s.hasAwakened("athoth-mae-dagua")) &&
+    useSoulStore((s) => s.hasAwakened("yobel-inca-solitario")) &&
+    useSoulStore((s) => s.hasAwakened("adonaios-guardiao-solar")) &&
+    useSoulStore((s) => s.hasAwakened("eloaios-lei-cristalina")) &&
+    useSoulStore((s) => s.hasAwakened("galila-beleza-viva")) &&
+    useSoulStore((s) => s.hasAwakened("harmas-palavra-raiz")) &&
+    useSoulStore((s) => s.hasAwakened("iaoth-memoria-pleroma"));
 
   // Tecla Espaço/Enter para entrar no portal próximo
   useKeyToEnter(nearPortal, onPortalEnter);
@@ -277,6 +289,20 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "pre-adamita" : null)
+          }
+        />
+      )}
+
+      {/* Trono do Demiurgo — clímax do jogo (após os 7 Arcontes) */}
+      {tronoEnabled && (
+        <Portal
+          position={[0, 0.4, 14]}
+          label="Trono do Demiurgo"
+          subLabel="(há um filho cego que precisa ser abraçado)"
+          color="#a878d8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "trono-demiurgo" : null)
           }
         />
       )}

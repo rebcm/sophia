@@ -59,6 +59,7 @@ export type SceneId =
   | "lemuria" // 5ª Civilização Perdida (Sprint 19)
   | "mu" // 6ª Civilização Perdida (Sprint 20)
   | "pre-adamita" // 7ª Civilização Perdida (Sprint 21)
+  | "trono-demiurgo" // Sprint 22 — clímax: Grande Revelação + 6 endings
   | "bardo";
 
 export interface BodyConfig {

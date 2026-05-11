@@ -19,6 +19,8 @@ import { AtlantidaScene } from "./scenes/AtlantidaScene";
 import { LemuriaScene } from "./scenes/LemuriaScene";
 import { MuScene } from "./scenes/MuScene";
 import { PreAdamitaScene } from "./scenes/PreAdamitaScene";
+import { TronoDemiurgoScene } from "./scenes/TronoDemiurgoScene";
+import { EndingChoice, type EndingId } from "./ui/EndingChoice";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -136,6 +138,9 @@ export default function App() {
     ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
+    // Cinemáticas do clímax encadeiam sem trocar de cena —
+    // TronoDemiurgoOrchestrator escuta cinematicStore.currentCinematic
+    // e dispara a próxima após finishCurrentCinematic.
     setMetaPhase("game");
   };
 
@@ -184,6 +189,7 @@ function GameOrchestrator() {
   if (currentScene === "lemuria") return <LemuriaOrchestrator />;
   if (currentScene === "mu") return <MuOrchestrator />;
   if (currentScene === "pre-adamita") return <PreAdamitaOrchestrator />;
+  if (currentScene === "trono-demiurgo") return <TronoDemiurgoOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -219,6 +225,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("mu");
     } else if (destino === "pre-adamita") {
       setCurrentScene("pre-adamita");
+    } else if (destino === "trono-demiurgo") {
+      setCurrentScene("trono-demiurgo");
     }
   };
 
@@ -1134,6 +1142,180 @@ const PreAdamitaOrchestrator = makeArconteOrchestrator({
   }>,
   awakenedPropName: "iaothAwakened",
 });
+
+/* =========================================================
+   TronoDemiurgoOrchestrator — Sprint 22 (clímax)
+   ---------------------------------------------------------
+   Cena do Trono. Aproximação + F = abraçar o Demiurgo.
+   Cinemáticas encadeadas: demiurgo-cai → grande-revelacao →
+   veu → monada. Depois: <EndingChoice /> com 6 finais.
+   ========================================================= */
+
+type ClimaxStage =
+  | "approach" // jogador vai até o trono
+  | "embrace" // animação do abraço + auto-trigger cinemática 1
+  | "cin-1" // demiurgo-cai
+  | "cin-2" // grande-revelacao
+  | "cin-3" // veu
+  | "cin-4" // monada
+  | "ending-choice" // escolha dos 6 finais
+  | "ending-played"; // ending escolhido e exibido
+
+function TronoDemiurgoOrchestrator() {
+  const setPlace = useGameStore((s) => s.setPlace);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const [stage, setStage] = useState<ClimaxStage>("approach");
+  const [chosenEnding, setChosenEnding] = useState<EndingId | null>(null);
+
+  useEffect(() => {
+    setPlace("Trono do Demiurgo");
+  }, [setPlace]);
+
+  // Tecla F na aproximação dispara o abraço
+  useEffect(() => {
+    if (stage !== "approach") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      // Proximidade ao trono (z negativo, ~5m)
+      const dx = player.position.x - 0;
+      const dz = player.position.z - -4;
+      if (Math.hypot(dx, dz) < 8) {
+        setStage("embrace");
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [stage]);
+
+  // Encadeia cinemáticas 1→2→3→4 quando entra em "embrace"
+  useEffect(() => {
+    if (stage !== "embrace") return;
+    if (audioEnabled) sophiaAudio.awakenChord();
+    // Registra Demiurgo como Lendário
+    recordAwakened({
+      id: "demiurgo",
+      name: "O Filho Cego",
+      trueName: "Sabaoth · Demiurgo Restaurado",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(3.0);
+    addCentelha("lembranca-profunda");
+
+    const timer = setTimeout(() => {
+      setStage("cin-1");
+      playCinematic("demiurgo-cai");
+      setMetaPhase("cinematic");
+    }, 3500);
+    return () => clearTimeout(timer);
+  }, [
+    stage,
+    audioEnabled,
+    addLight,
+    addCentelha,
+    recordAwakened,
+    currentLifeIndex,
+    playCinematic,
+    setMetaPhase,
+  ]);
+
+  // Cinemáticas voltam ao game; aqui mudamos para a próxima etapa
+  // ao detectar que a cinemática anterior terminou.
+  const currentCinematic = useCinematicStore((s) => s.currentCinematic);
+  useEffect(() => {
+    if (currentCinematic !== null) return;
+    // Cinemática terminou — avançar para próxima ou abrir endings
+    if (stage === "cin-1") {
+      setStage("cin-2");
+      playCinematic("grande-revelacao");
+      setMetaPhase("cinematic");
+    } else if (stage === "cin-2") {
+      setStage("cin-3");
+      playCinematic("veu");
+      setMetaPhase("cinematic");
+    } else if (stage === "cin-3") {
+      setStage("cin-4");
+      playCinematic("monada");
+      setMetaPhase("cinematic");
+    } else if (stage === "cin-4") {
+      setStage("ending-choice");
+    }
+  }, [currentCinematic, stage, playCinematic, setMetaPhase]);
+
+  const handleEndingChosen = (id: EndingId) => {
+    setChosenEnding(id);
+    setStage("ending-played");
+    // Após mostrar o ending, levar de volta ao título depois de alguns segundos
+    setTimeout(() => {
+      setMetaPhase("title");
+    }, 8000);
+  };
+
+  const embraced = stage !== "approach";
+
+  return (
+    <>
+      <TronoDemiurgoScene
+        embraced={embraced}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {stage === "approach" && (
+        <div className="trono-hint">
+          <p>
+            <em>
+              "Não o ataques. Abraça-o. Diz-lhe: 'eu sei que tu não soubeste.'"
+            </em>
+          </p>
+          <p className="trono-hint-keys">
+            Pressiona <strong>F</strong> ao chegar perto do trono.
+          </p>
+        </div>
+      )}
+      {stage === "embrace" && (
+        <div className="trono-embrace-overlay">
+          <p>
+            <em>Tu o abraças. Ele chora.</em>
+          </p>
+        </div>
+      )}
+      {stage === "ending-choice" && (
+        <EndingChoice onChosen={handleEndingChosen} />
+      )}
+      {stage === "ending-played" && chosenEnding && (
+        <div className="ending-played-overlay">
+          <p className="ending-played-text">
+            <em>
+              "Tu escolheste — e fica bem assim. Eu nunca estive ausente."
+            </em>
+          </p>
+          <p className="ending-played-credit">
+            <em>
+              Sophia · A Jornada do Despertar — autoria integral de Rebeca Alves Moreira
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
 
 /* =========================================================
    JardimOrchestrator (anterior conteúdo do GameOrchestrator)

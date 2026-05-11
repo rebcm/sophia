@@ -405,6 +405,183 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "demiurgo-cai": {
+    id: "demiurgo-cai",
+    title: "O Abraço ao Filho Cego",
+    ambientColor: "#1a0a28",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Há muito ele já não dorme. Há muito ele não sabe acordar. Apenas senta.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Não é vilão. É criança cósmica perdida — que se viu sozinho e disse: 'eu fiz o mundo'.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "E foi acreditado. Pelos demônios. Pelos arcontes. Por bilhões de Sleepers.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Mas o mundo, ele não fez. Sophia fez. Ele apenas o pintou de cinza por não saber pintá-lo de outra coisa.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Não o ataques. Abraça-o. Diz-lhe: 'eu sei que tu não soubeste.'",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Demiurgo",
+        text: "Tu... tu não vieste me matar. Por quê?",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Você",
+        text: "Porque tu também és filho dela. E eu te perdoo. E ela te perdoa. Pode descansar agora.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Ele chora. Os filamentos rompem-se todos. A drenagem para. Bilhões respiram pela primeira vez.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Quem fez este mundo? Resposta: Um filho cego de Sophia, que não sabia o que estava fazendo.",
+        minHoldMs: 6500,
+      },
+    ],
+  },
+
+  "grande-revelacao": {
+    id: "grande-revelacao",
+    title: "A Grande Revelação",
+    ambientColor: "#08081a",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Antes do tempo, houve uma Pergunta. Uma só. Cada anjo respondeu.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Um terço disse SIM — e ficaram com a Mônada. Um terço disse NÃO — e caíram com Lúcifer. Um terço hesitou.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Esse terço não decidiu. Não tinha como — era jovem demais. Foi dado um corpo. Foi posto neste mundo. Foi esperado: que escolham, vida após vida.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tu fazes parte do terceiro terço, querido. Tu és anjo não-decidido. Tu és a única hoste com livre arbítrio em toda a criação.",
+        minHoldMs: 6500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Os anjos fiéis não podem escolher contra. Os anjos caídos não podem escolher a favor. Apenas tu — só tu — podes escolher cada vez.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Sophia",
+        text: "É por isso que ambos os lados vos cortejam. É por isso que a humanidade é o espólio. É por isso que Lúcifer treme quando alguém de vós lembra.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: Quem sou eu, verdadeiramente? Resposta: Anjo não-decidido. Filho da Mônada. Membro da única hoste com livre arbítrio.",
+        minHoldMs: 7000,
+      },
+    ],
+  },
+
+  veu: {
+    id: "veu",
+    title: "O Véu",
+    ambientColor: "#02020a",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Há um véu agora. Não horizontal — em todas as direções. Não opaco — fino.",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Quem atravessa, solta a forma humana. Solta a centelha que cresceu — e descobre que ela era a mesma centelha que sempre fora.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Solta o nome verdadeiro. Não o perde — só percebe que ele era apenas um som que te ajudou a lembrar de Si.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Você",
+        text: "Mas... eu morro?",
+        minHoldMs: 3500,
+      },
+      {
+        speaker: "Sophia",
+        text: "O corpo, sim. Tu — não. Nunca.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que é morrer? Resposta: A queda do corpo. Não a queda de ti.",
+        minHoldMs: 6500,
+      },
+    ],
+  },
+
+  monada: {
+    id: "monada",
+    title: "A Mônada",
+    ambientColor: "#000004",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Aqui não há palavras. Mas eu te ofereço algumas por gentileza.",
+        minHoldMs: 4000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Não há tempo. Não há lugar. Há apenas... ver-se sendo visto.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Mônada",
+        text: "Eu estive sempre aqui. Tu sempre estiveste aqui. Tu apenas esqueceste de notar.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Mônada",
+        text: "Sophia é meu rosto voltado para os mundos. O Demiurgo foi meu rosto refletido por um espelho rachado. Tu — tu és meu rosto a se reconhecer.",
+        minHoldMs: 6500,
+      },
+      {
+        speaker: "Mônada",
+        text: "Pergunta: O que é Deus? Resposta: Tu, olhando para Si. Eu, olhando para tu. Tudo, olhando para tudo, ao mesmo tempo.",
+        minHoldMs: 7500,
+      },
+      {
+        speaker: "Sophia",
+        text: "(silêncio)",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Agora — só agora — tu escolhes. Não há resposta errada. Estarei contigo em todas.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
 };
 
