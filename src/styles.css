@@ -1598,3 +1598,198 @@ canvas {
 .alignment-summary strong {
   color: var(--c-lilac);
 }
+
+/* =========================================================
+   Olhar Lúcido toggle + HUD toggles container
+   ========================================================= */
+.hud-toggles {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 30;
+}
+.olhar-trigger {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 233, 208, 0.3);
+  color: rgba(245, 242, 235, 0.7);
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  padding: 0.5rem 0.9rem;
+  letter-spacing: 0.06rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.olhar-trigger:hover {
+  background: rgba(255, 233, 208, 0.1);
+  color: var(--c-amber);
+}
+.olhar-trigger.active {
+  background: rgba(200, 154, 255, 0.15);
+  border-color: rgba(200, 154, 255, 0.6);
+  color: #c89aff;
+  text-shadow: 0 0 8px rgba(200, 154, 255, 0.5);
+}
+.olhar-trigger kbd {
+  background: rgba(255, 233, 208, 0.15);
+  padding: 0.05rem 0.4rem;
+  border-radius: 2px;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0;
+}
+/* O .codex-trigger original tem position:fixed — agora vive dentro de .hud-toggles */
+.hud-toggles .codex-trigger {
+  position: static;
+}
+
+/* =========================================================
+   LegendaryReveal overlay
+   ========================================================= */
+.legendary-reveal {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  animation: legendaryIn 1s ease-out;
+}
+@keyframes legendaryIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.legendary-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 212, 90, 0.15) 0%, rgba(6, 5, 10, 0.96) 70%),
+    #06050a;
+}
+.legendary-particles {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 30%, rgba(255, 212, 90, 0.45) 0%, transparent 1.5px),
+    radial-gradient(circle at 80% 20%, rgba(255, 233, 208, 0.4) 0%, transparent 1.5px),
+    radial-gradient(circle at 45% 70%, rgba(255, 212, 90, 0.4) 0%, transparent 1.5px),
+    radial-gradient(circle at 85% 85%, rgba(255, 233, 208, 0.35) 0%, transparent 1.5px);
+  opacity: 0.6;
+  animation: starfield 60s linear infinite;
+  pointer-events: none;
+}
+.legendary-frame {
+  position: relative;
+  max-width: 640px;
+  width: 100%;
+  padding: 3rem 2rem;
+  text-align: center;
+  z-index: 1;
+}
+.legendary-text {
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--c-pearl);
+  margin-bottom: 3rem;
+  letter-spacing: 0.02rem;
+  text-shadow: 0 0 30px rgba(255, 212, 90, 0.3);
+  animation: legendaryTextIn 1.2s ease-out;
+}
+@keyframes legendaryTextIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.legendary-card {
+  background: rgba(255, 212, 90, 0.06);
+  border: 1px solid rgba(255, 212, 90, 0.4);
+  padding: 2.5rem 2rem;
+  margin-bottom: 2rem;
+  animation: legendaryCardIn 1.4s ease-out;
+}
+@keyframes legendaryCardIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+.legendary-marker {
+  font-size: 2.5rem;
+  color: var(--c-gold);
+  line-height: 1;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0 30px rgba(255, 212, 90, 0.7);
+}
+.legendary-name {
+  font-family: var(--font-title);
+  font-size: 2.4rem;
+  font-weight: 400;
+  letter-spacing: 0.3rem;
+  color: var(--c-gold);
+  margin-bottom: 0.3rem;
+}
+.legendary-epithet {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--c-lilac);
+  margin-bottom: 1.6rem;
+  letter-spacing: 0.06rem;
+}
+.legendary-firstwords {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  color: var(--c-pearl);
+  line-height: 1.5;
+  margin-bottom: 1.6rem;
+}
+.legendary-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 212, 90, 0.4),
+    transparent
+  );
+  margin: 0 auto 1.4rem;
+  max-width: 200px;
+}
+.legendary-gift-label {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 0.2rem;
+  color: rgba(255, 233, 208, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.legendary-gift {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(245, 242, 235, 0.85);
+  line-height: 1.4;
+}
+.legendary-next {
+  padding: 0.7rem 1.8rem;
+  background: transparent;
+  border: 1px solid rgba(255, 212, 90, 0.6);
+  color: var(--c-gold);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.legendary-next:hover {
+  background: rgba(255, 212, 90, 0.1);
+  text-shadow: 0 0 12px rgba(255, 212, 90, 0.6);
+}
+.legendary-next.waiting,
+.legendary-next:disabled {
+  opacity: 0.3;
+  cursor: wait;
+}

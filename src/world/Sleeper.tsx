@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useSoulStore } from "../state/soulStore";
+import { SleeperAura, type AuraColor } from "./SleeperAura";
 
 /* =========================================================
    Sleeper — Adormecido genérico
@@ -18,6 +19,10 @@ interface SleeperProps {
   position?: [number, number, number];
   /** Intensidade do "sono" — quanto maior, mais apagado. */
   sleepIntensity?: number;
+  /** Cor de aura ao usar Olhar Lúcido (oculta sem o toggle). */
+  auraColor?: AuraColor;
+  /** Marca este Sleeper como Lendário (aura mais intensa). */
+  isLegendary?: boolean;
 }
 
 export function Sleeper({
@@ -25,6 +30,8 @@ export function Sleeper({
   name,
   position = [12, 0, -8],
   sleepIntensity = 1.0,
+  auraColor = "branco-tenue",
+  isLegendary = false,
 }: SleeperProps) {
   const groupRef = useRef<THREE.Group>(null);
   const auraRef = useRef<THREE.Mesh>(null);
@@ -111,6 +118,11 @@ export function Sleeper({
         distance={6}
         decay={2}
       />
+
+      {/* Aura visível apenas com Olhar Lúcido — só se Sleeper ainda não acordou */}
+      {!awakened && (
+        <SleeperAura auraColor={auraColor} isLegendary={isLegendary} />
+      )}
     </group>
   );
 }

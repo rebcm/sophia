@@ -21,6 +21,7 @@ import { CinematicPlayer } from "./ui/CinematicPlayer";
 import { VozDaLuz } from "./ui/VozDaLuz";
 import { PedraConfirmation } from "./ui/PedraConfirmation";
 import { Codex } from "./ui/Codex";
+import { LegendaryReveal } from "./ui/LegendaryReveal";
 
 import {
   introDialog,
@@ -68,23 +69,23 @@ export default function App() {
   }, []);
 
   // Atalho global: C abre/fecha Codex (apenas em metaPhase=game)
+  // Atalho global: V toggle Olhar Lúcido (apenas em metaPhase=game)
+  const toggleOlharLucido = useGameStore((s) => s.toggleOlharLucido);
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
-      if (e.code !== "KeyC") return;
-      // Evita toggle quando jogador está digitando em algum input futuro
       if (
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement
       ) {
         return;
       }
-      if (metaPhase === "game") {
-        toggleCodex();
-      }
+      if (metaPhase !== "game") return;
+      if (e.code === "KeyC") toggleCodex();
+      if (e.code === "KeyV") toggleOlharLucido();
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [metaPhase, toggleCodex]);
+  }, [metaPhase, toggleCodex, toggleOlharLucido]);
 
   // -- Fluxos do meta-flow --
 
@@ -308,6 +309,24 @@ function JardimOrchestrator() {
   const addLight = useSoulStore((s) => s.addLight);
   const recordAwakened = useSoulStore((s) => s.recordAwakened);
   const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+
+  // Estado para o segundo Sleeper — O Estranho (Adão)
+  const elderAwakened = hasAwakened("velho-do-jardim");
+  const adamAwakened = hasAwakened("adao-estranho");
+  const showEstranho = elderAwakened; // aparece após despertar Velho
+  const [nearEstranho, setNearEstranho] = useState(false);
+  const [estranhoAwakenLoop, setEstranhoAwakenLoop] = useState(false);
+  const [estranhoAwakenState, setEstranhoAwakenState] = useState({
+    hits: 0,
+    required: 5,
+  });
+  const [showAdamReveal, setShowAdamReveal] = useState(false);
+  const estranhoCtrl = useMemo(
+    () => createAwakening({ required: 5, period: 1.4 }),
+    [],
+  );
+  const estranhoRaf = useRef<number | null>(null);
 
   // dialog index local para cada beat
   const [dialogIdx, setDialogIdx] = useState(0);
@@ -484,15 +503,85 @@ function JardimOrchestrator() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  /* ---- Despertar do Estranho (Adão) ---- */
+  const handleApproachEstranho = (near: boolean) => {
+    setNearEstranho(near);
+    if (near && !adamAwakened && !estranhoAwakenLoop) {
+      // Inicia automaticamente o mini-game quando se aproxima
+      setEstranhoAwakenLoop(true);
+      estranhoCtrl.start(performance.now() / 1000);
+      const tick = () => {
+        const now = performance.now() / 1000;
+        const st = estranhoCtrl.update(now);
+        setEstranhoAwakenState({ hits: st.hits, required: st.required });
+        if (st.done) {
+          finishEstranhoAwakening();
+          return;
+        }
+        estranhoRaf.current = requestAnimationFrame(tick);
+      };
+      estranhoRaf.current = requestAnimationFrame(tick);
+    }
+  };
+
+  const finishEstranhoAwakening = () => {
+    if (estranhoRaf.current !== null)
+      cancelAnimationFrame(estranhoRaf.current);
+    estranhoRaf.current = null;
+    setEstranhoAwakenLoop(false);
+
+    // Registra Adão como Lendário
+    recordAwakened({
+      id: "adao-estranho",
+      name: "Adão",
+      trueName: "O Primeiro",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.2);
+
+    if (audioEnabled) sophiaAudio.awakenChord();
+    // Mostra revelação cinematográfica
+    setTimeout(() => setShowAdamReveal(true), 1500);
+  };
+
+  // Tecla F durante mini-game do Estranho
+  useEffect(() => {
+    if (!estranhoAwakenLoop) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const now = performance.now() / 1000;
+      const hit = estranhoCtrl.press(now);
+      if (hit && audioEnabled) sophiaAudio.pulse();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [estranhoAwakenLoop, audioEnabled, estranhoCtrl]);
+
   /* ---- Cleanup ---- */
   useEffect(() => {
     return () => {
       if (awakeningRaf.current !== null)
         cancelAnimationFrame(awakeningRaf.current);
+      if (estranhoRaf.current !== null)
+        cancelAnimationFrame(estranhoRaf.current);
     };
   }, []);
 
   const goToMar = () => setCurrentScene("mar-de-cristal");
+
+  // Posição do Estranho (oposta ao Velho — pelo outro lado do Jardim)
+  const ESTRANHO_POS = useMemo(() => new THREE.Vector3(-9, 0, 8), []);
+
+  // Mostrar AwakeningRing para qualquer mini-game ativo
+  const isEstranhoMiniGame = estranhoAwakenLoop;
+  const ringHits = isEstranhoMiniGame
+    ? estranhoAwakenState.hits
+    : awakeningState.hits;
+  const ringRequired = isEstranhoMiniGame
+    ? estranhoAwakenState.required
+    : awakeningState.required;
 
   return (
     <>
@@ -501,14 +590,23 @@ function JardimOrchestrator() {
         onApproachElder={handleApproach}
         showExitPortal={phase === "free-roam"}
         onExitToMar={goToMar}
+        showEstranho={showEstranho && !adamAwakened}
+        estranhoPos={ESTRANHO_POS}
+        onApproachEstranho={handleApproachEstranho}
       />
       <HUD />
       <DialogBox onAdvance={handleAdvance} />
-      <AwakeningRing
-        hits={awakeningState.hits}
-        required={awakeningState.required}
-      />
+      <AwakeningRing hits={ringHits} required={ringRequired} />
       <Cursor />
+      {showAdamReveal && (
+        <LegendaryReveal
+          legendaryName="Adão"
+          epithet="O Primeiro"
+          firstWords="Eu nomeei os animais. Mas a primeira coisa que nomeei foi a saudade — antes mesmo de tê-la."
+          gift="Nome Original — pode dar o Nome Verdadeiro a qualquer ser, acalmando Potestades hostis."
+          onComplete={() => setShowAdamReveal(false)}
+        />
+      )}
     </>
   );
 }

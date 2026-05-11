@@ -20,6 +20,8 @@ export function HUD() {
   const toast = useGameStore((s) => s.toast);
   const hideToast = useGameStore((s) => s.hideToast);
   const toggleCodex = useGameStore((s) => s.toggleCodex);
+  const olharLucidoActive = useGameStore((s) => s.olharLucidoActive);
+  const toggleOlharLucido = useGameStore((s) => s.toggleOlharLucido);
 
   const light = useSoulStore((s) => s.light);
   const centelhasCount = useSoulStore((s) => s.centelhas.size);
@@ -62,14 +64,25 @@ export function HUD() {
 
       {hint && <div className="hint">{hint}</div>}
 
-      <button
-        className="codex-trigger"
-        onClick={toggleCodex}
-        aria-label="Abrir Codex (C)"
-        title="Codex · C"
-      >
-        Codex <kbd>C</kbd>
-      </button>
+      <div className="hud-toggles">
+        <button
+          className={`olhar-trigger ${olharLucidoActive ? "active" : ""}`}
+          onClick={toggleOlharLucido}
+          aria-label="Olhar Lúcido (V)"
+          title="Olhar Lúcido · V"
+        >
+          {olharLucidoActive ? "Olhar Lúcido ●" : "Olhar Lúcido"}
+          <kbd>V</kbd>
+        </button>
+        <button
+          className="codex-trigger"
+          onClick={toggleCodex}
+          aria-label="Abrir Codex (C)"
+          title="Codex · C"
+        >
+          Codex <kbd>C</kbd>
+        </button>
+      </div>
 
       {toast && (
         <div className="awakened-toast" key={toast.name}>

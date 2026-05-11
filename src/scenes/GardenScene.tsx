@@ -31,6 +31,12 @@ interface GardenSceneProps {
   showExitPortal?: boolean;
   /** Chamado quando o jogador entra no portal de saída. */
   onExitToMar?: () => void;
+  /** Mostra o Estranho (segundo Sleeper — revelado em jogo+ ou após Velho). */
+  showEstranho?: boolean;
+  /** Posição do Estranho. */
+  estranhoPos?: THREE.Vector3;
+  /** Callback de proximidade ao Estranho. */
+  onApproachEstranho?: (near: boolean) => void;
 }
 
 export function GardenScene({
@@ -38,6 +44,9 @@ export function GardenScene({
   onApproachElder,
   showExitPortal = false,
   onExitToMar,
+  showEstranho = false,
+  estranhoPos,
+  onApproachEstranho,
 }: GardenSceneProps) {
   const playerRef = useRef<THREE.Group | null>(null);
   const [nearPortal, setNearPortal] = useState(false);
@@ -97,19 +106,31 @@ export function GardenScene({
       <MemoryFireflies count={70} radius={28} />
       <AncientTree position={[elderPos.x, 0, elderPos.z - 1.5]} />
 
-      {/* Adormecido */}
+      {/* Adormecidos */}
       <Sleeper
         id="velho-do-jardim"
         name="Velho do Jardim"
         position={[elderPos.x, 0, elderPos.z]}
+        auraColor="branco-tenue"
       />
+
+      {/* O Estranho — Lendário oculto, aparece após despertar Velho */}
+      {showEstranho && estranhoPos && (
+        <Sleeper
+          id="adao-estranho"
+          name="O Estranho"
+          position={[estranhoPos.x, 0, estranhoPos.z]}
+          auraColor="dourado-forte"
+          isLegendary
+        />
+      )}
 
       {/* Player */}
       <Player
         externalRef={playerRef}
-        awakenTarget={elderPos}
+        awakenTarget={showEstranho && estranhoPos ? estranhoPos : elderPos}
         awakenDistance={3.2}
-        onApproachChange={onApproachElder}
+        onApproachChange={showEstranho ? onApproachEstranho : onApproachElder}
       />
 
       {/* Sussurrante */}

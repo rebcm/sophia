@@ -60,6 +60,11 @@ interface GameState {
   setCodexOpen: (o: boolean) => void;
   toggleCodex: () => void;
 
+  // Olhar Lúcido — visão de auras (sessão)
+  olharLucidoActive: boolean;
+  setOlharLucido: (active: boolean) => void;
+  toggleOlharLucido: () => void;
+
   // Áudio
   audioEnabled: boolean;
   enableAudio: () => void;
@@ -85,6 +90,11 @@ export const useGameStore = create<GameState>((set) => ({
   codexOpen: false,
   setCodexOpen: (o) => set({ codexOpen: o }),
   toggleCodex: () => set((s) => ({ codexOpen: !s.codexOpen })),
+
+  olharLucidoActive: false,
+  setOlharLucido: (active) => set({ olharLucidoActive: active }),
+  toggleOlharLucido: () =>
+    set((s) => ({ olharLucidoActive: !s.olharLucidoActive })),
 
   audioEnabled: false,
   enableAudio: () => set({ audioEnabled: true }),
