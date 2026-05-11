@@ -54,6 +54,7 @@ export type SceneId =
   | "ratanaba" // 1ª Civilização Perdida (Sprint 6+)
   | "casa-espelhada" // Sprint 11 — Auto-Sabotador
   | "el-dorado" // 2ª Civilização Perdida (Sprint 12+13)
+  | "hiperborea" // 3ª Civilização Perdida (Sprint 17)
   | "bardo";
 
 export interface BodyConfig {

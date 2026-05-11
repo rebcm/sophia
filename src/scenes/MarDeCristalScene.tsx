@@ -31,7 +31,8 @@ export type MarDestino =
   | "jardim-dos-ecos"
   | "ratanaba"
   | "casa-espelhada"
-  | "el-dorado";
+  | "el-dorado"
+  | "hiperborea";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -61,6 +62,11 @@ export function MarDeCristalScene({
   const elDoradoEnabled = casaEspelhadaEnabled;
   const yobelDefeated = useSoulStore((s) =>
     s.hasAwakened("yobel-inca-solitario"),
+  );
+  // Hiperbórea destrava quando El Dorado é desbloqueada (caminho aberto)
+  const hiperboreaEnabled = elDoradoEnabled;
+  const adonaiosDefeated = useSoulStore((s) =>
+    s.hasAwakened("adonaios-guardiao-solar"),
   );
 
   // Tecla Espaço/Enter para entrar no portal próximo
@@ -171,6 +177,24 @@ export function MarDeCristalScene({
         />
       )}
 
+      {/* Hiperbórea — 3ª Civilização Perdida */}
+      {hiperboreaEnabled && (
+        <Portal
+          position={[-14, 0.4, 2]}
+          label="Hiperbórea"
+          subLabel={
+            adonaiosDefeated
+              ? "(a coragem foi solta)"
+              : "(a tundra eterna te chama)"
+          }
+          color="#dde2ea"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "hiperborea" : null)
+          }
+        />
+      )}
+
       {/* Pedra das Vidas — morte voluntária (acessível após primeira reencarnação desbloqueada via gameplay) */}
       {onPedraActivate && (
         <PedraDasVidas
@@ -185,7 +209,7 @@ export function MarDeCristalScene({
       <DormantPortal position={[-10, 0.4, 8]} />
       {!casaEspelhadaEnabled && <DormantPortal position={[0, 0.4, -14]} />}
       {!elDoradoEnabled && <DormantPortal position={[14, 0.4, 2]} />}
-      <DormantPortal position={[-14, 0.4, 2]} />
+      {!hiperboreaEnabled && <DormantPortal position={[-14, 0.4, 2]} />}
 
       <EffectComposer>
         <Bloom intensity={0.55} luminanceThreshold={0.7} mipmapBlur />

@@ -14,6 +14,7 @@ import { BardoScene } from "./scenes/BardoScene";
 import { RatanabaScene } from "./scenes/RatanabaScene";
 import { CasaEspelhadaScene } from "./scenes/CasaEspelhadaScene";
 import { ElDoradoScene } from "./scenes/ElDoradoScene";
+import { HiperboreaScene } from "./scenes/HiperboreaScene";
 import { HUD } from "./ui/HUD";
 import { DialogBox } from "./ui/DialogBox";
 import { AwakeningRing } from "./ui/AwakeningRing";
@@ -120,7 +121,11 @@ export default function App() {
   const handleCinematicFinish = () => {
     // Cinemáticas pós-Arconte devolvem o jogador ao Mar de Cristal
     const lastWatched = useCinematicStore.getState().currentCinematic;
-    if (lastWatched === "athoth-cai" || lastWatched === "yobel-cai") {
+    if (
+      lastWatched === "athoth-cai" ||
+      lastWatched === "yobel-cai" ||
+      lastWatched === "adonaios-cai"
+    ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
     setMetaPhase("game");
@@ -166,6 +171,7 @@ function GameOrchestrator() {
   if (currentScene === "ratanaba") return <RatanabaOrchestrator />;
   if (currentScene === "casa-espelhada") return <CasaEspelhadaOrchestrator />;
   if (currentScene === "el-dorado") return <ElDoradoOrchestrator />;
+  if (currentScene === "hiperborea") return <HiperboreaOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -191,6 +197,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("casa-espelhada");
     } else if (destino === "el-dorado") {
       setCurrentScene("el-dorado");
+    } else if (destino === "hiperborea") {
+      setCurrentScene("hiperborea");
     }
   };
 
@@ -698,6 +706,123 @@ function ElDoradoOrchestrator() {
       <Cursor />
       {showChoice && (
         <VozesEscolha choice={YOBEL_CHOICE} onResolved={handleChoiceResolved} />
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   HiperboreaOrchestrator — Sprint 17
+   ---------------------------------------------------------
+   Tundra de cristal eterno. Adonaios (Guardião-Solar) com a
+   coragem acorrentada. F perto dele abre escolha-chave.
+   Despertar Adonaios = Centelha "coracao-firme" + cinemática
+   "adonaios-cai" + Adonaios registrado como Lendário.
+   ========================================================= */
+
+const ADONAIOS_CHOICE: KeyChoice = {
+  id: "adonaios-confronto",
+  context:
+    "Adonaios guarda o portão. Atrás dele, nas masmorras, a Raiva chora acorrentada. Ele acredita estar protegendo o povo — mas é o povo que está dócil demais para se defender.",
+  voices: {
+    angel:
+      "Mostra-lhe que a coragem não é golpe. É segurar firme o que se ama, respirando.",
+    demon:
+      "Quebra-lhe a armadura. Liberta a Raiva com violência. Ele só entende força.",
+    jinn: "Posso enganar o Guardião — basta dizermos que somos do mesmo lado. Ele dorme se a língua for boa.",
+    sophia: "Pergunta-lhe quem ele jurou proteger. E para quem o juramento foi roubado.",
+  },
+  options: [
+    {
+      label: "Mostrar-lhe que a Raiva é energia sagrada para defender o pequeno",
+      alignment: "light",
+      immediateEffect:
+        "Adonaios solta a chave. A Raiva sai, não para queimar — para guardar.",
+      amount: 8,
+    },
+    {
+      label: "Romper as correntes da Raiva à força — sem pedir licença",
+      alignment: "shadow",
+      immediateEffect:
+        "A Raiva sai em fúria. Acorda — mas com cicatriz. Aprende a vingar antes de aprender a guardar.",
+      amount: 6,
+    },
+    {
+      label: "Sentar-se ao lado dele em silêncio até que se reconheça",
+      alignment: "balance",
+      immediateEffect:
+        "Hora a hora, o elmo vergonha. Ele lembra quem jurou proteger. Solta a chave por si.",
+      amount: 7,
+    },
+  ],
+};
+
+function HiperboreaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  useEffect(() => {
+    setPlace("Hiperbórea · Tundra Eterna");
+  }, [setPlace]);
+
+  const adonaiosAwakened = hasAwakened("adonaios-guardiao-solar");
+  const [showChoice, setShowChoice] = useState(false);
+
+  useEffect(() => {
+    if (adonaiosAwakened || showChoice) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      setShowChoice(true);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [adonaiosAwakened, showChoice]);
+
+  const handleChoiceResolved = (_opt: ChoiceOption) => {
+    setShowChoice(false);
+    recordAwakened({
+      id: "adonaios-guardiao-solar",
+      name: "Guardião-Solar",
+      trueName: "Adonaios · Marte Restaurado",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.5);
+    if (!hasCentelha("coracao-firme")) {
+      addCentelha("coracao-firme");
+    }
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => {
+      playCinematic("adonaios-cai");
+      setMetaPhase("cinematic");
+    }, 1500);
+  };
+
+  return (
+    <>
+      <HiperboreaScene
+        adonaiosAwakened={adonaiosAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+      />
+      <HUD />
+      <Cursor />
+      {showChoice && (
+        <VozesEscolha
+          choice={ADONAIOS_CHOICE}
+          onResolved={handleChoiceResolved}
+        />
       )}
     </>
   );

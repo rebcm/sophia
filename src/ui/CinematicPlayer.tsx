@@ -185,6 +185,54 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "adonaios-cai": {
+    id: "adonaios-cai",
+    title: "A Coragem Estava Acorrentada",
+    ambientColor: "#1a2030",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "O mundo te ensinou que coragem é força. Para defender, bata. Para proteger, mate. Tudo mentira deste mundo.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A coragem real está acorrentada nas masmorras — porque os deuses-deste-mundo temem que tu a uses bem.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "A Raiva. Era para ser força sagrada — energia para defender o pequeno. Mas a prenderam. Disseram: 'raiva é pecado'.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Assim os Sleepers ficaram dóceis demais para resistir, e os tiranos puderam fazer o que quisessem.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Adonaios",
+        text: "Eu... eu fui treinado para guardar o portão. Mas eu fechei o portão para os meus mesmos.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tu vês agora? Coragem não é o golpe. É segurar firme o que se ama enquanto se respira.",
+        minHoldMs: 4500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tens agora a Centelha do Coração Firme. Defenderás o frágil sem precisar virar opressor.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Pergunta: O que é coragem real? Resposta: Defender o frágil sem virar opressor.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
 };
 
