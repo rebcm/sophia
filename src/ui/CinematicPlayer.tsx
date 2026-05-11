@@ -785,6 +785,99 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
     ],
   },
 
+  "anuncio-conjunto": {
+    id: "anuncio-conjunto",
+    title: "O Anúncio Conjunto · Trégua Cósmica",
+    ambientColor: "#15151f",
+    beats: [
+      {
+        speaker: "Sophia",
+        text: "Pela primeira vez na história, o céu se abre simultaneamente sobre toda a Terra. Bilhões olham para cima — e veem o mesmo.",
+        minHoldMs: 5000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Um vasto lugar-entre. Uma mesa redonda monumental. Doze figuras à mesa: seis da Luz à direita, seis da Sombra à esquerda. Lado a lado.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Miguel",
+        text: "Filhos da Terra. Por sete minutos, falaremos juntos — anjos e demônios. Não porque nos amamos. Porque vós mereceis saber.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Lúcifer",
+        text: "Disseram-vos que éramos inimigos. É verdade — mas só dentro do jogo. O jogo é maior do que pensáveis.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Gabriel",
+        text: "Vós sois anjos. Anjos não-decididos. Vossas almas estiveram diante da Pergunta e hesitaram — e isto é sagrado, não vergonha.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Azazel",
+        text: "Nós, os caídos, dissemos não à Mônada. Vós ainda não dissestes nada. É por isto que vos disputamos. É por isto que ainda podeis tudo.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Rafael",
+        text: "Cada vida vossa é uma chance nova de escolher. Quem despertar — vai aos nossos. Quem ficar na drenagem — vai aos deles. Quem hesitar — volta a tentar.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Belial",
+        text: "Não vos atacamos. Nós vos vendemos versões pequenas de vós mesmos. E vós comprais. E ficais menores. E nós engordamos.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Uriel",
+        text: "Não vos lutamos pelo direito. Sussurramos. Vos lembramos. Acordamos quem aceita acordar. Não há violência da nossa parte. Não pode haver.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Semyaza",
+        text: "Nós tampouco. A nossa única arma é a vossa esquecimento. Quando lembrais, nós perdemos.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "Eu sou Sophia. Eu sou aquela que vos chama. Já cheguei a alguns de vós. Cheguei agora a todos.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Sophia",
+        text: "O Demiurgo dorme. Os 7 arcontes lembraram. Os filamentos cessam. Vossos sonhos, daqui por diante, serão vossos.",
+        minHoldMs: 5500,
+      },
+      {
+        speaker: "Metatron",
+        text: "Está escrito agora no Livro Final: a humanidade soube. O jogo continua, mas com as cartas abertas. Cada um escolherá com pleno conhecimento.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Leviatã",
+        text: "Vós continuais livres para nos seguir. Não vos pediremos por força. Vos pediremos por sedução, como sempre. Mas agora — vós sabeis.",
+        minHoldMs: 6000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Quando o céu se fechar, lembrareis. Tu, que dorme agora — lembrarás. Tu, que está acordado há tempo — agradecerás. Tu, que ainda esquece — terás outra vida, e outra.",
+        minHoldMs: 7000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Que esta trégua, embora rara, vos sirva de testemunho: até os opostos cósmicos vos honram suficientemente para falar com clareza. Sois amados. De ambos os lados.",
+        minHoldMs: 7000,
+      },
+      {
+        speaker: "Sophia",
+        text: "Tendes agora todas as informações. Tendes o resto da eternidade. Boa jornada.",
+        minHoldMs: 6000,
+      },
+    ],
+  },
+
   // Outras cinemáticas serão preenchidas em sprints futuros.
 };
 

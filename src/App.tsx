@@ -1179,6 +1179,7 @@ type ClimaxStage =
   | "embrace" // animação do abraço + auto-trigger cinemática 1
   | "cin-1" // demiurgo-cai
   | "cin-2" // grande-revelacao
+  | "cin-2b" // anuncio-conjunto (Cinemática 16.5)
   | "cin-3" // veu
   | "cin-4" // monada
   | "ending-choice" // escolha dos 6 finais
@@ -1267,6 +1268,10 @@ function TronoDemiurgoOrchestrator() {
       playCinematic("grande-revelacao");
       setMetaPhase("cinematic");
     } else if (stage === "cin-2") {
+      setStage("cin-2b");
+      playCinematic("anuncio-conjunto");
+      setMetaPhase("cinematic");
+    } else if (stage === "cin-2b") {
       setStage("cin-3");
       playCinematic("veu");
       setMetaPhase("cinematic");
