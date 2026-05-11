@@ -1793,3 +1793,181 @@ canvas {
   opacity: 0.3;
   cursor: wait;
 }
+
+/* =========================================================
+   VozesEscolha overlay (4 Vozes + opções alinhamento)
+   ========================================================= */
+.vozes-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 5, 10, 0.85);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+  animation: vozesIn 0.6s ease-out;
+}
+@keyframes vozesIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.vozes-frame {
+  max-width: 720px;
+  width: 92vw;
+  background: linear-gradient(180deg, #14102a 0%, #0a0820 100%);
+  border: 1px solid rgba(255, 233, 208, 0.2);
+  padding: 2.5rem 3rem;
+  color: var(--c-pearl);
+}
+.vozes-context {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--c-amber);
+  margin-bottom: 2rem;
+  letter-spacing: 0.02rem;
+  text-align: center;
+}
+.vozes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.voice {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.45;
+  padding: 0.6rem 1rem;
+  border-left: 2px solid transparent;
+  animation: voiceIn 0.5s ease-out;
+}
+@keyframes voiceIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+.voice-tag {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+  padding: 0.1rem 0.5rem;
+  margin-right: 0.6rem;
+  border-radius: 2px;
+}
+.voice-angel {
+  color: rgba(255, 233, 208, 0.9);
+  border-left-color: var(--c-gold);
+  background: rgba(255, 212, 90, 0.04);
+}
+.voice-angel .voice-tag {
+  background: var(--c-gold);
+  color: #0a0420;
+}
+.voice-demon {
+  color: rgba(245, 230, 230, 0.85);
+  border-left-color: #6a4a4a;
+  background: rgba(80, 30, 30, 0.15);
+}
+.voice-demon .voice-tag {
+  background: #6a4a4a;
+  color: var(--c-pearl);
+}
+.voice-jinn {
+  color: rgba(255, 200, 130, 0.9);
+  border-left-color: #d49850;
+  background: rgba(212, 152, 80, 0.06);
+}
+.voice-jinn .voice-tag {
+  background: #d49850;
+  color: #0a0420;
+}
+.voice-sophia {
+  color: rgba(232, 216, 240, 0.85);
+  border-left-color: rgba(224, 182, 255, 0.6);
+  background: rgba(200, 154, 255, 0.05);
+  font-style: italic;
+}
+.voice-sophia .voice-tag {
+  background: var(--c-lilac);
+  color: #0a0420;
+}
+
+.vozes-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.voz-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.3rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 233, 208, 0.25);
+  color: var(--c-pearl);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: left;
+}
+.voz-option:hover {
+  background: rgba(255, 233, 208, 0.08);
+}
+.voz-option-tag {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border-radius: 2px;
+}
+.voz-light {
+  border-color: rgba(255, 212, 90, 0.4);
+}
+.voz-light:hover {
+  border-color: var(--c-gold);
+}
+.voz-option-tag.voz-light {
+  background: var(--c-gold);
+  color: #0a0420;
+}
+.voz-shadow {
+  border-color: rgba(140, 90, 90, 0.4);
+}
+.voz-shadow:hover {
+  border-color: #8c5a5a;
+}
+.voz-option-tag.voz-shadow {
+  background: #6a4a4a;
+  color: var(--c-pearl);
+}
+.voz-balance {
+  border-color: rgba(200, 154, 255, 0.4);
+}
+.voz-balance:hover {
+  border-color: var(--c-lilac);
+}
+.voz-option-tag.voz-balance {
+  background: var(--c-lilac);
+  color: #0a0420;
+}
+
+.voz-resolved {
+  text-align: center;
+  padding: 2rem 0;
+  animation: vozResolvedIn 0.6s ease-out;
+}
+@keyframes vozResolvedIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.voz-resolved-effect {
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  color: var(--c-amber);
+  line-height: 1.5;
+}

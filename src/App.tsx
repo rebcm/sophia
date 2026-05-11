@@ -23,6 +23,11 @@ import { VozDaLuz } from "./ui/VozDaLuz";
 import { PedraConfirmation } from "./ui/PedraConfirmation";
 import { Codex } from "./ui/Codex";
 import { LegendaryReveal } from "./ui/LegendaryReveal";
+import {
+  VozesEscolha,
+  type ChoiceOption,
+  type KeyChoice,
+} from "./ui/VozesEscolha";
 
 import {
   introDialog,
@@ -221,6 +226,43 @@ function MarDeCristalOrchestrator() {
    Despertar Athoth = ganha Centelha do Olhar Lúcido + cinemática.
    ========================================================= */
 
+const ATHOTH_CHOICE: KeyChoice = {
+  id: "athoth-confronto",
+  context:
+    "A Mãe-D'Água dorme. Os filamentos sobem em direção ao céu. Tu te aproximas. Algo decide agora.",
+  voices: {
+    angel:
+      "Canta com ela o canto-da-manhã. Toca-lhe sem palavras. Ela acordará por reconhecimento.",
+    demon:
+      "Quebra o sono dela à força. Tu mereces a Centelha. Não esperes que ela te dê — toma.",
+    jinn: "Posso te oferecer um atalho — eu acordo por ti, em troca de uma promessa minha.",
+    sophia: "Tu sabes o que fazer. Eu apenas guardo o silêncio.",
+  },
+  options: [
+    {
+      label: "Cantar com ela em silêncio (sentar e respirar 3 vezes)",
+      alignment: "light",
+      immediateEffect:
+        "Ela abre os olhos por reconhecimento. Os filamentos rompem-se sem ruído.",
+      amount: 8,
+    },
+    {
+      label: "Forçar o despertar (gritar o nome dela)",
+      alignment: "shadow",
+      immediateEffect:
+        "Ela acorda em choque. A Centelha vem — mas algo nela ficará receoso.",
+      amount: 6,
+    },
+    {
+      label: "Tocar-lhe sem palavras (mão sobre as águas)",
+      alignment: "balance",
+      immediateEffect:
+        "Ela respira. Tu respiras. O rio brilha mais. Há equilíbrio aqui.",
+      amount: 7,
+    },
+  ],
+};
+
 function RatanabaOrchestrator() {
   const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
   const setPlace = useGameStore((s) => s.setPlace);
@@ -241,52 +283,53 @@ function RatanabaOrchestrator() {
   }, [setPlace]);
 
   const maeAwakened = hasAwakened("athoth-mae-dagua");
+  const [showChoice, setShowChoice] = useState(false);
 
-  // Trigger automático: ao chegar perto da Mãe-D'Água + tecla F, desperta
+  // Tecla F abre a escolha quando perto
   useEffect(() => {
-    if (maeAwakened) return;
+    if (maeAwakened || showChoice) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.code !== "KeyF") return;
-      // Em vez de mini-game completo, instantâneo nesta MVP
-      // (futuro: integrar AwakeningController musical)
-      recordAwakened({
-        id: "athoth-mae-dagua",
-        name: "Mãe-D'Água",
-        trueName: "Athoth · Vigia Lunar Restaurada",
-        isLegendary: true,
-        awakenedAt: Date.now(),
-        awakenedInLife: currentLifeIndex,
-      });
-      addLight(1.5);
-      if (!hasCentelha("olhar-lucido")) {
-        addCentelha("olhar-lucido");
-      }
-      if (audioEnabled) sophiaAudio.awakenChord();
-      // Dispara cinemática 2
-      setTimeout(() => {
-        playCinematic("athoth-cai");
-        setMetaPhase("cinematic");
-      }, 1500);
+      setShowChoice(true);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [
-    maeAwakened,
-    recordAwakened,
-    addLight,
-    addCentelha,
-    hasCentelha,
-    audioEnabled,
-    playCinematic,
-    setMetaPhase,
-    currentLifeIndex,
-  ]);
+  }, [maeAwakened, showChoice]);
+
+  const handleChoiceResolved = (_opt: ChoiceOption) => {
+    setShowChoice(false);
+    // Despertar Athoth + Centelha + cinemática (independente da opção;
+    // o alinhamento já foi modificado)
+    recordAwakened({
+      id: "athoth-mae-dagua",
+      name: "Mãe-D'Água",
+      trueName: "Athoth · Vigia Lunar Restaurada",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.5);
+    if (!hasCentelha("olhar-lucido")) {
+      addCentelha("olhar-lucido");
+    }
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => {
+      playCinematic("athoth-cai");
+      setMetaPhase("cinematic");
+    }, 1500);
+  };
 
   return (
     <>
       <RatanabaScene onReturnToMar={() => setCurrentScene("mar-de-cristal")} />
       <HUD />
       <Cursor />
+      {showChoice && (
+        <VozesEscolha
+          choice={ATHOTH_CHOICE}
+          onResolved={handleChoiceResolved}
+        />
+      )}
     </>
   );
 }
