@@ -1,0 +1,55 @@
+MIT License
+
+Copyright (c) 2026 Rebeca Alves Moreira
+
+Autoria integral do projeto *Sophia · A Jornada do Despertar* —
+concepção, direção criativa, bíblia narrativa, design de mundo,
+roteiro de cinemáticas e implementação — pertence a
+**Rebeca Alves Moreira**. Todos os direitos reservados sobre a
+autoria; o uso do código e dos documentos é regido pelos termos
+abaixo.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+---
+
+## Aviso adicional sobre conteúdo narrativo (não normativo)
+
+O código-fonte (arquivos sob `src/`, `index.html`, configurações de
+build) é licenciado integralmente sob os termos MIT acima.
+
+A **bíblia de produção** (todos os arquivos sob `docs/` e
+`docs/production/`) contém escrita criativa, lore, mitologia
+sincrética e roteiros narrativos originais. Esses textos também
+estão cobertos pelos termos MIT — derivações, adaptações, traduções
+e usos comerciais são permitidos. Atribuição é apreciada (não
+exigida): "Inspirado em / derivado de *Sophia · A Jornada do
+Despertar*, de **Rebeca Alves Moreira** —
+https://github.com/rebcm/sophia".
+
+Marcas e personagens próprios do mundo (Sussurrante, Auto-Sabotador,
+Pedra das Vidas, Mar de Cristal, e nomes próprios cunhados nos
+documentos) podem ser reutilizados livremente; apenas evite implicar
+endosso por parte do projeto original.
+
+Textos de tradições religiosas e místicas referenciados ao longo do
+projeto (Nag Hammadi, Bhagavad Gita, Tao Te Ching, Cabala, Sufismo,
+mitologias indígenas etc.) são citados em domínio público ou em uso
+transformativo. Quando uma fonte específica e ainda protegida for
+identificada, o crédito explícito será adicionado.

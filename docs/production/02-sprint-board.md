@@ -2,8 +2,30 @@
 
 > **Sprints curtos (~1-2 semanas)**, focados, sem big-bangs.
 > Cada sprint termina com **build verde + push**.
+> Autoria integral: **Rebeca Alves Moreira**.
 
-## Sprint 1 · Fundação Estrutural (ATUAL)
+## Status global · pós-Sprint 11
+
+| Sprint   | Tema                                                  | Commit       | Status |
+| -------- | ----------------------------------------------------- | ------------ | ------ |
+| 1        | Fundação · Title→Character→Cinematic→Game             | `38ab6a2`    | ✅ |
+| 2        | Mar de Cristal hub + roteamento entre cenas           | `1da68a0`    | ✅ |
+| 3        | Bardo + morte voluntária + reencarnação básica        | `df60ad7`    | ✅ |
+| 4        | Codex completo (4 abas)                               | `6c00d90`    | ✅ |
+| 5        | Identidade Oculta + Auras + 1º Lendário (Adão)        | `b4bf5cf`    | ✅ |
+| 6+7+8    | Ratanabá + Athoth + Cinemática 2                      | `2508da6`    | ✅ |
+| 9+10     | Sistema de Vozes (4 falantes) + Alinhamento ativo     | `290170c`    | ✅ |
+| 11       | Casa-Espelhada + Auto-Sabotador + Sussurrante humanoide | `c0d51ff`  | ✅ |
+| 12       | El Dorado básico (próximo)                            | –            | 🔜 |
+| 13       | Yobel (2º Arconte) cai + Cinemática 3                 | –            | 🔜 |
+| 14       | Sistema de Filamentos (visão de drenagem)             | –            | 🔜 |
+| 15       | Sleepers de Casta 6/7 + ritmos de despertar avançados | –            | 🔜 |
+
+Sprints já marcados como **✅** estão consolidados no `main`.
+
+---
+
+## Sprint 1 · Fundação Estrutural (CONCLUÍDO)
 
 **Meta**: dar fundação para tudo o que vem. Estado modular,
 save, customização, centelha visual, cinemática placeholder.
@@ -101,18 +123,64 @@ funcional.
 
 ---
 
-## Backlog de Sprints (visão de 6 meses)
+## Sprints 6+7+8 · Ratanabá + Athoth + Cinemática 2 (CONCLUÍDO)
+
+**Commit:** `2508da6`. Entregou:
+
+- `RatanabaScene.tsx` (floresta, 70 árvores, 80 vagalumes,
+  rio luminoso)
+- `MaeDagua.tsx` (Athoth submersa com cipós)
+- `Paje.tsx` (Pajé-do-Cipó)
+- Cinemática "athoth-cai" com 9 *beats*
+- Portal Ratanabá no Mar destrava após Velho do Jardim
+- Centelha do Olhar Lúcido como reward
+
+---
+
+## Sprints 9+10 · Sistema de Vozes + Alinhamento (CONCLUÍDO)
+
+**Commit:** `290170c`. Entregou:
+
+- `VozesEscolha.tsx` overlay com fase voices → options → resolved
+- 4 vozes (anjo / demônio / jinn / Sophia) com cores distintas
+- 3 opções de alinhamento (luz / sombra / equilíbrio) feedando
+  `soulStore.addToAlignment()`
+- `ATHOTH_CHOICE` integrado em `RatanabaOrchestrator` — pressionar
+  F agora abre escolha-chave antes do despertar de Athoth
+
+---
+
+## Sprint 11 · Casa-Espelhada + Auto-Sabotador (CONCLUÍDO)
+
+**Commit:** `c0d51ff`. Entregou:
+
+- `CasaEspelhadaScene.tsx` (câmara hexagonal violeta com 6
+  painéis-espelho)
+- `AutoSabotador.tsx` (sombra cinzenta com aura que vira dourada)
+- Mecânica do abraço: F segurado por 5s em proximidade < 1.8m
+- HUD overlay com barra de progresso do abraço
+- Soltar ou afastar-se decai o progresso gradualmente
+- Vitória: Centelha do Discernimento, +1.0 luz, +10 equilíbrio,
+  Auto-Sabotador registrado como Lendário "O Carcereiro Era Eu"
+- `Whisperer.tsx` agora ganha torso/cabeça/braços etéricos após
+  despertar o Auto-Sabotador (forma humanoide)
+- Portal Casa-Espelhada destrava no Mar de Cristal após Athoth
+
+---
+
+## Backlog de Sprints (visão atualizada 6 meses)
 
 | Sprint | Foco |
 |--------|------|
-| 6 | Ratanabá: floresta, Mãe-D'Água, Pajé-do-Cipó |
-| 7 | Athoth (1º Arconte) cai + Centelha do Olhar Lúcido |
-| 8 | Cinemática 2 polida (placeholder de pré-render) |
-| 9 | Sistema de Vozes (anjo/demônio/jinn/Sophia) + primeira
-     escolha-chave |
-| 10 | Alinhamento Luz/Sombra/Equilíbrio funcional |
-| 11 | Casa-Espelhada + Auto-Sabotador (sombra interna) |
-| 12 | El Dorado básico |
+| 12 | El Dorado básico (cena + Yobel adormecido) |
+| 13 | Yobel (2º Arconte) cai + Cinemática 3 ("Ouro Era Sombra") + Centelha da Fala-Raiz |
+| 14 | Sistema de Filamentos (visão de drenagem dos Sleepers) |
+| 15 | Sleepers Casta 6/7 + variações de mini-game de despertar |
+| 16 | Feira dos Sistemas (5 distritos) — cidade-arquetipo |
+| 17 | Hiperbórea (3ª Civilização) + Adonaios cai |
+| 18 | Sistema de Profissões / Caminhos (12 práticas diárias) |
+| 19 | Vínculos / Par Sizígico — primeiro encontro romântico |
+| 20 | Eloaios (4º Arconte) + Cinemática 5 + Labirinto das Eras (esqueleto) |
 
 ---
 
