@@ -68,7 +68,27 @@ interface GameState {
   // Áudio
   audioEnabled: boolean;
   enableAudio: () => void;
+
+  // Prática diária (Sprint 28) — bônus simbólico da sessão
+  dailyPractice: DailyPracticeId | null;
+  setDailyPractice: (p: DailyPracticeId | null) => void;
 }
+
+/** 12 práticas diárias inspiradas em tradições contemplativas.
+ *  Cada uma confere um bônus simbólico/passivo (ainda placeholder). */
+export type DailyPracticeId =
+  | "silencio-matinal"
+  | "respiracao-quadrada"
+  | "leitura-sagrada"
+  | "caminhada-consciente"
+  | "gratidao-dos-tres"
+  | "contemplacao-do-corpo"
+  | "mantra-pessoal"
+  | "diario-de-sombras"
+  | "perdao-de-quatro-direcoes"
+  | "oferta-aos-ancestrais"
+  | "presenca-com-natureza"
+  | "saudacao-do-pleroma";
 
 export const useGameStore = create<GameState>((set) => ({
   metaPhase: "title",
@@ -98,4 +118,7 @@ export const useGameStore = create<GameState>((set) => ({
 
   audioEnabled: false,
   enableAudio: () => set({ audioEnabled: true }),
+
+  dailyPractice: null,
+  setDailyPractice: (p) => set({ dailyPractice: p }),
 }));

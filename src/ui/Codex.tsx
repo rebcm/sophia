@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSoulStore, type CentelhaId } from "../state/soulStore";
 import { useCharacterStore } from "../state/characterStore";
 import { useCinematicStore, type CinematicId } from "../state/cinematicStore";
+import { useGameStore, type DailyPracticeId } from "../state/gameStore";
 import {
   computeCentelhaPhase,
   getCentelhaVisual,
@@ -19,7 +20,7 @@ import {
      4. Caminho   — alinhamento Luz/Sombra/Equilíbrio
    ========================================================= */
 
-type Tab = "almas" | "centelhas" | "cinematicas" | "caminho";
+type Tab = "almas" | "centelhas" | "cinematicas" | "caminho" | "praticas";
 
 interface CodexProps {
   open: boolean;
@@ -76,6 +77,11 @@ export function Codex({ open, onClose }: CodexProps) {
             active={tab === "caminho"}
             onClick={() => setTab("caminho")}
           />
+          <CodexTab
+            label="Práticas"
+            active={tab === "praticas"}
+            onClick={() => setTab("praticas")}
+          />
         </nav>
 
         <div className="codex-body">
@@ -83,6 +89,7 @@ export function Codex({ open, onClose }: CodexProps) {
           {tab === "centelhas" && <CentelhasTab />}
           {tab === "cinematicas" && <CinematicasTab />}
           {tab === "caminho" && <CaminhoTab />}
+          {tab === "praticas" && <PraticasTab />}
         </div>
       </div>
     </div>
@@ -533,4 +540,146 @@ function dominantPath(a: {
   if (a.light === max) return "Luz";
   if (a.balance === max) return "Equilíbrio";
   return "Sombra";
+}
+
+/* ---------------- PraticasTab — Sprint 28 ---------------- */
+
+interface PraticaDescriptor {
+  id: DailyPracticeId;
+  title: string;
+  tradition: string;
+  description: string;
+  effect: string;
+}
+
+const PRACTICES: PraticaDescriptor[] = [
+  {
+    id: "silencio-matinal",
+    title: "Silêncio Matinal",
+    tradition: "Tradição contemplativa cristã / Zen",
+    description: "Quinze minutos sem palavras ao acordar. Apenas o que é.",
+    effect: "Os sussurros chegam com mais clareza durante o dia.",
+  },
+  {
+    id: "respiracao-quadrada",
+    title: "Respiração Quadrada",
+    tradition: "Pranayama / treinos militares",
+    description: "Inspira 4, segura 4, expira 4, segura 4. Doze ciclos.",
+    effect: "A Centelha vibra mais constante. Menos reatividade.",
+  },
+  {
+    id: "leitura-sagrada",
+    title: "Leitura Sagrada",
+    tradition: "Lectio Divina",
+    description: "Um único parágrafo de qualquer escritura, lido três vezes lentamente.",
+    effect: "Lembranças de vidas passadas tornam-se mais nítidas.",
+  },
+  {
+    id: "caminhada-consciente",
+    title: "Caminhada Consciente",
+    tradition: "Vipassana / Sufi walking",
+    description: "Caminhar sem destino, percebendo cada apoio do pé.",
+    effect: "Filamentos de Sleepers ficam visíveis com Olhar Lúcido mais cedo.",
+  },
+  {
+    id: "gratidao-dos-tres",
+    title: "Gratidão dos Três",
+    tradition: "Universal contemplativa",
+    description: "Três coisas pelas quais agradeces — uma material, uma humana, uma invisível.",
+    effect: "Equilíbrio cresce naturalmente ao longo da sessão.",
+  },
+  {
+    id: "contemplacao-do-corpo",
+    title: "Contemplação do Corpo",
+    tradition: "Hatha Yoga / Body Scan",
+    description: "Atravessa cada parte do corpo com atenção — dos pés ao alto da cabeça.",
+    effect: "O Olhar Lúcido pode ser ativado por mais tempo.",
+  },
+  {
+    id: "mantra-pessoal",
+    title: "Mantra Pessoal",
+    tradition: "Bhakti / Sufismo / Cabala",
+    description: "Uma única frase repetida 108 vezes — em voz baixa ou no coração.",
+    effect: "A Sussurrante responde antes de ser chamada.",
+  },
+  {
+    id: "diario-de-sombras",
+    title: "Diário de Sombras",
+    tradition: "Junguiana / contemplativa moderna",
+    description: "Escrever sem editar a primeira coisa que vier — sobretudo o que se quer esconder.",
+    effect: "Encontros com o Auto-Sabotador ficam mais suaves.",
+  },
+  {
+    id: "perdao-de-quatro-direcoes",
+    title: "Perdão das Quatro Direções",
+    tradition: "Ho'oponopono havaiano",
+    description: "Diz a cada lado: 'sinto muito, perdoa-me, agradeço, amo-te.'",
+    effect: "Anjos Caídos te reconhecem ao chegares aos altares.",
+  },
+  {
+    id: "oferta-aos-ancestrais",
+    title: "Oferta aos Ancestrais",
+    tradition: "Indígena / xintoísta / africana",
+    description: "Um copo de água deixado para os que vieram antes.",
+    effect: "Vidas passadas aparecem com mais facilidade no Labirinto das Eras.",
+  },
+  {
+    id: "presenca-com-natureza",
+    title: "Presença com a Natureza",
+    tradition: "Universal mística",
+    description: "Quinze minutos em silêncio com uma planta, um animal, uma pedra.",
+    effect: "Filamentos rompidos curam mais rapidamente.",
+  },
+  {
+    id: "saudacao-do-pleroma",
+    title: "Saudação ao Pleroma",
+    tradition: "Gnóstica (Nag Hammadi)",
+    description: "Em voz baixa: 'eu te saúdo, Mistério que sempre fui.'",
+    effect: "Cinemáticas-revelação são acessadas mais cedo.",
+  },
+];
+
+function PraticasTab() {
+  const dailyPractice = useGameStore((s) => s.dailyPractice);
+  const setDailyPractice = useGameStore((s) => s.setDailyPractice);
+
+  const handlePick = (id: DailyPracticeId) => {
+    setDailyPractice(dailyPractice === id ? null : id);
+  };
+
+  return (
+    <div className="codex-tab-content">
+      <h3>Práticas Diárias</h3>
+      <p className="codex-tab-sub">
+        <em>
+          Escolhe uma prática para esta sessão. Não há combate — há
+          ressonância. Os efeitos são simbólicos, mas a alma os sente.
+        </em>
+      </p>
+      <div className="praticas-grid">
+        {PRACTICES.map((p) => (
+          <button
+            key={p.id}
+            className={`pratica-card ${dailyPractice === p.id ? "active" : ""}`}
+            onClick={() => handlePick(p.id)}
+          >
+            <div className="pratica-title">{p.title}</div>
+            <div className="pratica-tradition">{p.tradition}</div>
+            <div className="pratica-desc">{p.description}</div>
+            <div className="pratica-effect">
+              <em>{p.effect}</em>
+            </div>
+          </button>
+        ))}
+      </div>
+      {dailyPractice && (
+        <p className="praticas-active-note">
+          <em>
+            Prática ativa nesta sessão. Tu carregarás essa intenção até
+            adormeceres ou trocares por outra.
+          </em>
+        </p>
+      )}
+    </div>
+  );
 }
