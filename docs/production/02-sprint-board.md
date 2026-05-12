@@ -45,6 +45,9 @@
 | 60       | Agartha · cidade intra-terrena + Rei do Mundo (paralelo) | `fe4acfe` | ✅ |
 | 61       | Sodoma · cidade do julgamento + intercessão (paralelo) | `fe4acfe`  | ✅ |
 | 22-doc   | docs/22-civilizacoes-expandidas.md · master de expansão | `fe4acfe`  | ✅ |
+| 62+63    | Shamballa (Tríade Sentinela) + Telos (Adama) — paralelo | `f29ec0c` | ✅ |
+| 64+65    | Gomorra (5 estátuas) + Babel (4 pontes) — paralelo   | `f29ec0c`    | ✅ |
+| 66+67    | Pleiadianos (7 pilares) + Arcturianos (12 guias) — paralelo | `f29ec0c` | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -216,9 +219,9 @@ de mundo aberto, conteúdo opcional e refinamento.
 | 35       | Multiplayer assíncrono (Aeon-Mestres em jardins de outros)        |
 | 36       | Localização EN/ES/FR (acessibilidade básica já feita)             |
 | 37       | Polimento, performance, lançamento beta                           |
-| 62-64    | Restantes intra-terrenas (Shamballa, Telos, Erks) — ver docs/22   |
-| 65-70    | Civilizações cósmicas (Pleiadianos, Siríacos, Arcturianos, Andromedanos, Cinzas, Reptilianos) |
-| 71-82    | Restantes 11 cidades do julgamento (Gomorra → Catalhöyük)         |
+| 68       | Erks (intra-terrena andina) — ver docs/22 §2.4                     |
+| 69-72    | Cósmicas restantes (Siríacos, Andromedanos, Cinzas, Reptilianos)   |
+| 73-82    | Cidades do julgamento restantes (Adamá, Tzeboim, Bela, Nínive, Tróia, Cartago, Pompeia, Yonaguni, Atlântis-arquetípica, Catalhöyük) |
 
 ---
 
