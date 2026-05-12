@@ -3722,3 +3722,371 @@ body.a11y-high-contrast .pause-hint {
   filter: none;
 }
 
+/* =========================================================
+   Shamballa · hint da Tríade Sentinela
+   Fragmento intacto do Pleroma · paleta branco-luminoso
+   ========================================================= */
+.shamballa-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 88vw);
+  padding: 18px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 12, 24, 0.86) 0%,
+    rgba(40, 40, 64, 0.7) 100%
+  );
+  border: 1px solid rgba(232, 224, 248, 0.42);
+  border-radius: 8px;
+  color: #f4f0e8;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.7),
+    inset 0 0 32px rgba(255, 248, 232, 0.1);
+  backdrop-filter: blur(2px);
+}
+.shamballa-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.shamballa-hint strong {
+  color: #fff8e8;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 248, 224, 0.55);
+}
+.shamballa-hint .shamballa-sub {
+  font-size: 0.86rem;
+  opacity: 0.74;
+  margin: 0;
+  letter-spacing: 0.05em;
+  font-style: italic;
+  color: #d8d0e8;
+}
+.shamballa-hint .shamballa-progress {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  color: #f4ecd8;
+}
+.shamballa-hint .shamballa-progress .dot {
+  display: inline-block;
+  margin: 0 0.22em;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: #5a5a78;
+  vertical-align: middle;
+}
+.shamballa-hint .shamballa-progress .dot.lit {
+  background: #fffce0;
+  box-shadow: 0 0 8px rgba(255, 248, 220, 0.85);
+}
+
+/* =========================================================
+   Telos · hint do Adama
+   Refúgio lemuriano · paleta verde-rosa clara
+   ========================================================= */
+.telos-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 88vw);
+  padding: 18px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 56, 36, 0.82) 0%,
+    rgba(86, 68, 62, 0.62) 100%
+  );
+  border: 1px solid rgba(232, 184, 168, 0.45);
+  border-radius: 8px;
+  color: #f4ecd8;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55),
+    inset 0 0 32px rgba(248, 200, 184, 0.1);
+  backdrop-filter: blur(2px);
+}
+.telos-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.telos-hint strong {
+  color: #ffd0c0;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 192, 168, 0.5);
+}
+.telos-hint .telos-sub {
+  font-size: 0.86rem;
+  opacity: 0.78;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #d8e8c8;
+}
+
+/* =========================================================
+   Pleiadianos · hint da Sacerdotisa
+   Sala dos Sete Pilares · paleta prata-violeta cintilante
+   ========================================================= */
+.pleiadianos-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 88vw);
+  padding: 18px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 16, 36, 0.88) 0%,
+    rgba(54, 36, 96, 0.74) 100%
+  );
+  border: 1px solid rgba(184, 196, 240, 0.42);
+  border-radius: 8px;
+  color: #e8ecff;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.62),
+    inset 0 0 30px rgba(184, 144, 240, 0.12);
+  backdrop-filter: blur(2px);
+  animation: pleiadianos-shimmer 3.6s ease-in-out infinite;
+}
+.pleiadianos-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.pleiadianos-hint strong {
+  color: #e0d4ff;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(184, 144, 240, 0.55);
+}
+.pleiadianos-hint .pleiadianos-sub {
+  font-size: 0.86rem;
+  opacity: 0.74;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #c8c0ec;
+}
+@keyframes pleiadianos-shimmer {
+  0%, 100% {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.62),
+      inset 0 0 30px rgba(184, 144, 240, 0.1);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.62),
+      inset 0 0 36px rgba(168, 196, 240, 0.18);
+  }
+}
+
+/* =========================================================
+   Arcturianos · hint do Guia
+   Doze Casas-do-Trânsito · paleta azul-elétrico pálido
+   ========================================================= */
+.arcturianos-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 88vw);
+  padding: 18px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 18, 36, 0.9) 0%,
+    rgba(20, 48, 88, 0.74) 100%
+  );
+  border: 1px solid rgba(120, 200, 232, 0.44);
+  border-radius: 8px;
+  color: #d8ecff;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.66),
+    inset 0 0 30px rgba(80, 160, 220, 0.12);
+  backdrop-filter: blur(2px);
+}
+.arcturianos-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.arcturianos-hint strong {
+  color: #aae0ff;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(120, 200, 232, 0.5);
+}
+.arcturianos-hint .arcturianos-sub {
+  font-size: 0.86rem;
+  opacity: 0.74;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #a8c8e0;
+}
+.arcturianos-hint.locked {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 12, 22, 0.92) 0%,
+    rgba(20, 28, 44, 0.82) 100%
+  );
+  border-color: rgba(120, 200, 232, 0.2);
+  color: #8aa4c0;
+}
+.arcturianos-hint.locked strong {
+  color: #aac4d8;
+  text-shadow: none;
+}
+
+/* =========================================================
+   Gomorra · A Cidade Que Não Soltava
+   ---------------------------------------------------------
+   Hint overlay para a mecânica de libertar as 5 estátuas de
+   posse. Tom contemplativo, paleta cinza-âmbar — a posse
+   virando libertação gentil. Sem julgamento moral.
+   ========================================================= */
+.gomorra-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 90vw);
+  padding: 20px 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 22, 14, 0.88) 0%,
+    rgba(54, 42, 26, 0.74) 100%
+  );
+  border: 1px solid rgba(196, 156, 110, 0.42);
+  border-radius: 8px;
+  color: var(--c-amber);
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.66),
+    inset 0 0 30px rgba(180, 130, 80, 0.1);
+  backdrop-filter: blur(2px);
+}
+.gomorra-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #f0d8b0;
+}
+.gomorra-hint strong {
+  color: #ffd890;
+  font-weight: 600;
+}
+.gomorra-hint .gomorra-sub {
+  font-size: 0.86rem;
+  opacity: 0.74;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #d8b888;
+}
+.gomorra-statue-count {
+  margin: 8px 0 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  font-family: var(--font-ui);
+  color: #ffd890;
+  text-shadow: 0 0 8px rgba(200, 140, 70, 0.4);
+}
+.gomorra-statue-count .gomorra-hand-icon {
+  display: inline-block;
+  margin: 0 0.18em;
+  font-size: 0.95em;
+  filter: drop-shadow(0 0 4px rgba(255, 176, 96, 0.6));
+}
+.gomorra-statue-count .gomorra-hand-icon.dim {
+  opacity: 0.3;
+  filter: none;
+}
+
+/* =========================================================
+   Babel · A Cidade da Palavra Fragmentada
+   ---------------------------------------------------------
+   Hint overlay para a mecânica de tradução entre os 4 povos.
+   Tom: a palavra original (Mu, Harmas) ainda vibra debaixo
+   das línguas. Paleta marrom-âmbar (poeira/cobre).
+   ========================================================= */
+.babel-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 90vw);
+  padding: 20px 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 22, 12, 0.88) 0%,
+    rgba(68, 42, 22, 0.74) 100%
+  );
+  border: 1px solid rgba(216, 144, 80, 0.42);
+  border-radius: 8px;
+  color: var(--c-amber);
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.68),
+    inset 0 0 30px rgba(216, 144, 80, 0.1);
+  backdrop-filter: blur(2px);
+}
+.babel-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #f4dcb4;
+}
+.babel-hint strong {
+  color: #ffd070;
+  font-weight: 600;
+}
+.babel-hint .babel-sub {
+  font-size: 0.86rem;
+  opacity: 0.76;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #d8b888;
+}
+.babel-bridge-count {
+  margin: 8px 0 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  font-family: var(--font-ui);
+  color: #ffd070;
+  text-shadow: 0 0 8px rgba(216, 144, 80, 0.45);
+}
+.babel-bridge-count .babel-bridge-icon {
+  display: inline-block;
+  margin: 0 0.18em;
+  font-size: 0.95em;
+  filter: drop-shadow(0 0 4px rgba(255, 176, 96, 0.6));
+}
+.babel-bridge-count .babel-bridge-icon.dim {
+  opacity: 0.3;
+  filter: none;
+}
+.babel-hint.babel-locked {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 14, 8, 0.92) 0%,
+    rgba(40, 26, 16, 0.82) 100%
+  );
+  border-color: rgba(140, 110, 84, 0.36);
+  color: #c0a888;
+}
+.babel-hint.babel-locked strong {
+  color: #d8b888;
+  text-shadow: none;
+}
+

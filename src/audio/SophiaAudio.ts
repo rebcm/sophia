@@ -25,9 +25,15 @@ type Mood =
   | "labirinto"
   | "trono"
   | "bardo"
-  // Sprint 60-61 · expansão
+  // Sprint 60-67 · expansão (intra-terrenas + julgamento + cósmicas)
   | "agartha"
-  | "sodoma";
+  | "sodoma"
+  | "shamballa"
+  | "telos"
+  | "gomorra"
+  | "babel"
+  | "pleiadianos"
+  | "arcturianos";
 
 class SophiaAudio {
   private ctx: AudioContext | null = null;
@@ -239,9 +245,15 @@ class SophiaAudio {
       trono: [0.24, 0.2, 0.18, 0.12], // clímax — pesado
       bardo: [0.18, 0.14, 0.18, 0.14], // limiar — neutro
 
-      // Expansão (Sprint 60-61)
+      // Expansão (Sprint 60-67)
       agartha: [0.22, 0.12, 0.14, 0.12], // intra-terreno — grave + cavernoso
       sodoma: [0.24, 0.18, 0.14, 0.1], // julgamento suspenso — pesado solene
+      shamballa: [0.08, 0.1, 0.16, 0.22], // fragmento pleromático — agudo etéreo
+      telos: [0.16, 0.18, 0.14, 0.14], // refúgio lemuriano — caloroso médio
+      gomorra: [0.22, 0.16, 0.14, 0.1], // posse — denso terroso
+      babel: [0.18, 0.14, 0.18, 0.14], // palavra fragmentada — neutro
+      pleiadianos: [0.1, 0.14, 0.18, 0.22], // sete estrelas — cintilante etéreo
+      arcturianos: [0.14, 0.14, 0.2, 0.18], // bardo claro — neutro luminoso
     };
     const vols = targetVols[mood];
     this.droneNodes.forEach(({ gain }, i) => {
@@ -304,6 +316,18 @@ export function moodForScene(scene: string): Mood {
       return "agartha";
     case "sodoma":
       return "sodoma";
+    case "shamballa":
+      return "shamballa";
+    case "telos":
+      return "telos";
+    case "gomorra":
+      return "gomorra";
+    case "babel":
+      return "babel";
+    case "pleiadianos":
+      return "pleiadianos";
+    case "arcturianos":
+      return "arcturianos";
     case "trono-demiurgo":
       return "trono";
     case "bardo":

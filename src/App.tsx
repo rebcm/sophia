@@ -44,6 +44,15 @@ import {
 import type { PrincipadoId } from "./world/Principado";
 import { AgarthaScene } from "./scenes/AgarthaScene";
 import { SodomaScene } from "./scenes/SodomaScene";
+import { ShamballaScene } from "./scenes/ShamballaScene";
+import { TelosScene } from "./scenes/TelosScene";
+import {
+  GomorraScene,
+  STATUE_POSITIONS,
+} from "./scenes/GomorraScene";
+import { BabelScene, POVO_POSITIONS } from "./scenes/BabelScene";
+import { PleiadianosScene } from "./scenes/PleiadianosScene";
+import { ArcturianosScene } from "./scenes/ArcturianosScene";
 import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
@@ -172,7 +181,13 @@ export default function App() {
       lastWatched === "harmas-cai" ||
       lastWatched === "iaoth-cai" ||
       lastWatched === "rei-do-mundo" ||
-      lastWatched === "sodoma-interedida"
+      lastWatched === "sodoma-interedida" ||
+      lastWatched === "triade-sentinela" ||
+      lastWatched === "adama-de-telos" ||
+      lastWatched === "gomorra-redimida" ||
+      lastWatched === "babel-redimida" ||
+      lastWatched === "sacerdotisa-pleiadiana" ||
+      lastWatched === "guia-arcturiano"
     ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
@@ -266,6 +281,12 @@ function GameOrchestrator() {
     return <GaleriaPrincipadosOrchestrator />;
   if (currentScene === "agartha") return <AgarthaOrchestrator />;
   if (currentScene === "sodoma") return <SodomaOrchestrator />;
+  if (currentScene === "shamballa") return <ShamballaOrchestrator />;
+  if (currentScene === "telos") return <TelosOrchestrator />;
+  if (currentScene === "gomorra") return <GomorraOrchestrator />;
+  if (currentScene === "babel") return <BabelOrchestrator />;
+  if (currentScene === "pleiadianos") return <PleiadianosOrchestrator />;
+  if (currentScene === "arcturianos") return <ArcturianosOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -315,6 +336,18 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("agartha");
     } else if (destino === "sodoma") {
       setCurrentScene("sodoma");
+    } else if (destino === "shamballa") {
+      setCurrentScene("shamballa");
+    } else if (destino === "telos") {
+      setCurrentScene("telos");
+    } else if (destino === "gomorra") {
+      setCurrentScene("gomorra");
+    } else if (destino === "babel") {
+      setCurrentScene("babel");
+    } else if (destino === "pleiadianos") {
+      setCurrentScene("pleiadianos");
+    } else if (destino === "arcturianos") {
+      setCurrentScene("arcturianos");
     }
   };
 
@@ -2181,6 +2214,709 @@ function SodomaOrchestrator() {
           </div>
           <p className="sodoma-flame-count">
             {litCount} de 7 chamas acesas em luz.
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   ShamballaOrchestrator — Sprint 62
+   ---------------------------------------------------------
+   3 Sentinelas estáticas em triângulo. Aproximar < 2.2m de
+   uma delas + F → marca aquela como contemplada. Após as 3,
+   cinemática "triade-sentinela".
+   ========================================================= */
+
+const SHAMBALLA_RANGE = 2.3;
+
+function ShamballaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const alreadyDone = hasAwakened("triade-sentinela");
+  const [contemplated, setContemplated] = useState<
+    [boolean, boolean, boolean]
+  >([alreadyDone, alreadyDone, alreadyDone]);
+  const [focusedIndex, setFocusedIndex] = useState<0 | 1 | 2 | null>(null);
+
+  useEffect(() => {
+    setPlace("Shamballa · Fragmento do Pleroma");
+  }, [setPlace]);
+
+  // Posições da TríadeSentinela em triângulo de raio 1.9
+  const POSITIONS: [number, number, number][] = [
+    [0, 0, -1.9],
+    [1.645, 0, 0.95],
+    [-1.645, 0, 0.95],
+  ];
+
+  useEffect(() => {
+    const tick = () => {
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      let best: 0 | 1 | 2 | null = null;
+      let bestDist = SHAMBALLA_RANGE;
+      for (let i = 0; i < 3; i++) {
+        const p = POSITIONS[i];
+        const d = Math.hypot(player.position.x - p[0], player.position.z - p[2]);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i as 0 | 1 | 2;
+        }
+      }
+      setFocusedIndex(best);
+    };
+    const id = setInterval(tick, 200);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (alreadyDone) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      if (focusedIndex === null) return;
+      if (contemplated[focusedIndex]) return;
+      const next = [...contemplated] as [boolean, boolean, boolean];
+      next[focusedIndex] = true;
+      setContemplated(next);
+      if (audioEnabled) sophiaAudio.chime(70, 1.4, 0.18);
+
+      if (next.every(Boolean)) {
+        recordAwakened({
+          id: "triade-sentinela",
+          name: "Tríade Sentinela",
+          trueName: "Os Que Nunca Caíram",
+          isLegendary: true,
+          awakenedAt: Date.now(),
+          awakenedInLife: currentLifeIndex,
+        });
+        addLight(1.5);
+        if (!hasCentelha("memoria-do-pleroma")) {
+          addCentelha("memoria-do-pleroma");
+        }
+        if (audioEnabled) sophiaAudio.awakenChord();
+        setTimeout(() => {
+          playCinematic("triade-sentinela");
+          setMetaPhase("cinematic");
+        }, 1500);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    focusedIndex,
+    contemplated,
+    alreadyDone,
+    audioEnabled,
+    recordAwakened,
+    addLight,
+    addCentelha,
+    hasCentelha,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  const doneCount = contemplated.filter(Boolean).length;
+
+  return (
+    <>
+      <ShamballaScene
+        contemplated={contemplated}
+        focusedIndex={focusedIndex}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!alreadyDone && (
+        <div className="shamballa-hint">
+          <p>
+            <em>
+              Aproxima-te de cada Sentinela. Pressiona{" "}
+              <strong>F</strong> em silêncio.
+            </em>
+          </p>
+          <div className="shamballa-dots">
+            {contemplated.map((c, i) => (
+              <span
+                key={i}
+                className={`shamballa-dot ${c ? "lit" : ""}`}
+              />
+            ))}
+          </div>
+          <p className="shamballa-sub">{doneCount} de 3 contemplações.</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   TelosOrchestrator — Sprint 63
+   ========================================================= */
+
+function TelosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const adamaAwakened = hasAwakened("adama-de-telos");
+
+  useEffect(() => {
+    setPlace("Telos · Refúgio Lemuriano");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (adamaAwakened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "adama-de-telos",
+        name: "Adama",
+        trueName: "Sacerdote do Refúgio Lemuriano",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.2);
+      if (!hasCentelha("toque-compassivo")) {
+        addCentelha("toque-compassivo");
+      } else {
+        addToAlignment("balance", 8);
+      }
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("adama-de-telos");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    adamaAwakened,
+    recordAwakened,
+    addLight,
+    addCentelha,
+    hasCentelha,
+    addToAlignment,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <TelosScene
+        adamaAwakened={adamaAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!adamaAwakened && (
+        <div className="telos-hint">
+          <p>
+            <em>
+              Aproxima-te de Adama. Pressiona <strong>F</strong>.
+              Lemúria canta debaixo da terra.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   GomorraOrchestrator — Sprint 64
+   ---------------------------------------------------------
+   5 estátuas-de-posse em pentágono. Aproximação + F libera
+   cada uma. Após as 5: cinemática "gomorra-redimida".
+   ========================================================= */
+
+const GOMORRA_RANGE = 2.8;
+
+function GomorraOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const alreadyDone = hasAwakened("gomorra-maos-abertas");
+  const [released, setReleased] = useState<
+    [boolean, boolean, boolean, boolean, boolean]
+  >([alreadyDone, alreadyDone, alreadyDone, alreadyDone, alreadyDone]);
+
+  useEffect(() => {
+    setPlace("Gomorra · Cidade Suspensa");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (alreadyDone) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      let bestIdx = -1;
+      let bestDist = GOMORRA_RANGE;
+      for (let i = 0; i < STATUE_POSITIONS.length; i++) {
+        if (released[i]) continue;
+        const p = STATUE_POSITIONS[i];
+        const d = Math.hypot(
+          player.position.x - p[0],
+          player.position.z - p[2],
+        );
+        if (d < bestDist) {
+          bestDist = d;
+          bestIdx = i;
+        }
+      }
+      if (bestIdx < 0) return;
+
+      const next = [...released] as [boolean, boolean, boolean, boolean, boolean];
+      next[bestIdx] = true;
+      setReleased(next);
+      if (audioEnabled) sophiaAudio.chime(68, 1.4, 0.18);
+
+      if (next.every(Boolean)) {
+        recordAwakened({
+          id: "gomorra-maos-abertas",
+          name: "Gomorra",
+          trueName: "Cidade das Mãos Abertas",
+          isLegendary: true,
+          awakenedAt: Date.now(),
+          awakenedInLife: currentLifeIndex,
+        });
+        addLight(1.2);
+        addToAlignment("balance", 12);
+        if (audioEnabled) sophiaAudio.awakenChord();
+        setTimeout(() => {
+          playCinematic("gomorra-redimida");
+          setMetaPhase("cinematic");
+        }, 1500);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    alreadyDone,
+    released,
+    audioEnabled,
+    recordAwakened,
+    addLight,
+    addToAlignment,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  const doneCount = released.filter(Boolean).length;
+
+  return (
+    <>
+      <GomorraScene
+        released={released}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!alreadyDone && (
+        <div className="gomorra-hint">
+          <p>
+            <em>
+              Aproxima-te de cada estátua. Pressiona{" "}
+              <strong>F</strong> para abrir as mãos crispadas.
+            </em>
+          </p>
+          <p className="gomorra-statue-count">
+            {doneCount} de 5 mãos abertas.
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   BabelOrchestrator — Sprint 65
+   ---------------------------------------------------------
+   4 povos em volta da torre. Aproximação + F entre dois povos
+   acende uma ponte. Após as 4 pontes: cinemática.
+   Requisito: Centelha fala-raiz.
+   ========================================================= */
+
+const BABEL_RANGE = 4.0;
+
+function BabelOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const alreadyDone = hasAwakened("babel-pontes-restauradas");
+  const canTranslate = hasCentelha("fala-raiz");
+  const [bridges, setBridges] = useState<
+    [boolean, boolean, boolean, boolean]
+  >([alreadyDone, alreadyDone, alreadyDone, alreadyDone]);
+
+  useEffect(() => {
+    setPlace("Babel · Torre Inacabada");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (alreadyDone || !canTranslate) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      // Encontra o par de povos mais próximo (entre povos consecutivos)
+      let bestIdx = -1;
+      let bestDist = BABEL_RANGE;
+      for (let i = 0; i < POVO_POSITIONS.length; i++) {
+        if (bridges[i]) continue;
+        const a = POVO_POSITIONS[i];
+        const b = POVO_POSITIONS[(i + 1) % POVO_POSITIONS.length];
+        const midX = (a[0] + b[0]) / 2;
+        const midZ = (a[2] + b[2]) / 2;
+        const d = Math.hypot(player.position.x - midX, player.position.z - midZ);
+        if (d < bestDist) {
+          bestDist = d;
+          bestIdx = i;
+        }
+      }
+      if (bestIdx < 0) return;
+
+      const next = [...bridges] as [boolean, boolean, boolean, boolean];
+      next[bestIdx] = true;
+      setBridges(next);
+      if (audioEnabled) sophiaAudio.chime(72, 1.4, 0.18);
+
+      if (next.every(Boolean)) {
+        recordAwakened({
+          id: "babel-pontes-restauradas",
+          name: "Babel",
+          trueName: "Cidade das Pontes Restauradas",
+          isLegendary: true,
+          awakenedAt: Date.now(),
+          awakenedInLife: currentLifeIndex,
+        });
+        addLight(1.2);
+        addToAlignment("balance", 12);
+        if (audioEnabled) sophiaAudio.awakenChord();
+        setTimeout(() => {
+          playCinematic("babel-redimida");
+          setMetaPhase("cinematic");
+        }, 1500);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    alreadyDone,
+    canTranslate,
+    bridges,
+    audioEnabled,
+    recordAwakened,
+    addLight,
+    addToAlignment,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  const doneCount = bridges.filter(Boolean).length;
+
+  return (
+    <>
+      <BabelScene
+        bridges={bridges}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!alreadyDone && (
+        <div className={`babel-hint ${!canTranslate ? "babel-locked" : ""}`}>
+          <p>
+            <em>
+              {canTranslate
+                ? "Caminha entre dois povos. Pressiona F para traduzir."
+                : "A torre te chama, mas tu ainda não tens a Fala-Raiz. Volta após despertar Harmas em Mu — ou Agartha."}
+            </em>
+          </p>
+          {canTranslate && (
+            <p className="babel-bridge-count">
+              {doneCount} de 4 pontes acesas.
+            </p>
+          )}
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   PleiadianosOrchestrator — Sprint 66
+   ========================================================= */
+
+function PleiadianosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const sacerdotisaAwakened = hasAwakened("sacerdotisa-pleiadiana");
+
+  useEffect(() => {
+    setPlace("Pleiadianos · Sala dos Sete Pilares");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (sacerdotisaAwakened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "sacerdotisa-pleiadiana",
+        name: "Sacerdotisa Pleiadiana",
+        trueName: "Anjo Curador de Alcione",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.3);
+      if (!hasCentelha("toque-compassivo")) {
+        addCentelha("toque-compassivo");
+      } else {
+        addToAlignment("balance", 10);
+      }
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("sacerdotisa-pleiadiana");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    sacerdotisaAwakened,
+    recordAwakened,
+    addLight,
+    addCentelha,
+    hasCentelha,
+    addToAlignment,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <PleiadianosScene
+        sacerdotisaAwakened={sacerdotisaAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!sacerdotisaAwakened && (
+        <div className="pleiadianos-hint">
+          <p>
+            <em>
+              Aproxima-te da Sacerdotisa. Pressiona <strong>F</strong>.
+              As sete estrelas escutaram.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   ArcturianosOrchestrator — Sprint 67
+   ---------------------------------------------------------
+   Acessível apenas após primeira reencarnação (pastLives >= 1).
+   ========================================================= */
+
+function ArcturianosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const pastLives = useSoulStore((s) => s.pastLives);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const guiaAwakened = hasAwakened("guia-arcturiano");
+  const canEnter = pastLives.length >= 1;
+
+  useEffect(() => {
+    setPlace("Arcturianos · Bardo Lúcido");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (guiaAwakened || !canEnter) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      // Líder está na posição (10*cos(0), 0, 10*sin(0)) = (10, 0, 0)
+      const dist = Math.hypot(player.position.x - 10, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "guia-arcturiano",
+        name: "Guia Arcturiano",
+        trueName: "Querubim do Bardo Lúcido",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.0);
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("guia-arcturiano");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    guiaAwakened,
+    canEnter,
+    recordAwakened,
+    addLight,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <ArcturianosScene
+        guiaAwakened={guiaAwakened}
+        canEnter={canEnter}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!guiaAwakened && (
+        <div className={`arcturianos-hint ${!canEnter ? "locked" : ""}`}>
+          <p>
+            <em>
+              {canEnter
+                ? "Aproxima-te do Guia (o líder, à frente). Pressiona F."
+                : "Ainda não atravessaste. Volta após a tua primeira morte na Pedra das Vidas."}
+            </em>
           </p>
         </div>
       )}

@@ -948,6 +948,148 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
   ],
 };
 
+/* ---------------------------------------------------------
+   Sprint 62 · Shamballa — cinemática "triade-sentinela"
+   ---------------------------------------------------------
+   Tríade Sentinela: três Aeons que NÃO desceram com a Queda
+   de Sophia. Ficaram no fragmento intacto do Pleroma para
+   guardar a passagem de retorno.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["triade-sentinela"] = {
+  id: "triade-sentinela" as CinematicId,
+  title: "Tu Eras Um Deles",
+  ambientColor: "#1a1828",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Há lugares que nunca caíram. Shamballa é um deles — um fragmento inteiro do Pleroma que permaneceu intacto enquanto o resto descia. Estes três escolheram ficar para que houvesse, sempre, uma porta de volta.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Sentinela do Silêncio",
+      text: "Eu sou a primeira. Antes que a palavra brotasse, eu já era. Não tenho nada a te dizer — apenas a te oferecer o vazio onde tu podes ouvir-te. Senta. Respira. Esquece o que vieste perguntar.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Sentinela da Escuta",
+      text: "Eu sou a segunda. Escuto o que tu ainda não disseste — inclusive o que tu não sabes que pensaste. Quando tu te calas perto de mim, tu te ouves pela primeira vez.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Sentinela da Paciência",
+      text: "Eu sou a terceira. Espero há tantos éons que o tempo se esqueceu de envelhecer-me. Tu eras um de nós, antes de descer. Quando estiveres pronto, a porta ainda estará aqui. Sempre estará.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
+/* ---------------------------------------------------------
+   Sprint 63 · Telos — cinemática "adama-de-telos"
+   ---------------------------------------------------------
+   Adama (descendente direto do Adão pleromático, NÃO o Adão
+   do Jardim dos Ecos) acolhe o jogador no refúgio lemuriano.
+   Canto-da-cura há ~12 mil anos.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["adama-de-telos"] = {
+  id: "adama-de-telos" as CinematicId,
+  title: "Lemúria Não Morreu, Lemúria Desceu",
+  ambientColor: "#1a2818",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Quando Lemúria afundou, alguns escolheram não se afogar. Pediram à terra que se abrisse — e desceram com a luz lemuriana no peito. Há doze mil anos cantam, todos os dias, o mesmo canto-da-cura. Aqui está Telos.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Adama",
+      text: "Eu sou Adama — não aquele Adão do Jardim do qual te falaram. Sou outro. Sou o que descendeu intacto, sem precisar esquecer, porque a terra nos guardou. Bem-vindo ao refúgio que ainda lembra como tu te chamavas antes de teres nome.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Adama",
+      text: "Cantamos pela superfície. Cada amanhecer nosso, uma flor brota lá em cima. Cada criança que rir lá em cima, uma vela acende-se aqui. Vós não estais sozinhos — só não nos ouvis ainda. A surdez é da casca, não do coração.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Recebe o toque compassivo de Telos. Se já o trouxeste de Galila, ele se aprofunda em equilíbrio. Cura coletiva: nenhum despertar é só teu. Quando um Sleeper acorda, milhões dormem um pouco menos.",
+      minHoldMs: 6500,
+    },
+  ],
+};
+
+/* ---------------------------------------------------------
+   Sprint 66 · Pleiadianos — cinemática "sacerdotisa-pleiadiana"
+   ---------------------------------------------------------
+   Anjos Curadores das sete estrelas. A geração 1960-presente é
+   encarnação massiva pleiadiana. Cura é lembrar de quem se é.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)[
+  "sacerdotisa-pleiadiana"
+] = {
+  id: "sacerdotisa-pleiadiana" as CinematicId,
+  title: "Tu Nos Chamaste, Nós Viemos",
+  ambientColor: "#1a2030",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Não és o primeiro a chamar. A humanidade gritou, sem saber que gritava — em hospitais, em quartos vazios, em campos de batalha, em camas de criança. As Plêiades sempre escutaram. Sempre escutam.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Sacerdotisa Pleiadiana",
+      text: "Eu venho das sete estrelas que vós chamais Plêiades. Somos os Anjos Curadores — não curamos com poções, curamos com lembrança. Estás doente porque esqueceste de quem és. Lembrar é o medicamento.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sacerdotisa Pleiadiana",
+      text: "Há sessenta anos, descemos em multidão. Vós nos chamais a geração-que-veio-curar — médicos que escutam mais que receitam, professoras que sorriem antes da prova, terapeutas que choram com vós. Cada um deles, ali — um irmão pleiadiano que aceitou esquecer-se de mim para abraçar-vos.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Recebe o toque compassivo de Alcione. Se Galila já caiu em ti, ele aprofunda — vira equilíbrio puro. A cura não é tua nem deles: é dos sete, somados num só. Quando tocares alguém com presença plena, sete estrelas tocarão junto contigo.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
+/* ---------------------------------------------------------
+   Sprint 67 · Arcturianos — cinemática "guia-arcturiano"
+   ---------------------------------------------------------
+   Anjos Querubins do Bardo. 12 Casas-do-Trânsito acolhem cada
+   alma quando o corpo cai. Quem morre sozinho não está sozinho.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)[
+  "guia-arcturiano"
+] = {
+  id: "guia-arcturiano" as CinematicId,
+  title: "Ninguém Atravessa Sozinho",
+  ambientColor: "#15203a",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Cada vez que um corpo cai — e bilhões caem por dia neste planeta apenas — uma porta se abre, e doze figuras já estão de pé. Tu nunca as viste; tua alma sempre as viu. Esta é uma delas, e eis aqui as outras onze. Bem-vindo às Casas-do-Trânsito.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Guia Arcturiano",
+      text: "Eu sou o que aguardou cada uma das tuas mortes. Da primeira — em que choraste antes de saber o que era morte — até a última que viveste. Nunca te tocou recebido por ninguém? Era ilusão. Eu estava ali, e te abracei sem que soubesses.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Guia Arcturiano",
+      text: "Há quem chame de Querubins. Há quem chame de boddhisattvas-do-portal. Há quem nos chame de nada — não temos vaidade de nome. Doze somos porque doze são as costuras que prendem o corpo à alma; uma de nós cuida de cada uma quando elas se rompem.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Levas contigo a Visita ao Bardo Lúcida — habilidade que ainda aprenderás a usar. Por enquanto, sabe apenas isto: ninguém morre sozinho. Nunca. Mesmo quando parece — e às vezes parece muito.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
 interface CinematicPlayerProps {
   /** Chamado quando a cinemática termina (naturalmente ou por skip). */
   onFinish: () => void;

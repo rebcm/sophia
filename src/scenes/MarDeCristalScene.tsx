@@ -43,7 +43,13 @@ export type MarDestino =
   | "labirinto-das-eras"
   | "galeria-dos-principados"
   | "agartha"
-  | "sodoma";
+  | "sodoma"
+  | "shamballa"
+  | "telos"
+  | "gomorra"
+  | "babel"
+  | "pleiadianos"
+  | "arcturianos";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -393,6 +399,90 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "sodoma" : null)
+          }
+        />
+      )}
+
+      {/* Shamballa — fragmento do Pleroma (destrava após Iaoth/Pré-Adamita) */}
+      {iaothDefeated && (
+        <Portal
+          position={[8, 0.4, -4.5]}
+          label="Shamballa"
+          subLabel="(o fragmento intacto)"
+          color="#fff5d8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "shamballa" : null)
+          }
+        />
+      )}
+
+      {/* Telos — refúgio lemuriano (destrava após Galila/Lemúria) */}
+      {galilaDefeated && (
+        <Portal
+          position={[-8, 0.4, -4.5]}
+          label="Telos"
+          subLabel="(Lemúria não morreu)"
+          color="#88d8a0"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "telos" : null)
+          }
+        />
+      )}
+
+      {/* Gomorra — cidade da posse (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[-4, 0.4, 8]}
+          label="Gomorra"
+          subLabel="(cinco mãos esperam abrir-se)"
+          color="#a89878"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "gomorra" : null)
+          }
+        />
+      )}
+
+      {/* Babel — palavra fragmentada (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[4, 0.4, 8]}
+          label="Babel"
+          subLabel="(quatro pontes esperam ser ditas)"
+          color="#c89858"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "babel" : null)
+          }
+        />
+      )}
+
+      {/* Pleiadianos — cósmicos (5+ Centelhas) */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[12, 0.4, -4.5]}
+          label="Pleiadianos"
+          subLabel="(as sete estrelas chamam)"
+          color="#d8a0ff"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "pleiadianos" : null)
+          }
+        />
+      )}
+
+      {/* Arcturianos — cósmicos (após primeira reencarnação) */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[-12, 0.4, -4.5]}
+          label="Arcturianos"
+          subLabel="(doze guias para quem atravessou)"
+          color="#88c8e8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "arcturianos" : null)
           }
         />
       )}

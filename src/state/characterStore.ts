@@ -66,6 +66,12 @@ export type SceneId =
   | "galeria-dos-principados" // Sprint 27 — 12 Principados contempláveis
   | "agartha" // Sprint 60 — cidade intra-terrena
   | "sodoma" // Sprint 61 — cidade aguardando julgamento
+  | "shamballa" // Sprint 62 — fragmento do Pleroma
+  | "telos" // Sprint 63 — refúgio lemuriano
+  | "gomorra" // Sprint 64 — cidade da posse
+  | "babel" // Sprint 65 — palavra fragmentada
+  | "pleiadianos" // Sprint 66 — sala dos sete pilares
+  | "arcturianos" // Sprint 67 — doze casas-do-trânsito
   | "bardo";
 
 export interface BodyConfig {

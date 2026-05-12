@@ -28,9 +28,15 @@ export type CinematicId =
   | "anuncio-conjunto" // 16.5 — trégua cósmica
   | "veu" // 17
   | "monada" // 18
-  // Sprint 60-61 · expansão (intra-terrenas + julgamento)
+  // Sprint 60-67 · expansão (intra-terrenas + julgamento + cósmicas)
   | "rei-do-mundo" // Agartha
-  | "sodoma-interedida"; // Sodoma
+  | "sodoma-interedida" // Sodoma
+  | "triade-sentinela" // Shamballa
+  | "adama-de-telos" // Telos
+  | "gomorra-redimida" // Gomorra
+  | "babel-redimida" // Babel
+  | "sacerdotisa-pleiadiana" // Pleiadianos
+  | "guia-arcturiano"; // Arcturianos
 
 interface CinematicEntry {
   id: CinematicId;
