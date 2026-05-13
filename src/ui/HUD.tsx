@@ -5,6 +5,7 @@ import {
   computeCentelhaPhase,
   phaseToHudLabel,
 } from "../systems/CentelhaController";
+import { powerPhaseFromState, phaseLabel } from "../systems/PowerController";
 
 /* =========================================================
    HUD — interface mínima do jogo
@@ -26,7 +27,11 @@ export function HUD() {
 
   const light = useSoulStore((s) => s.light);
   const centelhasCount = useSoulStore((s) => s.centelhas.size);
+  const centelhas = useSoulStore((s) => s.centelhas);
   const alignment = useSoulStore((s) => s.alignment);
+  const awakenedSleepers = useSoulStore((s) => s.awakenedSleepers);
+  const legendariesCount = awakenedSleepers.filter((s) => s.isLegendary).length;
+  const powerPhase = powerPhaseFromState(light, centelhas, legendariesCount);
 
   // Light percent: 0..9 → 4..100
   const pct = Math.min(100, 4 + (light / 9) * 96);
@@ -88,6 +93,11 @@ export function HUD() {
           <span className="practice-name">{practiceLabel}</span>
         </div>
       )}
+
+      <div className={`power-chip power-${powerPhase}`}>
+        <span className="power-marker">✦</span>
+        <span className="power-label">{phaseLabel(powerPhase)}</span>
+      </div>
 
       {hint && <div className="hint">{hint}</div>}
 

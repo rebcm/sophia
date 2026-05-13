@@ -9,6 +9,12 @@ import {
   ALL_PHASES,
   phaseToHudLabel,
 } from "../systems/CentelhaController";
+import {
+  POWER_PHASES,
+  POWER_PHASES_ORDER,
+  powerPhaseFromState,
+  type PowerPhase,
+} from "../systems/PowerController";
 
 /* =========================================================
    <Codex /> — registro da jornada da alma
@@ -28,7 +34,8 @@ type Tab =
   | "praticas"
   | "glossario"
   | "marcos"
-  | "missoes";
+  | "missoes"
+  | "poderes";
 
 interface CodexProps {
   open: boolean;
@@ -105,6 +112,11 @@ export function Codex({ open, onClose }: CodexProps) {
             active={tab === "missoes"}
             onClick={() => setTab("missoes")}
           />
+          <CodexTab
+            label="Poderes"
+            active={tab === "poderes"}
+            onClick={() => setTab("poderes")}
+          />
         </nav>
 
         <div className="codex-body">
@@ -116,6 +128,7 @@ export function Codex({ open, onClose }: CodexProps) {
           {tab === "glossario" && <GlossarioTab />}
           {tab === "marcos" && <MarcosTab />}
           {tab === "missoes" && <MissoesTab />}
+          {tab === "poderes" && <PoderesTab />}
         </div>
       </div>
     </div>
@@ -2035,6 +2048,73 @@ function MissoesTab() {
             <em>Esta categoria está inteira concluída.</em>
           </li>
         )}
+      </ul>
+    </div>
+  );
+}
+
+/* ---------------- PoderesTab (Sprint 31) ---------------- */
+
+function PoderesTab() {
+  const light = useSoulStore((s) => s.light);
+  const centelhas = useSoulStore((s) => s.centelhas);
+  const awakenedSleepers = useSoulStore((s) => s.awakenedSleepers);
+  const legendariesCount = awakenedSleepers.filter((s) => s.isLegendary).length;
+  const currentPhase = powerPhaseFromState(
+    light,
+    centelhas,
+    legendariesCount,
+  );
+
+  const currentOrder = POWER_PHASES[currentPhase].order;
+
+  return (
+    <div className="codex-tab-content">
+      <h3>
+        Poderes
+        <span className="count">
+          (fase {currentOrder} de 5)
+        </span>
+      </h3>
+      <p className="codex-tab-sub">
+        <em>
+          A alma evolui em cinco fases. Não é progresso linear de RPG —
+          é lembrança de quem tu já és. Cada fase abre o que sempre
+          esteve disponível, mas estava esquecido.
+        </em>
+      </p>
+      <ul className="poderes-list">
+        {POWER_PHASES_ORDER.map((id) => {
+          const config = POWER_PHASES[id];
+          const unlocked = config.order <= currentOrder;
+          const isCurrent = id === currentPhase;
+          return (
+            <li
+              key={id}
+              className={`poder-card poder-${id} ${unlocked ? "poder-unlocked" : "poder-locked"} ${isCurrent ? "poder-current" : ""}`}
+            >
+              <div className="poder-header">
+                <span className="poder-order">Fase {config.order}</span>
+                <span className="poder-name">{config.label}</span>
+                {isCurrent && (
+                  <span className="poder-current-badge">atual</span>
+                )}
+              </div>
+              <p className="poder-tagline">
+                <em>"{config.tagline}"</em>
+              </p>
+              <p className="poder-description">{config.description}</p>
+              <div className="poder-abilities">
+                <strong>Habilidades:</strong>
+                <ul>
+                  {config.abilities.map((a, i) => (
+                    <li key={i}>{a}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

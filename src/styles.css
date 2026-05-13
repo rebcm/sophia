@@ -5265,3 +5265,154 @@ body.a11y-high-contrast .pause-hint {
   font-size: 0.92rem;
   opacity: 0.7;
 }
+
+/* =========================================================
+   HUD · Power chip (Sprint 31)
+   ========================================================= */
+.power-chip {
+  position: fixed;
+  top: 156px;
+  right: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(28, 18, 40, 0.75);
+  border: 1px solid;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  z-index: 30;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  letter-spacing: 0.06em;
+}
+.power-acordado {
+  border-color: rgba(255, 233, 208, 0.55);
+  color: #ffe9d0;
+}
+.power-vidente {
+  border-color: rgba(200, 154, 255, 0.65);
+  color: #e8b8ff;
+  box-shadow: 0 0 14px rgba(200, 154, 255, 0.18);
+}
+.power-taumaturgo {
+  border-color: rgba(255, 212, 90, 0.7);
+  color: #ffd45a;
+  box-shadow: 0 0 16px rgba(255, 212, 90, 0.2);
+}
+.power-aeon-humano {
+  border-color: rgba(168, 232, 200, 0.7);
+  color: #c8f0d8;
+  box-shadow: 0 0 18px rgba(168, 232, 200, 0.25);
+}
+.power-espirito-puro {
+  border-color: rgba(255, 245, 216, 0.85);
+  color: #fff5d8;
+  box-shadow: 0 0 22px rgba(255, 245, 216, 0.4);
+  background: linear-gradient(
+    180deg,
+    rgba(50, 30, 80, 0.7) 0%,
+    rgba(30, 30, 60, 0.85) 100%
+  );
+}
+.power-marker {
+  font-size: 0.95rem;
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* =========================================================
+   Codex · Poderes tab (Sprint 31)
+   ========================================================= */
+.poderes-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.poder-card {
+  padding: 16px 18px;
+  background: rgba(20, 16, 32, 0.55);
+  border: 1px solid rgba(168, 120, 216, 0.25);
+  border-left: 4px solid;
+  border-radius: 6px;
+  transition: opacity 0.3s ease;
+}
+.poder-locked { opacity: 0.45; }
+.poder-unlocked { opacity: 1; }
+.poder-current {
+  background: rgba(50, 36, 18, 0.55);
+  box-shadow: 0 0 22px rgba(255, 212, 90, 0.18),
+    inset 0 0 18px rgba(255, 212, 90, 0.08);
+}
+.poder-acordado { border-left-color: #ffe9d0; }
+.poder-vidente { border-left-color: #c89aff; }
+.poder-taumaturgo { border-left-color: #ffd45a; }
+.poder-aeon-humano { border-left-color: #88e8a0; }
+.poder-espirito-puro { border-left-color: #fff5d8; }
+.poder-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.poder-order {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  opacity: 0.6;
+}
+.poder-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #fff5d8;
+  letter-spacing: 0.05em;
+}
+.poder-current-badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  background: rgba(255, 212, 90, 0.2);
+  border: 1px solid rgba(255, 212, 90, 0.6);
+  color: #ffd45a;
+  padding: 2px 9px;
+  border-radius: 999px;
+}
+.poder-tagline {
+  margin: 0 0 10px;
+  font-size: 1rem;
+  color: #fff5d8;
+  text-shadow: 0 0 12px rgba(255, 212, 90, 0.18);
+}
+.poder-description {
+  margin: 0 0 12px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+.poder-abilities {
+  font-size: 0.88rem;
+}
+.poder-abilities strong {
+  display: block;
+  color: #ffd45a;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.poder-abilities ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.poder-abilities li {
+  padding: 4px 0 4px 16px;
+  border-left: 1px dashed rgba(168, 120, 216, 0.25);
+  margin-bottom: 3px;
+  opacity: 0.88;
+  line-height: 1.45;
+}
