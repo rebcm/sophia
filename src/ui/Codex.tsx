@@ -536,6 +536,7 @@ function CentelhasTab() {
    ========================================================= */
 
 const CINEMATIC_LABELS: Partial<Record<CinematicId, string>> = {
+  // Arco principal (18 + Anúncio Conjunto)
   prologo: "Prólogo · Antes do Tempo",
   "athoth-cai": "Athoth Cai · O Sono Era Roubo",
   "yobel-cai": "Yobel Cai · O Ouro Era Sombra",
@@ -555,6 +556,36 @@ const CINEMATIC_LABELS: Partial<Record<CinematicId, string>> = {
   "anuncio-conjunto": "O Anúncio Conjunto",
   veu: "O Véu",
   monada: "A Mônada",
+
+  // Expansão · Intra-Terrenas (Sprints 60, 62, 63, 68)
+  "rei-do-mundo": "Agartha · O Reino Que Lembrou",
+  "triade-sentinela": "Shamballa · Tu Eras Um Deles",
+  "adama-de-telos": "Telos · Lemúria Não Morreu, Lemúria Desceu",
+  "mestre-andino": "Erks · Os Andes Têm Portais",
+
+  // Expansão · Cósmicas (Sprints 66, 67, 69, 74, 75, 76)
+  "sacerdotisa-pleiadiana": "Pleiadianos · Tu Nos Chamaste, Nós Viemos",
+  "guia-arcturiano": "Arcturianos · Ninguém Atravessa Sozinho",
+  "escriba-siriaco": "Siríacos · Eu Te Lembrei o Tempo Todo",
+  "bibliotecario-andromedano":
+    "Andromedanos · Esquecer É Guardar Com Cuidado",
+  "cinza-redimido": "Cinzas · Nem Todos Os Filhos Foram Cruéis",
+  "reptilianos-dissolvidos": "Reptilianos · Apenas Escondidos, Não Fortes",
+
+  // Expansão · Cidades-Julgamento (Sprints 61, 64, 65, 70-82)
+  "sodoma-interedida": "Sodoma · Pode Esperar",
+  "gomorra-redimida": "Gomorra · Mãos Que Aprenderam A Abrir",
+  "babel-redimida": "Babel · A Palavra Antes Da Palavra",
+  "adama-redimida": "Adamá · A Cidade Tocou A Terra",
+  "tzeboim-redimida": "Tzeboim · Os Espelhos Que Caíram",
+  "loth-de-bela": "Bela · Quem Recebe O Estrangeiro",
+  "jonas-de-ninive": "Nínive · A Cidade Que Lembrou",
+  "helena-de-troia": "Tróia · Eu Não Pedi Para Ser A Causa",
+  "dido-de-cartago": "Cartago · Não Havia Heroísmo, Havia Medo",
+  "avo-catalhoyuk": "Catalhöyük · Já Foi Vivida — Pode Ser Vivida De Novo",
+  "pompeia-redimida": "Pompeia · Tu Estiveste Viva O Tempo Todo",
+  "yonaguni-reconhecida": "Yonaguni · O Que O Mar Cobriu Ainda Lembra",
+  "atlantis-arquetipica": "Atlântis Arquetípica · O Que Ela Era — Antes",
 };
 
 function CinematicasTab() {
