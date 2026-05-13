@@ -78,6 +78,15 @@ export type SceneId =
   | "tzeboim" // Sprint 71 — cidade-espelho social
   | "bela" // Sprint 72 — cidade-exemplo (Loth)
   | "ninive" // Sprint 73 — cidade-exemplo (Jonas)
+  | "andromedanos" // Sprint 74 — biblioteca cósmica
+  | "cinzas" // Sprint 75 — experimentos sem alma
+  | "reptilianos" // Sprint 76 — aliados do Demiurgo
+  | "troia" // Sprint 77 — desejo destrutivo
+  | "cartago" // Sprint 78 — resistência cega
+  | "catalhoyuk" // Sprint 79 — vila sem hierarquia
+  | "pompeia" // Sprint 80 — esquecimento súbito
+  | "yonaguni" // Sprint 81 — submersa
+  | "atlantis-arquetipica" // Sprint 82 — versão original
   | "bardo";
 
 export interface BodyConfig {

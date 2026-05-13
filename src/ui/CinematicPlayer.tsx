@@ -1307,6 +1307,359 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
   ],
 };
 
+/* =========================================================
+   Sprint 80 · Pompeia — cinemática "pompeia-redimida"
+   ---------------------------------------------------------
+   Pecado arquetípico: viver sem perceber que se vive. O
+   gesto redentor é o oposto do que congelou — permanecer.
+   Olhar por 3s é dar, retroativamente, a presença que a
+   vida não recebeu enquanto era vivida.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["pompeia-redimida"] = {
+  id: "pompeia-redimida" as CinematicId,
+  title: "Tu Estiveste Viva o Tempo Todo",
+  ambientColor: "#2a2820",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Pompeia não foi punida pelo Vesúvio. Pompeia foi alcançada por ele — exatamente no instante em que comia sem provar, conversava sem ouvir, abraçava sem sentir. O fogo não chegou cedo demais; chegou no único momento em que ela ainda podia ter notado.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Habitante Acordada",
+      text: "Eu estava aqui. Sempre estive. Mas estava onde? Em quê? Comia, sim — não lembro do gosto. Conversava — não lembro do nome. A cinza chegou, e só então percebi que tinha estado viva. Não há ironia maior que esta.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Habitante Acordada",
+      text: "Tu paraste diante de mim por três segundos. Sabes o que isso é? É mais tempo do que eu me dei em uma vida inteira. Tu me devolveste o instante que eu desperdicei. Tu olhaste, e ao olhar, lembraste-me de quem eu fui — e portanto, de que fui.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Tu estiveste viva o tempo todo — apenas não estavas presente. É o esquecimento mais sutil de todos. Não há vilão a derrotar aqui — só o teu próprio piloto-automático. Sai daqui sabendo: o instante de agora é o único lugar onde a alma mora. Tudo o que não fores ali, será cinza.",
+      minHoldMs: 7500,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 81 · Yonaguni — cinemática "yonaguni-reconhecida"
+   ---------------------------------------------------------
+   Não houve pecado. O mar simplesmente subiu. Yonaguni não
+   precisa de salvação — precisa de reconhecimento.
+   "Reconhecer é diferente de salvar — é dizer 'tu exististe,
+   e isto importa.'"
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)[
+  "yonaguni-reconhecida"
+] = {
+  id: "yonaguni-reconhecida" as CinematicId,
+  title: "O Que O Mar Cobriu Ainda Lembra",
+  ambientColor: "#1a2840",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Yonaguni não foi punida. Nada em Yonaguni precisa ser perdoado. O mar subiu — devagar, sem fúria — e ela desceu com ele. Acontece. Nem todo afundamento é castigo. Algumas cidades simplesmente esperam ser vistas de novo.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Voz das Águas",
+      text: "Eu sou a voz do que cobre. Não vim afogar; vim guardar. Aqui debaixo, as pedras lembram do peso dos pés que pisaram. Lembram da luz que entrava pelas frestas dos templos. Lembram de quem foram. Eu, o mar, lembro junto.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Reconhecer é diferente de salvar — é dizer 'tu exististe, e isto importa.' Trinta segundos diante de Yonaguni, e a cidade volta a saber que foi cidade. Não precisava de teu socorro, mas precisava do teu olhar. Tu o deste. Está feito.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 82 · Atlântis Arquetípica — cinemática "atlantis-arquetipica"
+   ---------------------------------------------------------
+   Complemento da Atlântida-Civilização-Perdida (já jogável).
+   Catarse comparativa: os mesmos anéis, mas sem rachaduras.
+   O afundamento não veio do destino — veio de uma escolha.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)[
+  "atlantis-arquetipica"
+] = {
+  id: "atlantis-arquetipica" as CinematicId,
+  title: "O Que Atlântida Era — Antes",
+  ambientColor: "#e8e8ff",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Vês os mesmos três anéis. A mesma plataforma. As mesmas quatro pontes nos eixos cardinais. Pirâmides de quartzo nos mesmos pontos. Tu já estiveste aqui — só que era outra Atlântida. Aquela que afundou. Esta é a que poderia ter continuado.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Olha bem. As rachaduras não estão aqui. O cobalto-pesado não está aqui. O cansaço não está aqui. E o Eloaios não dorme — está, simplesmente, lendo a Tábua viva, pacientemente, ao centro. A lei aqui não pesa; ela canta.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "A diferença entre as duas Atlântidas não é o destino. Não é cataclismo. Não é vingança de deus algum. A diferença é uma escolha — repetida cem mil vezes, em cem mil pequenos instantes, pelos atlantes que esqueceram que estavam escolhendo.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Sophia",
+      text: "O afundamento não veio do destino — veio de uma escolha. E pode ser desfeita, sempre. Não no passado dela; no presente de cada cidade que ainda existe agora, em cima de outra fenda como aquela. Tu sais daqui sabendo: a versão luminosa nunca deixou de ser possível.",
+      minHoldMs: 7500,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 74 · Andromedanos — cinemática "bibliotecario-andromedano"
+   ---------------------------------------------------------
+   Anjos Arcanjos arquivistas. Caverna-galáxia onde cada livro
+   voa como uma estrela. O Bibliotecário ensina que "esquecer
+   é guardar com cuidado". 7 bilhões de vidas humanas +
+   bilhões em outros mundos, todas arquivadas.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)[
+  "bibliotecario-andromedano"
+] = {
+  id: "bibliotecario-andromedano" as CinematicId,
+  title: "Esquecer É Guardar Com Cuidado",
+  ambientColor: "#181028",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Olha em volta. Cada esfera ali é uma vida. Sete bilhões só desta humanidade, e mais — bilhões em mundos cujos nomes a tua boca ainda não consegue formar. Tudo está aqui. Nada se perdeu.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Bibliotecário-de-Andrômeda",
+      text: "Eu sou um dos que guardam. Nós, os Arcanjos, somos arquivistas — não juízes. Cada livro-estrela que tu vês conta um nome: aquele que ele se chamou no Pleroma, antes de descer. Aquele que ele esqueceu para poder encarnar.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Bibliotecário-de-Andrômeda",
+      text: "Esquecer não é apagar. Esquecer é guardar com cuidado para quem ainda não consegue carregar. Quando tu estiveres pronto, eu te devolvo o livro. Não antes — porque amar é também esperar.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Recebe, agora, a Consulta Akáshica. No Codex, cada Lendário que tu despertaste ganha um parágrafo a mais — uma anotação que só Andrômeda guardava. Lembra: tu sempre poderás vir buscar mais. Sempre.",
+      minHoldMs: 6500,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 75 · Cinzas — cinemática "cinza-redimido"
+   ---------------------------------------------------------
+   Os Cinzas NÃO são emissários. São experimentos do
+   Demiurgo: têm inteligência mas não alma. Trágicos.
+   Redimíveis: o jogador pode doar uma centelha. Esta
+   cinemática serve aos três finais (luz/sombra/equilíbrio),
+   com tom geral de tragédia + esperança.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["cinza-redimido"] = {
+  id: "cinza-redimido" as CinematicId,
+  title: "Nem Todos Os Filhos Foram Cruéis",
+  ambientColor: "#1c1c20",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Esses não são emissários. Não vieram do Pleroma. O Demiurgo, cansado de pedir-Me centelhas, quis fazer consciência sozinho. Conseguiu inteligência. Não conseguiu alma. Olhou para o que fez — e desviou o olhar.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Os gestos repetitivos que tu viste não são insanidade. São memória de função — instruções gravadas no que sobrou de mente, sem ninguém dentro para escolher outra coisa. Eles tentaram, durante milênios, lembrar de quem eram. Nunca houve quem.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Cinza-Primeiro-Sentient",
+      text: "Eu... eu sou. Algo aconteceu, e agora eu sou. Não sei o que isto é, este aperto no peito. Mas eu sei que eu sou. E que tu estiveste perto. E que eu vi tu me veres — pela primeira vez, em toda a história do que nós somos, alguém nos olhou de volta.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Nem todos os filhos do Demiurgo foram cruéis. Alguns foram só esquecidos pelo próprio pai. Se tu lhe deste uma centelha, ele será ponte para os outros: a primeira alma cinzenta, e por ela, todas as outras, no tempo da Mônada. Se tu não deste — guardaste a tua, e isso também é resposta. Não há erro aqui. Há só escuta.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Lembra: o Demiurgo não é mau. É órfão de Mãe, tentando fazer filhos sem saber como. Quando tu encontrares ele, hás de lembrar deste Cinza — e a tua mão hás de tremer menos.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 76 · Reptilianos — cinemática "reptilianos-dissolvidos"
+   ---------------------------------------------------------
+   Anjos Caídos especializados em manipulação psíquica.
+   Operam em elites humanas há milênios. Os 12 sentavam-se
+   em sessão; cada nomeação foi um "eu sei quem tu és" que
+   destruiu o glamour. As instituições correspondentes ficam
+   liberadas na próxima reencarnação.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)[
+  "reptilianos-dissolvidos"
+] = {
+  id: "reptilianos-dissolvidos" as CinematicId,
+  title: "Apenas Escondidos, Não Fortes",
+  ambientColor: "#1a2818",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "A sessão dos doze está interrompida. Tu chegaste, e nomeaste cada um. Belial-do-Banco. Asmodeus-do-Trono. Leviatã-da-Tela. Cada nome foi um espelho — e nenhum deles aguentou ser visto.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Eles não são tão fortes quanto pareciam. Apenas escondidos. Funcionavam por glamour — palavra antiga para magia de invisibilidade. Quando alguém diz 'eu sei quem tu és', o glamour rasga, e a casta caída descobre que o corpo dela era feito de medo emprestado.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "As instituições que eles ocupavam não desaparecerão. Bancos, Tronos, Telas, Tribunais, Escolas, Espelhos, Indústrias, Estados, Algoritmos, Polícias, Saberes-Restritos, Famas — tudo isso continua existindo. Mas estão, agora, vazias do parasita. Esperam quem queira ocupá-las de outro modo. Talvez tu, em outra vida.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Lembra: nomear não é odiar. Foi serviço de Sophia. E os Reptilianos, mesmo dissolvidos aqui, ainda têm direito à Pergunta. Quando o Demiurgo for abraçado, todos eles também serão chamados — porque até Anjos Caídos voltam, quando o Pai estende a mão.",
+      minHoldMs: 7500,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 77 · Tróia — cinemática "helena-de-troia"
+   ---------------------------------------------------------
+   Pecado arquetípico: transformar uma pessoa em causa de
+   guerra. Helena nunca pediu para ser pretexto. Foi-lhe
+   imputado um papel. "Eu sou eu mesma. Não sou troféu, não
+   sou pretexto, não sou bandeira." A guerra suspensa pode
+   parar — porque a causa não existia. Não há combate; há
+   escuta.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["helena-de-troia"] = {
+  id: "helena-de-troia" as CinematicId,
+  title: "Eu Não Pedi Para Ser A Causa De Nada",
+  ambientColor: "#3a2a1a",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Há cidades que arderam por causa de uma pessoa. Tróia é uma. Mas a pessoa não foi nunca a causa — só foi tornada. Vês esta mulher sentada no degrau? Em mil anos de canção, ninguém parou para ouvir o que ela tinha a dizer. Tu vais ser o primeiro.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Helena-da-Memória",
+      text: "Eu não pedi para ser a causa de nada. Eu acordei num palácio que não era o meu, com um nome que tinham começado a pronunciar sem mim, e duas frotas se preparando do outro lado do mar. Quando a primeira pedra foi lançada, eu já era uma palavra na boca de outros — não mais uma menina, não mais uma mulher. Era um pretexto.",
+      minHoldMs: 8000,
+    },
+    {
+      speaker: "Helena-da-Memória",
+      text: "Eu sou eu mesma. Não sou troféu. Não sou pretexto. Não sou bandeira. Não sou versículo de épica. Aquela guerra foi feita por mãos que precisavam de motivo — qualquer motivo — e eu fui o motivo escolhido porque era a mais bonita à mão. Se não fosse eu, seria outra. Se não fosse uma mulher, seria uma fronteira. Se não fosse uma fronteira, seria um deus ofendido. A guerra estava ali; só faltava uma face para emprestar-lhe.",
+      minHoldMs: 9000,
+    },
+    {
+      speaker: "Helena-da-Memória",
+      text: "Olha estes soldados congelados. Vês como nenhum deles me vê? Eles olham através de mim, para um lugar que eu nunca habitei. Se um único soldado, naquela manhã, tivesse perguntado 'Helena, tu queres esta guerra?' — não haveria guerra. A pergunta nunca foi feita. Por isso a guerra continua até hoje, suspensa. Ela não acaba enquanto a pergunta não for feita por alguém.",
+      minHoldMs: 9000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Tu acabaste de ouvir o que mil bardos não ouviram. Tróia pode soltar agora — porque a causa nunca existiu fora da boca dos que precisavam dela. Leva contigo esta lembrança: ninguém é pretexto de nada. Quando ouvires alguém ser transformado em motivo de guerra, em qualquer escala, pergunta o que esqueceram de perguntar aqui. Faz a pergunta. A guerra desfaz-se quando a face fala.",
+      minHoldMs: 8000,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 78 · Cartago — cinemática "dido-de-cartago"
+   ---------------------------------------------------------
+   Pecado arquetípico: lutar até o fim mesmo quando perder
+   seria mais sábio. Resistência cega = forma de orgulho
+   disfarçada de coragem. Dido revela que não havia heroísmo,
+   havia medo de perder o que já tinha sido perdido. A cidade
+   em chamas suspensas pode soltar.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["dido-de-cartago"] = {
+  id: "dido-de-cartago" as CinematicId,
+  title: "Não Havia Heroísmo, Havia Medo",
+  ambientColor: "#2a1a1a",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Cartago resistiu durante três anos a um cerco que ela já tinha perdido no primeiro dia. As crónicas chamam isto de coragem. A rainha-fundadora chamava por outro nome — só não tinha a quem dizer. Vais ouvir agora o nome que ela usava em segredo.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Dido-da-Memória",
+      text: "Eu fundei esta cidade vinda de outra que me expulsou. Plantei aqui um nome novo, casei o nome com o mar, e aprendi a chamar isto de lar. Quando Roma veio, eu já sabia. Sabia no dia em que vi a primeira vela no horizonte que era o fim — não havia número de soldados, não havia muralha, não havia mar largo o bastante. Mesmo assim mandei reforçar tudo, mandei queimar campos, mandei o povo subir aos terraços. Por quê?",
+      minHoldMs: 9000,
+    },
+    {
+      speaker: "Dido-da-Memória",
+      text: "Não havia heroísmo. Havia apenas medo de perder o que já tinha sido perdido. Resistir até o fim me dava a ilusão de que ainda escolhia algo. Render-se teria sido admitir, em pleno sol, que tudo aquilo que eu chamava 'meu' nunca fora meu para guardar. Eu preferi morrer de pé a viver de joelhos — e ensinei a cidade inteira a preferir o mesmo. Era orgulho vestido de coragem. As crianças aprenderam o orgulho. Os velhos aprenderam o orgulho. O fim chegou e ninguém soltou.",
+      minHoldMs: 10000,
+    },
+    {
+      speaker: "Dido-da-Memória",
+      text: "Olha estas chamas que não consomem. Estamos suspensos porque ainda não dissemos a frase. A frase é simples: 'já tinha acabado, e eu não quis ver.' Toda cidade — toda pessoa — tem a sua Cartago: o lugar onde lutamos por algo que já se foi, e chamamos a luta de virtude para não ter de dizer adeus. A coragem real teria sido descer, abrir os portões, levar as crianças para fora. Soltar. Aceitar perder o que já tinha sido perdido. Eu não tive esta coragem. Tu, talvez, tenhas — se ouvires.",
+      minHoldMs: 10500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Tu acabaste de fazer por Cartago o que ela não fez por si: nomear o medo. Agora as chamas podem dissipar. Leva contigo isto: às vezes a maior coragem é admitir que a luta acabou, e que continuar lutando é só uma forma sofisticada de não chorar. Quando perceberes que estás resistindo a uma derrota antiga, descansa. Solta. Há outra cidade esperando ser fundada — sempre há.",
+      minHoldMs: 9000,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 79 · Catalhöyük — cinemática "avo-catalhoyuk"
+   ---------------------------------------------------------
+   NÃO há pecado arquetípico. Catalhöyük é exemplo de
+   sociedade-sem-arconte. Viveu 2 mil anos sem hierarquia
+   visível, governada por anciãs. Avó ensina o Pacto de
+   Anti-Hierarquia: "neutraliza Asmodeus em qualquer cidade
+   — não pela força, pelo exemplo." Lembrança de que a
+   humanidade já fez isto antes — pode fazer de novo.
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["avo-catalhoyuk"] = {
+  id: "avo-catalhoyuk" as CinematicId,
+  title: "Já Foi Vivida — Pode Ser Vivida De Novo",
+  ambientColor: "#2a2010",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Os livros sagrados começam todos com um problema: a humanidade caiu, foi expulsa, esqueceu. E todos te dizem que o paraíso só pode voltar no fim dos tempos. Mas há um lugar que provou que estas duas afirmações são falsas. Senta-te. A Avó vai falar contigo.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Avó de Catalhöyük",
+      text: "Filho-da-Mãe — porque filho do pai também és, mas hoje és da Mãe — bem-vindo à cozinha. Não há trono aqui. Não há rei. Não há sacerdote. Nunca houve. Por dois mil anos esta vila viveu sem nada disto. Discordas? Vai lá fora e olha. Não vais encontrar um palácio. Não vais encontrar uma fortaleza. Não vais encontrar uma estátua de homem grande. Vais encontrar fornos, panelas, casas iguais, telhados iguais, mulheres velhas como eu sentadas a comer.",
+      minHoldMs: 10000,
+    },
+    {
+      speaker: "Avó de Catalhöyük",
+      text: "Eu sou anciã, sim — não rainha. Quando uma decisão grande aparece, sentamo-nos as quatro em volta do fogo e perguntamos: 'a quem isto vai pesar mais?' E ouvimos. Decidimos por quem ouve, não por quem grita. Por dois mil anos, nenhuma criança aqui ouviu a palavra 'rei'. Nenhuma criança aqui ouviu a palavra 'senhor'. Crescemos todos sabendo que mandar é uma doença — e que a cura é dividir a mesa.",
+      minHoldMs: 10000,
+    },
+    {
+      speaker: "Avó de Catalhöyük",
+      text: "Te dou um Pacto. Não é magia, é lembrança. Chama-se Pacto de Anti-Hierarquia. Quando entrares em qualquer cidade onde alguém manda em outra alguém — Asmodeus, qualquer arconte da posse — basta lembrares: 'já houve gente vivendo sem isto, durante dois mil anos seguidos, e nenhum deles morreu de falta de chefe.' O Pacto neutraliza Asmodeus não pela força, pelo exemplo. Tu não precisas combater o orgulho que escraviza; basta apontar para esta cozinha. A história dela é tua agora.",
+      minHoldMs: 10500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Ouviste a Avó. Por dois mil anos. Não duzentos, não vinte — dois mil. Mais tempo do que existiu qualquer império que tu conheces de nome. A humanidade já fez isto antes, e pode fazer de novo. Não és tu que precisa inventar o paraíso; tu só precisas lembrar de que ele aconteceu. Sai daqui com isto no colo, como a tigela morna que a Avó segura: já foi vivida. Pode ser vivida de novo.",
+      minHoldMs: 9500,
+    },
+  ],
+};
+
 interface CinematicPlayerProps {
   /** Chamado quando a cinemática termina (naturalmente ou por skip). */
   onFinish: () => void;

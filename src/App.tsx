@@ -62,6 +62,21 @@ import {
 } from "./scenes/TzeboimScene";
 import { BelaScene } from "./scenes/BelaScene";
 import { NiniveScene } from "./scenes/NiniveScene";
+import { AndromedanosScene } from "./scenes/AndromedanosScene";
+import { CinzasScene, CINZA_CHOICE } from "./scenes/CinzasScene";
+import {
+  ReptilianosScene,
+  REPTILIANO_POSITIONS,
+} from "./scenes/ReptilianosScene";
+import { TroiaScene } from "./scenes/TroiaScene";
+import { CartagoScene } from "./scenes/CartagoScene";
+import { CatalhoyukScene } from "./scenes/CatalhoyukScene";
+import {
+  PompeiaScene,
+  STATUE_POS_POMPEIA,
+} from "./scenes/PompeiaScene";
+import { YonaguniScene } from "./scenes/YonaguniScene";
+import { AtlantisArquetipicaScene } from "./scenes/AtlantisArquetipicaScene";
 import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
@@ -202,7 +217,16 @@ export default function App() {
       lastWatched === "adama-redimida" ||
       lastWatched === "tzeboim-redimida" ||
       lastWatched === "loth-de-bela" ||
-      lastWatched === "jonas-de-ninive"
+      lastWatched === "jonas-de-ninive" ||
+      lastWatched === "bibliotecario-andromedano" ||
+      lastWatched === "cinza-redimido" ||
+      lastWatched === "reptilianos-dissolvidos" ||
+      lastWatched === "helena-de-troia" ||
+      lastWatched === "dido-de-cartago" ||
+      lastWatched === "avo-catalhoyuk" ||
+      lastWatched === "pompeia-redimida" ||
+      lastWatched === "yonaguni-reconhecida" ||
+      lastWatched === "atlantis-arquetipica"
     ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
@@ -308,6 +332,16 @@ function GameOrchestrator() {
   if (currentScene === "tzeboim") return <TzeboimOrchestrator />;
   if (currentScene === "bela") return <BelaOrchestrator />;
   if (currentScene === "ninive") return <NiniveOrchestrator />;
+  if (currentScene === "andromedanos") return <AndromedanosOrchestrator />;
+  if (currentScene === "cinzas") return <CinzasOrchestrator />;
+  if (currentScene === "reptilianos") return <ReptilianosOrchestrator />;
+  if (currentScene === "troia") return <TroiaOrchestrator />;
+  if (currentScene === "cartago") return <CartagoOrchestrator />;
+  if (currentScene === "catalhoyuk") return <CatalhoyukOrchestrator />;
+  if (currentScene === "pompeia") return <PompeiaOrchestrator />;
+  if (currentScene === "yonaguni") return <YonaguniOrchestrator />;
+  if (currentScene === "atlantis-arquetipica")
+    return <AtlantisArquetipicaOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -381,6 +415,24 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("bela");
     } else if (destino === "ninive") {
       setCurrentScene("ninive");
+    } else if (destino === "andromedanos") {
+      setCurrentScene("andromedanos");
+    } else if (destino === "cinzas") {
+      setCurrentScene("cinzas");
+    } else if (destino === "reptilianos") {
+      setCurrentScene("reptilianos");
+    } else if (destino === "troia") {
+      setCurrentScene("troia");
+    } else if (destino === "cartago") {
+      setCurrentScene("cartago");
+    } else if (destino === "catalhoyuk") {
+      setCurrentScene("catalhoyuk");
+    } else if (destino === "pompeia") {
+      setCurrentScene("pompeia");
+    } else if (destino === "yonaguni") {
+      setCurrentScene("yonaguni");
+    } else if (destino === "atlantis-arquetipica") {
+      setCurrentScene("atlantis-arquetipica");
     }
   };
 
@@ -3567,6 +3619,788 @@ function NiniveOrchestrator() {
             <em>
               Aproxima-te de Jonas-da-Memória. Pressiona{" "}
               <strong>F</strong>. Nínive lembrou primeiro.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   AndromedanosOrchestrator — Sprint 74
+   ========================================================= */
+function AndromedanosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const awakened = hasAwakened("bibliotecario-andromedano");
+
+  useEffect(() => {
+    setPlace("Andromedanos · Biblioteca da Origem");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (awakened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+      recordAwakened({
+        id: "bibliotecario-andromedano",
+        name: "Bibliotecário-de-Andrômeda",
+        trueName: "Anjo Arcanjo · Arquivista Akáshico",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.0);
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("bibliotecario-andromedano");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [awakened, recordAwakened, addLight, audioEnabled, playCinematic, setMetaPhase, currentLifeIndex]);
+
+  return (
+    <>
+      <AndromedanosScene
+        bibliotecarioAwakened={awakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!awakened && (
+        <div className="andromedanos-hint">
+          <p>
+            <em>
+              Aproxima-te do Bibliotecário. Pressiona <strong>F</strong>.
+              Cada livro-estrela é uma vida.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   CinzasOrchestrator — Sprint 75
+   ---------------------------------------------------------
+   Aproximar do Cinza central + F abre escolha-chave de 3 vozes.
+   Luz: doa centelha (-1 luz permanente). Sombra: nega.
+   Equilíbrio: oferece presença sem centelha.
+   ========================================================= */
+function CinzasOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const centralAwakened = hasAwakened("cinza-redimido");
+  const [showChoice, setShowChoice] = useState(false);
+
+  useEffect(() => {
+    setPlace("Os Cinzas · Sala Sem Alma");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (centralAwakened || showChoice) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+      setShowChoice(true);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [centralAwakened, showChoice]);
+
+  const handleChoice = (opt: ChoiceOption) => {
+    setShowChoice(false);
+    recordAwakened({
+      id: "cinza-redimido",
+      name: "Cinza-Primeiro-Sentient",
+      trueName: "O Filho Que o Pai Cego Esqueceu",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    // Custo simbólico: se escolheu luz, -1 luz permanente
+    if (opt.alignment === "light") {
+      addLight(-1.0);
+    } else {
+      addLight(0.4);
+    }
+    addToAlignment(opt.alignment, opt.amount ?? 5);
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => {
+      playCinematic("cinza-redimido");
+      setMetaPhase("cinematic");
+    }, 1500);
+  };
+
+  return (
+    <>
+      <CinzasScene
+        centralAwakened={centralAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {showChoice && (
+        <VozesEscolha choice={CINZA_CHOICE} onResolved={handleChoice} />
+      )}
+      {!centralAwakened && !showChoice && (
+        <div className="cinzas-hint">
+          <p>
+            <em>
+              Aproxima-te do Cinza central. Pressiona <strong>F</strong>.
+              Uma escolha-chave aguarda.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   ReptilianosOrchestrator — Sprint 76
+   ---------------------------------------------------------
+   12 reptilianos. Aproximar < 2.5m + F dissolve um. Todos os
+   12 = cinemática.
+   ========================================================= */
+const REPTILIANO_RANGE = 2.5;
+function ReptilianosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const alreadyDone = hasAwakened("reptilianos-dissolvidos");
+  const [dissolved, setDissolved] = useState<boolean[]>(
+    REPTILIANO_POSITIONS.map(() => alreadyDone),
+  );
+
+  useEffect(() => {
+    setPlace("Reptilianos · Câmara Subterrânea");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (alreadyDone) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      let bestIdx = -1;
+      let bestDist = REPTILIANO_RANGE;
+      for (let i = 0; i < REPTILIANO_POSITIONS.length; i++) {
+        if (dissolved[i]) continue;
+        const p = REPTILIANO_POSITIONS[i].pos;
+        const d = Math.hypot(player.position.x - p[0], player.position.z - p[2]);
+        if (d < bestDist) {
+          bestDist = d;
+          bestIdx = i;
+        }
+      }
+      if (bestIdx < 0) return;
+      const next = [...dissolved];
+      next[bestIdx] = true;
+      setDissolved(next);
+      if (audioEnabled) sophiaAudio.chime(68, 1.4, 0.18);
+      if (next.every(Boolean)) {
+        recordAwakened({
+          id: "reptilianos-dissolvidos",
+          name: "Os Doze Reptilianos",
+          trueName: "Conselho de Belial — Dissolvido",
+          isLegendary: true,
+          awakenedAt: Date.now(),
+          awakenedInLife: currentLifeIndex,
+        });
+        addLight(1.5);
+        addToAlignment("balance", 15);
+        if (audioEnabled) sophiaAudio.awakenChord();
+        setTimeout(() => {
+          playCinematic("reptilianos-dissolvidos");
+          setMetaPhase("cinematic");
+        }, 1500);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [alreadyDone, dissolved, audioEnabled, recordAwakened, addLight, addToAlignment, playCinematic, setMetaPhase, currentLifeIndex]);
+
+  const doneCount = dissolved.filter(Boolean).length;
+
+  return (
+    <>
+      <ReptilianosScene
+        dissolved={dissolved}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!alreadyDone && (
+        <div
+          className={`reptilianos-hint ${dissolved.every(Boolean) ? "reptilianos-complete" : ""}`}
+        >
+          <p>
+            <em>
+              Aproxima-te de cada Reptiliano. Pressiona <strong>F</strong>.
+              Nomeá-los rasga o glamour.
+            </em>
+          </p>
+          <p className="reptilianos-counter">{doneCount} de 12 dissolvidos.</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   TroiaOrchestrator — Sprint 77
+   ========================================================= */
+function TroiaOrchestrator() {
+  return makeSimpleNpcOrchestrator({
+    scene: TroiaScene as unknown as React.ComponentType<{
+      [k: string]: unknown;
+      onReturnToMar?: () => void;
+    }>,
+    place: "Tróia · Cidade Suspensa Em Combate",
+    awakenedId: "helena-da-memoria",
+    npcName: "Helena-da-Memória",
+    trueName: "A Que Foi Causa Sem Pedir",
+    centelha: null,
+    light: 1.0,
+    balance: 10,
+    cinematic: "helena-de-troia",
+    metPropName: "helenaMet",
+    hintClass: "troia-hint",
+    hintText:
+      "Aproxima-te de Helena. Pressiona F. Ela esperou ser ouvida.",
+  });
+}
+
+/* =========================================================
+   CartagoOrchestrator — Sprint 78
+   ========================================================= */
+function CartagoOrchestrator() {
+  return makeSimpleNpcOrchestrator({
+    scene: CartagoScene as unknown as React.ComponentType<{
+      [k: string]: unknown;
+      onReturnToMar?: () => void;
+    }>,
+    place: "Cartago · A Resistência Cega",
+    awakenedId: "dido-da-memoria",
+    npcName: "Dido-da-Memória",
+    trueName: "A Rainha-Fundadora Que Lutou Demais",
+    centelha: null,
+    light: 1.0,
+    balance: 10,
+    cinematic: "dido-de-cartago",
+    metPropName: "didoMet",
+    hintClass: "cartago-hint",
+    hintText:
+      "Aproxima-te de Dido. Pressiona F. Ela admite o que ninguém admitiu.",
+  });
+}
+
+/* =========================================================
+   CatalhoyukOrchestrator — Sprint 79
+   ========================================================= */
+function CatalhoyukOrchestrator() {
+  return makeSimpleNpcOrchestrator({
+    scene: CatalhoyukScene as unknown as React.ComponentType<{
+      [k: string]: unknown;
+      onReturnToMar?: () => void;
+    }>,
+    place: "Catalhöyük · A Vila-Mãe",
+    awakenedId: "avo-catalhoyuk",
+    npcName: "Avó de Catalhöyük",
+    trueName: "Matriarca do Pacto Anti-Hierarquia",
+    centelha: "discernimento",
+    light: 1.0,
+    balance: 12,
+    cinematic: "avo-catalhoyuk",
+    metPropName: "avoMet",
+    hintClass: "catalhoyuk-hint",
+    hintText:
+      "Aproxima-te da Avó na cozinha comunitária. Pressiona F.",
+  });
+}
+
+/** Factory para orchestradores de "encontro simples com NPC" (Bela-like).
+ *  Aproximar < 4m + F → cinemática + Lendária + recompensa. */
+function makeSimpleNpcOrchestrator(config: {
+  scene: React.ComponentType<{
+    [k: string]: unknown;
+    onReturnToMar?: () => void;
+  }>;
+  place: string;
+  awakenedId: string;
+  npcName: string;
+  trueName: string;
+  centelha: Parameters<ReturnType<typeof useSoulStore.getState>["addCentelha"]>[0] | null;
+  light: number;
+  balance: number;
+  cinematic: Parameters<ReturnType<typeof useCinematicStore.getState>["playCinematic"]>[0];
+  metPropName: string;
+  hintClass: string;
+  hintText: string;
+}) {
+  const setCurrentScene = useCharacterStore.getState().setCurrentScene;
+  return <SimpleNpcOrchestrator config={config} setCurrentScene={setCurrentScene} />;
+}
+
+function SimpleNpcOrchestrator({
+  config,
+  setCurrentScene,
+}: {
+  config: Parameters<typeof makeSimpleNpcOrchestrator>[0];
+  setCurrentScene: ReturnType<typeof useCharacterStore.getState>["setCurrentScene"];
+}) {
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  const met = hasAwakened(config.awakenedId);
+
+  useEffect(() => {
+    setPlace(config.place);
+  }, [setPlace, config.place]);
+
+  useEffect(() => {
+    if (met) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+      recordAwakened({
+        id: config.awakenedId,
+        name: config.npcName,
+        trueName: config.trueName,
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(config.light);
+      addToAlignment("balance", config.balance);
+      if (config.centelha && !hasCentelha(config.centelha)) {
+        addCentelha(config.centelha);
+      }
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic(config.cinematic);
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    met,
+    config,
+    audioEnabled,
+    recordAwakened,
+    addLight,
+    addToAlignment,
+    addCentelha,
+    hasCentelha,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  const SceneComp = config.scene;
+  const sceneProps: Record<string, unknown> = {
+    [config.metPropName]: met,
+    onReturnToMar: () => setCurrentScene("mar-de-cristal"),
+    onPlayerRef: (ref: React.RefObject<THREE.Group | null>) => {
+      playerRefHolder.current = ref;
+    },
+  };
+
+  return (
+    <>
+      <SceneComp {...sceneProps} />
+      <HUD />
+      <Cursor />
+      {!met && (
+        <div className={config.hintClass}>
+          <p>
+            <em>{config.hintText}</em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   PompeiaOrchestrator — Sprint 80
+   ---------------------------------------------------------
+   10 estátuas. Cada uma contemplada por 3s (proximidade
+   contínua) → "awakened". Todas 10 = cinemática.
+   ========================================================= */
+const POMPEIA_RANGE = 2.5;
+const POMPEIA_DURATION_S = 3.0;
+function PompeiaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const already = hasAwakened("pompeia-redimida");
+  const [contemplated, setContemplated] = useState<boolean[]>(
+    STATUE_POS_POMPEIA.map(() => already),
+  );
+  const proximityTimers = useRef<number[]>(STATUE_POS_POMPEIA.map(() => 0));
+
+  useEffect(() => {
+    setPlace("Pompeia · Esquecimento Súbito");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (already) return;
+    let raf = 0;
+    let lastTick = 0;
+    const tick = (now: number) => {
+      const dt = lastTick ? Math.min(0.1, (now - lastTick) / 1000) : 0;
+      lastTick = now;
+      const player = playerRefHolder.current?.current;
+      if (player) {
+        let changed = false;
+        const next = [...contemplated];
+        for (let i = 0; i < STATUE_POS_POMPEIA.length; i++) {
+          if (next[i]) continue;
+          const p = STATUE_POS_POMPEIA[i].pos;
+          const d = Math.hypot(
+            player.position.x - p[0],
+            player.position.z - p[2],
+          );
+          if (d < POMPEIA_RANGE) {
+            proximityTimers.current[i] += dt;
+            if (proximityTimers.current[i] >= POMPEIA_DURATION_S) {
+              next[i] = true;
+              changed = true;
+              if (audioEnabled) sophiaAudio.chime(64, 1.2, 0.14);
+            }
+          } else {
+            proximityTimers.current[i] = Math.max(
+              0,
+              proximityTimers.current[i] - dt * 0.5,
+            );
+          }
+        }
+        if (changed) {
+          setContemplated(next);
+          if (next.every(Boolean)) {
+            recordAwakened({
+              id: "pompeia-redimida",
+              name: "Pompeia",
+              trueName: "Cidade Acordada Para O Que Estava Vivo",
+              isLegendary: true,
+              awakenedAt: Date.now(),
+              awakenedInLife: currentLifeIndex,
+            });
+            addLight(1.2);
+            addToAlignment("balance", 12);
+            if (audioEnabled) sophiaAudio.awakenChord();
+            setTimeout(() => {
+              playCinematic("pompeia-redimida");
+              setMetaPhase("cinematic");
+            }, 1500);
+          }
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [already, contemplated]);
+
+  const doneCount = contemplated.filter(Boolean).length;
+
+  return (
+    <>
+      <PompeiaScene
+        contemplated={contemplated}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!already && (
+        <div
+          className={`pompeia-hint ${contemplated.every(Boolean) ? "pompeia-redeemed" : ""}`}
+        >
+          <p>
+            <em>
+              Aproxima-te de cada estátua e permanece por 3 segundos.
+              A presença é o ato.
+            </em>
+          </p>
+          <p className="pompeia-count">
+            {doneCount} de 10 estátuas notadas.
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   YonaguniOrchestrator — Sprint 81
+   ---------------------------------------------------------
+   30 segundos contemplando ruínas. Sem F. Apenas presença.
+   ========================================================= */
+const YONAGUNI_DURATION_S = 30.0;
+function YonaguniOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const already = hasAwakened("yonaguni-reconhecida");
+  const [revealed, setRevealed] = useState(already);
+  const [progressSec, setProgressSec] = useState(0);
+
+  useEffect(() => {
+    setPlace("Yonaguni · Ruínas Submersas");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (already) return;
+    let raf = 0;
+    let lastTick = 0;
+    const tick = (now: number) => {
+      const dt = lastTick ? Math.min(0.1, (now - lastTick) / 1000) : 0;
+      lastTick = now;
+      const player = playerRefHolder.current?.current;
+      if (player) {
+        const dist = Math.hypot(player.position.x, player.position.z);
+        const onMirante = dist < 5;
+        if (onMirante) {
+          setProgressSec((s) => {
+            const next = Math.min(YONAGUNI_DURATION_S, s + dt);
+            if (next >= YONAGUNI_DURATION_S && !revealed) {
+              finishYonaguni();
+            }
+            return next;
+          });
+        } else {
+          setProgressSec((s) => Math.max(0, s - dt * 0.3));
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [already, revealed]);
+
+  const finishYonaguni = () => {
+    setRevealed(true);
+    recordAwakened({
+      id: "yonaguni-reconhecida",
+      name: "Yonaguni",
+      trueName: "A Que O Mar Cobriu E Ainda Lembra",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(0.6);
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => {
+      playCinematic("yonaguni-reconhecida");
+      setMetaPhase("cinematic");
+    }, 1500);
+  };
+
+  const progressNorm = progressSec / YONAGUNI_DURATION_S;
+
+  return (
+    <>
+      <YonaguniScene
+        revealed={revealed}
+        contemplationProgress={progressNorm}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!already && (
+        <div
+          className={`yonaguni-hint ${revealed ? "yonaguni-revealed" : ""}`}
+        >
+          <p>
+            <em>
+              Permanece no mirante. Apenas observa por 30 segundos.
+              Reconhecer é dizer "tu exististe."
+            </em>
+          </p>
+          <div className="yonaguni-progress">
+            <span style={{ width: `${progressNorm * 100}%` }} />
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   AtlantisArquetipicaOrchestrator — Sprint 82
+   ---------------------------------------------------------
+   Catarse comparativa. Requer Atlântida visitada (Eloaios).
+   ========================================================= */
+function AtlantisArquetipicaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const canEnter = hasAwakened("eloaios-lei-cristalina");
+  const visited = hasAwakened("atlantis-arquetipica-visitada");
+  const [autoTriggered, setAutoTriggered] = useState(visited);
+
+  useEffect(() => {
+    setPlace("Atlântis Arquetípica · A Versão Original");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (!canEnter || autoTriggered) return;
+    let raf = 0;
+    const tick = () => {
+      const player = playerRefHolder.current?.current;
+      if (player) {
+        const dist = Math.hypot(player.position.x, player.position.z);
+        if (dist < 3) {
+          setAutoTriggered(true);
+          recordAwakened({
+            id: "atlantis-arquetipica-visitada",
+            name: "Atlântis Arquetípica",
+            trueName: "A Versão Original Que Nunca Caiu",
+            isLegendary: true,
+            awakenedAt: Date.now(),
+            awakenedInLife: currentLifeIndex,
+          });
+          addLight(0.8);
+          if (audioEnabled) sophiaAudio.awakenChord();
+          setTimeout(() => {
+            playCinematic("atlantis-arquetipica");
+            setMetaPhase("cinematic");
+          }, 1500);
+          return;
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [canEnter, autoTriggered, recordAwakened, addLight, audioEnabled, playCinematic, setMetaPhase, currentLifeIndex]);
+
+  return (
+    <>
+      <AtlantisArquetipicaScene
+        canEnter={canEnter}
+        visited={autoTriggered}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!autoTriggered && (
+        <div
+          className={`atlantis-arq-hint ${!canEnter ? "atlantis-arq-locked" : ""}`}
+        >
+          <p>
+            <em>
+              {canEnter
+                ? "Caminha até o centro. A catarse vem por presença, sem F."
+                : "Volta após visitar a Atlântida atual (Eloaios)."}
             </em>
           </p>
         </div>

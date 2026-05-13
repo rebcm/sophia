@@ -39,7 +39,16 @@ type Mood =
   | "adama"
   | "tzeboim"
   | "bela"
-  | "ninive";
+  | "ninive"
+  | "andromedanos"
+  | "cinzas"
+  | "reptilianos"
+  | "troia"
+  | "cartago"
+  | "catalhoyuk"
+  | "pompeia"
+  | "yonaguni"
+  | "atlantis-arquetipica";
 
 class SophiaAudio {
   private ctx: AudioContext | null = null;
@@ -266,6 +275,15 @@ class SophiaAudio {
       tzeboim: [0.14, 0.18, 0.16, 0.14], // espelhos sociais — meio-frio
       bela: [0.14, 0.18, 0.2, 0.12], // tarde dourada — caloroso
       ninive: [0.18, 0.16, 0.18, 0.12], // gratidão entardecer — neutro caloroso
+      andromedanos: [0.1, 0.12, 0.16, 0.24], // biblioteca cósmica — cintilante alto
+      cinzas: [0.16, 0.12, 0.16, 0.08], // sala metálica — frio neutro
+      reptilianos: [0.22, 0.16, 0.12, 0.1], // câmara conspirativa — denso baixo
+      troia: [0.2, 0.16, 0.14, 0.12], // poeira de batalha — terroso médio
+      cartago: [0.22, 0.18, 0.14, 0.1], // resistência cega — pesado baixo
+      catalhoyuk: [0.16, 0.18, 0.16, 0.12], // vila-mãe — caloroso neutro
+      pompeia: [0.18, 0.14, 0.14, 0.12], // cinzas suspensas — neutro empoeirado
+      yonaguni: [0.18, 0.12, 0.14, 0.16], // submarino — médio com aguda
+      "atlantis-arquetipica": [0.1, 0.14, 0.2, 0.22], // ideal pleromático — luminoso alto
     };
     const vols = targetVols[mood];
     this.droneNodes.forEach(({ gain }, i) => {
@@ -352,6 +370,24 @@ export function moodForScene(scene: string): Mood {
       return "bela";
     case "ninive":
       return "ninive";
+    case "andromedanos":
+      return "andromedanos";
+    case "cinzas":
+      return "cinzas";
+    case "reptilianos":
+      return "reptilianos";
+    case "troia":
+      return "troia";
+    case "cartago":
+      return "cartago";
+    case "catalhoyuk":
+      return "catalhoyuk";
+    case "pompeia":
+      return "pompeia";
+    case "yonaguni":
+      return "yonaguni";
+    case "atlantis-arquetipica":
+      return "atlantis-arquetipica";
     case "trono-demiurgo":
       return "trono";
     case "bardo":

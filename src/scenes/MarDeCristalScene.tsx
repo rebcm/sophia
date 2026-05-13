@@ -55,7 +55,16 @@ export type MarDestino =
   | "adama"
   | "tzeboim"
   | "bela"
-  | "ninive";
+  | "ninive"
+  | "andromedanos"
+  | "cinzas"
+  | "reptilianos"
+  | "troia"
+  | "cartago"
+  | "catalhoyuk"
+  | "pompeia"
+  | "yonaguni"
+  | "atlantis-arquetipica";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -573,6 +582,132 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "ninive" : null)
+          }
+        />
+      )}
+
+      {/* Andromedanos — biblioteca cósmica (após Casa-Espelhada) */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[16, 0.4, 0]}
+          label="Andromedanos"
+          subLabel="(a biblioteca da origem)"
+          color="#c8b8e8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "andromedanos" : null)
+          }
+        />
+      )}
+
+      {/* Cinzas — experimentos do Demiurgo (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[-16, 0.4, 0]}
+          label="Os Cinzas"
+          subLabel="(quem o Pai cego esqueceu)"
+          color="#a0a0a8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "cinzas" : null)
+          }
+        />
+      )}
+
+      {/* Reptilianos — aliados do Demiurgo (após Demiurgo + Tabernáculo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[0, 0.4, -16]}
+          label="Reptilianos"
+          subLabel="(doze nomes a serem ditos)"
+          color="#5a8048"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "reptilianos" : null)
+          }
+        />
+      )}
+
+      {/* Tróia — desejo destrutivo (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[12, 0.4, -10]}
+          label="Tróia"
+          subLabel="(Helena nunca pediu)"
+          color="#c89878"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "troia" : null)
+          }
+        />
+      )}
+
+      {/* Cartago — resistência cega (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[-12, 0.4, -10]}
+          label="Cartago"
+          subLabel="(Dido relembra)"
+          color="#a85858"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "cartago" : null)
+          }
+        />
+      )}
+
+      {/* Catalhöyük — vila-mãe sem hierarquia (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[12, 0.4, 10]}
+          label="Catalhöyük"
+          subLabel="(já foi vivida — pode de novo)"
+          color="#e8c878"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "catalhoyuk" : null)
+          }
+        />
+      )}
+
+      {/* Pompeia — esquecimento súbito (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[-12, 0.4, 10]}
+          label="Pompeia"
+          subLabel="(dez estátuas para contemplar)"
+          color="#a8a098"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "pompeia" : null)
+          }
+        />
+      )}
+
+      {/* Yonaguni — submersa (após Casa-Espelhada) */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[8, 0.4, 14]}
+          label="Yonaguni"
+          subLabel="(o que o mar cobriu)"
+          color="#5878a8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "yonaguni" : null)
+          }
+        />
+      )}
+
+      {/* Atlântis-arquetípica — versão idealizada (após Atlântida) */}
+      {eloaiosDefeated && (
+        <Portal
+          position={[-8, 0.4, 14]}
+          label="Atlântis Arquetípica"
+          subLabel="(o que ela era — antes)"
+          color="#e8e8ff"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "atlantis-arquetipica" : null)
           }
         />
       )}

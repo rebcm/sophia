@@ -42,7 +42,16 @@ export type CinematicId =
   | "adama-redimida" // Adamá
   | "tzeboim-redimida" // Tzeboim
   | "loth-de-bela" // Bela
-  | "jonas-de-ninive"; // Nínive
+  | "jonas-de-ninive" // Nínive
+  | "bibliotecario-andromedano" // Andromedanos
+  | "cinza-redimido" // Cinzas
+  | "reptilianos-dissolvidos" // Reptilianos
+  | "helena-de-troia" // Tróia
+  | "dido-de-cartago" // Cartago
+  | "avo-catalhoyuk" // Catalhöyük
+  | "pompeia-redimida" // Pompeia
+  | "yonaguni-reconhecida" // Yonaguni
+  | "atlantis-arquetipica"; // Atlântis-arq
 
 interface CinematicEntry {
   id: CinematicId;
