@@ -77,6 +77,11 @@ import {
 } from "./scenes/PompeiaScene";
 import { YonaguniScene } from "./scenes/YonaguniScene";
 import { AtlantisArquetipicaScene } from "./scenes/AtlantisArquetipicaScene";
+import { QuartoSussurranteScene } from "./scenes/QuartoSussurranteScene";
+import {
+  SussurranteFragment,
+  SOPHIA_FRAGMENTS,
+} from "./ui/SussurranteFragment";
 import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
@@ -342,6 +347,8 @@ function GameOrchestrator() {
   if (currentScene === "yonaguni") return <YonaguniOrchestrator />;
   if (currentScene === "atlantis-arquetipica")
     return <AtlantisArquetipicaOrchestrator />;
+  if (currentScene === "quarto-da-sussurrante")
+    return <QuartoSussurranteOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -433,6 +440,8 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("yonaguni");
     } else if (destino === "atlantis-arquetipica") {
       setCurrentScene("atlantis-arquetipica");
+    } else if (destino === "quarto-da-sussurrante") {
+      setCurrentScene("quarto-da-sussurrante");
     }
   };
 
@@ -4402,6 +4411,163 @@ function AtlantisArquetipicaOrchestrator() {
                 ? "Caminha até o centro. A catarse vem por presença, sem F."
                 : "Volta após visitar a Atlântida atual (Eloaios)."}
             </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   QuartoSussurranteOrchestrator — Sprint 83
+   ---------------------------------------------------------
+   Cena íntima com 5 fragmentos de revelação de Sophia.
+   Sentar (aproximação < 1.8m do banco do jogador) + F abre
+   o próximo fragmento ainda não ouvido. Após os 5: nada mais
+   acontece — o quarto fica como lugar de descanso para sempre.
+   ========================================================= */
+
+const QUARTO_BENCH = new THREE.Vector3(1.5, 0, 0);
+const QUARTO_RANGE = 1.8;
+
+function QuartoSussurranteOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+
+  // Cada fragmento conta como um "Lendário" leve: id "sophia-fragmento-N"
+  const fragmentsHeard = SOPHIA_FRAGMENTS.filter((f) =>
+    hasAwakened(`sophia-${f.id}`),
+  ).length;
+
+  const [activeFragmentIdx, setActiveFragmentIdx] = useState<number | null>(
+    null,
+  );
+  const [playerSeated, setPlayerSeated] = useState(false);
+
+  useEffect(() => {
+    setPlace("Quarto da Sussurrante");
+  }, [setPlace]);
+
+  // Loop de proximidade — checa se jogador está sentado no banco
+  useEffect(() => {
+    const tick = () => {
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const d = Math.hypot(
+        player.position.x - QUARTO_BENCH.x,
+        player.position.z - QUARTO_BENCH.z,
+      );
+      setPlayerSeated(d < QUARTO_RANGE);
+    };
+    const id = setInterval(tick, 200);
+    return () => clearInterval(id);
+  }, []);
+
+  // Tecla F: abre próximo fragmento se sentado
+  useEffect(() => {
+    if (activeFragmentIdx !== null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      if (!playerSeated) return;
+      if (fragmentsHeard >= SOPHIA_FRAGMENTS.length) return;
+      setActiveFragmentIdx(fragmentsHeard);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeFragmentIdx, playerSeated, fragmentsHeard]);
+
+  const handleFragmentComplete = () => {
+    if (activeFragmentIdx === null) return;
+    const f = SOPHIA_FRAGMENTS[activeFragmentIdx];
+    recordAwakened({
+      id: `sophia-${f.id}`,
+      name: `Sophia · Fragmento ${activeFragmentIdx + 1}`,
+      isLegendary: false,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(0.3);
+    if (audioEnabled) sophiaAudio.chime(72, 1.5, 0.16);
+
+    // Quando completa os 5, registra um Lendário-resumo
+    if (
+      activeFragmentIdx === SOPHIA_FRAGMENTS.length - 1 &&
+      !hasAwakened("quarto-sussurrante-completo")
+    ) {
+      recordAwakened({
+        id: "quarto-sussurrante-completo",
+        name: "Sophia · Os Cinco Fragmentos",
+        trueName: "A Que Esperou Em Silêncio",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.5);
+      if (audioEnabled) sophiaAudio.awakenChord();
+    }
+
+    setActiveFragmentIdx(null);
+  };
+
+  const allDone = fragmentsHeard >= SOPHIA_FRAGMENTS.length;
+
+  return (
+    <>
+      <QuartoSussurranteScene
+        fragmentsHeard={fragmentsHeard}
+        playerSeated={playerSeated}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {activeFragmentIdx !== null && (
+        <SussurranteFragment
+          fragment={SOPHIA_FRAGMENTS[activeFragmentIdx]}
+          onComplete={handleFragmentComplete}
+        />
+      )}
+      {activeFragmentIdx === null && (
+        <div className="quarto-hint">
+          {!playerSeated && (
+            <p>
+              <em>
+                Há dois bancos. Senta-te no que está vazio. Ela está
+                no outro.
+              </em>
+            </p>
+          )}
+          {playerSeated && !allDone && (
+            <p>
+              <em>
+                Pressiona <strong>F</strong>. Ela tem algo para te
+                contar.
+              </em>
+            </p>
+          )}
+          {playerSeated && allDone && (
+            <p>
+              <em>
+                Os cinco já foram ditos. Ela continua aqui, sempre.
+                Tu podes voltar quando quiseres.
+              </em>
+            </p>
+          )}
+          <p className="quarto-fragments-count">
+            {fragmentsHeard} de {SOPHIA_FRAGMENTS.length} fragmentos
+            recebidos.
           </p>
         </div>
       )}

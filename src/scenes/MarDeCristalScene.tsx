@@ -64,7 +64,8 @@ export type MarDestino =
   | "catalhoyuk"
   | "pompeia"
   | "yonaguni"
-  | "atlantis-arquetipica";
+  | "atlantis-arquetipica"
+  | "quarto-da-sussurrante";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -708,6 +709,21 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "atlantis-arquetipica" : null)
+          }
+        />
+      )}
+
+      {/* Quarto da Sussurrante — destrava após Casa-Espelhada
+       *  (quando a Sussurrante ganha forma humanoide) */}
+      {autoSabotadorDefeated && (
+        <Portal
+          position={[0, 0.4, 2.5]}
+          label="Quarto da Sussurrante"
+          subLabel="(há um banco vazio para ti)"
+          color="#ffe9d0"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "quarto-da-sussurrante" : null)
           }
         />
       )}

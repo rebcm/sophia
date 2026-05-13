@@ -87,6 +87,7 @@ export type SceneId =
   | "pompeia" // Sprint 80 — esquecimento súbito
   | "yonaguni" // Sprint 81 — submersa
   | "atlantis-arquetipica" // Sprint 82 — versão original
+  | "quarto-da-sussurrante" // Sprint 83 — encontro íntimo com Sophia
   | "bardo";
 
 export interface BodyConfig {

@@ -48,7 +48,8 @@ type Mood =
   | "catalhoyuk"
   | "pompeia"
   | "yonaguni"
-  | "atlantis-arquetipica";
+  | "atlantis-arquetipica"
+  | "quarto-sussurrante";
 
 class SophiaAudio {
   private ctx: AudioContext | null = null;
@@ -284,6 +285,7 @@ class SophiaAudio {
       pompeia: [0.18, 0.14, 0.14, 0.12], // cinzas suspensas — neutro empoeirado
       yonaguni: [0.18, 0.12, 0.14, 0.16], // submarino — médio com aguda
       "atlantis-arquetipica": [0.1, 0.14, 0.2, 0.22], // ideal pleromático — luminoso alto
+      "quarto-sussurrante": [0.14, 0.16, 0.2, 0.16], // íntimo — caloroso médio
     };
     const vols = targetVols[mood];
     this.droneNodes.forEach(({ gain }, i) => {
@@ -388,6 +390,8 @@ export function moodForScene(scene: string): Mood {
       return "yonaguni";
     case "atlantis-arquetipica":
       return "atlantis-arquetipica";
+    case "quarto-da-sussurrante":
+      return "quarto-sussurrante";
     case "trono-demiurgo":
       return "trono";
     case "bardo":
