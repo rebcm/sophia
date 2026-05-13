@@ -4,16 +4,16 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica COMPLETA** — 67 sprints
+**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica COMPLETA** — 68 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
 (alma-gêmea), 7 Aeon-Mestres exclusivos por civilização, Codex
-com 7 abas (Almas, Centelhas, Cinemáticas, Caminho, Práticas,
-Glossário, Marcos), HUD polido com alignment/practice chips,
-PauseMenu (P) com áudio/créditos/wipe, áudio procedural com 15
-moods distintos por cena, feedback visual de progressão da
-Centelha, e 22 marcos de conquista rastreados automaticamente.
+com 8 abas (Almas, Centelhas, Cinemáticas, Caminho, Práticas,
+Glossário, Marcos, Missões), HUD polido com alignment/practice
+chips, PauseMenu (P) com áudio/créditos/wipe, áudio procedural
+com 23 moods distintos por cena, feedback visual de progressão
+da Centelha, 22 marcos + 38 missões rastreadas automaticamente.
 Ver [Histórico de Sprints](#histórico-de-sprints).
 **Licença:** MIT (ver [LICENSE](LICENSE)).
 **Repositório:** https://github.com/rebcm/sophia
@@ -272,6 +272,7 @@ Após a Mônada, o jogador escolhe entre:
 | 62-67  | **6 cenas paralelas:** Shamballa, Telos, Gomorra, Babel, Pleiadianos, Arcturianos | `f29ec0c` | ✅ |
 | 68-73  | **6 cenas paralelas:** Erks, Siríacos, Adamá, Tzeboim, Bela, Nínive | `09b26e0` | ✅ |
 | 74-82  | **9 cenas paralelas finais:** Andromedanos, Cinzas, Reptilianos, Tróia, Cartago, Catalhöyük, Pompeia, Yonaguni, Atlântis Arquetípica | `bea8e36` | ✅ |
+| 32 lean| Missões · 8ª aba do Codex · 38 objetivos em 8 categorias | `d2e99b0` | ✅ |
 | —      | **Expansão cosmológica COMPLETA** (docs/22 100% implementado). Backlog restante: mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---

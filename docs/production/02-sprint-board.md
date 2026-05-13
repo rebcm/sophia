@@ -54,6 +54,7 @@
 | 74-76    | Andromedanos + Cinzas + Reptilianos — 3 cósmicas, paralelo | `bea8e36` | ✅ |
 | 77-79    | Tróia (Helena) + Cartago (Dido) + Catalhöyük (Avó) — paralelo | `bea8e36` | ✅ |
 | 80-82    | Pompeia + Yonaguni + Atlântis-arq — 3 visuais, paralelo | `bea8e36` | ✅ |
+| 32 lean  | Missões · 8ª aba do Codex · 38 objetivos em 8 categorias | `d2e99b0` | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
