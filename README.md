@@ -4,7 +4,7 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica COMPLETA** + **5 fases de poder ativas** — 69 sprints
+**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica COMPLETA** + **5 fases de poder ativas** + **polimento de produção** — 70 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
@@ -274,6 +274,7 @@ Após a Mônada, o jogador escolhe entre:
 | 74-82  | **9 cenas paralelas finais:** Andromedanos, Cinzas, Reptilianos, Tróia, Cartago, Catalhöyük, Pompeia, Yonaguni, Atlântis Arquetípica | `bea8e36` | ✅ |
 | 32 lean| Missões · 8ª aba do Codex · 38 objetivos em 8 categorias | `d2e99b0` | ✅ |
 | 31     | 5 Fases de Poder · HUD chip + 9ª aba do Codex         | `62ffa3c`    | ✅ |
+| 37 lean| Polimento prod. · SEO + Open Graph + PWA + manualChunks | `424664a`  | ✅ |
 | —      | **Expansão cosmológica COMPLETA** (docs/22 100% implementado). Backlog restante: mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
