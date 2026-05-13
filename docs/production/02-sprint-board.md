@@ -57,6 +57,7 @@
 | 32 lean  | Missões · 8ª aba do Codex · 38 objetivos em 8 categorias | `d2e99b0` | ✅ |
 | 31       | 5 Fases de Poder · HUD chip + 9ª aba do Codex         | `62ffa3c`    | ✅ |
 | 37 lean  | Polimento de produção · SEO + Open Graph + PWA + manualChunks | `424664a` | ✅ |
+| 83       | Quarto da Sussurrante · 5 fragmentos íntimos de Sophia | `dd64a70`    | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher

@@ -4,7 +4,7 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica COMPLETA** + **5 fases de poder ativas** + **polimento de produção** — 70 sprints
+**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica COMPLETA** + **5 fases de poder ativas** + **polimento de produção** + **Quarto da Sussurrante** — 71 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
@@ -103,7 +103,7 @@ todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
 de duração do loop narrativo: **~2-3 horas** se o jogador ler
 todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas (39)
+### Cenas implementadas (40)
 
 | Cena                       | Função                                       | Sprint |
 | -------------------------- | -------------------------------------------- | ------ |
@@ -146,6 +146,7 @@ todas as cinemáticas e explorar cada cena.
 | **Pompeia**                | Esquecimento súbito · 10 estátuas contempladas | 80    |
 | **Yonaguni**               | Submersa · 30s de reconhecimento              | 81     |
 | **Atlântis Arquetípica**   | Versão idealizada · catarse comparativa        | 82     |
+| **Quarto da Sussurrante**  | Encontro íntimo com Sophia · 5 fragmentos      | 83     |
 
 ### Sistemas funcionais
 
@@ -275,6 +276,7 @@ Após a Mônada, o jogador escolhe entre:
 | 32 lean| Missões · 8ª aba do Codex · 38 objetivos em 8 categorias | `d2e99b0` | ✅ |
 | 31     | 5 Fases de Poder · HUD chip + 9ª aba do Codex         | `62ffa3c`    | ✅ |
 | 37 lean| Polimento prod. · SEO + Open Graph + PWA + manualChunks | `424664a`  | ✅ |
+| 83     | Quarto da Sussurrante · 5 fragmentos íntimos de Sophia | `dd64a70`    | ✅ |
 | —      | **Expansão cosmológica COMPLETA** (docs/22 100% implementado). Backlog restante: mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
