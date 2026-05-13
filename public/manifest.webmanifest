@@ -1,0 +1,20 @@
+{
+  "name": "Sophia · A Jornada do Despertar",
+  "short_name": "Sophia",
+  "description": "Jogo web3D contemplativo gnóstico de Rebeca Alves Moreira. 39 cenas, 7 civilizações perdidas, 13 cidades aguardando julgamento, 6 endings.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#0a0420",
+  "theme_color": "#0a0420",
+  "categories": ["games", "education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}

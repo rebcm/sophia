@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sophia · A Jornada do Despertar
+# Autoria integral: Rebeca Alves Moreira
+# https://github.com/rebcm/sophia

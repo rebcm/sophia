@@ -10,5 +10,20 @@ export default defineConfig({
   build: {
     target: "es2022",
     sourcemap: true,
+    chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Three.js + R3F + drei + postprocessing num chunk grande
+          // separado — sempre necessário, mas cacheable entre deploys
+          "vendor-three": [
+            "three",
+            "@react-three/fiber",
+            "@react-three/drei",
+            "@react-three/postprocessing",
+          ],
+        },
+      },
+    },
   },
 });
