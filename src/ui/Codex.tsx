@@ -27,7 +27,8 @@ type Tab =
   | "caminho"
   | "praticas"
   | "glossario"
-  | "marcos";
+  | "marcos"
+  | "missoes";
 
 interface CodexProps {
   open: boolean;
@@ -99,6 +100,11 @@ export function Codex({ open, onClose }: CodexProps) {
             active={tab === "marcos"}
             onClick={() => setTab("marcos")}
           />
+          <CodexTab
+            label="Missões"
+            active={tab === "missoes"}
+            onClick={() => setTab("missoes")}
+          />
         </nav>
 
         <div className="codex-body">
@@ -109,6 +115,7 @@ export function Codex({ open, onClose }: CodexProps) {
           {tab === "praticas" && <PraticasTab />}
           {tab === "glossario" && <GlossarioTab />}
           {tab === "marcos" && <MarcosTab />}
+          {tab === "missoes" && <MissoesTab />}
         </div>
       </div>
     </div>
@@ -1438,6 +1445,596 @@ function MarcosTab() {
             </div>
           </li>
         ))}
+      </ul>
+    </div>
+  );
+}
+
+/* ---------------- MissoesTab (Sprint 32 lean) ---------------- */
+
+type MissaoCategory =
+  | "principal"
+  | "civilizacoes"
+  | "cidades"
+  | "cosmicas"
+  | "intra-terrenas"
+  | "centelhas"
+  | "alma"
+  | "exploracao";
+
+interface Missao {
+  id: string;
+  title: string;
+  hint: string;
+  category: MissaoCategory;
+  difficulty: 1 | 2 | 3;
+  isComplete: (state: {
+    sleepers: { id: string; isLegendary: boolean }[];
+    centelhas: Set<CentelhaId>;
+    cinematicas: Record<string, boolean>;
+    light: number;
+    pastLives: number;
+  }) => boolean;
+}
+
+const MISSOES: Missao[] = [
+  // PRINCIPAL — arco central
+  {
+    id: "despertar-velho",
+    title: "Aquele Que Procurou",
+    hint: "Acorda o Velho do Jardim — o primeiro Sleeper.",
+    category: "principal",
+    difficulty: 1,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "velho-do-jardim"),
+  },
+  {
+    id: "encontrar-adao",
+    title: "O Primeiro Estranho",
+    hint: "Desperta o Estranho do Jardim — Adão, o Primeiro.",
+    category: "principal",
+    difficulty: 1,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "adao-estranho"),
+  },
+  {
+    id: "abracar-demiurgo",
+    title: "O Abraço Ao Filho Cego",
+    hint: "Atravessa todos os 7 Arcontes e abraça o Demiurgo.",
+    category: "principal",
+    difficulty: 3,
+    isComplete: ({ sleepers }) => sleepers.some((s) => s.id === "demiurgo"),
+  },
+  {
+    id: "encontrar-monada",
+    title: "O Coração Quieto",
+    hint: "Atravessa o Véu. Encontra a Mônada.",
+    category: "principal",
+    difficulty: 3,
+    isComplete: ({ cinematicas }) => cinematicas["monada"] === true,
+  },
+
+  // CIVILIZAÇÕES PERDIDAS (7)
+  {
+    id: "athoth-cai",
+    title: "Athoth · A Lua Acorda",
+    hint: "Em Ratanabá, escolhe entre as 4 vozes diante da Mãe-D'Água.",
+    category: "civilizacoes",
+    difficulty: 1,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "athoth-mae-dagua"),
+  },
+  {
+    id: "yobel-cai",
+    title: "Yobel · O Sol Lembra",
+    hint: "Em El Dorado, ensina ao Inca-Solitário o que vale.",
+    category: "civilizacoes",
+    difficulty: 1,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "yobel-inca-solitario"),
+  },
+  {
+    id: "adonaios-cai",
+    title: "Adonaios · A Coragem Liberta",
+    hint: "Em Hiperbórea, escolhe a verdadeira coragem.",
+    category: "civilizacoes",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "adonaios-guardiao-solar"),
+  },
+  {
+    id: "eloaios-cai",
+    title: "Eloaios · A Lei Vira Água",
+    hint: "Em Atlântida, ajuda o Jurista a lembrar.",
+    category: "civilizacoes",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "eloaios-lei-cristalina"),
+  },
+  {
+    id: "galila-cai",
+    title: "Galila · A Beleza Real",
+    hint: "Em Lemúria, canta com a Senhora do Lótus.",
+    category: "civilizacoes",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "galila-beleza-viva"),
+  },
+  {
+    id: "harmas-cai",
+    title: "Harmas · A Palavra-Raiz",
+    hint: "Em Mu, vibra com o Hieroglifo Vivo.",
+    category: "civilizacoes",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "harmas-palavra-raiz"),
+  },
+  {
+    id: "iaoth-cai",
+    title: "Iaoth · A Memória Nua",
+    hint: "Na Pré-Adamita, aceita a Esfera Saturnal.",
+    category: "civilizacoes",
+    difficulty: 3,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "iaoth-memoria-pleroma"),
+  },
+
+  // CIDADES DO JULGAMENTO (13)
+  {
+    id: "sodoma-interedida",
+    title: "Hospedaria Restaurada",
+    hint: "Acende as 7 chamas do Candelabro de Sodoma.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "sodoma-interedida"),
+  },
+  {
+    id: "gomorra-redimida",
+    title: "As 5 Mãos Que Se Abriram",
+    hint: "Libera as 5 estátuas-de-posse em Gomorra.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "gomorra-maos-abertas"),
+  },
+  {
+    id: "babel-redimida",
+    title: "As Pontes Antes Das Línguas",
+    hint:
+      "Com a Centelha da Fala-Raiz, acende as 4 pontes de Babel.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "babel-pontes-restauradas"),
+  },
+  {
+    id: "adama-tocou",
+    title: "A Cidade Que Pousou",
+    hint: "Faz Adamá descer das nuvens via a Pedra-Mãe.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "adama-tocou-terra"),
+  },
+  {
+    id: "tzeboim-rostos",
+    title: "Os 10 Espelhos Caíram",
+    hint: "Caminha pelas ruas de Tzeboim e quebra os 10 espelhos.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "tzeboim-rostos-devolvidos"),
+  },
+  {
+    id: "encontrou-loth",
+    title: "O Mestre do Acolhimento",
+    hint: "Em Bela, conversa com Loth-da-Memória.",
+    category: "cidades",
+    difficulty: 1,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "loth-da-memoria"),
+  },
+  {
+    id: "encontrou-jonas",
+    title: "Aquele Que Voltou",
+    hint: "Em Nínive, conversa com Jonas-da-Memória.",
+    category: "cidades",
+    difficulty: 1,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "jonas-da-memoria"),
+  },
+  {
+    id: "helena-ouvida",
+    title: "Pela Primeira Vez Em Mil Anos",
+    hint: "Em Tróia, deixa Helena finalmente falar.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "helena-da-memoria"),
+  },
+  {
+    id: "dido-admite",
+    title: "Coragem Para Largar A Espada",
+    hint: "Em Cartago, escuta Dido confessar o medo disfarçado.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "dido-da-memoria"),
+  },
+  {
+    id: "avo-pacto",
+    title: "Pacto Anti-Hierarquia",
+    hint: "Em Catalhöyük, recebe o pacto da Avó-Matriarca.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "avo-catalhoyuk"),
+  },
+  {
+    id: "pompeia-notada",
+    title: "Tu Estavas Viva Todo O Tempo",
+    hint: "Em Pompeia, permanece 3s perto de cada uma das 10 estátuas.",
+    category: "cidades",
+    difficulty: 3,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "pompeia-redimida"),
+  },
+  {
+    id: "yonaguni-reconhecida",
+    title: "Reconhecer É Diferente De Salvar",
+    hint: "No mirante de Yonaguni, observa as ruínas por 30s.",
+    category: "cidades",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "yonaguni-reconhecida"),
+  },
+  {
+    id: "atlantis-vista",
+    title: "O Que Atlântida Era Antes",
+    hint:
+      "Após visitar a Atlântida (Eloaios), atravessa para a Arquetípica.",
+    category: "cidades",
+    difficulty: 3,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "atlantis-arquetipica-visitada"),
+  },
+
+  // CÓSMICAS (6)
+  {
+    id: "pleiadianos",
+    title: "Os Anjos Curadores Chegam",
+    hint: "Aproxima da Sacerdotisa Pleiadiana entre os 7 pilares.",
+    category: "cosmicas",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "sacerdotisa-pleiadiana"),
+  },
+  {
+    id: "siriacos",
+    title: "A Memória Cósmica Devolvida",
+    hint: "No Cristal-Memória, recebe a vida passada esquecida.",
+    category: "cosmicas",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "escriba-siriaco"),
+  },
+  {
+    id: "arcturianos",
+    title: "Doze Casas-do-Trânsito",
+    hint: "Após a primeira reencarnação, visita o Bardo Lúcido.",
+    category: "cosmicas",
+    difficulty: 3,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "guia-arcturiano"),
+  },
+  {
+    id: "andromedanos",
+    title: "Bilhões De Livros-Estrela",
+    hint:
+      "No pedestal cristalino, recebe a Consulta Akáshica do Bibliotecário.",
+    category: "cosmicas",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "bibliotecario-andromedano"),
+  },
+  {
+    id: "cinzas-decisao",
+    title: "O Que Fazer Com Os Esquecidos",
+    hint:
+      "Na sala metálica, decide se doar uma centelha ao Cinza central.",
+    category: "cosmicas",
+    difficulty: 3,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "cinza-redimido"),
+  },
+  {
+    id: "reptilianos-nomeados",
+    title: "Os 12 Nomes Que Dissolvem",
+    hint: "Nomeia cada um dos 12 reptilianos no conselho.",
+    category: "cosmicas",
+    difficulty: 3,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "reptilianos-dissolvidos"),
+  },
+
+  // INTRA-TERRENAS (4)
+  {
+    id: "agartha-mestre",
+    title: "Rei do Mundo",
+    hint:
+      "Em Agartha, encontra o guardião dos Mui-Telepatas descidos.",
+    category: "intra-terrenas",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "rei-do-mundo"),
+  },
+  {
+    id: "shamballa-triade",
+    title: "Os Que Nunca Caíram",
+    hint:
+      "Em Shamballa, contempla as 3 Sentinelas em sequência.",
+    category: "intra-terrenas",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "triade-sentinela"),
+  },
+  {
+    id: "telos-adama",
+    title: "Lemúria Que Desceu",
+    hint:
+      "Em Telos, conhece Adama (não confundir com Adão).",
+    category: "intra-terrenas",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "adama-de-telos"),
+  },
+  {
+    id: "erks-mestre",
+    title: "Os Andes Sempre Tiveram Portais",
+    hint: "Em Erks, escuta o Mestre Andino no nível médio.",
+    category: "intra-terrenas",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "mestre-andino"),
+  },
+
+  // CENTELHAS / PODERES
+  {
+    id: "primeira-centelha",
+    title: "Olhar Lúcido",
+    hint: "Conquista tua primeira Centelha (em Ratanabá).",
+    category: "centelhas",
+    difficulty: 1,
+    isComplete: ({ centelhas }) => centelhas.has("olhar-lucido"),
+  },
+  {
+    id: "todas-9-centelhas",
+    title: "As Nove Centelhas",
+    hint: "Coleta todas as 9 Centelhas dos planos sagrados.",
+    category: "centelhas",
+    difficulty: 3,
+    isComplete: ({ centelhas }) => centelhas.size >= 9,
+  },
+  {
+    id: "plenitude-angelica",
+    title: "Plenitude Angélica",
+    hint: "Alcança a 8ª fase visual da Centelha.",
+    category: "centelhas",
+    difficulty: 3,
+    isComplete: ({ light, centelhas }) =>
+      light >= 8 || centelhas.size >= 7,
+  },
+
+  // ALMA / VIDAS
+  {
+    id: "par-sizigico",
+    title: "A Alma-Gêmea Reconhecida",
+    hint: "Com 3 Centelhas, encontra o Par Sizígico no Jardim.",
+    category: "alma",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "par-sizigico"),
+  },
+  {
+    id: "primeira-morte",
+    title: "Roda Em Movimento",
+    hint: "Usa a Pedra das Vidas. Reencarna.",
+    category: "alma",
+    difficulty: 2,
+    isComplete: ({ pastLives }) => pastLives >= 2,
+  },
+  {
+    id: "auto-sabotador",
+    title: "O Carcereiro Era Eu",
+    hint:
+      "Na Casa-Espelhada, abraça a tua própria sombra (5s com F).",
+    category: "alma",
+    difficulty: 2,
+    isComplete: ({ sleepers }) =>
+      sleepers.some((s) => s.id === "auto-sabotador"),
+  },
+
+  // EXPLORAÇÃO
+  {
+    id: "labirinto-completo",
+    title: "Dez Vidas Lembradas",
+    hint: "No Labirinto das Eras, lembra todas as 10 eras.",
+    category: "exploracao",
+    difficulty: 3,
+    isComplete: ({ sleepers }) => {
+      const eras = [
+        "era-mito",
+        "era-atlantida",
+        "era-mesopotamia",
+        "era-egito",
+        "era-grecia",
+        "era-roma",
+        "era-idade-media",
+        "era-renascimento",
+        "era-vapor-aco",
+        "era-informacao",
+      ];
+      return eras.every((id) => sleepers.some((s) => s.id === id));
+    },
+  },
+  {
+    id: "tabernaculo-completo",
+    title: "Os Seis Caídos Redimidos",
+    hint: "No Tabernáculo, redime os 6 Anjos Caídos.",
+    category: "exploracao",
+    difficulty: 3,
+    isComplete: ({ sleepers }) => {
+      const ids = [
+        "caido-asmodeus",
+        "caido-lucifer",
+        "caido-belial",
+        "caido-azazel",
+        "caido-semyaza",
+        "caido-leviata",
+      ];
+      return ids.every((id) => sleepers.some((s) => s.id === id));
+    },
+  },
+  {
+    id: "principados-12",
+    title: "As 12 Leis Contempladas",
+    hint:
+      "Na Galeria dos Principados, contempla os 12 em silêncio.",
+    category: "exploracao",
+    difficulty: 3,
+    isComplete: ({ sleepers }) => {
+      const ids = [
+        "principado-sentinela-espelho",
+        "principado-capataz-cinto",
+        "principado-vigia-vela",
+        "principado-censor-boca",
+        "principado-coletor-imposto",
+        "principado-porta-trancada",
+        "principado-lei-viva",
+        "principado-estatua-vigia",
+        "principado-boca-grande",
+        "principado-boneca-corda",
+        "principado-saco-vazio",
+        "principado-mascara-cega",
+      ];
+      return ids.every((id) => sleepers.some((s) => s.id === id));
+    },
+  },
+];
+
+function MissoesTab() {
+  const awakenedSleepers = useSoulStore((s) => s.awakenedSleepers);
+  const centelhas = useSoulStore((s) => s.centelhas);
+  const light = useSoulStore((s) => s.light);
+  const pastLives = useSoulStore((s) => s.pastLives);
+  const watched = useCinematicStore((s) => s.watched);
+
+  const [filter, setFilter] = useState<MissaoCategory | "todas">("todas");
+
+  const cinematicasMap: Record<string, boolean> = {};
+  for (const id in watched) {
+    cinematicasMap[id] = watched[id as CinematicId].watched;
+  }
+
+  const state = {
+    sleepers: awakenedSleepers.map((s) => ({
+      id: s.id,
+      isLegendary: s.isLegendary,
+    })),
+    centelhas,
+    cinematicas: cinematicasMap,
+    light,
+    pastLives: pastLives.length,
+  };
+
+  const filtered =
+    filter === "todas"
+      ? MISSOES
+      : MISSOES.filter((m) => m.category === filter);
+
+  const completed = filtered.filter((m) => m.isComplete(state));
+  const totalCompleted = MISSOES.filter((m) => m.isComplete(state)).length;
+  const pct = Math.round((totalCompleted / MISSOES.length) * 100);
+
+  const categoryLabel: Record<MissaoCategory, string> = {
+    principal: "Principal",
+    civilizacoes: "Civilizações",
+    cidades: "Cidades-Julgamento",
+    cosmicas: "Cósmicas",
+    "intra-terrenas": "Intra-Terrenas",
+    centelhas: "Centelhas",
+    alma: "Alma",
+    exploracao: "Exploração",
+  };
+
+  return (
+    <div className="codex-tab-content">
+      <h3>
+        Missões
+        <span className="count">
+          ({totalCompleted}/{MISSOES.length} · {pct}%)
+        </span>
+      </h3>
+      <p className="codex-tab-sub">
+        <em>
+          Não são tarefas para vencer — são caminhos que tua alma pode
+          tomar. Cada um é também um espelho.
+        </em>
+      </p>
+      <div className="missoes-progress">
+        <div
+          className="missoes-progress-bar"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <div className="missoes-filters">
+        <button
+          className={`missoes-filter ${filter === "todas" ? "active" : ""}`}
+          onClick={() => setFilter("todas")}
+        >
+          Todas ({MISSOES.length})
+        </button>
+        {(Object.keys(categoryLabel) as MissaoCategory[]).map((cat) => {
+          const count = MISSOES.filter((m) => m.category === cat).length;
+          return (
+            <button
+              key={cat}
+              className={`missoes-filter ${filter === cat ? "active" : ""}`}
+              onClick={() => setFilter(cat)}
+            >
+              {categoryLabel[cat]} ({count})
+            </button>
+          );
+        })}
+      </div>
+      <ul className="missoes-list">
+        {filtered.map((m) => {
+          const done = m.isComplete(state);
+          return (
+            <li
+              key={m.id}
+              className={`missao missao-${m.category} ${done ? "missao-done" : "missao-pending"}`}
+            >
+              <div className="missao-marker">{done ? "◆" : "◇"}</div>
+              <div className="missao-body">
+                <div className="missao-title">
+                  {m.title}
+                  <span className="missao-difficulty">
+                    {"●".repeat(m.difficulty)}
+                  </span>
+                  <span className="missao-cat">{categoryLabel[m.category]}</span>
+                </div>
+                <p className="missao-hint">{m.hint}</p>
+              </div>
+            </li>
+          );
+        })}
+        {filtered.length - completed.length === 0 && filtered.length > 0 && (
+          <li className="missoes-category-complete">
+            <em>Esta categoria está inteira concluída.</em>
+          </li>
+        )}
       </ul>
     </div>
   );
