@@ -55,6 +55,7 @@
 | 77-79    | Tróia (Helena) + Cartago (Dido) + Catalhöyük (Avó) — paralelo | `bea8e36` | ✅ |
 | 80-82    | Pompeia + Yonaguni + Atlântis-arq — 3 visuais, paralelo | `bea8e36` | ✅ |
 | 32 lean  | Missões · 8ª aba do Codex · 38 objetivos em 8 categorias | `d2e99b0` | ✅ |
+| 31       | 5 Fases de Poder · HUD chip + 9ª aba do Codex         | `62ffa3c`    | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -219,7 +220,7 @@ de mundo aberto, conteúdo opcional e refinamento.
 
 | Sprint   | Foco                                                              |
 |----------|-------------------------------------------------------------------|
-| 31       | 5 fases de poderes (Acordado → Espírito Puro) — só PowerUpToast feito |
+| 31       | 5 fases de poderes — **CONCLUÍDO** (commit `62ffa3c`)              |
 | 32       | Mecânica de mundo aberto · 140 missões secundárias                |
 | 33       | Cinemáticas CGI pré-renderizadas (substituir text-based)          |
 | 34       | Áudio com OST original (substituir sintetizador procedural)       |
