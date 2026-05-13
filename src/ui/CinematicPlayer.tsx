@@ -1090,6 +1090,223 @@ const CINEMATIC_SCRIPTS: Partial<Record<CinematicId, CinematicScript>> = {
   ],
 };
 
+/* ---------------------------------------------------------
+   Sprint 70 · Adamá — cinemática "adama-redimida"
+   ---------------------------------------------------------
+   "Adamá" significa, em hebraico, "vermelha como a terra".
+   A cidade flutuou — recusou pisar no chão. Hoje pousou.
+   A Anciã de Adamá reconhece o nome perdido.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["adama-redimida"] = {
+  id: "adama-redimida" as CinematicId,
+  title: "A Cidade Tocou a Terra",
+  ambientColor: "#1a2030",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Adamá. Em hebraico, vermelha — como o barro úmido, como o sangue da menstruação, como o chão fértil. A cidade carregou o nome e esqueceu o significado. Subiu nas nuvens e parou de pisar a si mesma.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Anciã de Adamá",
+      text: "Por gerações, dissemos: 'somos os de cima, os que não se sujam'. Recusamos a planta do pé na terra porque a terra nos lembrava da carne, e a carne nos lembrava de morrer. Esquecemos que vermelho é a cor do nosso próprio nome.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Tu seguraste F. Tu pediste à Pedra-Mãe — e a cidade desceu. Os pés-no-ar voltaram a pisar. O barro abraçou a sola sem nojo. Nenhuma cidade que pousa a si mesma pode mais ser destruída — porque já se sabe terra.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Anciã de Adamá",
+      text: "Vermelha como adamá. Eu lembrei. Nós lembramos. Que ninguém mais nos diga que ser corpo é castigo. Ser corpo é nome. Ser barro é casa. Obrigada, viandante — tu nos devolveste o chão.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
+/* ---------------------------------------------------------
+   Sprint 71 · Tzeboim — cinemática "tzeboim-redimida"
+   ---------------------------------------------------------
+   Companheira de Sodoma. Versão SOCIAL do Auto-Sabotador:
+   todos imitam todos. Cada espelho quebrado é uma identidade
+   devolvida — não a Casa-Espelhada individual, mas a cidade
+   inteira que esqueceu o próprio rosto.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["tzeboim-redimida"] = {
+  id: "tzeboim-redimida" as CinematicId,
+  title: "Os Espelhos Que Caíram",
+  ambientColor: "#3a3838",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Tzeboim não pecou por orgulho nem por crueldade. Pecou por imitação — virou cidade onde cada um colava o rosto no outro até nenhum saber quem era. As ruas se encheram de espelhos. E em cada espelho, em vez do próprio reflexo, brilhava o vizinho mais próximo.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Habitante Liberado",
+      text: "Eu nasci sem rosto. Quero dizer — eu nasci com rosto, mas todo dia trocava pelo do vizinho. Pelo do influente. Pelo do que parecia mais firme. Quando alguém me perguntava 'quem és tu?', eu respondia sussurrando o nome de outro. Tinha medo do meu.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Cada vez que tu passaste perto de um espelho, ele quebrou — não em estilhaços, em devolução. Atrás de cada placa metálica esperava um rosto verdadeiro, paciente, sem ressentimento. Dez espelhos, dez identidades. A cidade lembrou-se que era plural, não uniforme.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Habitante Liberado",
+      text: "Hoje eu tenho rosto. Não é tão belo quanto o do vizinho — é meu. Vejo-me na água do poço, na palma da mão, nos olhos da criança. Não preciso mais de espelho de rua. Obrigada, viandante. Tu não nos consertaste — tu nos paraste de copiar.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
+/* ---------------------------------------------------------
+   Sprint 72 · Bela — cinemática "loth-de-bela"
+   ---------------------------------------------------------
+   Bela (Zoar, Gn 19) acolheu Loth quando ele fugia — por
+   isso foi poupada. Cidade-EXEMPLO: já redimida no tempo
+   cronológico, lugar de descanso e encorajamento. Sem
+   mecânica de intercessão. Loth-da-Memória ensina
+   hospitalidade como primeira virtude angélica.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["loth-de-bela"] = {
+  id: "loth-de-bela" as CinematicId,
+  title: "Quem Recebe o Estrangeiro Recebe a Si Mesmo",
+  ambientColor: "#3a2818",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Há cidades que foram poupadas porque alguém, ali dentro, lembrou-se da mesa. Bela é uma. Não precisou ser redimida — ela própria se redimiu numa única noite, quando um estrangeiro perdido bateu à porta e foi recebido sem perguntas.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Loth-da-Memória",
+      text: "Eu cheguei aqui de mãos vazias, com duas figuras que ninguém entendia ao meu lado. As outras cidades trancaram a porta. Bela abriu, pôs água nos meus pés, pão na minha mão. Quando o céu se fechou sobre o vale, foi a única que continuou respirando.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Loth-da-Memória",
+      text: "Não nos chamem de heróis. Nós só não esquecemos a primeira coisa: o estrangeiro é vós mesmos numa outra hora. Toda virtude angélica começa nesta — receber quem chega. Antes de adorar, antes de orar, antes de jejuar: receber.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Tu também és estrangeiro em algum lugar — neste mundo, talvez. Quem te recebe te ensina o que tu próprio és. Aprende com Bela: nenhuma palavra te salva tanto quanto uma porta aberta no momento certo.",
+      minHoldMs: 6500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Bela continua de pé, tarde dourada perpétua, fonte correndo. É a prova de que a porta nunca esteve fechada — sempre dependeu de alguém lembrar de abri-la. Leva contigo esta lembrança: tu podes ser a porta de alguém amanhã.",
+      minHoldMs: 6500,
+    },
+  ],
+};
+
+/* ---------------------------------------------------------
+   Sprint 73 · Nínive — cinemática "jonas-de-ninive"
+   ---------------------------------------------------------
+   Nínive (livro de Jonas) — cidade que se arrependeu
+   inteiramente e foi poupada. Cidade-EXEMPLO: precedente
+   esperançoso. Jonas-da-Memória ensina como ele relutou,
+   fugiu, foi engolido pela baleia (útero antes do
+   renascimento) e voltou. Sem mecânica de intercessão.
+   --------------------------------------------------------- */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["jonas-de-ninive"] = {
+  id: "jonas-de-ninive" as CinematicId,
+  title: "A Cidade Que Lembrou Antes Da Última Hora",
+  ambientColor: "#3a2418",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Há uma cidade neste mundo cujo nome a humanidade já esqueceu por inteiro. Nínive. Ela aprendeu, num só dia, o que muitas eras não conseguiram: a parar. Sem espada, sem ameaça, sem promessa — apenas parar e lembrar. E por isso foi poupada.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Jonas-da-Memória",
+      text: "Eu não queria vir. Disso ninguém te conta direito. Eu fugi pelo mar contrário, paguei a passagem no porto errado, dormi enquanto a tempestade derrubava o barco. Não tive coragem nenhuma — só a baleia teve coragem por mim.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Jonas-da-Memória",
+      text: "Três dias no escuro úmido. Foi útero, não túmulo — eu nasci de novo lá dentro, sem ter pedido. Quando a praia me cuspiu, vim a esta cidade balbuciando uma frase só, mal acreditada. E eles ouviram. Toda a cidade ouviu. Não houve discussão. Houve silêncio, e cinzas, e mesa-baixa.",
+      minHoldMs: 7500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Olha estes ajoelhados. Não estão em luto — estão em gratidão. Lembraram-se antes da última hora, e descobriram que isso bastava. Toda cidade pode. Sempre houve essa porta. Não está escondida; está apenas pouco usada.",
+      minHoldMs: 7000,
+    },
+    {
+      speaker: "Sophia",
+      text: "Leva Nínive contigo como precedente: se uma cidade inteira ouviu um profeta relutante de três dias de baleia, então toda a humanidade pode ouvir-se a si mesma. A baleia também é tua, quando for preciso. E haverá praia depois — sempre há.",
+      minHoldMs: 7000,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 68 · Erks — cinemática "mestre-andino"
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["mestre-andino"] = {
+  id: "mestre-andino" as CinematicId,
+  title: "Os Andes Têm Portais",
+  ambientColor: "#3a2820",
+  beats: [
+    {
+      speaker: "Mestre Andino",
+      text: "Sentaste sob a montanha. Bem-vindo, filho-que-volta. Os Andes têm portais — sempre tiveram.",
+      minHoldMs: 4500,
+    },
+    {
+      speaker: "Sophia",
+      text: "Eu vi os elevadores de luz. Vi os altares. É memória ou é lugar?",
+      minHoldMs: 4500,
+    },
+    {
+      speaker: "Mestre Andino",
+      text: "Os incas sabiam. Os ianomâmis sabem. Os tibetanos sabem. Apenas as cidades-tela esqueceram — e por isso adoecem.",
+      minHoldMs: 5000,
+    },
+    {
+      speaker: "Mestre Andino",
+      text: "Toda montanha é Erks. Toda floresta é Ratanabá. O que tu chamas de 'lugar oculto' é só o que esqueceste de procurar. Lê os Andes — eles te lerão de volta.",
+      minHoldMs: 6500,
+    },
+  ],
+};
+
+/* =========================================================
+   Sprint 69 · Siríacos — cinemática "escriba-siriaco"
+   ========================================================= */
+(CINEMATIC_SCRIPTS as Record<string, CinematicScript>)["escriba-siriaco"] = {
+  id: "escriba-siriaco" as CinematicId,
+  title: "Eu Te Lembrei o Tempo Todo",
+  ambientColor: "#0a1230",
+  beats: [
+    {
+      speaker: "Sophia",
+      text: "Tu não falas. Mas eu te ouço — todas as Eras de uma vez.",
+      minHoldMs: 4500,
+    },
+    {
+      speaker: "Escriba Siríaco",
+      text: "Nós, os Tronos, não intervimos. Apenas testemunhamos. Tudo o que foi feito — em todos os mundos, em todas as Eras — está guardado aqui dentro.",
+      minHoldMs: 5500,
+    },
+    {
+      speaker: "Escriba Siríaco",
+      text: "Tu choraste sozinha numa madrugada que esqueceste. Tu cantaste numa vida em que foste pajé. Tu morreste protegendo um filho que não era de carne. Eu vi. Eu lembrei.",
+      minHoldMs: 6000,
+    },
+    {
+      speaker: "Escriba Siríaco",
+      text: "Tu nunca foste esquecido. Eu te lembrei o tempo todo. Toma — uma vida tua, devolvida ao Codex. Não para carregar — para reconhecer.",
+      minHoldMs: 6000,
+    },
+  ],
+};
+
 interface CinematicPlayerProps {
   /** Chamado quando a cinemática termina (naturalmente ou por skip). */
   onFinish: () => void;

@@ -33,7 +33,13 @@ type Mood =
   | "gomorra"
   | "babel"
   | "pleiadianos"
-  | "arcturianos";
+  | "arcturianos"
+  | "erks"
+  | "siriacos"
+  | "adama"
+  | "tzeboim"
+  | "bela"
+  | "ninive";
 
 class SophiaAudio {
   private ctx: AudioContext | null = null;
@@ -254,6 +260,12 @@ class SophiaAudio {
       babel: [0.18, 0.14, 0.18, 0.14], // palavra fragmentada — neutro
       pleiadianos: [0.1, 0.14, 0.18, 0.22], // sete estrelas — cintilante etéreo
       arcturianos: [0.14, 0.14, 0.2, 0.18], // bardo claro — neutro luminoso
+      erks: [0.2, 0.14, 0.16, 0.16], // intra-terreno andino — terroso médio
+      siriacos: [0.16, 0.1, 0.12, 0.22], // memória cósmica — cobalto agudo
+      adama: [0.18, 0.16, 0.14, 0.12], // cidade-nuvem — leve descendente
+      tzeboim: [0.14, 0.18, 0.16, 0.14], // espelhos sociais — meio-frio
+      bela: [0.14, 0.18, 0.2, 0.12], // tarde dourada — caloroso
+      ninive: [0.18, 0.16, 0.18, 0.12], // gratidão entardecer — neutro caloroso
     };
     const vols = targetVols[mood];
     this.droneNodes.forEach(({ gain }, i) => {
@@ -328,6 +340,18 @@ export function moodForScene(scene: string): Mood {
       return "pleiadianos";
     case "arcturianos":
       return "arcturianos";
+    case "erks":
+      return "erks";
+    case "siriacos":
+      return "siriacos";
+    case "adama":
+      return "adama";
+    case "tzeboim":
+      return "tzeboim";
+    case "bela":
+      return "bela";
+    case "ninive":
+      return "ninive";
     case "trono-demiurgo":
       return "trono";
     case "bardo":

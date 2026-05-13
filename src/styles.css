@@ -4090,3 +4090,406 @@ body.a11y-high-contrast .pause-hint {
   text-shadow: none;
 }
 
+/* =========================================================
+   Adamá · A Cidade Que Esqueceu a Terra
+   ---------------------------------------------------------
+   Overlay de intercessão — o jogador encosta na Pedra-Mãe e
+   segura F por 5s. Paleta âmbar-terroso (barro vermelho seco
+   + sépia quente). Barra de progresso desce com a cidade.
+   ========================================================= */
+.adama-intercession-overlay {
+  position: fixed;
+  bottom: 7vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 92vw);
+  padding: 22px 28px 20px;
+  background: linear-gradient(
+    180deg,
+    rgba(36, 14, 6, 0.88) 0%,
+    rgba(64, 28, 14, 0.74) 100%
+  );
+  border: 1px solid rgba(216, 120, 64, 0.42);
+  border-radius: 8px;
+  color: #f4d8b0;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7),
+    inset 0 0 32px rgba(216, 120, 64, 0.1);
+  backdrop-filter: blur(2px);
+}
+.adama-intercession-overlay .adama-intercession-text {
+  margin: 0 0 10px;
+  font-family: var(--font-title);
+  font-size: 1.12rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: #ffd8a8;
+  text-shadow: 0 0 12px rgba(216, 120, 56, 0.45);
+}
+.adama-intercession-overlay .adama-intercession-hint {
+  margin: 4px 0 10px;
+  font-size: 0.92rem;
+  opacity: 0.78;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #f0c890;
+}
+.adama-intercession-overlay strong {
+  color: #ffb070;
+  font-weight: 600;
+}
+.adama-progress-bar {
+  width: 100%;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 8px 0 6px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+.adama-progress-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #5a2814 0%,
+    #b8542a 35%,
+    #d87038 65%,
+    #ffa860 100%
+  );
+  transition: width 0.12s linear;
+  box-shadow: 0 0 12px rgba(216, 112, 56, 0.6);
+}
+.adama-descent-count {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  font-family: var(--font-ui);
+  color: #ffb070;
+  text-shadow: 0 0 8px rgba(216, 120, 56, 0.45);
+}
+.adama-descent-count .adama-step-icon {
+  display: inline-block;
+  margin: 0 0.18em;
+  font-size: 0.95em;
+  filter: drop-shadow(0 0 4px rgba(216, 120, 56, 0.7));
+}
+.adama-descent-count .adama-step-icon.dim {
+  opacity: 0.3;
+  filter: none;
+}
+
+/* =========================================================
+   Tzeboim · A Cidade-Espelho Social
+   ---------------------------------------------------------
+   Hint overlay para a mecânica de andar entre 10 espelhos.
+   Paleta cinza-prata fria com âmbar progressivo (cada espelho
+   quebrado aquece a paleta). Contador "X de 10 espelhos".
+   ========================================================= */
+.tzeboim-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 90vw);
+  padding: 20px 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 26, 32, 0.88) 0%,
+    rgba(58, 56, 56, 0.72) 100%
+  );
+  border: 1px solid rgba(200, 200, 216, 0.36);
+  border-radius: 8px;
+  color: #e8e4dc;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.7),
+    inset 0 0 30px rgba(232, 228, 216, 0.06);
+  backdrop-filter: blur(2px);
+}
+.tzeboim-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #ece6d8;
+}
+.tzeboim-hint strong {
+  color: #ffd890;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 200, 128, 0.4);
+}
+.tzeboim-hint .tzeboim-sub {
+  font-size: 0.86rem;
+  opacity: 0.74;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #c8c4bc;
+}
+.tzeboim-mirror-count {
+  margin: 8px 0 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  font-family: var(--font-ui);
+  color: #ffd890;
+  text-shadow: 0 0 8px rgba(216, 192, 132, 0.45);
+}
+.tzeboim-mirror-count .tzeboim-mirror-icon {
+  display: inline-block;
+  margin: 0 0.18em;
+  font-size: 0.95em;
+  filter: drop-shadow(0 0 4px rgba(216, 192, 132, 0.6));
+}
+.tzeboim-mirror-count .tzeboim-mirror-icon.dim {
+  opacity: 0.32;
+  filter: none;
+}
+.tzeboim-hint.tzeboim-redeemed {
+  background: linear-gradient(
+    180deg,
+    rgba(36, 22, 12, 0.9) 0%,
+    rgba(68, 42, 22, 0.78) 100%
+  );
+  border-color: rgba(255, 176, 96, 0.4);
+  color: #f4dcb4;
+}
+.tzeboim-hint.tzeboim-redeemed strong {
+  color: #ffd070;
+}
+
+/* =========================================================
+   Erks · hint do Mestre Andino
+   Cidade dos Mestres Cósmicos · paleta âmbar-andina
+   ========================================================= */
+.erks-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 88vw);
+  padding: 18px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 16, 6, 0.88) 0%,
+    rgba(72, 44, 18, 0.74) 100%
+  );
+  border: 1px solid rgba(216, 152, 96, 0.46);
+  border-radius: 8px;
+  color: #ffe2b0;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65),
+    inset 0 0 30px rgba(232, 168, 96, 0.12);
+  backdrop-filter: blur(2px);
+  animation: erks-shimmer 4.2s ease-in-out infinite;
+}
+.erks-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.erks-hint strong {
+  color: #ffd890;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(232, 168, 96, 0.55);
+}
+.erks-hint .erks-sub {
+  font-size: 0.86rem;
+  opacity: 0.72;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #f0c898;
+}
+@keyframes erks-shimmer {
+  0%, 100% {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65),
+      inset 0 0 30px rgba(232, 168, 96, 0.1);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65),
+      inset 0 0 36px rgba(248, 200, 120, 0.18);
+  }
+}
+
+/* =========================================================
+   Siríacos · hint do Escriba
+   Câmara da Memória Cósmica · paleta azul-cobalto profundo
+   ========================================================= */
+.siriacos-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 88vw);
+  padding: 18px 24px;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 12, 30, 0.92) 0%,
+    rgba(28, 44, 96, 0.74) 100%
+  );
+  border: 1px solid rgba(120, 160, 232, 0.42);
+  border-radius: 8px;
+  color: #dce8ff;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.7),
+    inset 0 0 30px rgba(88, 128, 232, 0.12);
+  backdrop-filter: blur(2px);
+  animation: siriacos-shimmer 5.2s ease-in-out infinite;
+}
+.siriacos-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+.siriacos-hint strong {
+  color: #b8d0ff;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(120, 160, 240, 0.55);
+}
+.siriacos-hint .siriacos-sub {
+  font-size: 0.86rem;
+  opacity: 0.74;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #b0c0e8;
+}
+@keyframes siriacos-shimmer {
+  0%, 100% {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.7),
+      inset 0 0 30px rgba(88, 128, 232, 0.1);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7),
+      inset 0 0 36px rgba(120, 160, 240, 0.18);
+  }
+}
+
+
+/* =========================================================
+   Bela · A Cidade Que Pôde Ser Salva (Sprint 72)
+   ---------------------------------------------------------
+   Hint overlay para o encontro opcional com Loth-da-Memória.
+   Paleta âmbar-quente-amistosa — tarde dourada perpétua,
+   sem aspereza nem solenidade pesada.
+   ========================================================= */
+.bela-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(600px, 90vw);
+  padding: 20px 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(60, 36, 18, 0.84) 0%,
+    rgba(102, 64, 32, 0.7) 100%
+  );
+  border: 1px solid rgba(248, 200, 120, 0.5);
+  border-radius: 10px;
+  color: #fce0b0;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55),
+    inset 0 0 30px rgba(248, 200, 120, 0.14);
+  backdrop-filter: blur(2px);
+}
+.bela-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #fde4bc;
+}
+.bela-hint strong {
+  color: #ffd078;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 200, 120, 0.45);
+}
+.bela-hint .bela-sub {
+  font-size: 0.86rem;
+  opacity: 0.82;
+  margin: 0;
+  letter-spacing: 0.04em;
+  font-style: italic;
+  color: #f4c890;
+}
+.bela-hint.bela-met {
+  background: linear-gradient(
+    180deg,
+    rgba(48, 30, 14, 0.78) 0%,
+    rgba(82, 52, 24, 0.62) 100%
+  );
+  border-color: rgba(216, 168, 100, 0.42);
+}
+.bela-hint.bela-met strong {
+  color: #f4c878;
+  text-shadow: none;
+}
+
+/* =========================================================
+   Nínive · A Cidade Que Se Lembrou (Sprint 73)
+   ---------------------------------------------------------
+   Hint overlay para o encontro opcional com Jonas-da-Memória.
+   Paleta laranja-sépia-final-de-tarde — mais grave que Bela,
+   sem ser pesada. Gratidão coletiva, lembrança antes da hora.
+   ========================================================= */
+.ninive-hint {
+  position: fixed;
+  bottom: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 90vw);
+  padding: 20px 26px;
+  background: linear-gradient(
+    180deg,
+    rgba(52, 26, 14, 0.86) 0%,
+    rgba(96, 50, 24, 0.72) 100%
+  );
+  border: 1px solid rgba(220, 152, 90, 0.5);
+  border-radius: 10px;
+  color: #f4ccaa;
+  font-family: var(--font-body);
+  text-align: center;
+  z-index: 50;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.6),
+    inset 0 0 30px rgba(220, 152, 90, 0.12);
+  backdrop-filter: blur(2px);
+}
+.ninive-hint p {
+  margin: 0 0 6px;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #f4d4ac;
+}
+.ninive-hint strong {
+  color: #ffb878;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(220, 152, 90, 0.5);
+}
+.ninive-hint .ninive-sub {
+  font-size: 0.86rem;
+  opacity: 0.8;
+  margin: 0;
+  letter-spacing: 0.05em;
+  font-style: italic;
+  color: #e0b08c;
+}
+.ninive-hint.ninive-met {
+  background: linear-gradient(
+    180deg,
+    rgba(40, 22, 10, 0.8) 0%,
+    rgba(72, 40, 18, 0.66) 100%
+  );
+  border-color: rgba(188, 136, 80, 0.42);
+}
+.ninive-hint.ninive-met strong {
+  color: #dca878;
+  text-shadow: none;
+}

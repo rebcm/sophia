@@ -53,6 +53,15 @@ import {
 import { BabelScene, POVO_POSITIONS } from "./scenes/BabelScene";
 import { PleiadianosScene } from "./scenes/PleiadianosScene";
 import { ArcturianosScene } from "./scenes/ArcturianosScene";
+import { ErksScene } from "./scenes/ErksScene";
+import { SiriacosScene } from "./scenes/SiriacosScene";
+import { AdamaScene } from "./scenes/AdamaScene";
+import {
+  TzeboimScene,
+  MIRROR_POSITIONS,
+} from "./scenes/TzeboimScene";
+import { BelaScene } from "./scenes/BelaScene";
+import { NiniveScene } from "./scenes/NiniveScene";
 import { ParSizigico } from "./world/ParSizigico";
 import { SizigiaRecognition } from "./ui/SizigiaRecognition";
 import { PowerUpToast } from "./ui/PowerUpToast";
@@ -187,7 +196,13 @@ export default function App() {
       lastWatched === "gomorra-redimida" ||
       lastWatched === "babel-redimida" ||
       lastWatched === "sacerdotisa-pleiadiana" ||
-      lastWatched === "guia-arcturiano"
+      lastWatched === "guia-arcturiano" ||
+      lastWatched === "mestre-andino" ||
+      lastWatched === "escriba-siriaco" ||
+      lastWatched === "adama-redimida" ||
+      lastWatched === "tzeboim-redimida" ||
+      lastWatched === "loth-de-bela" ||
+      lastWatched === "jonas-de-ninive"
     ) {
       useCharacterStore.getState().setCurrentScene("mar-de-cristal");
     }
@@ -287,6 +302,12 @@ function GameOrchestrator() {
   if (currentScene === "babel") return <BabelOrchestrator />;
   if (currentScene === "pleiadianos") return <PleiadianosOrchestrator />;
   if (currentScene === "arcturianos") return <ArcturianosOrchestrator />;
+  if (currentScene === "erks") return <ErksOrchestrator />;
+  if (currentScene === "siriacos") return <SiriacosOrchestrator />;
+  if (currentScene === "adama") return <AdamaOrchestrator />;
+  if (currentScene === "tzeboim") return <TzeboimOrchestrator />;
+  if (currentScene === "bela") return <BelaOrchestrator />;
+  if (currentScene === "ninive") return <NiniveOrchestrator />;
   return <JardimOrchestrator />;
 }
 
@@ -348,6 +369,18 @@ function MarDeCristalOrchestrator() {
       setCurrentScene("pleiadianos");
     } else if (destino === "arcturianos") {
       setCurrentScene("arcturianos");
+    } else if (destino === "erks") {
+      setCurrentScene("erks");
+    } else if (destino === "siriacos") {
+      setCurrentScene("siriacos");
+    } else if (destino === "adama") {
+      setCurrentScene("adama");
+    } else if (destino === "tzeboim") {
+      setCurrentScene("tzeboim");
+    } else if (destino === "bela") {
+      setCurrentScene("bela");
+    } else if (destino === "ninive") {
+      setCurrentScene("ninive");
     }
   };
 
@@ -2916,6 +2949,624 @@ function ArcturianosOrchestrator() {
               {canEnter
                 ? "Aproxima-te do Guia (o líder, à frente). Pressiona F."
                 : "Ainda não atravessaste. Volta após a tua primeira morte na Pedra das Vidas."}
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   ErksOrchestrator — Sprint 68
+   ---------------------------------------------------------
+   Mestre Andino no nível médio (y=8.4). Aproximar XZ < 4 + F.
+   ========================================================= */
+
+function ErksOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addCentelha = useSoulStore((s) => s.addCentelha);
+  const hasCentelha = useSoulStore((s) => s.hasCentelha);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const mestreAwakened = hasAwakened("mestre-andino");
+
+  useEffect(() => {
+    setPlace("Erks · Cidade Andina");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (mestreAwakened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "mestre-andino",
+        name: "Mestre Andino",
+        trueName: "O Anciã do Portal Cordilheirano",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.2);
+      if (!hasCentelha("lembranca-profunda")) {
+        addCentelha("lembranca-profunda");
+      } else {
+        addToAlignment("balance", 8);
+      }
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("mestre-andino");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    mestreAwakened,
+    recordAwakened,
+    addLight,
+    addCentelha,
+    hasCentelha,
+    addToAlignment,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <ErksScene
+        mestreAwakened={mestreAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!mestreAwakened && (
+        <div className="erks-hint">
+          <p>
+            <em>
+              Sobe ao nível médio. Aproxima-te do Mestre Andino.
+              Pressiona <strong>F</strong>.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   SiriacosOrchestrator — Sprint 69
+   ========================================================= */
+
+function SiriacosOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const escribaAwakened = hasAwakened("escriba-siriaco");
+
+  useEffect(() => {
+    setPlace("Siríacos · Câmara da Memória Cósmica");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (escribaAwakened) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "escriba-siriaco",
+        name: "Escriba Siríaco",
+        trueName: "Anjo Trono · Memória de Todas as Eras",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(1.0);
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("escriba-siriaco");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    escribaAwakened,
+    recordAwakened,
+    addLight,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <SiriacosScene
+        escribaAwakened={escribaAwakened}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!escribaAwakened && (
+        <div className="siriacos-hint">
+          <p>
+            <em>
+              Aproxima-te do Cristal-Memória. Pressiona{" "}
+              <strong>F</strong>. O Escriba ouvirá com olhos cerrados.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   AdamaOrchestrator — Sprint 70
+   ---------------------------------------------------------
+   Intercessão pela Pedra-Mãe: segurar F por 5s na proximidade.
+   ========================================================= */
+
+const ADAMA_DURATION_S = 5.0;
+const ADAMA_RANGE = 3.0;
+
+function AdamaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const already = hasAwakened("adama-tocou-terra");
+  const [interceded, setInterceded] = useState(already);
+  const [progressSec, setProgressSec] = useState(0);
+  const fKeyDownRef = useRef(false);
+  const lastTickRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    setPlace("Adamá · Cidade Aérea");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (interceded) return;
+    const down = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = true;
+    };
+    const up = (e: KeyboardEvent) => {
+      if (e.code === "KeyF") fKeyDownRef.current = false;
+    };
+    window.addEventListener("keydown", down);
+    window.addEventListener("keyup", up);
+    return () => {
+      window.removeEventListener("keydown", down);
+      window.removeEventListener("keyup", up);
+    };
+  }, [interceded]);
+
+  useEffect(() => {
+    if (interceded) return;
+    let raf = 0;
+    const tick = (now: number) => {
+      const last = lastTickRef.current ?? now;
+      const dt = Math.min(0.1, (now - last) / 1000);
+      lastTickRef.current = now;
+      const player = playerRefHolder.current?.current;
+      let inRange = false;
+      if (player) {
+        const d = Math.hypot(player.position.x, player.position.z);
+        inRange = d < ADAMA_RANGE;
+      }
+      if (fKeyDownRef.current && inRange) {
+        setProgressSec((s) => {
+          const next = Math.min(ADAMA_DURATION_S, s + dt);
+          if (next >= ADAMA_DURATION_S) finish();
+          return next;
+        });
+      } else {
+        setProgressSec((s) => Math.max(0, s - dt * 0.6));
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      lastTickRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [interceded]);
+
+  const finish = () => {
+    setInterceded(true);
+    setProgressSec(ADAMA_DURATION_S);
+    recordAwakened({
+      id: "adama-tocou-terra",
+      name: "Adamá",
+      trueName: "Cidade Que Tocou a Terra",
+      isLegendary: true,
+      awakenedAt: Date.now(),
+      awakenedInLife: currentLifeIndex,
+    });
+    addLight(1.0);
+    addToAlignment("balance", 12);
+    if (audioEnabled) sophiaAudio.awakenChord();
+    setTimeout(() => {
+      playCinematic("adama-redimida");
+      setMetaPhase("cinematic");
+    }, 1500);
+  };
+
+  const progressNorm = progressSec / ADAMA_DURATION_S;
+
+  return (
+    <>
+      <AdamaScene
+        interceded={interceded}
+        descentProgress={progressNorm}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!interceded && (
+        <div className="adama-intercession-overlay">
+          <p>
+            <em>
+              Aproxima-te da Pedra-Mãe. Segura <strong>F</strong> em
+              silêncio. A cidade descerá.
+            </em>
+          </p>
+          <div className="adama-progress-bar">
+            <div
+              className="adama-progress-fill"
+              style={{ width: `${progressNorm * 100}%` }}
+            />
+          </div>
+          <p className="adama-descent-count">
+            {progressSec.toFixed(1)}s / {ADAMA_DURATION_S.toFixed(0)}s
+            de toque na terra.
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   TzeboimOrchestrator — Sprint 71
+   ---------------------------------------------------------
+   10 espelhos quebram automaticamente ao passar perto (< 1.8m).
+   ========================================================= */
+
+const MIRROR_BREAK_RANGE = 1.8;
+
+function TzeboimOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const already = hasAwakened("tzeboim-rostos-devolvidos");
+  const [broken, setBroken] = useState<boolean[]>(
+    MIRROR_POSITIONS.map(() => already),
+  );
+
+  useEffect(() => {
+    setPlace("Tzeboim · Cidade-Espelho");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (already) return;
+    let raf = 0;
+    const tick = () => {
+      const player = playerRefHolder.current?.current;
+      if (player) {
+        let changed = false;
+        const next = [...broken];
+        for (let i = 0; i < MIRROR_POSITIONS.length; i++) {
+          if (next[i]) continue;
+          const m = MIRROR_POSITIONS[i];
+          const d = Math.hypot(
+            player.position.x - m.pos[0],
+            player.position.z - m.pos[2],
+          );
+          if (d < MIRROR_BREAK_RANGE) {
+            next[i] = true;
+            changed = true;
+            if (audioEnabled) sophiaAudio.chime(68, 1.4, 0.16);
+          }
+        }
+        if (changed) {
+          setBroken(next);
+          if (next.every(Boolean)) {
+            recordAwakened({
+              id: "tzeboim-rostos-devolvidos",
+              name: "Tzeboim",
+              trueName: "Cidade dos Rostos Devolvidos",
+              isLegendary: true,
+              awakenedAt: Date.now(),
+              awakenedInLife: currentLifeIndex,
+            });
+            addLight(1.2);
+            addToAlignment("balance", 12);
+            if (audioEnabled) sophiaAudio.awakenChord();
+            setTimeout(() => {
+              playCinematic("tzeboim-redimida");
+              setMetaPhase("cinematic");
+            }, 1500);
+          }
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [already, broken]);
+
+  const doneCount = broken.filter(Boolean).length;
+
+  return (
+    <>
+      <TzeboimScene
+        broken={broken}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!already && (
+        <div
+          className={`tzeboim-hint ${broken.every(Boolean) ? "tzeboim-redeemed" : ""}`}
+        >
+          <p>
+            <em>
+              Caminha entre os espelhos. Eles quebram quando tu passas.
+              Cada quebrar é um rosto devolvido.
+            </em>
+          </p>
+          <p className="tzeboim-mirror-count">{doneCount} de 10 espelhos caídos.</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   BelaOrchestrator — Sprint 72
+   ---------------------------------------------------------
+   Encontro com Loth-da-Memória. Sem intercessão.
+   ========================================================= */
+
+function BelaOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const lothMet = hasAwakened("loth-da-memoria");
+
+  useEffect(() => {
+    setPlace("Bela · A Cidade Que Foi Salva");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (lothMet) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "loth-da-memoria",
+        name: "Loth-da-Memória",
+        trueName: "O Que Recebeu o Estrangeiro",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(0.8);
+      addToAlignment("balance", 8);
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("loth-de-bela");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    lothMet,
+    recordAwakened,
+    addLight,
+    addToAlignment,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <BelaScene
+        lothMet={lothMet}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!lothMet && (
+        <div className="bela-hint">
+          <p>
+            <em>
+              Aproxima-te de Loth-da-Memória, sentado no degrau.
+              Pressiona <strong>F</strong>.
+            </em>
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
+/* =========================================================
+   NiniveOrchestrator — Sprint 73
+   ========================================================= */
+
+function NiniveOrchestrator() {
+  const setCurrentScene = useCharacterStore((s) => s.setCurrentScene);
+  const setPlace = useGameStore((s) => s.setPlace);
+  const audioEnabled = useGameStore((s) => s.audioEnabled);
+
+  const recordAwakened = useSoulStore((s) => s.recordAwakened);
+  const addLight = useSoulStore((s) => s.addLight);
+  const addToAlignment = useSoulStore((s) => s.addToAlignment);
+  const hasAwakened = useSoulStore((s) => s.hasAwakened);
+  const currentLifeIndex = useSoulStore((s) => s.currentLifeIndex);
+  const playCinematic = useCinematicStore((s) => s.playCinematic);
+  const setMetaPhase = useGameStore((s) => s.setMetaPhase);
+
+  const playerRefHolder = useRef<React.RefObject<THREE.Group | null> | null>(
+    null,
+  );
+  const jonasMet = hasAwakened("jonas-da-memoria");
+
+  useEffect(() => {
+    setPlace("Nínive · A Cidade Que Se Lembrou");
+  }, [setPlace]);
+
+  useEffect(() => {
+    if (jonasMet) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.code !== "KeyF") return;
+      const player = playerRefHolder.current?.current;
+      if (!player) return;
+      const dist = Math.hypot(player.position.x, player.position.z);
+      if (dist > 4) return;
+
+      recordAwakened({
+        id: "jonas-da-memoria",
+        name: "Jonas-da-Memória",
+        trueName: "O Que Relutou e Voltou",
+        isLegendary: true,
+        awakenedAt: Date.now(),
+        awakenedInLife: currentLifeIndex,
+      });
+      addLight(0.8);
+      addToAlignment("balance", 10);
+      if (audioEnabled) sophiaAudio.awakenChord();
+      setTimeout(() => {
+        playCinematic("jonas-de-ninive");
+        setMetaPhase("cinematic");
+      }, 1200);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [
+    jonasMet,
+    recordAwakened,
+    addLight,
+    addToAlignment,
+    audioEnabled,
+    playCinematic,
+    setMetaPhase,
+    currentLifeIndex,
+  ]);
+
+  return (
+    <>
+      <NiniveScene
+        jonasMet={jonasMet}
+        onReturnToMar={() => setCurrentScene("mar-de-cristal")}
+        onPlayerRef={(ref) => {
+          playerRefHolder.current = ref;
+        }}
+      />
+      <HUD />
+      <Cursor />
+      {!jonasMet && (
+        <div className="ninive-hint">
+          <p>
+            <em>
+              Aproxima-te de Jonas-da-Memória. Pressiona{" "}
+              <strong>F</strong>. Nínive lembrou primeiro.
             </em>
           </p>
         </div>

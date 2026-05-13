@@ -49,7 +49,13 @@ export type MarDestino =
   | "gomorra"
   | "babel"
   | "pleiadianos"
-  | "arcturianos";
+  | "arcturianos"
+  | "erks"
+  | "siriacos"
+  | "adama"
+  | "tzeboim"
+  | "bela"
+  | "ninive";
 
 interface MarDeCristalSceneProps {
   /** Chamado quando o jogador "entra" num portal (proximidade + ação). */
@@ -483,6 +489,90 @@ export function MarDeCristalScene({
           playerRef={playerRef}
           onProximityChange={(near) =>
             setNearPortal(near ? "arcturianos" : null)
+          }
+        />
+      )}
+
+      {/* Erks — cidade andina (destrava após Adonaios/Hiperbórea) */}
+      {adonaiosDefeated && (
+        <Portal
+          position={[6, 0.4, -6]}
+          label="Erks"
+          subLabel="(os Andes têm portais)"
+          color="#c8a868"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "erks" : null)
+          }
+        />
+      )}
+
+      {/* Siríacos — câmara da memória (após Casa-Espelhada) */}
+      {casaEspelhadaEnabled && (
+        <Portal
+          position={[-6, 0.4, -6]}
+          label="Siríacos"
+          subLabel="(eu te lembrei o tempo todo)"
+          color="#5a78d8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "siriacos" : null)
+          }
+        />
+      )}
+
+      {/* Adamá — cidade que esqueceu a terra (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[10, 0.4, 0]}
+          label="Adamá"
+          subLabel="(uma cidade flutua, querendo descer)"
+          color="#b85838"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "adama" : null)
+          }
+        />
+      )}
+
+      {/* Tzeboim — cidade-espelho social (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[-10, 0.4, 0]}
+          label="Tzeboim"
+          subLabel="(dez espelhos esperam cair)"
+          color="#a8a8c8"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "tzeboim" : null)
+          }
+        />
+      )}
+
+      {/* Bela — cidade-exemplo (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[0, 0.4, -8]}
+          label="Bela"
+          subLabel="(a que foi salva — descansa aqui)"
+          color="#e8a878"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "bela" : null)
+          }
+        />
+      )}
+
+      {/* Nínive — cidade-exemplo (após Demiurgo) */}
+      {tronoEnabled && (
+        <Portal
+          position={[0, 0.4, 12]}
+          label="Nínive"
+          subLabel="(a que se lembrou — precedente)"
+          color="#d88858"
+          playerRef={playerRef}
+          onProximityChange={(near) =>
+            setNearPortal(near ? "ninive" : null)
           }
         />
       )}

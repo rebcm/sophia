@@ -72,6 +72,12 @@ export type SceneId =
   | "babel" // Sprint 65 — palavra fragmentada
   | "pleiadianos" // Sprint 66 — sala dos sete pilares
   | "arcturianos" // Sprint 67 — doze casas-do-trânsito
+  | "erks" // Sprint 68 — cidade andina intra-terrena
+  | "siriacos" // Sprint 69 — câmara da memória cósmica
+  | "adama" // Sprint 70 — cidade que esqueceu a terra
+  | "tzeboim" // Sprint 71 — cidade-espelho social
+  | "bela" // Sprint 72 — cidade-exemplo (Loth)
+  | "ninive" // Sprint 73 — cidade-exemplo (Jonas)
   | "bardo";
 
 export interface BodyConfig {

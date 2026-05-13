@@ -36,7 +36,13 @@ export type CinematicId =
   | "gomorra-redimida" // Gomorra
   | "babel-redimida" // Babel
   | "sacerdotisa-pleiadiana" // Pleiadianos
-  | "guia-arcturiano"; // Arcturianos
+  | "guia-arcturiano" // Arcturianos
+  | "mestre-andino" // Erks
+  | "escriba-siriaco" // Siríacos
+  | "adama-redimida" // Adamá
+  | "tzeboim-redimida" // Tzeboim
+  | "loth-de-bela" // Bela
+  | "jonas-de-ninive"; // Nínive
 
 interface CinematicEntry {
   id: CinematicId;
