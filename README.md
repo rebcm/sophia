@@ -4,7 +4,7 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica em curso** — 58 sprints
+**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica COMPLETA** — 67 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
@@ -103,7 +103,7 @@ todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
 de duração do loop narrativo: **~2-3 horas** se o jogador ler
 todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas (30)
+### Cenas implementadas (39)
 
 | Cena                       | Função                                       | Sprint |
 | -------------------------- | -------------------------------------------- | ------ |
@@ -137,6 +137,15 @@ todas as cinemáticas e explorar cada cena.
 | **Tzeboim**                | Cidade-espelho social · 10 espelhos           | 71     |
 | **Bela**                   | Cidade-exemplo · Loth-da-Memória              | 72     |
 | **Nínive**                 | Cidade-exemplo · Jonas-da-Memória             | 73     |
+| **Andromedanos**           | Biblioteca da Origem · Bibliotecário-de-Andrômeda | 74 |
+| **Os Cinzas**              | Experimentos sem alma · escolha-chave de centelha | 75 |
+| **Reptilianos**            | Câmara subterrânea · 12 nomeações arquetípicas | 76    |
+| **Tróia**                  | Desejo destrutivo · Helena-da-Memória         | 77     |
+| **Cartago**                | Resistência cega · Dido-da-Memória            | 78     |
+| **Catalhöyük**             | Vila-Mãe da humanidade · Avó (Anti-Hierarquia) | 79    |
+| **Pompeia**                | Esquecimento súbito · 10 estátuas contempladas | 80    |
+| **Yonaguni**               | Submersa · 30s de reconhecimento              | 81     |
+| **Atlântis Arquetípica**   | Versão idealizada · catarse comparativa        | 82     |
 
 ### Sistemas funcionais
 
@@ -262,7 +271,8 @@ Após a Mônada, o jogador escolhe entre:
 | 60+61  | **Expansão cosmológica:** Agartha (intra-terrena) + Sodoma (julgamento) | `fe4acfe` | ✅ |
 | 62-67  | **6 cenas paralelas:** Shamballa, Telos, Gomorra, Babel, Pleiadianos, Arcturianos | `f29ec0c` | ✅ |
 | 68-73  | **6 cenas paralelas:** Erks, Siríacos, Adamá, Tzeboim, Bela, Nínive | `09b26e0` | ✅ |
-| —      | Backlog — mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização + expansão (intra-terrenas restantes, cósmicas, 11 cidades do julgamento) — ver `docs/22` e `docs/production/02-sprint-board.md` | – | 🔜 |
+| 74-82  | **9 cenas paralelas finais:** Andromedanos, Cinzas, Reptilianos, Tróia, Cartago, Catalhöyük, Pompeia, Yonaguni, Atlântis Arquetípica | `bea8e36` | ✅ |
+| —      | **Expansão cosmológica COMPLETA** (docs/22 100% implementado). Backlog restante: mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização — ver `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---
 

@@ -51,6 +51,9 @@
 | 68+69    | Erks (intra-terrena andina) + Siríacos (memória cósmica) — paralelo | `09b26e0` | ✅ |
 | 70+71    | Adamá (Pedra-Mãe) + Tzeboim (10 espelhos) — paralelo | `09b26e0`    | ✅ |
 | 72+73    | Bela (Loth) + Nínive (Jonas) — cidades-exemplo, paralelo | `09b26e0` | ✅ |
+| 74-76    | Andromedanos + Cinzas + Reptilianos — 3 cósmicas, paralelo | `bea8e36` | ✅ |
+| 77-79    | Tróia (Helena) + Cartago (Dido) + Catalhöyük (Avó) — paralelo | `bea8e36` | ✅ |
+| 80-82    | Pompeia + Yonaguni + Atlântis-arq — 3 visuais, paralelo | `bea8e36` | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -222,8 +225,7 @@ de mundo aberto, conteúdo opcional e refinamento.
 | 35       | Multiplayer assíncrono (Aeon-Mestres em jardins de outros)        |
 | 36       | Localização EN/ES/FR (acessibilidade básica já feita)             |
 | 37       | Polimento, performance, lançamento beta                           |
-| 74-76    | Cósmicas restantes (Andromedanos, Cinzas, Reptilianos)             |
-| 77-82    | Cidades do julgamento restantes (Tróia, Cartago, Pompeia, Yonaguni, Atlântis-arquetípica, Catalhöyük) |
+| —        | (Expansão cosmológica do docs/22 está agora COMPLETA · 13 cidades-julgamento + 6 cósmicas + 4 intra-terrenas) |
 
 ---
 
