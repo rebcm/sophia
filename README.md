@@ -4,7 +4,7 @@
 > — Sussurrante de Sophia, Capítulo 1
 
 **Autoria integral:** Rebeca Alves Moreira.
-**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica em curso** — 52 sprints
+**Status:** **vertical slice end-to-end COMPLETO** + **expansão cosmológica em curso** — 58 sprints
 entregues, da TitleScreen aos 6 endings. Inclui 6 Anjos Caídos
 redimíveis, Anúncio Conjunto integrado, Feira dos Sistemas,
 Labirinto das Eras (10 vidas passadas), Par Sizígico
@@ -103,7 +103,7 @@ todas as 7 Civilizações Perdidas e a Casa-Espelhada. Estimativa
 de duração do loop narrativo: **~2-3 horas** se o jogador ler
 todas as cinemáticas e explorar cada cena.
 
-### Cenas implementadas (24)
+### Cenas implementadas (30)
 
 | Cena                       | Função                                       | Sprint |
 | -------------------------- | -------------------------------------------- | ------ |
@@ -131,6 +131,12 @@ todas as cinemáticas e explorar cada cena.
 | **Babel**                  | Palavra fragmentada · 4 pontes de tradução    | 65     |
 | **Pleiadianos**            | Sala dos sete pilares · Sacerdotisa Curadora  | 66     |
 | **Arcturianos**            | Doze casas-do-trânsito · Bardo Lúcido         | 67     |
+| **Erks**                   | Cidade andina intra-terrena · Mestre Andino   | 68     |
+| **Siríacos**               | Câmara da memória cósmica · Escriba Siríaco   | 69     |
+| **Adamá**                  | Cidade aérea descendo · Pedra-Mãe             | 70     |
+| **Tzeboim**                | Cidade-espelho social · 10 espelhos           | 71     |
+| **Bela**                   | Cidade-exemplo · Loth-da-Memória              | 72     |
+| **Nínive**                 | Cidade-exemplo · Jonas-da-Memória             | 73     |
 
 ### Sistemas funcionais
 
@@ -255,6 +261,7 @@ Após a Mônada, o jogador escolhe entre:
 | 27+36 lean | Galeria dos Principados (12) + Acessibilidade · paralelo agents | `155df2b` | ✅ |
 | 60+61  | **Expansão cosmológica:** Agartha (intra-terrena) + Sodoma (julgamento) | `fe4acfe` | ✅ |
 | 62-67  | **6 cenas paralelas:** Shamballa, Telos, Gomorra, Babel, Pleiadianos, Arcturianos | `f29ec0c` | ✅ |
+| 68-73  | **6 cenas paralelas:** Erks, Siríacos, Adamá, Tzeboim, Bela, Nínive | `09b26e0` | ✅ |
 | —      | Backlog — mundo aberto / 140 missões, CGI, OST nativo, multiplayer, localização + expansão (intra-terrenas restantes, cósmicas, 11 cidades do julgamento) — ver `docs/22` e `docs/production/02-sprint-board.md` | – | 🔜 |
 
 ---

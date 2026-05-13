@@ -48,6 +48,9 @@
 | 62+63    | Shamballa (Tríade Sentinela) + Telos (Adama) — paralelo | `f29ec0c` | ✅ |
 | 64+65    | Gomorra (5 estátuas) + Babel (4 pontes) — paralelo   | `f29ec0c`    | ✅ |
 | 66+67    | Pleiadianos (7 pilares) + Arcturianos (12 guias) — paralelo | `f29ec0c` | ✅ |
+| 68+69    | Erks (intra-terrena andina) + Siríacos (memória cósmica) — paralelo | `09b26e0` | ✅ |
+| 70+71    | Adamá (Pedra-Mãe) + Tzeboim (10 espelhos) — paralelo | `09b26e0`    | ✅ |
+| 72+73    | Bela (Loth) + Nínive (Jonas) — cidades-exemplo, paralelo | `09b26e0` | ✅ |
 
 **Sprint 22 fecha o vertical slice end-to-end:** o jogador pode
 agora ir da TitleScreen ao confronto com a Mônada e escolher
@@ -219,9 +222,8 @@ de mundo aberto, conteúdo opcional e refinamento.
 | 35       | Multiplayer assíncrono (Aeon-Mestres em jardins de outros)        |
 | 36       | Localização EN/ES/FR (acessibilidade básica já feita)             |
 | 37       | Polimento, performance, lançamento beta                           |
-| 68       | Erks (intra-terrena andina) — ver docs/22 §2.4                     |
-| 69-72    | Cósmicas restantes (Siríacos, Andromedanos, Cinzas, Reptilianos)   |
-| 73-82    | Cidades do julgamento restantes (Adamá, Tzeboim, Bela, Nínive, Tróia, Cartago, Pompeia, Yonaguni, Atlântis-arquetípica, Catalhöyük) |
+| 74-76    | Cósmicas restantes (Andromedanos, Cinzas, Reptilianos)             |
+| 77-82    | Cidades do julgamento restantes (Tróia, Cartago, Pompeia, Yonaguni, Atlântis-arquetípica, Catalhöyük) |
 
 ---
 
